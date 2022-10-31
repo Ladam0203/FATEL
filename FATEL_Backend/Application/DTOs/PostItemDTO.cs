@@ -4,7 +4,6 @@ namespace Application.DTOs;
 
 public class PostItemDTO
 {
-
     public string Name { get; set; }
     public float? Length { get; set; }
     public float?  Width { get; set; }
