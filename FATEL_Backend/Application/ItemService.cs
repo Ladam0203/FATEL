@@ -33,7 +33,7 @@ public class ItemService : IItemService
         throw new NotImplementedException();
     }
 
-    public Item Delete(string id)
+    public Item Delete(int id)
     {
         throw new NotImplementedException();
     }
