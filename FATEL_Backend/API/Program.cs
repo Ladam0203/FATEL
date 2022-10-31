@@ -1,4 +1,3 @@
-using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using DbContext = Microsoft.EntityFrameworkCore.DbContext;
 
@@ -11,6 +10,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+
+Application.DependencyResolver.DependencyResolverService.RegisterApplicationLayer(builder.Services);
+Infrastructure.DependencyResolver.DependencyResolverService.RegisterInfrastructureLayer(builder.Services);
 
 var app = builder.Build();
 
