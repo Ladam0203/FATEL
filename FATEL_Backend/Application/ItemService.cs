@@ -10,7 +10,7 @@ public class ItemService : IItemService
 
     public ItemService(IItemRepository itemRepository)
     {
-        _itemRepository = itemRepository;
+        _itemRepository = itemRepository ?? throw new ArgumentNullException(nameof(itemRepository));
     }
     
     public Item Create(PostItemDTO postClientDto)

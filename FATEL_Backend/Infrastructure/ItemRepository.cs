@@ -9,7 +9,7 @@ public class ItemRepository : IItemRepository
     
     public ItemRepository(DbContext context)
     {
-        _context = context;
+        _context = context ?? throw new ArgumentNullException(nameof(context));
     }
     
     public Item Create(Item item)
