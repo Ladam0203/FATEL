@@ -19,12 +19,15 @@ public class ItemRepository : IItemRepository
 
     public Item Read(int id)
     {
-        throw new NotImplementedException();
+        Item item = _context.ItemTable.Find(id);
+        if (item != null)
+            return item;
+        throw new KeyNotFoundException();
     }
 
     public List<Item> ReadAll()
     {
-        throw new NotImplementedException();
+        return _context.ItemTable.ToList();
     }
 
     public Item Update(Item item)
