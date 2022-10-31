@@ -41,8 +41,11 @@ public class ItemServiceTest
     {
         //Arrange
         var mockRepository = new Mock<IItemRepository>();
-        int mockId = 0;
-        Item mockItem = new Item(); //TODO: Use a detailed item and test with that
+        int mockId = 1;
+        Item mockItem = new()
+        {
+            Id = mockId
+        };
         mockRepository.Setup(r => r.Read(mockId)).Returns(mockItem);
         
         IItemService itemService = new ItemService(mockRepository.Object);
@@ -54,6 +57,7 @@ public class ItemServiceTest
         Assert.NotNull(readItem);
         Assert.True(readItem is Item);
         Assert.Equal(mockItem, readItem);
+        Assert.Equal(mockItem.Id, mockId);
         mockRepository.Verify(r => r.Read(mockId), Times.Once);
     }
     
@@ -62,7 +66,11 @@ public class ItemServiceTest
     {
         //Arrange
         var mockRepository = new Mock<IItemRepository>();
-        List<Item> mockItems = new List<Item>(); //TODO: Use detailed items and test with that
+        List<Item> mockItems = new ()
+        {
+            new Item() { Id = 1 },
+            new Item() { Id = 2 }
+        };
         mockRepository.Setup(r => r.ReadAll()).Returns(mockItems);
         
         IItemService itemService = new ItemService(mockRepository.Object);
@@ -74,6 +82,7 @@ public class ItemServiceTest
         Assert.NotNull(readItems);
         Assert.True(readItems is List<Item>);
         Assert.Equal(mockItems, readItems);
+        Assert.Equal(mockItems.Count, readItems.Count);
         mockRepository.Verify(r => r.ReadAll(), Times.Once);
     }
 }
