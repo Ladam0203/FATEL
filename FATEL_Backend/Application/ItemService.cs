@@ -20,12 +20,12 @@ public class ItemService : IItemService
 
     public Item Read(int id)
     {
-        throw new NotImplementedException();
+        return _itemRepository.Read(id);
     }
 
     public List<Item> ReadAll()
     {
-        throw new NotImplementedException();
+        return _itemRepository.ReadAll();
     }
 
     public Item Update(int id, Item item)
