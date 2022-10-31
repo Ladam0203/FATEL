@@ -1,3 +1,6 @@
+using Application.DTOs;
+using AutoMapper;
+using Domain;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +16,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 Application.DependencyResolver.DependencyResolverService.RegisterApplicationLayer(builder.Services);
 Infrastructure.DependencyResolver.DependencyResolverService.RegisterInfrastructureLayer(builder.Services);
+
+//Mapper
+var mapper = new MapperConfiguration(configuration =>
+{
+    configuration.CreateMap<PostItemDTO, Item>();
+}).CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 
