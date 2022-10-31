@@ -8,5 +8,5 @@ public interface IItemRepository
     public Item Read(int id);
     public List<Item> ReadAll();
     public Item Update(Item item);
-    public Item Delete(string id);
+    public Item Delete(int id);
 }
