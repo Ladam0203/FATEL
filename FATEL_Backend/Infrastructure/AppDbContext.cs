@@ -9,11 +9,6 @@ public class AppDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
     }
 
-    public AppDbContext() //solely for mocking purposes
-    {
-        
-    }
-    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Item>()
