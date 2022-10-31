@@ -1,4 +1,4 @@
-﻿namespace Entities;
+﻿namespace Domain;
 
 public enum Unit
 {
