@@ -1,7 +1,9 @@
-using Application;
 using Application.DTOs;
 using Application.Interfaces;
+using Application.Validators;
+using AutoMapper;
 using Domain;
+using FluentValidation;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,11 +11,12 @@ namespace API.Controllers;
 
 
 [ApiController]
+
 [Route("api/[Controller]")]
 public class ItemController : ControllerBase
 {
     private readonly IItemService _itemService;
-
+    
     public ItemController(IItemService itemService)
     {
         _itemService = itemService;
@@ -50,4 +53,31 @@ public class ItemController : ControllerBase
             return StatusCode(500, e.ToString());
         }
     }
+
+    [HttpPost]
+    public ActionResult Create(PostItemDTO itemDto)
+    {
+        try
+        {
+            var item = _itemService.Create(itemDto);
+            return Created($"item/{item.Id}", item);
+        }
+        catch(ValidationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+
+
+    }
+    
+
+    
+
+
+
+
 }
