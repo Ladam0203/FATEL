@@ -9,5 +9,5 @@ public interface IItemService
     public Item Read(int id);
     public List<Item> ReadAll();
     public Item Update(string id, Item item); //To be able to check whether the body and header corresponds
-    public Item Delete(string id);
+    public Item Delete(int id);
 }
