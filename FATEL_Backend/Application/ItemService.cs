@@ -28,7 +28,7 @@ public class ItemService : IItemService
         throw new NotImplementedException();
     }
 
-    public Item Update(string id, Item item)
+    public Item Update(int id, Item item)
     {
         throw new NotImplementedException();
     }
