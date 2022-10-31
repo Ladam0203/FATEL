@@ -8,8 +8,11 @@ public class AppDbContext : Microsoft.EntityFrameworkCore.DbContext
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
-    
-    
+
+    public AppDbContext() //solely for mocking purposes
+    {
+        
+    }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
