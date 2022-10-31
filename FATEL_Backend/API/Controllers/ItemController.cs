@@ -28,7 +28,7 @@ public class ItemController : ControllerBase
     
     [HttpGet]
     [Route("ReadAll")]
-    public ActionResult<List<Item>> CreateItem()
+    public ActionResult<List<Item>> ReadAll()
     {
         return _itemService.ReadAll();
     }
