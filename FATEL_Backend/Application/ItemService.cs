@@ -30,7 +30,6 @@ public class ItemService : IItemService
         if (!validation.IsValid) 
             throw new ValidationException(validation.ToString());
         return _itemRepository.Create(_mapper.Map<Item>(postItemDto));
-
     }
 
     public Item Read(int id)
