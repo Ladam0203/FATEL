@@ -36,6 +36,7 @@ public class ItemServiceTest
         //TODO: Test if the repository is truly injected
     }
 
+    //TODO: Add more coverage
     [Fact]
     public void Read()
     {
@@ -61,6 +62,7 @@ public class ItemServiceTest
         mockRepository.Verify(r => r.Read(mockId), Times.Once);
     }
     
+    //Add more coverage
     [Fact]
     public void ReadAll()
     {
