@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
-public class AppDbContext : Microsoft.EntityFrameworkCore.DbContext
+public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
@@ -12,12 +12,11 @@ public class AppDbContext : Microsoft.EntityFrameworkCore.DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Item>()
-            .Property(i => i.Id)
+            .Property(item => item.Id)
             .ValueGeneratedOnAdd();
     }
-    
-   
-    #region Database sets
+
+    #region #region Database sets
     public DbSet<Item> ItemTable { get; set; }
     #endregion
 }

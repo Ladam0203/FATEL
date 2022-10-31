@@ -5,11 +5,17 @@ namespace Infrastructure;
 
 public class ItemRepository : IItemRepository
 {
-    private AppDbContext _context;
+    private readonly AppDbContext _context;
     
     public ItemRepository(AppDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
+    }
+
+    private void Rebuild()
+    {
+        _context.Database.EnsureDeleted();
+        _context.Database.EnsureCreated();
     }
     
     public Item Create(Item item)
