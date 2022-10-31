@@ -1,5 +1,5 @@
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
 
 namespace Test;
 
@@ -13,9 +13,9 @@ public class DbContextTest
     [Fact]
     public void CanConnect_WithInvalidConnectionString()
     {
-        var optionsBuilder = new DbContextOptionsBuilder<DbContext>().UseNpgsql("invalid");
+        var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>().UseNpgsql("invalid");
         
-        DbContext dbContext = new DbContext(optionsBuilder.Options);
+        var dbContext = new AppDbContext(optionsBuilder.Options);
 
         Assert.False(dbContext.Database.CanConnect());
     }
