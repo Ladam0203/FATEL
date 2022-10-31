@@ -12,7 +12,7 @@ namespace API.Controllers;
 [Route("api/[Controller]")]
 public class ItemController : ControllerBase
 {
-    private IItemService _itemService;
+    private readonly IItemService _itemService;
 
     public ItemController(IItemService itemService)
     {
@@ -23,13 +23,31 @@ public class ItemController : ControllerBase
     [Route("Read")]
     public ActionResult<Item> Read(int id)
     {
-        return _itemService.Read(id);
+        try
+        {
+            return Ok(_itemService.Read(id));
+        }
+        catch (KeyNotFoundException)
+        {
+            return NotFound("No Item found with the id " + id);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
     }
     
     [HttpGet]
     [Route("ReadAll")]
     public ActionResult<List<Item>> ReadAll()
     {
-        return _itemService.ReadAll();
+        try
+        {
+            return Ok(_itemService.ReadAll());
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
     }
 }
