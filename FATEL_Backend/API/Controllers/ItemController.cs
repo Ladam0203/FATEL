@@ -1,5 +1,7 @@
+using Application.DTOs;
 using Application.Interfaces;
 using Domain;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -10,7 +12,7 @@ namespace API.Controllers;
 public class ItemController : ControllerBase
 {
     private readonly IItemService _itemService;
-
+    
     public ItemController(IItemService itemService)
     {
         _itemService = itemService;
@@ -66,4 +68,21 @@ public class ItemController : ControllerBase
         }
     }
 
+    [HttpPost]
+    public ActionResult Create(PostItemDTO itemDto)
+    {
+        try
+        {
+            var item = _itemService.Create(itemDto);
+            return Created($"item/{item.Id}", item);
+        }
+        catch(ValidationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
 }
