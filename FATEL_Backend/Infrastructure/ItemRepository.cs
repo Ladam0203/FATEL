@@ -5,9 +5,9 @@ namespace Infrastructure;
 
 public class ItemRepository : IItemRepository
 {
-    private DbContext _context;
+    private AppDbContext _context;
     
-    public ItemRepository(DbContext context)
+    public ItemRepository(AppDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }

@@ -25,7 +25,7 @@ public class ItemRepositoryTest
     public void CreateItemRepository_WithDbContext()
     {
         //Arrange
-        var mockDbContext = new Mock<DbContext>();
+        var mockDbContext = new Mock<AppDbContext>();
         
         //Act
         IItemRepository itemRepository = new ItemRepository(mockDbContext.Object);
