@@ -1,8 +1,5 @@
-using Application;
-using Application.DTOs;
 using Application.Interfaces;
 using Domain;
-using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -68,4 +65,5 @@ public class ItemController : ControllerBase
             return StatusCode(500, e.ToString());
         }
     }
+
 }
