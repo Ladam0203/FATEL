@@ -1,5 +1,6 @@
 using Application;
 using Application.DTOs;
+using Application.Interfaces;
 using Domain;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,9 @@ namespace API.Controllers;
 [Route("api/[Controller]")]
 public class ItemController : ControllerBase
 {
-    private ItemService _itemService;
+    private IItemService _itemService;
 
-    public ItemController(ItemService itemService)
+    public ItemController(IItemService itemService)
     {
         _itemService = itemService;
     }
@@ -22,13 +23,13 @@ public class ItemController : ControllerBase
     [Route("Read")]
     public ActionResult<Item> Read(int id)
     {
-        return Ok(_itemService.Read(id));
+        return _itemService.Read(id);
     }
     
     [HttpGet]
     [Route("ReadAll")]
     public ActionResult<List<Item>> CreateItem()
     {
-        return Ok(_itemService.ReadAll());
+        return _itemService.ReadAll();
     }
 }
