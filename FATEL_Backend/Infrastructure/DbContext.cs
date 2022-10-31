@@ -9,7 +9,7 @@ public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     {
     }
     
-    //TODO: OnModelCreating
+    
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -22,5 +22,4 @@ public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     #region Database sets
     public DbSet<Item> ItemTable { get; set; }
     #endregion
-    //TODO: Table mapping for entities
 }
