@@ -10,8 +10,7 @@ public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     }
     
     //TODO: OnModelCreating
-
-    #region OnModelCreating
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Item>()
@@ -19,9 +18,8 @@ public class DbContext : Microsoft.EntityFrameworkCore.DbContext
             .ValueGeneratedOnAdd();
     }
     
-    #endregion
    
-    #region TableMapping
+    #region Database sets
     public DbSet<Item> ItemTable { get; set; }
     #endregion
     //TODO: Table mapping for entities
