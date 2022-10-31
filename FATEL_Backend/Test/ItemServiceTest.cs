@@ -70,8 +70,8 @@ public class ItemServiceTest
         var mockRepository = new Mock<IItemRepository>();
         List<Item> mockItems = new ()
         {
-            new Item() { Id = 1 },
-            new Item() { Id = 2 }
+            new Item { Id = 1 },
+            new Item { Id = 2 }
         };
         mockRepository.Setup(r => r.ReadAll()).Returns(mockItems);
         
