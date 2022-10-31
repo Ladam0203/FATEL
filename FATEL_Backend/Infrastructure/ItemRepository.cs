@@ -32,7 +32,7 @@ public class ItemRepository : IItemRepository
         throw new NotImplementedException();
     }
 
-    public Item Delete(string id)
+    public Item Delete(int id)
     {
         throw new NotImplementedException();
     }
