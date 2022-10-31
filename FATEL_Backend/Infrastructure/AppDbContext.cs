@@ -9,6 +9,11 @@ public class AppDbContext : DbContext
     {
     }
 
+    public AppDbContext() //solely for mocking purposes
+    {
+        
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Item>()
