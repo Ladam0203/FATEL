@@ -8,6 +8,7 @@ namespace API.Controllers;
 
 
 [ApiController]
+
 [Route("api/[Controller]")]
 public class ItemController : ControllerBase
 {
@@ -49,7 +50,7 @@ public class ItemController : ControllerBase
             return StatusCode(500, e.ToString());
         }
     }
-
+    
     [HttpDelete]
     [Route("Delete/{id}")]
     public ActionResult<Item> Delete([FromRoute] int id)
@@ -67,7 +68,7 @@ public class ItemController : ControllerBase
             return StatusCode(500, e.ToString());
         }
     }
-
+    
     [HttpPost]
     public ActionResult Create(PostItemDTO itemDto)
     {
