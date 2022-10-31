@@ -1,18 +1,25 @@
+using Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
 public class AppDbContext : Microsoft.EntityFrameworkCore.DbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    public AppDbContext(DbContextOptions<DbContext> options) : base(options)
     {
-    }
-
-    public AppDbContext() //solely for mocking purposes
-    {
-        
     }
     
-    //TODO: OnModelCreating
-    //TODO: Table mapping for entities
+    
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Item>()
+            .Property(i => i.Id)
+            .ValueGeneratedOnAdd();
+    }
+    
+   
+    #region Database sets
+    public DbSet<Item> ItemTable { get; set; }
+    #endregion
 }
