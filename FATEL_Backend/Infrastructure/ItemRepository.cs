@@ -20,9 +20,7 @@ public class ItemRepository : IItemRepository
     public Item Read(int id)
     {
         Item item = _context.ItemTable.Find(id);
-        if (item != null)
-            return item;
-        throw new KeyNotFoundException();
+        return item ?? throw new KeyNotFoundException();
     }
 
     public List<Item> ReadAll()
