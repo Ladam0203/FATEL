@@ -35,6 +35,6 @@ public class ItemService : IItemService
 
     public Item Delete(int id)
     {
-        throw new NotImplementedException();
+        return _itemRepository.Delete(id);
     }
 }

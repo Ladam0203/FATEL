@@ -20,7 +20,7 @@ public class ItemController : ControllerBase
     }
     
     [HttpGet]
-    [Route("Read")]
+    [Route("Read/{id}")]
     public ActionResult<Item> Read(int id)
     {
         try
@@ -44,6 +44,24 @@ public class ItemController : ControllerBase
         try
         {
             return Ok(_itemService.ReadAll());
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
+    }
+
+    [HttpDelete]
+    [Route("Delete/{id}")]
+    public ActionResult<Item> DeleteItem(int id)
+    {
+        try
+        {
+            return Ok(_itemService.Delete(id));
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound(e.Message);
         }
         catch (Exception e)
         {

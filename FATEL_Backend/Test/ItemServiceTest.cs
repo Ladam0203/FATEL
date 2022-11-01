@@ -87,4 +87,35 @@ public class ItemServiceTest
         Assert.Equal(mockItems.Count, readItems.Count);
         mockRepository.Verify(r => r.ReadAll(), Times.Once);
     }
+
+    [Fact]
+    public void Delete()
+    {
+        var mockRepository = new Mock<IItemRepository>();
+        int mockId = 1;
+        Item item1 = new Item { Id = 1 };
+        Item item2 = new Item { Id = 2 };
+        List<Item> mockItems = new List<Item>();
+        mockItems.Add(item1);
+        mockItems.Add(item2);
+        mockRepository.Setup(r => r.Delete(mockId)).Returns(() =>
+        {
+            mockItems.Remove(item1);
+            return item1;
+        });
+        
+        IItemService itemService = new ItemService(mockRepository.Object);
+        
+        //Act
+        Item deleteItem = itemService.Delete(mockId);
+
+        //Assert
+        Assert.NotNull(deleteItem);
+        Assert.True(deleteItem is Item);
+        Assert.Equal(item1, deleteItem);
+        Assert.Equal(mockId, deleteItem.Id);
+        Assert.DoesNotContain(item1, mockItems);
+        Assert.Contains(item2, mockItems);
+        mockRepository.Verify(r => r.Delete(mockId), Times.Once);
+    }
 }

@@ -16,6 +16,14 @@ public class ItemRepository : IItemRepository
     {
         _context.Database.EnsureDeleted();
         _context.Database.EnsureCreated();
+
+        Item test1 = new Item() { Name = "Item1", Quantity = 1 };
+        Item test2 = new Item() { Name = "Item2", Quantity = 1 };
+        Item test3 = new Item() { Name = "Item3", Quantity = 1 };
+        _context.ItemTable.Add(test1);
+        _context.ItemTable.Add(test2);
+        _context.ItemTable.Add(test3);
+        _context.SaveChanges();
     }
     
     public Item Create(Item item)
@@ -41,6 +49,13 @@ public class ItemRepository : IItemRepository
 
     public Item Delete(int id)
     {
-        throw new NotImplementedException();
+        Item item = _context.ItemTable.Find(id);
+        if (item != null)
+        {
+            _context.ItemTable.Remove(item);
+            _context.SaveChanges();
+            return item;
+        }
+        throw new KeyNotFoundException();
     }
 }
