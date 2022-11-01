@@ -39,7 +39,7 @@ public class ItemServiceTest
         var mockRepository = new Mock<IItemRepository>();
         var validator = new PostItemDTOValidator();
         var putValidator = new PutItemDTOValidator();
-        
+
         IItemService itemService = null;
         
         //Act
@@ -62,7 +62,7 @@ public class ItemServiceTest
         var putValidator = new PutItemDTOValidator();
 
         IItemService itemService = null;
-        
+
         //Act
         var e = Assert.Throws<ArgumentNullException>(() => itemService = new ItemService(mockRepository.Object, mapper, null, putValidator));
 
@@ -133,7 +133,6 @@ public class ItemServiceTest
         var putValidator = new PutItemDTOValidator();
 
         IItemService itemService = new ItemService(mockRepository.Object,mapper, validator, putValidator);
-
         //Act
         Item readItem = itemService.Read(mockId);
 
@@ -165,7 +164,6 @@ public class ItemServiceTest
         var putValidator = new PutItemDTOValidator();
         
         IItemService itemService = new ItemService(mockRepository.Object,mapper, validator, putValidator);
-
         //Act
         List<Item> readItems = itemService.ReadAll();
 
