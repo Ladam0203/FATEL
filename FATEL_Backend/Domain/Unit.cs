@@ -6,8 +6,3 @@ public enum Unit
     SquareMeter,
     Piece
 }
-
-public class Model
-{
-    public Unit Unit { get; set; }
-}
