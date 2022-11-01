@@ -28,7 +28,9 @@ public class ItemRepository : IItemRepository
     
     public Item Create(Item item)
     {
-        throw new NotImplementedException();
+        _context.ItemTable.Add(item);
+        _context.SaveChanges();
+        return item;
     }
 
     public Item Read(int id)
