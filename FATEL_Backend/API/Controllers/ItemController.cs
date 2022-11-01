@@ -20,7 +20,7 @@ public class ItemController : ControllerBase
     
     [HttpGet]
     [Route("Read/{id}")]
-    public ActionResult<Item> Read(int id)
+    public ActionResult<Item> Read([FromRoute] int id)
     {
         try
         {
@@ -52,7 +52,7 @@ public class ItemController : ControllerBase
 
     [HttpDelete]
     [Route("Delete/{id}")]
-    public ActionResult<Item> DeleteItem(int id)
+    public ActionResult<Item> Delete([FromRoute] int id)
     {
         try
         {
