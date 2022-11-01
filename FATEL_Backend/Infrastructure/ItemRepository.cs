@@ -44,19 +44,10 @@ public class ItemRepository : IItemRepository
 
     public Item Update(Item item)
     {
-        Item edit = _context.ItemTable.Find(item.Id);
-        if (edit != null)
-        {
-            edit.Lenght = item.Lenght;
-            edit.Width = item.Width;
-            edit.Name = item.Name;
-            edit.Quantity = item.Quantity;
-            edit.Unit = item.Unit;
-            edit.Note = item.Note;
-            _context.SaveChanges();
-            return edit;
-        }
-        throw new KeyNotFoundException();
+        _context.ChangeTracker.Clear();
+        _context.ItemTable.Update(item);
+        _context.SaveChanges();
+        return item;
     }
 
     public Item Delete(int id)
