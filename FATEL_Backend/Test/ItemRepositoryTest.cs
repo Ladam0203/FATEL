@@ -108,12 +108,44 @@ public class ItemRepositoryTest
 
             //Act
             Item item = repo.Delete(1);
-            List<Item> items = repo.ReadAll();
+            List<Item> items = context.ItemTable.ToList();
 
             //Assert
             Assert.Equal("Item1", item.Name);
             Assert.Contains(item2, items);
             Assert.DoesNotContain(item1, items);
+        }
+    }
+
+    [Fact]
+    public void UpdateItem()
+    {
+        //Arrange
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseInMemoryDatabase(databaseName: "ItemDatabase")
+            .Options;
+
+        using (var context = new AppDbContext(options))
+        {
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
+            int mockId = 1;
+            Item item1 = new Item() { Id = mockId, Name = "Item1", Quantity = 1 };
+            context.ItemTable.Add(item1);
+            context.SaveChanges();
+
+            Item editedItem = new Item() { Id = mockId, Name = "EditedItem", Quantity = 5 };
+
+            IItemRepository repo = new ItemRepository(context);
+            
+            //Act
+            Item edited = repo.Update(editedItem);
+            Item readItem = context.ItemTable.Find(mockId);
+            
+            Assert.Equal("EditedItem", edited.Name);
+            Assert.Equal("EditedItem", readItem.Name);
+            Assert.Equal(edited.Quantity, readItem.Quantity);
+            Assert.Equal(edited, readItem);
         }
     }
 }

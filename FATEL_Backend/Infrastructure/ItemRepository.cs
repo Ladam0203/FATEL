@@ -44,7 +44,19 @@ public class ItemRepository : IItemRepository
 
     public Item Update(Item item)
     {
-        throw new NotImplementedException();
+        Item edit = _context.ItemTable.Find(item.Id);
+        if (edit != null)
+        {
+            edit.Lenght = item.Lenght;
+            edit.Width = item.Width;
+            edit.Name = item.Name;
+            edit.Quantity = item.Quantity;
+            edit.Unit = item.Unit;
+            edit.Note = item.Note;
+            _context.SaveChanges();
+            return edit;
+        }
+        throw new KeyNotFoundException();
     }
 
     public Item Delete(int id)
