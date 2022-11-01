@@ -46,6 +46,7 @@ public class ItemRepository : IItemRepository
 
     public Item Update(Item item)
     {
+        //TODO: Yeah, most probs we need a find here
         _context.ChangeTracker.Clear();
         _context.ItemTable.Update(item);
         _context.SaveChanges();
@@ -61,6 +62,6 @@ public class ItemRepository : IItemRepository
             _context.SaveChanges();
             return item;
         }
-        throw new KeyNotFoundException();
+        throw new KeyNotFoundException(); //TODO: Write message
     }
 }
