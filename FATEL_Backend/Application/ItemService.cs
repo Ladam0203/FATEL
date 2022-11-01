@@ -18,8 +18,8 @@ public class ItemService : IItemService
     public ItemService(IItemRepository itemRepository, IMapper mapper, IValidator<PostItemDTO> validator)
     {
         _itemRepository = itemRepository ?? throw new ArgumentNullException(nameof(itemRepository));
-        _mapper = mapper;
-        _validator = validator;
+        _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        _validator = validator ?? throw new ArgumentNullException(nameof(validator));
     }
     
     public Item Create(PostItemDTO postItemDto)
