@@ -217,13 +217,13 @@ public class ItemServiceTest
     [Fact]
     public void Update()
     {
-        var mockRepository = new Mock<IItemRepository>();
         int mockId = 1;
-        Item item1 = new Item { Id = mockId, Name = "Item1", Quantity = 1, Unit = Unit.Piece};
         PutItemDTO dto = new PutItemDTO() { Id = mockId, Name = "UpdatedItem", Quantity = 5, Unit = Unit.Piece};
-        Item editItem = new Item() { Id = dto.Id, Name = dto.Name, Quantity = dto.Quantity, Unit = Unit.Piece };
-
-        mockRepository.Setup(r => r.Update(editItem)).Returns(editItem);
+        Item editedItem = new Item() { Id = dto.Id, Name = dto.Name, Quantity = dto.Quantity, Unit = Unit.Piece };
+        
+        var mockRepository = new Mock<IItemRepository>();
+        mockRepository.Setup(r => r.Update(It.IsAny<Item>())).Returns(editedItem);
+        
         var mapper = new MapperConfiguration(configuration =>
         {
             configuration.CreateMap<PostItemDTO, Item>();
@@ -240,10 +240,10 @@ public class ItemServiceTest
         //Assert
         Assert.NotNull(updated);
         Assert.True(updated is Item);
-        Assert.Equal(editItem, updated);
-        Assert.Equal(editItem.Name, updated.Name);
-        Assert.Equal(editItem.Quantity, updated.Quantity);
-        Assert.Equal(editItem.Unit, updated.Unit);
-        mockRepository.Verify(r => r.Update(editItem), Times.Once);
+        Assert.Equal(editedItem, updated);
+        Assert.Equal(editedItem.Name, updated.Name);
+        Assert.Equal(editedItem.Quantity, updated.Quantity);
+        Assert.Equal(editedItem.Unit, updated.Unit);
+        mockRepository.Verify(r => r.Update(It.IsAny<Item>()), Times.Once);
     }
 }
