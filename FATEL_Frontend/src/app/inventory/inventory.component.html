@@ -1,6 +1,31 @@
 <div class="inventory-container">
-  <h1>Warehouse Inventory</h1>
-  <div *ngFor="let item of items">
-    {{item.name}}
+  <h2>Warehouse Inventory</h2>
+  <div class="item-grid" *ngFor="let item of items">
+    <div class="div1">id</div>
+    <div class="div2">name</div>
+    <div class="div3">width</div>
+    <div class="div4">length</div>
+    <div class="div5">quantity</div>
+    <div class="div6">unit</div>
+    <div class="div7">note</div>
+  </div>
+
+  <div class="item-properties">
+    <h6>ID</h6>
+    <h6>Name</h6>
+    <h6>Width</h6>
+    <h6>Length</h6>
+    <h6>Unit</h6>
+    <h6>Quantity</h6>
+    <h6>Note</h6>
+  </div>
+  <div class="item-component" *ngFor="let item of items">
+    <h6>{{item.id}}</h6>
+    <h6>{{item.name}}</h6>
+    <h6>{{item.width}}</h6>
+    <h6>{{item.length}}</h6>
+    <h6>{{item.unit}}</h6>
+    <h6>{{item.quantity}}</h6>
+    <h6>{{item.note}}</h6>
   </div>
 </div>

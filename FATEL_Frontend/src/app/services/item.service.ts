@@ -11,17 +11,17 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ItemService {
 
-  private itemURL = 'http://localhost:5175/api/item/readall';
+  private itemURL = 'http://localhost:5175/api/item/';
 
   constructor(private http: HttpClient) {
 
   }
 
-  getAll(): Observable<Item[]> {
-    return this.http.get<Item[]>(this.itemURL)
+  readAll(): Observable<Item[]> {
+    return this.http.get<Item[]>(this.itemURL + 'readall')
       .pipe(
         tap(_ => this.log('fetched items')),
-        catchError(this.handleError<Item[]>('getAll', []))
+        catchError(this.handleError<Item[]>('readAll', []))
       );
   }
 
