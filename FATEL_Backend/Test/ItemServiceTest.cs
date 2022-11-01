@@ -20,11 +20,12 @@ public class ItemServiceTest
             configuration.CreateMap<PostItemDTO, Item>();
         }).CreateMapper();
         var validator = new PostItemDTOValidator();
+        var putValidator = new PutItemDTOValidator();
 
         IItemService itemService = null;
         
         //Act
-        var e = Assert.Throws<ArgumentNullException>(() => itemService = new ItemService(null, mapper, validator));
+        var e = Assert.Throws<ArgumentNullException>(() => itemService = new ItemService(null, mapper, validator, putValidator));
 
         //Assert
         Assert.Equal("Value cannot be null. (Parameter 'itemRepository')", e.Message);
@@ -37,11 +38,12 @@ public class ItemServiceTest
         //Arrange
         var mockRepository = new Mock<IItemRepository>();
         var validator = new PostItemDTOValidator();
+        var putValidator = new PutItemDTOValidator();
         
         IItemService itemService = null;
         
         //Act
-        var e = Assert.Throws<ArgumentNullException>(() => itemService = new ItemService(mockRepository.Object, null, validator));
+        var e = Assert.Throws<ArgumentNullException>(() => itemService = new ItemService(mockRepository.Object, null, validator, putValidator));
 
         //Assert
         Assert.Equal("Value cannot be null. (Parameter 'mapper')", e.Message);
@@ -57,14 +59,36 @@ public class ItemServiceTest
         {
             configuration.CreateMap<PostItemDTO, Item>();
         }).CreateMapper();
+        var putValidator = new PutItemDTOValidator();
 
         IItemService itemService = null;
         
         //Act
-        var e = Assert.Throws<ArgumentNullException>(() => itemService = new ItemService(mockRepository.Object, mapper, null));
+        var e = Assert.Throws<ArgumentNullException>(() => itemService = new ItemService(mockRepository.Object, mapper, null, putValidator));
 
         //Assert
         Assert.Equal("Value cannot be null. (Parameter 'validator')", e.Message);
+        Assert.Null(itemService);
+    }
+    
+    [Fact]
+    public void CreateItemService_WithNullPutValidator_ExpectArgumentNullException()
+    {
+        //Arrange
+        var mockRepository = new Mock<IItemRepository>();
+        var mapper = new MapperConfiguration(configuration =>
+        {
+            configuration.CreateMap<PostItemDTO, Item>();
+        }).CreateMapper();
+        var postValidator = new PostItemDTOValidator();
+
+        IItemService itemService = null;
+        
+        //Act
+        var e = Assert.Throws<ArgumentNullException>(() => itemService = new ItemService(mockRepository.Object, mapper, postValidator, null));
+
+        //Assert
+        Assert.Equal("Value cannot be null. (Parameter 'putValidator')", e.Message);
         Assert.Null(itemService);
     }
 
@@ -78,9 +102,10 @@ public class ItemServiceTest
             configuration.CreateMap<PostItemDTO, Item>();
         }).CreateMapper();
         var validator = new PostItemDTOValidator();
+        var putValidator = new PutItemDTOValidator();
         
         //Act
-        IItemService itemService = new ItemService(mockRepository.Object, mapper, validator);
+        IItemService itemService = new ItemService(mockRepository.Object, mapper, validator, putValidator);
         
         //Assert
         Assert.NotNull(itemService);
@@ -105,8 +130,9 @@ public class ItemServiceTest
             configuration.CreateMap<PostItemDTO, Item>();
         }).CreateMapper();
         var validator = new PostItemDTOValidator();
+        var putValidator = new PutItemDTOValidator();
         
-        IItemService itemService = new ItemService(mockRepository.Object,mapper, validator);
+        IItemService itemService = new ItemService(mockRepository.Object,mapper, validator, putValidator);
         
         //Act
         Item readItem = itemService.Read(mockId);
@@ -136,8 +162,9 @@ public class ItemServiceTest
             configuration.CreateMap<PostItemDTO, Item>();
         }).CreateMapper();
         var validator = new PostItemDTOValidator();
+        var putValidator = new PutItemDTOValidator();
         
-        IItemService itemService = new ItemService(mockRepository.Object,mapper, validator);
+        IItemService itemService = new ItemService(mockRepository.Object,mapper, validator, putValidator);
         
         //Act
         List<Item> readItems = itemService.ReadAll();
@@ -165,8 +192,14 @@ public class ItemServiceTest
             mockItems.Remove(item1);
             return item1;
         });
+        var mapper = new MapperConfiguration(configuration =>
+        {
+            configuration.CreateMap<PostItemDTO, Item>();
+        }).CreateMapper();
+        var validator = new PostItemDTOValidator();
+        var putValidator = new PutItemDTOValidator();
         
-        IItemService itemService = new ItemService(mockRepository.Object);
+        IItemService itemService = new ItemService(mockRepository.Object, mapper, validator, putValidator);
         
         //Act
         Item deleteItem = itemService.Delete(mockId);
@@ -186,18 +219,20 @@ public class ItemServiceTest
     {
         var mockRepository = new Mock<IItemRepository>();
         int mockId = 1;
-        Item item1 = new Item { Id = mockId, Name = "Item1", Quantity = 1};
-        PutItemDTO dto = new PutItemDTO() { Id = mockId, Name = "UpdatedItem", Quantity = 5 };
-        Item editItem = new Item() { Id = dto.Id, Name = dto.Name, Quantity = dto.Quantity };
+        Item item1 = new Item { Id = mockId, Name = "Item1", Quantity = 1, Unit = Unit.Piece};
+        PutItemDTO dto = new PutItemDTO() { Id = mockId, Name = "UpdatedItem", Quantity = 5, Unit = Unit.Piece};
+        Item editItem = new Item() { Id = dto.Id, Name = dto.Name, Quantity = dto.Quantity, Unit = Unit.Piece };
 
-        mockRepository.Setup(r => r.Update(editItem)).Returns(() =>
+        mockRepository.Setup(r => r.Update(editItem)).Returns(editItem);
+        var mapper = new MapperConfiguration(configuration =>
         {
-            item1.Name = editItem.Name;
-            item1.Quantity = editItem.Quantity;
-            return item1;
-        });
+            configuration.CreateMap<PostItemDTO, Item>();
+            configuration.CreateMap<PutItemDTO, Item>();
+        }).CreateMapper();
+        var validator = new PostItemDTOValidator();
+        var putValidator = new PutItemDTOValidator();
         
-        IItemService itemService = new ItemService(mockRepository.Object);
+        IItemService itemService = new ItemService(mockRepository.Object, mapper, validator, putValidator);
         
         //Act
         Item updated = itemService.Update(mockId, dto);
@@ -205,9 +240,10 @@ public class ItemServiceTest
         //Assert
         Assert.NotNull(updated);
         Assert.True(updated is Item);
-        Assert.Equal(item1, updated);
+        Assert.Equal(editItem, updated);
         Assert.Equal(editItem.Name, updated.Name);
         Assert.Equal(editItem.Quantity, updated.Quantity);
+        Assert.Equal(editItem.Unit, updated.Unit);
         mockRepository.Verify(r => r.Update(editItem), Times.Once);
     }
 }

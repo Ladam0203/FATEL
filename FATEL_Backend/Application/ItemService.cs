@@ -13,18 +13,20 @@ public class ItemService : IItemService
 {
     private readonly IItemRepository _itemRepository;
     private IMapper _mapper;
-    private IValidator<PostItemDTO> _validator;
+    private IValidator<PostItemDTO> _postValidator;
+    private IValidator<PutItemDTO> _putValidator;
 
-    public ItemService(IItemRepository itemRepository, IMapper mapper, IValidator<PostItemDTO> validator)
+    public ItemService(IItemRepository itemRepository, IMapper mapper, IValidator<PostItemDTO> validator, IValidator<PutItemDTO> putValidator)
     {
         _itemRepository = itemRepository ?? throw new ArgumentNullException(nameof(itemRepository));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-        _validator = validator ?? throw new ArgumentNullException(nameof(validator));
+        _postValidator = validator ?? throw new ArgumentNullException(nameof(validator));
+        _putValidator = putValidator ?? throw new ArgumentNullException(nameof(putValidator));
     }
     
     public Item Create(PostItemDTO postItemDto)
     {
-        var validation = _validator.Validate(postItemDto);
+        var validation = _postValidator.Validate(postItemDto);
         if (!validation.IsValid) 
             throw new ValidationException(validation.ToString());
         return _mapper.Map<Item>(postItemDto);
@@ -45,8 +47,11 @@ public class ItemService : IItemService
     {
         if (id != dto.Id)
             throw new ValidationException("Id in route must match Id in request");
-        var validation = 
-
+        var validation = _putValidator.Validate(dto);
+        if (!validation.IsValid)
+            throw new ValidationException(validation.ToString());
+        Item item = _mapper.Map<Item>(dto);
+        return _itemRepository.Update(item);
     }
 
     public Item Delete(int id)

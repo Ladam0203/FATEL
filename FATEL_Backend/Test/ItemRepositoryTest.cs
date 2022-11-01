@@ -129,11 +129,11 @@ public class ItemRepositoryTest
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
             int mockId = 1;
-            Item item1 = new Item() { Id = mockId, Name = "Item1", Quantity = 1 };
+            Item item1 = new Item() { Id = mockId, Name = "Item1", Quantity = 1, Unit = Unit.Piece};
             context.ItemTable.Add(item1);
             context.SaveChanges();
 
-            Item editedItem = new Item() { Id = mockId, Name = "EditedItem", Quantity = 5 };
+            Item editedItem = new Item() { Id = mockId, Name = "EditedItem", Quantity = 5, Unit = Unit.Piece };
 
             IItemRepository repo = new ItemRepository(context);
             
@@ -144,7 +144,35 @@ public class ItemRepositoryTest
             Assert.Equal("EditedItem", edited.Name);
             Assert.Equal("EditedItem", readItem.Name);
             Assert.Equal(edited.Quantity, readItem.Quantity);
+            Assert.Equal(edited.Unit, readItem.Unit);
             Assert.Equal(edited, readItem);
+        }
+    }
+
+    [Fact]
+    public void UpdateItemInvalidId()
+    {
+        //Arrange
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseInMemoryDatabase(databaseName: "ItemDatabase")
+            .Options;
+
+        using (var context = new AppDbContext(options))
+        {
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
+            int mockId = 1;
+            int wrongId = 2;
+            Item item1 = new Item() { Id = mockId, Name = "Item1", Quantity = 1, Unit = Unit.Piece };
+            context.ItemTable.Add(item1);
+            context.SaveChanges();
+
+            Item editedItem = new Item() { Id = wrongId, Name = "EditedItem", Quantity = 5, Unit = Unit.Piece };
+
+            IItemRepository repo = new ItemRepository(context);
+
+            //Act + Assert
+            Assert.Throws<DbUpdateConcurrencyException>(()=> repo.Update(editedItem));
         }
     }
 }
