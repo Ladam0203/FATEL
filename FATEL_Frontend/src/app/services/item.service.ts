@@ -1,13 +1,9 @@
 import {Injectable} from '@angular/core';
-import axios from "axios";
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {catchError} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 import {Unit} from "../entities/units";
-
-
-export const customAxios = axios.create({
-  baseURL: 'http://localhost:5175/api',
-})
+import {Observable, of} from "rxjs";
+import {Item} from "../entities/item";
+import {HttpClient} from "@angular/common/http";
 
 
 @Injectable({
@@ -15,30 +11,21 @@ export const customAxios = axios.create({
 })
 export class ItemService {
 
-  constructor(private matSnackbar: MatSnackBar) {
-    customAxios.interceptors.response.use(
-      response => {
-        if (response.status == 201) {
-          this.matSnackbar.open("Great success")
-        }
-        return response;
-      }, rejected => {
-        if (rejected.response.status >= 400 && rejected.response.status < 500) {
-          matSnackbar.open(rejected.response.data);
-        } else if (rejected.response.status > 499) {
-          this.matSnackbar.open("Something went wrong")
-        }
-        catchError(rejected);
-      }
-    )
+  private itemURL = 'http://localhost:5175/api/item/readall';
+
+  constructor(private http: HttpClient) {
+
   }
 
-  async getAll() {
-    const response = await customAxios.get<any>('item/readall');
-    return response.data;
+  getAll(): Observable<Item[]> {
+    return this.http.get<Item[]>(this.itemURL)
+      .pipe(
+        tap(_ => this.log('fetched items')),
+        catchError(this.handleError<Item[]>('getAll', []))
+      );
   }
 
-  async get(id: any){
+  /*async get(id: any){
     const response = await customAxios.get<any>('item/read/' + id);
     return response.data;
   }
@@ -54,5 +41,23 @@ export class ItemService {
   async delete(id: any){
     const result = await customAxios.delete('item/delete/' + id);
     return result.data;
+  }*/
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+
+  private log(message: string) {
+    console.log(`ItemService: ${message}`);
   }
 }
