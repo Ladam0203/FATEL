@@ -1,10 +1,7 @@
 using Application.DTOs;
 using Application.Interfaces;
-using Application.Validators;
-using AutoMapper;
 using Domain;
 using FluentValidation;
-using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
