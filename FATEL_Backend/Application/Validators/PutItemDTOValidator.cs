@@ -5,5 +5,5 @@ namespace Application.Validators;
 
 public class PutItemDTOValidator : AbstractValidator<PutItemDTO>
 {
-    
+    //TODO: Implement validation
 }

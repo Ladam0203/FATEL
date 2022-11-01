@@ -16,11 +16,11 @@ public class ItemService : IItemService
     private IValidator<PostItemDTO> _postValidator;
     private IValidator<PutItemDTO> _putValidator;
 
-    public ItemService(IItemRepository itemRepository, IMapper mapper, IValidator<PostItemDTO> validator, IValidator<PutItemDTO> putValidator)
+    public ItemService(IItemRepository itemRepository, IMapper mapper, IValidator<PostItemDTO> postValidator, IValidator<PutItemDTO> putValidator)
     {
         _itemRepository = itemRepository ?? throw new ArgumentNullException(nameof(itemRepository));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-        _postValidator = validator ?? throw new ArgumentNullException(nameof(validator));
+        _postValidator = postValidator ?? throw new ArgumentNullException(nameof(postValidator));
         _putValidator = putValidator ?? throw new ArgumentNullException(nameof(putValidator));
     }
     
@@ -29,7 +29,7 @@ public class ItemService : IItemService
         var validation = _postValidator.Validate(postItemDto);
         if (!validation.IsValid) 
             throw new ValidationException(validation.ToString());
-        return _mapper.Map<Item>(postItemDto);
+        return _itemRepository.Create(_mapper.Map<Item>(postItemDto));
 
     }
 
