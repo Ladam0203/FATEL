@@ -8,6 +8,7 @@ public class PostItemDTOValidator : AbstractValidator<PostItemDTO>
 {
     public PostItemDTOValidator()
     {
+        //TODO: Implement validation
         RuleFor(item => item.Name).NotEmpty();
 
         RuleFor(item => item.Unit).NotEmpty();
