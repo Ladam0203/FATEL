@@ -11,4 +11,5 @@ public class Item
     public Unit Unit { get; set; }
     public int Quantity { get; set; }
     public string? Note { get; set; }
+
 }
