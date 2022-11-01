@@ -67,7 +67,7 @@ public class ItemServiceTest
         var e = Assert.Throws<ArgumentNullException>(() => itemService = new ItemService(mockRepository.Object, mapper, null, putValidator));
 
         //Assert
-        Assert.Equal("Value cannot be null. (Parameter 'validator')", e.Message);
+        Assert.Equal("Value cannot be null. (Parameter 'postValidator')", e.Message);
         Assert.Null(itemService);
     }
     
