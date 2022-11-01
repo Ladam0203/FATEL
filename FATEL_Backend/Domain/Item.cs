@@ -4,11 +4,11 @@ namespace Domain;
 
 public class Item
 {
-    public int Id;
-    public string Name;
-    public float?  Width;
-    public float? Lenght;
-    public Unit Unit;
-    public int Quantity;
-    public string? Note;
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public float? Width { get; set; }
+    public float? Lenght { get; set; }
+    public Unit Unit { get; set; }
+    public int Quantity { get; set; }
+    public string? Note { get; set; }
 }

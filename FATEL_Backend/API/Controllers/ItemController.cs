@@ -1,8 +1,9 @@
-﻿using Application;
 using Application.DTOs;
+using Application.Interfaces;
 using Application.Validators;
 using AutoMapper;
 using Domain;
+using FluentValidation;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,31 +11,69 @@ namespace API.Controllers;
 
 
 [ApiController]
-[Route("[Controller]")]
+
+[Route("api/[Controller]")]
 public class ItemController : ControllerBase
 {
-    private ItemRepository _itemRepository;
-    private ItemValidator _itemValidator;
-    private IMapper _mapper;
-
-    public ItemController(ItemRepository itemRepository, IMapper mapper)
+    private readonly IItemService _itemService;
+    
+    public ItemController(IItemService itemService)
     {
-        _itemRepository = itemRepository;
-        _itemValidator = new ItemValidator();
-        _mapper = mapper;
+        _itemService = itemService;
+    }
+    
+    [HttpGet]
+    [Route("Read")]
+    public ActionResult<Item> Read(int id)
+    {
+        try
+        {
+            return Ok(_itemService.Read(id));
+        }
+        catch (KeyNotFoundException)
+        {
+            return NotFound("No Item found with the id " + id);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
+    }
+    
+    [HttpGet]
+    [Route("ReadAll")]
+    public ActionResult<List<Item>> ReadAll()
+    {
+        try
+        {
+            return Ok(_itemService.ReadAll());
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
     }
 
     [HttpPost]
-    public ActionResult CreateItem(PostItemDTO itemDto)
+    public ActionResult Create(PostItemDTO itemDto)
     {
-        var validate = _itemValidator.Validate(itemDto);
-        if (!validate.IsValid) 
-            return BadRequest(validate.ToString());
-        var newItem = _mapper.Map<Item>(itemDto);
-        return Ok(_itemRepository.Create(newItem));
+        try
+        {
+            var item = _itemService.Create(itemDto);
+            return Created($"item/{item.Id}", item);
+        }
+        catch(ValidationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+
 
     }
-
+    
 
 
 }

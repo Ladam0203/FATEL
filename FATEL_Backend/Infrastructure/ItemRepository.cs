@@ -5,11 +5,17 @@ namespace Infrastructure;
 
 public class ItemRepository : IItemRepository
 {
-    private AppDbContext _context;
+    private readonly AppDbContext _context;
     
     public ItemRepository(AppDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
+    }
+
+    private void Rebuild()
+    {
+        _context.Database.EnsureDeleted();
+        _context.Database.EnsureCreated();
     }
     
     public Item Create(Item item)
@@ -19,12 +25,13 @@ public class ItemRepository : IItemRepository
 
     public Item Read(int id)
     {
-        throw new NotImplementedException();
+        Item item = _context.ItemTable.Find(id);
+        return item ?? throw new KeyNotFoundException();
     }
 
     public List<Item> ReadAll()
     {
-        throw new NotImplementedException();
+        return _context.ItemTable.ToList();
     }
 
     public Item Update(Item item)

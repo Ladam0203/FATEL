@@ -1,31 +1,44 @@
+using System.ComponentModel.DataAnnotations;
+using System.Reflection.Metadata.Ecma335;
 using Application.DTOs;
 using Application.Interfaces;
+using AutoMapper;
 using Domain;
+using FluentValidation;
+using ValidationException = FluentValidation.ValidationException;
 
 namespace Application;
 
 public class ItemService : IItemService
 {
     private readonly IItemRepository _itemRepository;
+    private IMapper _mapper;
+    private IValidator<PostItemDTO> _validator;
 
-    public ItemService(IItemRepository itemRepository)
+    public ItemService(IItemRepository itemRepository, IMapper mapper, IValidator<PostItemDTO> validator)
     {
         _itemRepository = itemRepository ?? throw new ArgumentNullException(nameof(itemRepository));
+        _mapper = mapper;
+        _validator = validator;
     }
     
-    public Item Create(PostItemDTO postClientDto)
+    public Item Create(PostItemDTO postItemDto)
     {
-        throw new NotImplementedException();
+        var validation = _validator.Validate(postItemDto);
+        if (!validation.IsValid) 
+            throw new ValidationException(validation.ToString());
+        return _mapper.Map<Item>(postItemDto);
+
     }
 
     public Item Read(int id)
     {
-        throw new NotImplementedException();
+        return _itemRepository.Read(id);
     }
 
     public List<Item> ReadAll()
     {
-        throw new NotImplementedException();
+        return _itemRepository.ReadAll();
     }
 
     public Item Update(int id, Item item)

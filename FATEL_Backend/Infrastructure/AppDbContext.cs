@@ -1,8 +1,9 @@
+using Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
-public class AppDbContext : Microsoft.EntityFrameworkCore.DbContext
+public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
@@ -12,7 +13,15 @@ public class AppDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
         
     }
-    
-    //TODO: OnModelCreating
-    //TODO: Table mapping for entities
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Item>()
+            .Property(item => item.Id)
+            .ValueGeneratedOnAdd();
+    }
+
+    #region #region Database sets
+    public DbSet<Item> ItemTable { get; set; }
+    #endregion
 }
