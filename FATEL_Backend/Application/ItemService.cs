@@ -27,7 +27,7 @@ public class ItemService : IItemService
         var validation = _validator.Validate(postItemDto);
         if (!validation.IsValid) 
             throw new ValidationException(validation.ToString());
-        return _mapper.Map<Item>(postItemDto);
+        return _itemRepository.Create(_mapper.Map<Item>(postItemDto));
 
     }
 
