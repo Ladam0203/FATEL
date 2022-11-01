@@ -75,16 +75,5 @@ public class ItemController : ControllerBase
     }
     
 
-    
-
-
-    [HttpDelete]
-
-    public ActionResult DeleteItem(int id)
-    {
-        //guess this aint right
-        return Ok(_itemRepository.Delete(id));
-    }
-
 
 }
