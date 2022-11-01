@@ -88,5 +88,26 @@ public class ItemController : ControllerBase
         }
     }
     
-    //TODO: Add update
+    [HttpPut]
+    [Route("Update/{id}")]
+    public ActionResult<Item> Update([FromRoute] int id, [FromBody] PutItemDTO item)
+    {
+        try
+        {
+            var result = _itemService.Update(id, item);
+            return Ok(result);
+        }
+        catch (ValidationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
 }
