@@ -1,5 +1,6 @@
 using Application;
 using Application.Interfaces;
+using AutoMapper;
 using Domain;
 using Moq;
 
@@ -14,7 +15,7 @@ public class ItemServiceTest
 
         //Act
         IItemService itemService = null;
-        var e = Assert.Throws<ArgumentNullException>(() => itemService = new ItemService(null));
+        var e = Assert.Throws<ArgumentNullException>(() => itemService = new ItemService(null, null, null));
         
         //Assert
         Assert.Equal("Value cannot be null. (Parameter 'itemRepository')", e.Message);
@@ -28,7 +29,7 @@ public class ItemServiceTest
         var mockRepository = new Mock<IItemRepository>();
         
         //Act
-        IItemService itemService = new ItemService(mockRepository.Object);
+        IItemService itemService = new ItemService(mockRepository.Object, null, null);
         
         //Assert
         Assert.NotNull(itemService);
@@ -49,7 +50,7 @@ public class ItemServiceTest
         };
         mockRepository.Setup(r => r.Read(mockId)).Returns(mockItem);
         
-        IItemService itemService = new ItemService(mockRepository.Object);
+        IItemService itemService = new ItemService(mockRepository.Object,null, null);
         
         //Act
         Item readItem = itemService.Read(mockId);
@@ -75,7 +76,7 @@ public class ItemServiceTest
         };
         mockRepository.Setup(r => r.ReadAll()).Returns(mockItems);
         
-        IItemService itemService = new ItemService(mockRepository.Object);
+        IItemService itemService = new ItemService(mockRepository.Object,null, null);
         
         //Act
         List<Item> readItems = itemService.ReadAll();
