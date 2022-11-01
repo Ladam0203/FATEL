@@ -1,31 +1,33 @@
 <div class="inventory-container">
   <h2>Warehouse Inventory</h2>
-  <div class="item-grid" *ngFor="let item of items">
-    <div class="div1">id</div>
-    <div class="div2">name</div>
-    <div class="div3">width</div>
-    <div class="div4">length</div>
-    <div class="div5">quantity</div>
-    <div class="div6">unit</div>
-    <div class="div7">note</div>
-  </div>
-
-  <div class="item-properties">
-    <h6>ID</h6>
-    <h6>Name</h6>
-    <h6>Width</h6>
-    <h6>Length</h6>
-    <h6>Unit</h6>
-    <h6>Quantity</h6>
-    <h6>Note</h6>
-  </div>
-  <div class="item-component" *ngFor="let item of items">
-    <h6>{{item.id}}</h6>
-    <h6>{{item.name}}</h6>
-    <h6>{{item.width}}</h6>
-    <h6>{{item.length}}</h6>
-    <h6>{{item.unit}}</h6>
-    <h6>{{item.quantity}}</h6>
-    <h6>{{item.note}}</h6>
+  <div class="item-grid" *ngFor="let item of items; let i=index;">
+    <div class="id-col">
+      <div *ngIf="i==0">id</div>
+      <div>{{item.id}}</div>
+    </div>
+    <div class="name-col">
+      <div *ngIf="i==0">name</div>
+      <div>{{item.name}}</div>
+    </div>
+    <div class="width-col">
+      <div *ngIf="i==0">width</div>
+      <div>{{item.width}}</div>
+    </div>
+    <div class="length-col">
+      <div *ngIf="i==0">length</div>
+      <div>{{item.length}}</div>
+    </div>
+    <div class="quantity-col">
+      <div *ngIf="i==0">quantity</div>
+      <div>{{item.quantity}}</div>
+    </div>
+    <div class="unit-col">
+      <div *ngIf="i==0">unit</div>
+      <div>{{item.unit}}</div>
+    </div>
+    <div class="note-col">
+      <div *ngIf="i==0">note</div>
+      <div>{{item.note}}</div>
+    </div>
   </div>
 </div>

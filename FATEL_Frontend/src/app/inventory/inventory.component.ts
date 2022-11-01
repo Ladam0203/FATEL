@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Item} from "../entities/item";
 import {ItemService} from "../services/item.service";
+import {ITEMS} from "../mock-objects/mock-items";
 
 @Component({
   selector: 'inventory',

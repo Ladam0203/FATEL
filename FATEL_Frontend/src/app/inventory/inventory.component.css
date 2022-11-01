@@ -14,10 +14,10 @@
   grid-row-gap: 0px;
 }
 
-.div1 { grid-area: 1 / 1 / 2 / 2; }
-.div2 { grid-area: 1 / 2 / 2 / 3; }
-.div3 { grid-area: 1 / 3 / 2 / 4; }
-.div4 { grid-area: 1 / 4 / 2 / 5; }
-.div5 { grid-area: 1 / 5 / 2 / 6; }
-.div6 { grid-area: 1 / 6 / 2 / 7; }
-.div7 { grid-area: 1 / 7 / 2 / 8; }
+.id-col { grid-area: 1 / 1 / 2 / 2; }
+.name-col { grid-area: 1 / 2 / 2 / 3; }
+.width-col { grid-area: 1 / 3 / 2 / 4; }
+.length-col { grid-area: 1 / 4 / 2 / 5; }
+.quantity-col { grid-area: 1 / 5 / 2 / 6; }
+.unit-col { grid-area: 1 / 6 / 2 / 7; }
+.note-col { grid-area: 1 / 7 / 2 / 8; }
