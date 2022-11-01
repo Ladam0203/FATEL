@@ -41,9 +41,12 @@ public class ItemService : IItemService
         return _itemRepository.ReadAll();
     }
 
-    public Item Update(int id, Item item)
+    public Item Update(int id, PutItemDTO dto)
     {
-        throw new NotImplementedException();
+        if (id != dto.Id)
+            throw new ValidationException("Id in route must match Id in request");
+        var validation = 
+
     }
 
     public Item Delete(int id)

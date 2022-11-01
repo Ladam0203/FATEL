@@ -180,4 +180,34 @@ public class ItemServiceTest
         Assert.Contains(item2, mockItems);
         mockRepository.Verify(r => r.Delete(mockId), Times.Once);
     }
+
+    [Fact]
+    public void Update()
+    {
+        var mockRepository = new Mock<IItemRepository>();
+        int mockId = 1;
+        Item item1 = new Item { Id = mockId, Name = "Item1", Quantity = 1};
+        PutItemDTO dto = new PutItemDTO() { Id = mockId, Name = "UpdatedItem", Quantity = 5 };
+        Item editItem = new Item() { Id = dto.Id, Name = dto.Name, Quantity = dto.Quantity };
+
+        mockRepository.Setup(r => r.Update(editItem)).Returns(() =>
+        {
+            item1.Name = editItem.Name;
+            item1.Quantity = editItem.Quantity;
+            return item1;
+        });
+        
+        IItemService itemService = new ItemService(mockRepository.Object);
+        
+        //Act
+        Item updated = itemService.Update(mockId, dto);
+        
+        //Assert
+        Assert.NotNull(updated);
+        Assert.True(updated is Item);
+        Assert.Equal(item1, updated);
+        Assert.Equal(editItem.Name, updated.Name);
+        Assert.Equal(editItem.Quantity, updated.Quantity);
+        mockRepository.Verify(r => r.Update(editItem), Times.Once);
+    }
 }
