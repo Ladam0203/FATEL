@@ -16,7 +16,10 @@ public class ItemRepository : IItemRepository
     {
         _context.Database.EnsureDeleted();
         _context.Database.EnsureCreated();
+    }
 
+    private void Seed()
+    {
         Item test1 = new Item() { Name = "Item1", Quantity = 1 };
         Item test2 = new Item() { Name = "Item2", Quantity = 1 };
         Item test3 = new Item() { Name = "Item3", Quantity = 1 };
