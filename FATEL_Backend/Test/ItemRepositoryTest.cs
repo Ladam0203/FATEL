@@ -172,7 +172,7 @@ public class ItemRepositoryTest
             IItemRepository repo = new ItemRepository(context);
 
             //Act + Assert
-            Assert.Throws<DbUpdateConcurrencyException>(()=> repo.Update(editedItem));
+            Assert.Throws<KeyNotFoundException>(()=> repo.Update(editedItem));
         }
     }
 }
