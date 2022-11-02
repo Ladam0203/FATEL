@@ -38,7 +38,7 @@ public class ItemRepository : IItemRepository
     public Item Read(int id)
     {
         Item item = _context.ItemTable.Find(id);
-        return item ?? throw new KeyNotFoundException();
+        return item ?? throw new KeyNotFoundException("Item with id " + item.Id + " does not exist");
     }
 
     public List<Item> ReadAll()
@@ -48,7 +48,9 @@ public class ItemRepository : IItemRepository
 
     public Item Update(Item item)
     {
-        //TODO: Most probably we need a find here actually, also check for null
+        Item oldItem = _context.ItemTable.Find(item.Id);
+        if (oldItem == null)
+            throw new KeyNotFoundException("Item with id " + item.Id + " does not exist");
         _context.ChangeTracker.Clear();
         _context.ItemTable.Update(item);
         _context.SaveChanges();
@@ -64,6 +66,6 @@ public class ItemRepository : IItemRepository
             _context.SaveChanges();
             return item;
         }
-        throw new KeyNotFoundException(); //TODO: Write message
+        throw new KeyNotFoundException("Item with id " + item.Id + " does not exist"); //TODO: Write message
     }
 }
