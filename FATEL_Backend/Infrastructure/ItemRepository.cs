@@ -48,7 +48,7 @@ public class ItemRepository : IItemRepository
 
     public Item Update(Item item)
     {
-        //TODO: Most probably we need a find here actually
+        //TODO: Most probably we need a find here actually, also check for null
         _context.ChangeTracker.Clear();
         _context.ItemTable.Update(item);
         _context.SaveChanges();
