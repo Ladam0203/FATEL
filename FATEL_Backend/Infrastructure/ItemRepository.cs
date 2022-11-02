@@ -26,6 +26,8 @@ public class ItemRepository : IItemRepository
         _context.SaveChanges();
     }
     
+    //TODO: Create a separate Seed method
+    
     public Item Create(Item item)
     {
         _context.ItemTable.Add(item);
@@ -46,7 +48,7 @@ public class ItemRepository : IItemRepository
 
     public Item Update(Item item)
     {
-        //TODO: Yeah, most probs we need a find here
+        //TODO: Most probably we need a find here actually
         _context.ChangeTracker.Clear();
         _context.ItemTable.Update(item);
         _context.SaveChanges();
