@@ -22,6 +22,13 @@ public class EntryRepository : IEntryRepository
 
     public List<Entry> ReadAll()
     {
+        Rebuild();
         return _context.EntryTable.ToList();
+    }
+    
+    private void Rebuild()
+    {
+        _context.Database.EnsureDeleted();
+        _context.Database.EnsureCreated();
     }
 }

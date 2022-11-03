@@ -27,6 +27,7 @@ public class EntryService : IEntryService
             throw new ValidationException(validation.ToString());
         return _entryRepository.Create(_mapper.Map<Entry>(dto));
     }
+    
 
     public List<Entry> ReadAll()
     {
