@@ -8,6 +8,6 @@ public class PostItemDTO
     public float? Length { get; set; }
     public float?  Width { get; set; }
     public Unit Unit { get; set; }
-    public int Quantity { get; set; } //TODO: This will have to be removed as soon as we have a diary/movement manager
+    public int Quantity { get; set; } //TODO: If we create an item with initial quantity a diary entry has to be made later on
     public string? Note { get; set; }
 }
