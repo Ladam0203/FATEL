@@ -244,4 +244,36 @@ public class ItemServiceTest
         Assert.Equal(editedItem.Unit, updated.Unit);
         mockRepository.Verify(r => r.Update(It.IsAny<Item>()), Times.Once);
     }
+    
+    [Fact]
+    public void Create()
+    {
+        var mockRepository = new Mock<IItemRepository>();
+        List<Item> mockItems = new List<Item>();
+        Item item = new Item() { Name = "Item", Unit = Unit.Piece, Quantity = 1};
+        PostItemDTO dto = new PostItemDTO() { Name = "Item", Unit = Unit.Piece, Quantity = 1 };
+
+        mockRepository.Setup(r => r.Create(It.IsAny<Item>())).Returns(() =>
+        {
+            mockItems.Add(item);
+            return item;
+        });
+        var mapper = new MapperConfiguration(configuration =>
+        {
+            configuration.CreateMap<PostItemDTO, Item>();
+        }).CreateMapper();
+        var validator = new PostItemDTOValidator();
+        var putValidator = new PutItemDTOValidator();
+        
+        IItemService itemService = new ItemService(mockRepository.Object,mapper, validator, putValidator);
+        
+        //Act
+        Item result = itemService.Create(dto);
+        
+        //Assert
+        Assert.NotNull(result);
+        Assert.True(result is Item);
+        Assert.Equal(item, result);
+        mockRepository.Verify(r => r.Create(It.IsAny<Item>()), Times.Once);
+    }
 }
