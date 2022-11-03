@@ -20,8 +20,8 @@ public class ItemController : ControllerBase
     }
     
     [HttpGet]
-    [Route("Read")]
-    public ActionResult<Item> Read(int id)
+    [Route("Read/{id}")]
+    public ActionResult<Item> Read([FromRoute] int id)
     {
         try
         {
@@ -50,7 +50,25 @@ public class ItemController : ControllerBase
             return StatusCode(500, e.ToString());
         }
     }
-
+    
+    [HttpDelete]
+    [Route("Delete/{id}")]
+    public ActionResult<Item> Delete([FromRoute] int id)
+    {
+        try
+        {
+            return Ok(_itemService.Delete(id));
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
+    }
+    
     [HttpPost]
     [Route("Create")]
     public ActionResult<Item> Create(PostItemDTO itemDto)
@@ -70,6 +88,26 @@ public class ItemController : ControllerBase
         }
     }
     
-
-
+    [HttpPut]
+    [Route("Update/{id}")]
+    public ActionResult<Item> Update([FromRoute] int id, [FromBody] PutItemDTO item)
+    {
+        try
+        {
+            var result = _itemService.Update(id, item);
+            return Ok(result);
+        }
+        catch (ValidationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
 }

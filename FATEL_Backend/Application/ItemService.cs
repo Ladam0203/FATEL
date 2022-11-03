@@ -13,22 +13,23 @@ public class ItemService : IItemService
 {
     private readonly IItemRepository _itemRepository;
     private IMapper _mapper;
-    private IValidator<PostItemDTO> _validator;
+    private IValidator<PostItemDTO> _postValidator;
+    private IValidator<PutItemDTO> _putValidator;
 
-    public ItemService(IItemRepository itemRepository, IMapper mapper, IValidator<PostItemDTO> validator)
+    public ItemService(IItemRepository itemRepository, IMapper mapper, IValidator<PostItemDTO> postValidator, IValidator<PutItemDTO> putValidator)
     {
         _itemRepository = itemRepository ?? throw new ArgumentNullException(nameof(itemRepository));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-        _validator = validator ?? throw new ArgumentNullException(nameof(validator));
+        _postValidator = postValidator ?? throw new ArgumentNullException(nameof(postValidator));
+        _putValidator = putValidator ?? throw new ArgumentNullException(nameof(putValidator));
     }
     
     public Item Create(PostItemDTO postItemDto)
     {
-        var validation = _validator.Validate(postItemDto);
+        var validation = _postValidator.Validate(postItemDto);
         if (!validation.IsValid) 
             throw new ValidationException(validation.ToString());
         return _itemRepository.Create(_mapper.Map<Item>(postItemDto));
-
     }
 
     public Item Read(int id)
@@ -41,13 +42,19 @@ public class ItemService : IItemService
         return _itemRepository.ReadAll();
     }
 
-    public Item Update(int id, Item item)
+    public Item Update(int id, PutItemDTO dto)
     {
-        throw new NotImplementedException();
+        if (id != dto.Id)
+            throw new ValidationException("Id in route must match Id in request");
+        var validation = _putValidator.Validate(dto);
+        if (!validation.IsValid)
+            throw new ValidationException(validation.ToString());
+        Item item = _mapper.Map<Item>(dto);
+        return _itemRepository.Update(item);
     }
 
     public Item Delete(int id)
     {
-        throw new NotImplementedException();
+        return _itemRepository.Delete(id);
     }
 }

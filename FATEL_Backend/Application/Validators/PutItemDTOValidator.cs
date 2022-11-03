@@ -4,9 +4,9 @@ using FluentValidation;
 
 namespace Application.Validators;
 
-public class PostItemDTOValidator : AbstractValidator<PostItemDTO>
+public class PutItemDTOValidator : AbstractValidator<PutItemDTO>
 {
-    public PostItemDTOValidator()
+    public PutItemDTOValidator()
     {
         //Name
         RuleFor(item => item.Name)
@@ -37,7 +37,7 @@ public class PostItemDTOValidator : AbstractValidator<PostItemDTO>
             .NotNull().When(item => item.Unit == Unit.SquareMeter).WithMessage("Width must not be null if the unit is SquareMeter");
         RuleFor(item => item.Width)
             .GreaterThan(0).When(item => item.Unit == Unit.SquareMeter).WithMessage("Width has to be greater than 0 if the unit is SquareMeter");
-        //Quantity
+        //Quantity TODO: This has to be removed as soon as we have movement managing/diary
         RuleFor(item => item.Quantity)
             .NotNull()
             .GreaterThanOrEqualTo(0).WithMessage("Quantity has to be greater than or equal to 0");

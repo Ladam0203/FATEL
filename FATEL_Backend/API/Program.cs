@@ -23,6 +23,7 @@ Infrastructure.DependencyResolver.DependencyResolverService.RegisterInfrastructu
 //Mapper
 var mapper = new MapperConfiguration(configuration =>
 {
+    configuration.CreateMap<PutItemDTO, Item>();
     configuration.CreateMap<PostItemDTO, Item>();
 }).CreateMapper();
 builder.Services.AddSingleton(mapper);

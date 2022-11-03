@@ -10,6 +10,11 @@ public class ItemRepository : IItemRepository
     public ItemRepository(AppDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
+        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+        {
+            Rebuild();
+            Seed();
+        }
     }
 
     private void Rebuild()
@@ -17,7 +22,46 @@ public class ItemRepository : IItemRepository
         _context.Database.EnsureDeleted();
         _context.Database.EnsureCreated();
     }
-    
+
+    private void Seed()
+    {
+        Item doorKnob = new Item()
+        {
+            Name = "Pánt", 
+            Unit = Unit.Piece,
+            Quantity = 5
+        };
+        Item plank = new Item()
+        {
+            Name = "Fenyőpadléc", 
+            Length = 5,
+            Unit = Unit.Meter,
+            Quantity = 2
+        };
+        Item floor1 = new Item()
+        {
+            Name = "Fenyőlambéria 12x95",
+            Length = 5,
+            Width = 0.0095f,
+            Unit = Unit.SquareMeter,
+            Quantity = 2,
+            Note = "Szar minőségű"
+        };
+        Item floor2 = new Item()
+        {
+            Name = "Fenyőlambéria 12x95",
+            Length = 2,
+            Width = 0.0095f,
+            Unit = Unit.SquareMeter,
+            Quantity = 2,
+        };
+        _context.ItemTable.Add(doorKnob);
+        _context.ItemTable.Add(plank);
+        _context.ItemTable.Add(floor1);
+        _context.ItemTable.Add(floor2);
+        _context.SaveChanges();
+    }
+
     public Item Create(Item item)
     {
         _context.ItemTable.Add(item);
@@ -28,7 +72,7 @@ public class ItemRepository : IItemRepository
     public Item Read(int id)
     {
         Item item = _context.ItemTable.Find(id);
-        return item ?? throw new KeyNotFoundException();
+        return item ?? throw new KeyNotFoundException("Item with id " + item.Id + " does not exist");
     }
 
     public List<Item> ReadAll()
@@ -38,11 +82,24 @@ public class ItemRepository : IItemRepository
 
     public Item Update(Item item)
     {
-        throw new NotImplementedException();
+        Item oldItem = _context.ItemTable.Find(item.Id);
+        if (oldItem == null)
+            throw new KeyNotFoundException("Item with id " + item.Id + " does not exist");
+        _context.ChangeTracker.Clear();
+        _context.ItemTable.Update(item);
+        _context.SaveChanges();
+        return item;
     }
 
     public Item Delete(int id)
     {
-        throw new NotImplementedException();
+        Item item = _context.ItemTable.Find(id);
+        if (item != null)
+        {
+            _context.ItemTable.Remove(item);
+            _context.SaveChanges();
+            return item;
+        }
+        throw new KeyNotFoundException("Item with id " + item.Id + " does not exist"); //TODO: Write message
     }
 }
