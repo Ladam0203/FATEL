@@ -19,9 +19,14 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Item>()
             .Property(item => item.Id)
             .ValueGeneratedOnAdd();
+        
+        modelBuilder.Entity<Entry>()
+            .Property(e => e.Id)
+            .ValueGeneratedOnAdd();
     }
 
     #region #region Database sets
     public DbSet<Item> ItemTable { get; set; }
+    public DbSet<Entry> EntryTable { get; set; }
     #endregion
 }
