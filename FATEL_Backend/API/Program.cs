@@ -25,6 +25,7 @@ var mapper = new MapperConfiguration(configuration =>
 {
     configuration.CreateMap<PutItemDTO, Item>();
     configuration.CreateMap<PostItemDTO, Item>();
+    configuration.CreateMap<PostEntryDTO, Entry>();
 }).CreateMapper();
 builder.Services.AddSingleton(mapper);
 
