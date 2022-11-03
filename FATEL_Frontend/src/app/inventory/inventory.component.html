@@ -42,6 +42,28 @@
           Accordion summary without toggle icon
         </mat-panel-description>
       </mat-expansion-panel-header>
+
+      <p><b>This is the first item's accordion body.</b>
+        An Angular material is an amazing UI for Angular framework, it
+        has lots of pre-built components lie card, modal, more , and Angular
+        material tabs are on of them.
+      </p>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel (opened)="secondPanelOpenState = true"
+                         (closed)="secondPanelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Accordion second item title
+        </mat-panel-title>
+        <mat-panel-description>
+          Expansion panel currently state :
+          {{ secondPanelOpenState ? 'open' : 'closed' }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p> <b>This is the first item's accordion body.</b>
+        Second item expansion is open
+      </p>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
