@@ -1,0 +1,15 @@
+.warehouse-navbar {
+  display: flex;
+  padding: 8px 0 8px 0;
+}
+
+.warehouse-anchor {
+  padding: 16px;
+  margin-right: 16px;
+  font-weight: bold;
+
+  background-color: var(--orange-2);
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
