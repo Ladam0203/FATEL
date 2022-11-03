@@ -10,6 +10,9 @@ public class ItemRepository : IItemRepository
     public ItemRepository(AppDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
+        //TODO: Remove these when the app is in production mode
+        Rebuild(); 
+        Seed();
     }
 
     private void Rebuild()
