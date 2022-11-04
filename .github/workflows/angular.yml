@@ -40,10 +40,10 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - name: Sync package files
+      - name: Install package lock
         working-directory: ./FATEL_Frontend
         run: |
-          npm install
+          npm install --package-lock-only
       - name: Install Dependencies
         working-directory: ./FATEL_Frontend
         if: steps.cache-nodemodules.outputs.cache-hit != 'true'
@@ -52,4 +52,4 @@ jobs:
       - name: Build
         working-directory: ./FATEL_Frontend
         run: |
-          npm run build -- --prod
+          npm run build --
