@@ -22,7 +22,6 @@ public class EntryRepository : IEntryRepository
 
     public List<Entry> ReadAll()
     {
-        Rebuild();
         return _context.EntryTable.ToList();
     }
     
