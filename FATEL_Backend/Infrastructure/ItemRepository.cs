@@ -107,6 +107,7 @@ public class ItemRepository : IItemRepository
 
     public double ReadTotalQuantityOf(string itemName)
     {
+        //This only works for the pieces, TODO: Implement something that is good for the Meter And SquareMeter
         return _context
             .ItemTable
             .Where(item => item.Name == itemName)

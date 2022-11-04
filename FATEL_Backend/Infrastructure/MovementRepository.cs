@@ -17,7 +17,9 @@ public class MovementRepository : IMovementRepository
     {
         using (var dbContextTransaction = _context.Database.BeginTransaction())
         {
+            _context.ChangeTracker.Clear();
             _context.ItemTable.Update(item);
+            
             _context.EntryTable.Add(entry);
                 
             _context.SaveChanges();
