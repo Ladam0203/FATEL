@@ -18,8 +18,9 @@ public class MovementService : IMovementService
 
     public Entry Record(Movement movement)
     {
+        //Check if item with id exists
         Item item = _itemRepository.Read(movement.Item.Id);
-        
+        //Check if stored item is the same as the item in the request
         bool haveSameData = false;
         foreach(PropertyInfo prop in item.GetType().GetProperties())
         {
@@ -28,7 +29,18 @@ public class MovementService : IMovementService
             if (!haveSameData)
                 throw new ValidationException("Item in body does not match with stored Item");
         }
-
-        return _movementRepository.Record(movement);
+        //TODO: CHANGE CANNOT BE ZERO OR NULL
+        //Change the item based on the movement
+        item.Quantity += movement.Change;
+        //Create a diary entry
+        Entry entry = new()
+        {
+            Timestamp = DateTime.Now,
+            ItemId = item.Id,
+            ItemName = item.Name,
+            Change = movement.Change,
+            QuantityAfterChange = _itemRepository.ReadTotalQuantityOf(item.Name)
+        };
+        return _movementRepository.Record(item, entry);
     }
 }

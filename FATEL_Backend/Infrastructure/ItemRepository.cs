@@ -10,11 +10,13 @@ public class ItemRepository : IItemRepository
     public ItemRepository(AppDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
+        /*
         if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
         {
             Rebuild();
             Seed();
         }
+        */
     }
 
     private void Rebuild()
@@ -101,5 +103,13 @@ public class ItemRepository : IItemRepository
             return item;
         }
         throw new KeyNotFoundException("Item with id " + item.Id + " does not exist"); //TODO: Write message
+    }
+
+    public double ReadTotalQuantityOf(string itemName)
+    {
+        return _context
+            .ItemTable
+            .Where(item => item.Name == itemName)
+            .Sum(item => item.Quantity);
     }
 }

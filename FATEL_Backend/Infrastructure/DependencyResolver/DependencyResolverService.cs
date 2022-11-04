@@ -10,5 +10,6 @@ public static class DependencyResolverService
     {
         services.AddScoped<IItemRepository, ItemRepository>();
         services.AddScoped<IEntryRepository, EntryRepository>();
+        services.AddScoped<IMovementRepository, MovementRepository>();
     }
 }
