@@ -4,5 +4,5 @@ namespace Application.Interfaces;
 
 public interface IMovementRepository
 {
-    public Entry Record(Movement movement);
+    public Entry Record(Item item, Entry entry);
 }
