@@ -102,15 +102,13 @@ public class ItemRepository : IItemRepository
             _context.SaveChanges();
             return item;
         }
-        throw new KeyNotFoundException("Item with id " + item.Id + " does not exist"); //TODO: Write message
+        throw new KeyNotFoundException("Item with id " + item.Id + " does not exist");
     }
 
     public double ReadTotalQuantityOf(string itemName)
     {
-        //This only works for the pieces, TODO: Implement something that is good for the Meter And SquareMeter
-        return _context
-            .ItemTable
-            .Where(item => item.Name == itemName)
-            .Sum(item => item.Quantity);
+        return _context.ItemTable.Where(item => item.Name == itemName)
+            .Select(item => item.Length.GetValueOrDefault(1) * item.Width.GetValueOrDefault(1) * item.Quantity)
+            .Sum();
     }
 }

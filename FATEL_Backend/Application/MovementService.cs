@@ -37,13 +37,14 @@ public class MovementService : IMovementService
         //Change the item based on the movement
         item.Quantity += movement.Change;
         //Create a diary entry
+        double totalChange = item.Length.GetValueOrDefault(1) * item.Width.GetValueOrDefault(1) * movement.Change;
         Entry entry = new()
         {
             Timestamp = DateTime.Now.ToUniversalTime(),
             ItemId = item.Id,
             ItemName = item.Name,
-            Change = movement.Change,
-            QuantityAfterChange = _itemRepository.ReadTotalQuantityOf(item.Name) + movement.Change
+            Change = totalChange,
+            QuantityAfterChange = _itemRepository.ReadTotalQuantityOf(item.Name) + totalChange
         };
         return _movementRepository.Record(item, entry);
     }
