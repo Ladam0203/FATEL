@@ -5,6 +5,5 @@ namespace Application.Interfaces;
 
 public interface IEntryService
 {
-    Entry Create(PostEntryDTO dto);
     List<Entry> ReadAll();
 }
