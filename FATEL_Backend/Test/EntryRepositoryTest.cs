@@ -37,7 +37,7 @@ public class EntryRepositoryTest
         //TODO: Test if the repository is truly injected
     }
 
-    [Fact]
+    /*[Fact]
     public void CreateEntry()
     {
         var options = new DbContextOptionsBuilder<AppDbContext>()
@@ -71,7 +71,7 @@ public class EntryRepositoryTest
             Assert.Equal(entry1, foundResult);
         }
     }
-    
+    */
     [Fact]
     public void ReadAllEntries()
     {
