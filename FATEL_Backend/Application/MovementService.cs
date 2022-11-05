@@ -2,6 +2,7 @@
 using Application.Interfaces;
 using Domain;
 using FluentValidation;
+using Newtonsoft.Json;
 
 namespace Application;
 
@@ -9,31 +10,28 @@ public class MovementService : IMovementService
 {
     private readonly IItemRepository _itemRepository;
     private readonly IMovementRepository _movementRepository;
+    private readonly IValidator<Movement> _movementValidator;
 
-    public MovementService(IItemRepository itemRepository, IMovementRepository movementRepository)
+    public MovementService(IItemRepository itemRepository, IMovementRepository movementRepository, IValidator<Movement> _movementValidator)
     {
         _itemRepository = itemRepository;
         _movementRepository = movementRepository;
+        _movementValidator = _movementValidator;
     }
 
     public Entry Record(Movement movement)
     {
-        //Check if item with id exists
-        Item item = _itemRepository.Read(movement.Item.Id);
-
-        //TODO: Check if stored item is the same as the item in the request IS THIS REALLY NECESSARY?
-        /*
-        bool haveSameData = false;
-        foreach(PropertyInfo prop in item.GetType().GetProperties())
-        {
-            haveSameData = prop.GetValue(item, null).Equals(prop.GetValue(movement.Item, null));
-
-            if (!haveSameData)
-                throw new ValidationException("Item in body does not match with stored Item");
-        }
-        */
+        var validation = _movementValidator.Validate(movement);
+        if (!validation.IsValid) 
+            throw new ValidationException(validation.ToString());
         
-        //TODO: CHANGE CANNOT BE ZERO OR NULL
+        //Check if item with id exists, if not, this will throw a KeyNotFoundException
+        Item item = _itemRepository.Read(movement.Item.Id);
+        
+        //Check if stored item is the same as the one in the movement
+        if (JsonConvert.SerializeObject(item) != JsonConvert.SerializeObject(movement.Item)) 
+            throw new ValidationException("Item in body does not match with stored Item");
+        
         //Change the item based on the movement
         item.Quantity += movement.Change;
         //Create a diary entry
@@ -44,7 +42,7 @@ public class MovementService : IMovementService
             ItemId = item.Id,
             ItemName = item.Name,
             Change = totalChange,
-            QuantityAfterChange = _itemRepository.ReadTotalQuantityOf(item.Name) + totalChange
+            QuantityAfterChange = _itemRepository.ReadTotalQuantityOf(item.Name) + totalChange //old total quantity plus new totalChange
         };
         return _movementRepository.Record(item, entry);
     }
