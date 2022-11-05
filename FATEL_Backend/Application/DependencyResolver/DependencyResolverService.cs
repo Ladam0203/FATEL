@@ -9,6 +9,5 @@ public static class DependencyResolverService
     {
         services.AddScoped<IItemService, ItemService>();
         services.AddScoped<IEntryService, EntryService>();
-        services.AddScoped<IMovementService, MovementService>();
     }
 }
