@@ -73,8 +73,7 @@ public class ItemRepository : IItemRepository
 
     public Item Read(int id)
     {
-        Item item = _context.ItemTable.Find(id);
-        return item ?? throw new KeyNotFoundException("Item with id " + item.Id + " does not exist");
+        return _context.ItemTable.Find(id) ?? throw new KeyNotFoundException("Item with id " + id + " does not exist");
     }
 
     public List<Item> ReadAll()
@@ -84,8 +83,7 @@ public class ItemRepository : IItemRepository
 
     public Item Update(Item item)
     {
-        Item oldItem = _context.ItemTable.Find(item.Id);
-        if (oldItem == null)
+        if (_context.ItemTable.Find(item.Id) == null)
             throw new KeyNotFoundException("Item with id " + item.Id + " does not exist");
         _context.ChangeTracker.Clear();
         _context.ItemTable.Update(item);
@@ -95,14 +93,10 @@ public class ItemRepository : IItemRepository
 
     public Item Delete(int id)
     {
-        Item item = _context.ItemTable.Find(id);
-        if (item != null)
-        {
-            _context.ItemTable.Remove(item);
-            _context.SaveChanges();
-            return item;
-        }
-        throw new KeyNotFoundException("Item with id " + item.Id + " does not exist");
+        Item item = _context.ItemTable.Find(id) ?? throw new KeyNotFoundException("Item with id " + id + " does not exist");
+        _context.ItemTable.Remove(item);
+        _context.SaveChanges();
+        return item;
     }
 
     public double ReadTotalQuantityOf(string itemName)
