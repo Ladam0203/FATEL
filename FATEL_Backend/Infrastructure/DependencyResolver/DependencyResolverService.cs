@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Domain;
 using Microsoft.Extensions.DependencyInjection;
+using Test;
 
 namespace Infrastructure.DependencyResolver;
 
@@ -10,6 +11,6 @@ public static class DependencyResolverService
     {
         services.AddScoped<IItemRepository, ItemRepository>();
         services.AddScoped<IEntryRepository, EntryRepository>();
-        services.AddScoped<IMovementRepository, MovementRepository>();
+        services.AddScoped<IRepositoryFacade, RepositoryFacade>();
     }
 }

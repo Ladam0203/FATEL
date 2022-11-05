@@ -13,13 +13,12 @@ public class EntryRepository : IEntryRepository
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
     
-    /*public Entry Create(Entry entry)
+    public Entry Create(Entry entry)
     {
         _context.EntryTable.Add(entry);
         _context.SaveChanges();
         return entry;
     }
-    */
 
     public List<Entry> ReadAll()
     {
