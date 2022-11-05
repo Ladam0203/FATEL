@@ -49,6 +49,10 @@ jobs:
         if: steps.cache-nodemodules.outputs.cache-hit != 'true'
         run: |
           npm ci
+      - name: Link Angular
+        working-directory: ./FATEL_Frontend
+        run: |
+          npm link @angular/cli
       - name: Build
         working-directory: ./FATEL_Frontend
         run: |
