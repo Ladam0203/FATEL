@@ -27,8 +27,7 @@ public class MovementService : IMovementService
         
         //Check if item with id exists, if not, this will throw a KeyNotFoundException
         Item item = _itemRepository.Read(movement.Item.Id);
-        
-        
+
         //Check if stored item is the same as the one in the movement
         if (JsonConvert.SerializeObject(item) != JsonConvert.SerializeObject(movement.Item)) 
             throw new ValidationException("Item in body does not match with stored Item");

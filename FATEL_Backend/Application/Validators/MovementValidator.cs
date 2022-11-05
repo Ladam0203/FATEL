@@ -9,5 +9,8 @@ public class MovementValidator : AbstractValidator<Movement>
     {
         RuleFor(movement => movement.Item.Id).GreaterThan(0).WithMessage("Item Id is in invalid range");
         RuleFor(movement => movement.Change).NotEqual(0).WithMessage("Change cannot be 0");
+        RuleFor(movement => movement.Change)
+            .Must((movement, change) => movement.Item.Quantity + change >= 0)
+            .WithMessage("Change cannot make the quantity negative");
     }
 }

@@ -8,6 +8,8 @@ public class PutItemDTOValidator : AbstractValidator<PutItemDTO>
 {
     public PutItemDTOValidator()
     {
+        //Id is in range?
+        RuleFor(item => item.Id).GreaterThan(0).WithMessage("Item Id is in invalid range");
         //Name
         RuleFor(item => item.Name)
             .NotEmpty().WithMessage("Name must not be empty");
