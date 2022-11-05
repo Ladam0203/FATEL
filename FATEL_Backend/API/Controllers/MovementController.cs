@@ -27,9 +27,13 @@ public class MovementController : ControllerBase
             var entry = _movementService.Record(movement);
             return Created($"entry/{entry.Id}", entry);
         }
-        catch(ValidationException e)
+        catch (ValidationException e)
         {
             return BadRequest(e.Message);
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound(e.Message);
         }
         catch (Exception e)
         {
