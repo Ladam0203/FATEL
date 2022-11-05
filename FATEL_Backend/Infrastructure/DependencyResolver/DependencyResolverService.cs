@@ -9,8 +9,6 @@ public static class DependencyResolverService
 {
     public static void RegisterInfrastructureLayer(IServiceCollection services)
     {
-        services.AddScoped<IItemRepository, ItemRepository>();
-        services.AddScoped<IEntryRepository, EntryRepository>();
         services.AddScoped<IRepositoryFacade, RepositoryFacade>();
     }
 }
