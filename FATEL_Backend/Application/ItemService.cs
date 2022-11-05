@@ -18,11 +18,13 @@ public class ItemService : IItemService
     private IValidator<PutItemDTO> _putValidator;
     private readonly IValidator<Movement> _movementValidator;
 
-    public ItemService(IRepositoryFacade _repository, IMapper mapper, IValidator<PostItemDTO> postValidator, IValidator<PutItemDTO> putValidator, IValidator<Movement _movementValidator)
+    public ItemService(IRepositoryFacade repository, IMapper mapper, IValidator<PostItemDTO> postValidator, IValidator<PutItemDTO> putValidator, IValidator<Movement> movementValidator)
     {
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         _postValidator = postValidator ?? throw new ArgumentNullException(nameof(postValidator));
         _putValidator = putValidator ?? throw new ArgumentNullException(nameof(putValidator));
+        _movementValidator = movementValidator ?? throw new ArgumentNullException(nameof(movementValidator));
+        _repository = repository ?? throw new ArgumentNullException(nameof(repository));
     }
     
     public Item Create(PostItemDTO postItemDto)
@@ -45,12 +47,12 @@ public class ItemService : IItemService
 
     public Item Read(int id)
     {
-        return _itemRepository.Read(id);
+        return _repository.ReadItem(id);
     }
 
     public List<Item> ReadAll()
     {
-        return _itemRepository.ReadAll();
+        return _repository.ReadAllItems();
     }
 
     public Item Update(int id, PutItemDTO dto)
@@ -61,7 +63,7 @@ public class ItemService : IItemService
         if (!validation.IsValid)
             throw new ValidationException(validation.ToString());
         Item item = _mapper.Map<Item>(dto);
-        return _itemRepository.Update(item);
+        return _repository.UpdateItem(item);
     }
     
     public Item UpdateQuantity(int id, Movement movement)
@@ -96,6 +98,6 @@ public class ItemService : IItemService
 
     public Item Delete(int id)
     {
-        return _itemRepository.Delete(id);
+        return _repository.DeleteItem(id);
     }
 }
