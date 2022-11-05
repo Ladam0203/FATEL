@@ -73,4 +73,9 @@ public class RepositoryFacade : IRepositoryFacade
     {
         return _itemRepository.Delete(id);
     }
+
+    public List<Entry> ReadAllEntries()
+    {
+        return _entryRepository.ReadAll();
+    }
 }
