@@ -18,11 +18,6 @@ export class InventoryComponent implements OnInit {
   constructor(private itemService: ItemService) { }
 
   ngOnInit(): void {
-    this.readALlItemsFromInventory();
-  }
-
-
-  private readALlItemsFromInventory(): void {
     this.itemService.readAll()
       .subscribe(items => {
         this.items = items;
@@ -31,27 +26,18 @@ export class InventoryComponent implements OnInit {
   }
 
   private categoriseItems(): void {
-    //TODO: Create categorizing logic by name
-    /*const names: string[] = [];
-    for(const item of this.items){
-      if(!names.includes(item.name))
-        names.push(item.name);
-    }
-    console.log(names);*/
-
     const categories: Category[] = [];
     for(const item of this.items){
-      if(!categories.map(value => {
-        return value.name
-      }).includes(item.name))
+      //if the item's name is not in the category array
+      if(!categories.map(value => value.name).includes(item.name))
+        //add new category with the item's name & the item itself
         categories.push({name: item.name, items: [item]})
       else {
-        // @ts-ignore
-        categories.filter(value => {
-          return value.name == item.name;
-        }).at(0).items.push(item);
+        //if the item's name is in the category array, get the first occurrence and add the current item
+        const category = categories.filter(value => value.name == item.name).at(0);
+        if(category)
+          category.items.push(item);
       }
     }
-    console.log(categories);
   }
 }
