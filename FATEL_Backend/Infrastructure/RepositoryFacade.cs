@@ -40,14 +40,13 @@ public class RepositoryFacade : IRepositoryFacade
         {
             var newItem = _itemRepository.Create(item);
             
-            entry.Id = newItem.Id;
+            entry.ItemId = newItem.Id;
             _entryRepository.Create(entry);
                 
             _context.SaveChanges();
 
             dbContextTransaction.Commit();
         }
-
         return item;
     }
 
@@ -55,9 +54,23 @@ public class RepositoryFacade : IRepositoryFacade
     {
         return _itemRepository.Read(id);
     }
+
+    public List<Item> ReadAllItems()
+    {
+        return _itemRepository.ReadAll();
+    }
     
     public double ReadTotalQuantityOf(string itemName)
     {
         return _itemRepository.ReadTotalQuantityOf(itemName);
+    }
+
+    public Item UpdateItem(Item item)
+    {
+        return _itemRepository.Update(item);
+    }
+    public Item DeleteItem(int id)
+    {
+        return _itemRepository.Delete(id);
     }
 }

@@ -39,10 +39,6 @@ public class PutItemDTOValidator : AbstractValidator<PutItemDTO>
             .NotNull().When(item => item.Unit == Unit.SquareMeter).WithMessage("Width must not be null if the unit is SquareMeter");
         RuleFor(item => item.Width)
             .GreaterThan(0).When(item => item.Unit == Unit.SquareMeter).WithMessage("Width has to be greater than 0 if the unit is SquareMeter");
-        //Quantity TODO: This has to be removed as soon as we have movement managing/diary
-        RuleFor(item => item.Quantity)
-            .NotNull()
-            .GreaterThanOrEqualTo(0).WithMessage("Quantity has to be greater than or equal to 0");
         //Note
         RuleFor(item => item.Note)
             .NotEmpty().When(item => item.Note != null).WithMessage("Note must not be empty");
