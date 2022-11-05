@@ -8,17 +8,17 @@ namespace Application;
 
 public class EntryService : IEntryService
 {
-    
-    private readonly IEntryRepository _entryRepository;
 
-    public EntryService(IEntryRepository entryRepository)
+    private readonly IRepositoryFacade _repository;
+
+    public EntryService(IRepositoryFacade repository)
     {
-        _entryRepository = entryRepository ?? throw new ArgumentNullException(nameof(entryRepository));
+        _repository = repository ?? throw new ArgumentNullException(nameof(repository));
     }
 
 
     public List<Entry> ReadAll()
     {
-        return _entryRepository.ReadAll();
+        return _repository.ReadAllEntries();
     }
 }

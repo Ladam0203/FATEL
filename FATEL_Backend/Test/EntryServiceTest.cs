@@ -20,15 +20,15 @@ public class EntryServiceTest
         var e = Assert.Throws<ArgumentNullException>(() => entryService = new EntryService(null));
 
         //Assert
-        Assert.Equal("Value cannot be null. (Parameter 'entryRepository')", e.Message);
+        Assert.Equal("Value cannot be null. (Parameter 'repository')", e.Message);
         Assert.Null(entryService);
     }
 
     [Fact]
-    public void CreateEntryService_WithNonNullParamters()
+    public void CreateEntryService_WithNonNullParameters()
     {
         //Arrange
-        var mockRepository = new Mock<IEntryRepository>();
+        var mockRepository = new Mock<IRepositoryFacade>();
 
         //Act
         IEntryService entryService = new EntryService(mockRepository.Object);
@@ -43,7 +43,7 @@ public class EntryServiceTest
     public void ReadAll()
     {
         //Arrange
-        var mockRepository = new Mock<IEntryRepository>();
+        var mockRepository = new Mock<IRepositoryFacade>();
         List<Entry> mockEntries = new ()
         {
             new Entry {
@@ -63,7 +63,7 @@ public class EntryServiceTest
                 QuantityAfterChange = 1
             }
         };
-        mockRepository.Setup(r => r.ReadAll()).Returns(mockEntries);
+        mockRepository.Setup(r => r.ReadAllEntries()).Returns(mockEntries);
 
         IEntryService entryService = new EntryService(mockRepository.Object);
         //Act
@@ -74,6 +74,6 @@ public class EntryServiceTest
         Assert.True(readEntries is List<Entry>);
         Assert.Equal(mockEntries, readEntries);
         Assert.Equal(mockEntries.Count, readEntries.Count);
-        mockRepository.Verify(r => r.ReadAll(), Times.Once);
+        mockRepository.Verify(r => r.ReadAllEntries(), Times.Once);
     }
 }
