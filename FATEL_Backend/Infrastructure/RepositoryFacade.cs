@@ -83,4 +83,20 @@ public class RepositoryFacade : IRepositoryFacade
     {
         return _entryRepository.ReadAll();
     }
+
+    public Item DeleteAndRecord(int id, Entry entry)
+    {
+        Item item;
+        
+        using (var dbContextTransaction = _context.Database.BeginTransaction())
+        {
+           item = _itemRepository.Delete(id);
+            _entryRepository.Create(entry);
+                
+            _context.SaveChanges();
+
+            dbContextTransaction.Commit();
+        }
+        return item;
+    }
 }

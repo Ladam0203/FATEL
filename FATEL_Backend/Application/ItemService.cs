@@ -102,6 +102,21 @@ public class ItemService : IItemService
 
     public Item Delete(int id)
     {
-        return _repository.DeleteItem(id);
+        Item item = _repository.ReadItem(id);
+        if (item.Quantity == 0)
+        {
+             return _repository.DeleteItem(item.Id);
+        }
+
+        double totalChange = item.Length.GetValueOrDefault(1) * item.Width.GetValueOrDefault(1) * item.Quantity * -1;
+        Entry entry = new()
+        {
+            Timestamp = DateTime.Now.ToUniversalTime(),
+            ItemId = item.Id,
+            ItemName = item.Name,
+            Change = totalChange,
+            QuantityAfterChange = 0  
+        };
+        return _repository.DeleteAndRecord(item.Id, entry);
     }
 }
