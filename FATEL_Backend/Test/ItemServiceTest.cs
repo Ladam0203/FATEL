@@ -279,7 +279,7 @@ public class ItemServiceTest
     //ToDo test updateQuantity
     
     [Fact]
-    public void Create()
+    public void Create_WithNonZeroQuantity()
     {
         var mockRepository = new Mock<IRepositoryFacade>();
         List<Item> mockItems = new List<Item>();
@@ -309,5 +309,39 @@ public class ItemServiceTest
         Assert.True(result is Item);
         Assert.Equal(item, result);
         mockRepository.Verify(r => r.CreateAndRecord(It.IsAny<Item>(), It.IsAny<Entry>()), Times.Once);
+    }
+    
+    [Fact]
+    public void Create_WithZeroQuantity()
+    {
+        var mockRepository = new Mock<IRepositoryFacade>();
+        List<Item> mockItems = new List<Item>();
+        Item item = new Item() { Name = "Item", Unit = Unit.Piece, Quantity = 0};
+        PostItemDTO dto = new PostItemDTO() { Name = "Item", Unit = Unit.Piece, Quantity = 0 };
+
+        mockRepository.Setup(r => r.CreateItem(It.IsAny<Item>())).Returns(() =>
+        {
+            mockItems.Add(item);
+            return item;
+        });
+        var mapper = new MapperConfiguration(configuration =>
+        {
+            configuration.CreateMap<PostItemDTO, Item>();
+        }).CreateMapper();
+        var validator = new PostItemDTOValidator();
+        var putValidator = new PutItemDTOValidator();
+        var movementValidator = new MovementValidator();
+        
+        IItemService itemService = new ItemService(mockRepository.Object,mapper, validator, putValidator, movementValidator);
+        
+        //Act
+        Item result = itemService.Create(dto);
+        
+        //Assert
+        Assert.NotNull(result);
+        Assert.True(result is Item);
+        Assert.Equal(item, result);
+        mockRepository.Verify(r => r.CreateItem(It.IsAny<Item>()), Times.Once);
+        mockRepository.Verify(r => r.CreateAndRecord(It.IsAny<Item>(), It.IsAny<Entry>()), Times.Never);
     }
 }
