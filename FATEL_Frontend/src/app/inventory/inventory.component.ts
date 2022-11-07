@@ -10,10 +10,10 @@ import {Category} from "../entities/category";
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'name', 'width', 'length', 'unit', 'quantity', 'note'];
+
   items: Item[] = [];
   categories: Category[] = [];
-
-  secondPanelOpenState: boolean = false;
 
   constructor(private itemService: ItemService) { }
 
@@ -26,15 +26,14 @@ export class InventoryComponent implements OnInit {
   }
 
   private categoriseItems(): void {
-    const categories: Category[] = [];
     for(const item of this.items){
-      //if the item's name is not in the category array
-      if(!categories.map(value => value.name).includes(item.name))
+      //if the item's name is not in the categories array
+      if(!this.categories.map(value => value.name).includes(item.name))
         //add new category with the item's name & the item itself
-        categories.push({name: item.name, items: [item]})
+        this.categories.push({name: item.name, items: [item]})
       else {
-        //if the item's name is in the category array, get the first occurrence and add the current item
-        const category = categories.filter(value => value.name == item.name).at(0);
+        //if the item's name is in the categories array, get the first occurrence and add the current item
+        const category = this.categories.filter(value => value.name == item.name).at(0);
         if(category)
           category.items.push(item);
       }

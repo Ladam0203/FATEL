@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgMaterialModule} from "./ng-material/ng-material.module";
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {NgMaterialModule} from "./ng-material/ng-material.module";
     BrowserAnimationsModule,
     HttpClientModule,
     NgbModule,
-    NgMaterialModule
+    NgMaterialModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
