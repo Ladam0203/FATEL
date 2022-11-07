@@ -203,17 +203,19 @@ public class ItemServiceTest
         Assert.Equal(mockItems.Count, readItems.Count);
         mockRepository.Verify(r => r.ReadAllItems(), Times.Once);
     }
-
+    
+    
     [Fact]
-    public void Delete()
+    public void Delete_WithZeroQuantity()
     {
         var mockRepository = new Mock<IRepositoryFacade>();
         int mockId = 1;
-        Item item1 = new Item { Id = 1 };
-        Item item2 = new Item { Id = 2 };
+        Item item1 = new Item { Id = 1, Unit = Unit.Piece, Quantity = 0};
+        Item item2 = new Item { Id = 2, Unit = Unit.Piece, Quantity = 5};
         List<Item> mockItems = new List<Item>();
         mockItems.Add(item1);
         mockItems.Add(item2);
+        mockRepository.Setup(r => r.ReadItem(mockId)).Returns(item1);
         mockRepository.Setup(r => r.DeleteItem(mockId)).Returns(() =>
         {
             mockItems.Remove(item1);
@@ -240,6 +242,48 @@ public class ItemServiceTest
         Assert.DoesNotContain(item1, mockItems);
         Assert.Contains(item2, mockItems);
         mockRepository.Verify(r => r.DeleteItem(mockId), Times.Once);
+        mockRepository.Verify(r => r.DeleteAndRecord(It.IsAny<int>(),  It.IsAny<Entry>()), Times.Never);
+
+    }
+    
+    [Fact]
+    public void Delete_WithNonZeroQuantity()
+    {
+        var mockRepository = new Mock<IRepositoryFacade>();
+        int mockId = 1;
+        Item item1 = new Item { Id = 1 , Unit = Unit.Piece, Quantity = 28};
+        Item item2 = new Item { Id = 2 , Unit = Unit.Piece, Quantity = 0};
+        List<Item> mockItems = new List<Item>();
+        mockItems.Add(item1);
+        mockItems.Add(item2);
+        mockRepository.Setup(r => r.ReadItem(mockId)).Returns(item1);
+        mockRepository.Setup(r => r.DeleteAndRecord(mockId, It.IsAny<Entry>())).Returns(() =>
+        {
+            mockItems.Remove(item1);
+            return item1;
+        });
+        var mapper = new MapperConfiguration(configuration =>
+        {
+            configuration.CreateMap<PostItemDTO, Item>();
+        }).CreateMapper();
+        var validator = new PostItemDTOValidator();
+        var putValidator = new PutItemDTOValidator();
+        var movementValidator = new MovementValidator();
+        
+        IItemService itemService = new ItemService(mockRepository.Object, mapper, validator, putValidator, movementValidator);
+        
+        //Act
+        Item deleteItem = itemService.Delete(mockId);
+
+        //Assert
+        Assert.NotNull(deleteItem);
+        Assert.True(deleteItem is Item);
+        Assert.Equal(item1, deleteItem);
+        Assert.Equal(mockId, deleteItem.Id);
+        Assert.DoesNotContain(item1, mockItems);
+        Assert.Contains(item2, mockItems);
+        mockRepository.Verify(r => r.DeleteItem(mockId), Times.Never);
+        mockRepository.Verify(r => r.DeleteAndRecord(mockId,  It.IsAny<Entry>()), Times.Once);
     }
 
     [Fact]

@@ -13,4 +13,5 @@ public interface IRepositoryFacade
     public Item UpdateItem(Item item);
     public Item DeleteItem(int id);
     List<Entry> ReadAllEntries();
+    Item DeleteAndRecord(int id, Entry entry);
 }
