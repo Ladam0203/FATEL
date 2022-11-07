@@ -33,6 +33,10 @@ public class ItemService : IItemService
         if (!validation.IsValid) 
             throw new ValidationException(validation.ToString());
         var item = _mapper.Map<Item>(postItemDto);
+        if (item.Quantity == 0)
+        {
+            return _repository.CreateItem(item);
+        }
         double totalChange = item.Length.GetValueOrDefault(1) * item.Width.GetValueOrDefault(1) * item.Quantity;
         Entry entry = new()
         {

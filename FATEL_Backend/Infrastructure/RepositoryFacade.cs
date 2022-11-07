@@ -33,7 +33,12 @@ public class RepositoryFacade : IRepositoryFacade
 
         return item;
     }
-    
+
+    public Item CreateItem(Item item)
+    {
+        return _itemRepository.Create(item);
+    }
+
     public Item CreateAndRecord(Item item, Entry entry)
     {
         using (var dbContextTransaction = _context.Database.BeginTransaction())
