@@ -1,5 +1,12 @@
 export enum Unit {
-  Meter = "m",
-  SquareMeter = "m2",
-  Piece = "x",
+  Meter,
+  SquareMeter,
+  Piece,
+}
+
+export namespace Unit {
+  export function keys(): Array<string>{
+    var keys = Object.keys(Unit);
+    return keys.slice(keys.length / 2, keys.length-1);
+  }
 }

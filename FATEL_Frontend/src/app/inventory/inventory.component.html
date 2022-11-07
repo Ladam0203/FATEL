@@ -1,7 +1,7 @@
 <div class="inventory-container">
   <h2>Warehouse Inventory</h2>
 
-  <mat-accordion>
+  <mat-accordion multi>
     <mat-expansion-panel *ngFor="let category of categories">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -41,7 +41,7 @@
         <!-- Unit Column -->
         <ng-container matColumnDef="unit">
           <th mat-header-cell *matHeaderCellDef> Unit</th>
-          <td mat-cell *matCellDef="let item"> {{item.unit}} </td>
+          <td mat-cell *matCellDef="let item;"> {{units[item.unit]}} </td>
         </ng-container>
 
         <!-- Quantity Column -->

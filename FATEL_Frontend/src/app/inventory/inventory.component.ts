@@ -3,6 +3,7 @@ import {Item} from "../entities/item";
 import {ItemService} from "../services/item.service";
 import {ITEMS} from "../mock-objects/mock-items";
 import {Category} from "../entities/category";
+import {Unit} from "../entities/units";
 
 @Component({
   selector: 'inventory',
@@ -12,6 +13,7 @@ import {Category} from "../entities/category";
 export class InventoryComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'width', 'length', 'unit', 'quantity', 'note'];
 
+  units: typeof Unit = Unit;
   items: Item[] = [];
   categories: Category[] = [];
 
@@ -23,6 +25,7 @@ export class InventoryComponent implements OnInit {
         this.items = items;
         this.categoriseItems();
       });
+      console.log(this.units.keys());
   }
 
   private categoriseItems(): void {
