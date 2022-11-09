@@ -1,11 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-  --main: #001233;
-  --main-tint: #85b0ff;
-  --analogous: #30ffb6;
-  --main-bright: #76f4f1;
-  --secondary: #33415c;
-  --grey: #eeeff3;
+  --white: #ffffff;
+  --light: #e4e0e0;
+  --dark: #000105;
+  --primary: #001233;
+  --secondary: #24607c;
+  --info: #bf604d;
+  --success: #009756;
+  --warning: #dfc700;
+  --danger: #ec1500;
 }
 
 * {
@@ -28,5 +31,5 @@ body {
   justify-content: center;
   align-items: center;
 
-  background-color: var(--grey);
+  background-color: var(--light);
 }

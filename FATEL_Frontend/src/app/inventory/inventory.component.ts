@@ -60,6 +60,6 @@ export class InventoryComponent implements OnInit {
   }
 
   buttonClick() {
-    console.log('here');
+    alert('here');
   }
 }

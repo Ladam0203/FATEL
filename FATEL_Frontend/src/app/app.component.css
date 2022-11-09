@@ -54,7 +54,7 @@ inventory, diary {
   align-items: center;
 
   width: 80px;
-  background: var(--main);
+  background: var(--primary);
 }
 
 .sidenav-component {
@@ -80,10 +80,11 @@ inventory, diary {
   width: 70%;
   background-color: transparent;
   border: none;
+  padding: 8px;
 }
 
 .warehouse-button:hover mat-icon {
-  color: #8cb5ff;
+  border-bottom: 2px solid var(--info);
 }
 
 

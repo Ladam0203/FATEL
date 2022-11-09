@@ -1,7 +1,7 @@
 <div class="inventory-container">
   <div class="tool-bar">
     <h2 class="warehouse-header">Warehouse Inventory</h2>
-    <button mat-button class="main-button" (click)="buttonClick()">
+    <button mat-button class="main-button fs-5" (click)="buttonClick()">
       <mat-icon class="main-icon" aria-hidden="false" aria-label="add icon" fontIcon="add"></mat-icon>
       New Item
     </button>
@@ -10,7 +10,7 @@
   <div class="content-container">
     <mat-accordion multi class="inventory">
       <mat-expansion-panel *ngFor="let category of categories">
-        <mat-expansion-panel-header class="expansion-panel-header">
+        <mat-expansion-panel-header>
           <mat-panel-title class="fs-3 panel-title">
             {{category.name}}
           </mat-panel-title>
