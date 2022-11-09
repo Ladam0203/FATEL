@@ -3,7 +3,7 @@ import {Item} from "../entities/item";
 import {ItemService} from "../services/item.service";
 import {ITEMS} from "../mock-objects/mock-items";
 import {Category} from "../entities/category";
-import {Unit} from "../entities/units";
+import {Unit, UnitUtil} from "../entities/units";
 
 @Component({
   selector: 'inventory',
@@ -15,6 +15,12 @@ export class InventoryComponent implements OnInit {
 
   units: typeof Unit = Unit;
   categories: Category[] = [];
+
+  quantity: number = 10;
+  length: number = 10;
+  width: number = 10;
+  name: string = "";
+  unit: Unit = Unit.Piece;
 
   constructor(private itemService: ItemService) {
   }
@@ -49,7 +55,11 @@ export class InventoryComponent implements OnInit {
       for (const item of category.items) {
         total += item.quantity;
       }
-      category.description = "" + total + Unit.abbreviations(suffix);
+      category.description = "" + total + UnitUtil.abbreviations(suffix);
     }
+  }
+
+  buttonClick() {
+    console.log('here');
   }
 }

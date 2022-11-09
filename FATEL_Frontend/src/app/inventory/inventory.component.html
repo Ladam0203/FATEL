@@ -1,71 +1,120 @@
 <div class="inventory-container">
   <div class="tool-bar">
     <h2 class="warehouse-header">Warehouse Inventory</h2>
-    <button mat-button class="main-button">
-      <mat-icon class="main-icon" aria-hidden="false" aria-label="add icon" fontIcon="add"></mat-icon>New Item
+    <button mat-button class="main-button" (click)="buttonClick()">
+      <mat-icon class="main-icon" aria-hidden="false" aria-label="add icon" fontIcon="add"></mat-icon>
+      New Item
     </button>
   </div>
 
 
-  <mat-accordion multi class="inventory">
-    <mat-expansion-panel *ngFor="let category of categories">
-      <mat-expansion-panel-header class="expansion-panel-header">
-        <mat-panel-title class="fs-3 panel-title">
-          {{category.name}}
-        </mat-panel-title>
-        <mat-panel-description class="fs-5 panel-description">
-          Total: {{category.description}}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+  <div class="content-container">
+    <mat-accordion multi class="inventory">
+      <mat-expansion-panel *ngFor="let category of categories">
+        <mat-expansion-panel-header class="expansion-panel-header">
+          <mat-panel-title class="fs-3 panel-title">
+            {{category.name}}
+          </mat-panel-title>
+          <mat-panel-description class="fs-5 panel-description">
+            Total: {{category.description}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
 
-      <table mat-table [dataSource]="category.items">
+        <table mat-table [dataSource]="category.items">
 
-        <!-- ID Column -->
-        <ng-container matColumnDef="id">
-          <th class="fs-5" mat-header-cell *matHeaderCellDef>#</th>
-          <td class="fs-5" mat-cell *matCellDef="let item"> {{item.id}} </td>
-        </ng-container>
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th class="fs-5" mat-header-cell *matHeaderCellDef>#</th>
+            <td class="fs-5" mat-cell *matCellDef="let item"> {{item.id}} </td>
+          </ng-container>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <th class="fs-5" mat-header-cell *matHeaderCellDef>Name</th>
-          <td class="fs-5" mat-cell *matCellDef="let item"> {{item.name}} </td>
-        </ng-container>
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th class="fs-5" mat-header-cell *matHeaderCellDef>Name</th>
+            <td class="fs-5" mat-cell *matCellDef="let item"> {{item.name}} </td>
+          </ng-container>
 
-        <!-- Width Column -->
-        <ng-container matColumnDef="width">
-          <th class="fs-5" mat-header-cell *matHeaderCellDef>Width</th>
-          <td class="fs-5" mat-cell *matCellDef="let item"> {{item.width}} </td>
-        </ng-container>
+          <!-- Width Column -->
+          <ng-container matColumnDef="width">
+            <th class="fs-5" mat-header-cell *matHeaderCellDef>Width</th>
+            <td class="fs-5" mat-cell *matCellDef="let item"> {{item.width}} </td>
+          </ng-container>
 
-        <!-- Length Column -->
-        <ng-container matColumnDef="length">
-          <th class="fs-5" mat-header-cell *matHeaderCellDef>Length</th>
-          <td class="fs-5" mat-cell *matCellDef="let item"> {{item.length}} </td>
-        </ng-container>
+          <!-- Length Column -->
+          <ng-container matColumnDef="length">
+            <th class="fs-5" mat-header-cell *matHeaderCellDef>Length</th>
+            <td class="fs-5" mat-cell *matCellDef="let item"> {{item.length}} </td>
+          </ng-container>
 
-        <!-- Unit Column -->
-        <ng-container matColumnDef="unit">
-          <th class="fs-5" mat-header-cell *matHeaderCellDef>Unit</th>
-          <td class="fs-5" mat-cell *matCellDef="let item;"> {{units[item.unit]}} </td>
-        </ng-container>
+          <!-- Unit Column -->
+          <ng-container matColumnDef="unit">
+            <th class="fs-5" mat-header-cell *matHeaderCellDef>Unit</th>
+            <td class="fs-5" mat-cell *matCellDef="let item;"> {{units[item.unit]}} </td>
+          </ng-container>
 
-        <!-- Quantity Column -->
-        <ng-container matColumnDef="quantity">
-          <th class="fs-5" mat-header-cell *matHeaderCellDef>Quantity</th>
-          <td class="fs-5" mat-cell *matCellDef="let item"> {{item.quantity}} </td>
-        </ng-container>
+          <!-- Quantity Column -->
+          <ng-container matColumnDef="quantity">
+            <th class="fs-5" mat-header-cell *matHeaderCellDef>Quantity</th>
+            <td class="fs-5" mat-cell *matCellDef="let item"> {{item.quantity}} </td>
+          </ng-container>
 
-        <!-- Note Column -->
-        <ng-container matColumnDef="note">
-          <th class="fs-5" mat-header-cell *matHeaderCellDef>Note</th>
-          <td class="fs-5" mat-cell *matCellDef="let item"> {{item.note}} </td>
-        </ng-container>
+          <!-- Note Column -->
+          <ng-container matColumnDef="note">
+            <th class="fs-5" mat-header-cell *matHeaderCellDef>Note</th>
+            <td class="fs-5" mat-cell *matCellDef="let item"> {{item.note}} </td>
+          </ng-container>
 
-        <tr class="fs-5" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr class="fs-5" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-      </table>
-    </mat-expansion-panel>
-  </mat-accordion>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <div class="right-content">
+      <mat-form-field appearance="fill" style="margin-right: 10px">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="name">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Unit</mat-label>
+        <mat-select [(ngModel)]="unit">
+          <mat-option *ngFor="let unit of units | keys" [value]=units[unit]>
+            {{unit}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Quantity</mat-label>
+        <input matInput [(ngModel)]="quantity">
+      </mat-form-field>
+
+      <div *ngIf="unit == units.Meter || unit == units.SquareMeter">
+        <mat-form-field appearance="fill">
+          <mat-label>Length</mat-label>
+          <input matInput [(ngModel)]="length">
+        </mat-form-field>
+      </div>
+      <div *ngIf="unit == units.SquareMeter">
+        <mat-form-field appearance="fill">
+          <mat-label>Width</mat-label>
+          <input matInput [(ngModel)]="width">
+        </mat-form-field>
+      </div>
+
+      <br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Notes</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+
+      <br>
+      <button mat-button>ADD ITEM</button>
+    </div>
+  </div>
 </div>

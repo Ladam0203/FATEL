@@ -12,7 +12,11 @@ import {NgMaterialModule} from "./ng-material/ng-material.module";
 import {MatTableModule} from "@angular/material/table";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
+import {MatOptionModule} from "@angular/material/core";
+import {KeysPipe} from "./pipes/KeysPipe";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -20,6 +24,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     WarehouseComponent,
     InventoryComponent,
     DiaryComponent,
+    KeysPipe
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,11 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatTableModule,
     MatSidenavModule,
     MatCheckboxModule,
-    ReactiveFormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
