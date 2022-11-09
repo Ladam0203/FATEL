@@ -20,12 +20,11 @@ public class PutItemDTOValidatorTest
     //Note sad cases
     [InlineData(10, "Name 1", 1, null, Unit.Meter, "", false, "Note must not be empty")]
     //Meter sad cases
-    [InlineData(1, "Name", null, 2, Unit.Meter, "Note", false, "Length must not be null if the unit is Meter\r\nWidth must be null if the unit is Meter")]
     [InlineData(1, "Name", null, null, Unit.Meter, "Note", false, "Length must not be null if the unit is Meter")]
+    [InlineData(1, "Name", 1, 2, Unit.Meter, "Note", false, "Width must be null if the unit is Meter")]
     //SquareMeter sad cases
-    [InlineData(1, "Name", null, null, Unit.SquareMeter, "Note", false, "Length must not be null if the unit is SquareMeter\r\nWidth must not be null if the unit is SquareMeter")]
-    [InlineData(1, "Name", 1, null, Unit.SquareMeter, "Note", false, "Width must not be null if the unit is SquareMeter")]
     [InlineData(1, "Name", null, 1, Unit.SquareMeter, "Note", false, "Length must not be null if the unit is SquareMeter")]
+    [InlineData(1, "Name", 1, null, Unit.SquareMeter, "Note", false, "Width must not be null if the unit is SquareMeter")]
     //Piece sad cases
     [InlineData(1, "Name", null, 1, Unit.Piece, "Note", false, "Width must be null if the unit is Piece")]
     [InlineData(1, "Name", 1, null, Unit.Piece, "Note", false, "Length must be null if the unit is Piece")]
