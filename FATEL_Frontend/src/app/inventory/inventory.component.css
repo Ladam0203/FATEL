@@ -7,6 +7,10 @@
   background-color: white;*/
 }
 
+.warehouse-header {
+  color: var(--main);
+}
+
 table {
   width: 100%;
 }
