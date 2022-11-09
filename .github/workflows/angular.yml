@@ -52,7 +52,7 @@ jobs:
       - name: Link Angular
         working-directory: ./FATEL_Frontend
         run: |
-          npm link @angular/cli
+          npm install -g @angular/cli
       - name: Build
         working-directory: ./FATEL_Frontend
         run: |
