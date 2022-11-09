@@ -6,3 +6,5 @@ export interface Entry {
   Change: number;
   QuantityAfterChange: number;
 }
+
+

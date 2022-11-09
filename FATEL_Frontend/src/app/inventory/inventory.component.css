@@ -1,9 +1,10 @@
 .inventory-container {
   height: 100%;
 
-  padding: 8px;
+  /*padding: 8px;*/
+  /*border-radius: 8px;
   border: 2px solid black;
-  background-color: var(--grey);
+  background-color: white;*/
 }
 
 table {

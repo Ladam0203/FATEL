@@ -10,6 +10,9 @@ import {HttpClientModule} from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgMaterialModule} from "./ng-material/ng-material.module";
 import {MatTableModule} from "@angular/material/table";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import {MatTableModule} from "@angular/material/table";
     HttpClientModule,
     NgbModule,
     NgMaterialModule,
-    MatTableModule
+    MatTableModule,
+    MatSidenavModule,
+    MatCheckboxModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

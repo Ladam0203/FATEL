@@ -1,9 +1,27 @@
 .main-container {
-  display:flex;
+  position: absolute;
+  right: 0;
+  top: 0;
+  overflow: auto;
+
+  height: 100%;
+  width: calc(100% - 80px);
+
+  background-color: var(--grey);
+  padding: 32px;
+}
+
+.content-container {
+  padding: 32px;
+
+  display: flex;
   flex-wrap: wrap;
 
-  width: 90vw;
-  height: 90vh;
+  min-height: 100%;
+
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .warehouse-navbar {
@@ -23,3 +41,51 @@
 inventory, diary {
   flex: 1;
 }
+
+.sidenav-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.sidenav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 80px;
+  background: var(--main);
+}
+
+.sidenav-component {
+  width: 100%;
+  text-align: center;
+  margin-top: 32px;
+}
+
+.sidenav-component:nth-child(2){
+  margin-top:60px;
+}
+
+.sidenav-logo {
+  margin-top: 28px;
+}
+
+.icon {
+  color: white;
+  transform: scale(1.5);
+}
+
+.warehouse-button {
+  width: 70%;
+  background-color: transparent;
+  border:none;
+}
+
+.warehouse-button:hover mat-icon {
+  color: var(--main-bright);
+}
+
+
+

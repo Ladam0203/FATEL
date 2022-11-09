@@ -1,7 +1,38 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" opened class="sidenav"
+               [fixedInViewport]="options.value.fixed" [fixedTopGap]="options.value.top"
+               [fixedBottomGap]="options.value.bottom">
+    <div class="sidenav-component sidenav-logo">
+      <mat-icon class="icon" aria-hidden="false" aria-label="logo icon" fontIcon="gavel"></mat-icon>
+    </div>
+
+    <div class="sidenav-component">
+      <button class="warehouse-button">
+        <mat-icon class="icon" aria-hidden="false" aria-label="warehouse icon" fontIcon="home"></mat-icon>
+      </button>
+    </div>
+
+    <div class="sidenav-component">
+      <button class="warehouse-button">
+        <mat-icon class="icon" aria-hidden="false" aria-label="warehouse icon" fontIcon="home"></mat-icon>
+      </button>
+    </div>
+
+    <div class="sidenav-component">
+      <button class="warehouse-button">
+        <mat-icon class="icon" aria-hidden="false" aria-label="warehouse icon" fontIcon="home"></mat-icon>
+      </button>
+    </div>
+
+  </mat-sidenav>
+</mat-sidenav-container>
+
 <div class="main-container">
-  <warehouse-navbar class="warehouse-navbar"></warehouse-navbar>
-  <div class="inventory-diary-container">
-    <inventory></inventory>
-    <diary></diary>
+  <div class="content-container">
+    <div class="inventory-diary-container">
+      <inventory></inventory>
+      <diary></diary>
+    </div>
   </div>
 </div>
+

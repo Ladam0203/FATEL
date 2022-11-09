@@ -1,24 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-  --light-black: rgba(0, 0, 0, 0.7);
-  --grey: #efefef;
-
-  --orange-1: #F9B56F;
-  --orange-2: #D37F52;
-  --orange-3: #994D47;
-  --orange-4: #EB4B33;
-
-  --red-1: #C52542;
-  --red-2: #8A1E40;
-
-  --blue-1: #D3CEEB;
-  --blue-2: #C0BADE;
-  --blue-3: #9C9AC2;
-  --blue-4: #5D5D86;
-  --blue-5: #404067;
-
-  --shadow-dark: rgba(0,0,0,0.3);
-  --shadow-light: rgba(255,255,255,0.1);
+  --main: #001233;
+  --main-bright: #76f4f1;
+  --secondary: #33415c;
+  --grey: #eeeff3;
 }
 
 * {
@@ -29,15 +14,17 @@
 
 html, body {
   height: 100%;
+  overflow: auto;
 }
 
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 16px;
+
   width: 100%;
-  background-color: white;
 
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: center;
+
 }
