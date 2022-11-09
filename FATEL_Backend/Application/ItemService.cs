@@ -33,6 +33,10 @@ public class ItemService : IItemService
         if (!validation.IsValid) 
             throw new ValidationException(validation.ToString());
         var item = _mapper.Map<Item>(postItemDto);
+        if (_repository.DoesIdenticalItemExist(item))
+        {
+            throw new ArgumentException("Item with the same properties already exists");
+        }
         if (item.Quantity == 0)
         {
             return _repository.CreateItem(item);

@@ -79,6 +79,11 @@ public class RepositoryFacade : IRepositoryFacade
         return _itemRepository.Delete(id);
     }
 
+    public bool DoesIdenticalItemExist(Item item)
+    {
+        return _itemRepository.DoesIdenticalExist(item);
+    }
+
     public List<Entry> ReadAllEntries()
     {
         return _entryRepository.ReadAll();
