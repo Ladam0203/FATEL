@@ -16,7 +16,6 @@
 
 html, body {
   height: 100%;
-  overflow: auto;
 }
 
 body {
@@ -29,4 +28,5 @@ body {
   justify-content: center;
   align-items: center;
 
+  background-color: var(--grey);
 }

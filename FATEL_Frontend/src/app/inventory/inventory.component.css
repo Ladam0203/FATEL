@@ -22,11 +22,11 @@
 
 .content-container {
   display: flex;
+  margin-top: 16px;
 }
 
 .inventory {
-  display: inline-block;
-  width: 50%;
+  flex: 1;
 }
 
 .expansion-panel-header {
@@ -41,10 +41,21 @@ table {
   width: 100%;
 }
 
-.right-content {
-  display: inline-block;
-  position: fixed;
+.action-container {
+  position: sticky;
+  flex: 1;
+  align-self: flex-start;
+  top: 0;
+}
+
+.action-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: normal;
+}
+
+.action-panel mat-form-field, .action-panel button {
   width: 50%;
-  padding: 32px;
-  right: 0;
+  margin: 0 auto 0 auto;
 }

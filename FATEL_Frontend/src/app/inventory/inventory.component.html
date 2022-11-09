@@ -7,7 +7,6 @@
     </button>
   </div>
 
-
   <div class="content-container">
     <mat-accordion multi class="inventory">
       <mat-expansion-panel *ngFor="let category of categories">
@@ -71,50 +70,54 @@
       </mat-expansion-panel>
     </mat-accordion>
 
-    <div class="right-content">
-      <mat-form-field appearance="fill" style="margin-right: 10px">
-        <mat-label>Name</mat-label>
-        <input matInput [(ngModel)]="name">
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Unit</mat-label>
-        <mat-select [(ngModel)]="unit">
-          <mat-option *ngFor="let unit of units | keys" [value]=units[unit]>
-            {{unit}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <br>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Quantity</mat-label>
-        <input matInput [(ngModel)]="quantity">
-      </mat-form-field>
-
-      <div *ngIf="unit == units.Meter || unit == units.SquareMeter">
+    <div class="action-container">
+      <div class="action-panel">
         <mat-form-field appearance="fill">
-          <mat-label>Length</mat-label>
-          <input matInput [(ngModel)]="length">
+          <mat-label>Name</mat-label>
+          <input matInput [(ngModel)]="name">
         </mat-form-field>
-      </div>
-      <div *ngIf="unit == units.SquareMeter">
+
+        <br>
+
         <mat-form-field appearance="fill">
-          <mat-label>Width</mat-label>
-          <input matInput [(ngModel)]="width">
+          <mat-label>Unit</mat-label>
+          <mat-select [(ngModel)]="unit">
+            <mat-option *ngFor="let unit of units | keys" [value]=units[unit]>
+              {{unit}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
+
+        <br>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Quantity</mat-label>
+          <input matInput [(ngModel)]="quantity">
+        </mat-form-field>
+
+        <ng-container *ngIf="unit == units.Meter || unit == units.SquareMeter">
+          <mat-form-field appearance="fill">
+            <mat-label>Length</mat-label>
+            <input matInput [(ngModel)]="length">
+          </mat-form-field>
+        </ng-container>
+        <ng-container *ngIf="unit == units.SquareMeter">
+          <mat-form-field appearance="fill">
+            <mat-label>Width</mat-label>
+            <input matInput [(ngModel)]="width">
+          </mat-form-field>
+        </ng-container>
+
+        <br>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Notes</mat-label>
+          <textarea matInput></textarea>
+        </mat-form-field>
+
+        <br>
+        <button mat-button>ADD ITEM</button>
       </div>
-
-      <br>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Notes</mat-label>
-        <textarea matInput></textarea>
-      </mat-form-field>
-
-      <br>
-      <button mat-button>ADD ITEM</button>
     </div>
   </div>
 </div>
