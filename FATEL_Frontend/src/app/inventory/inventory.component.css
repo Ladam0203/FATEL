@@ -7,8 +7,35 @@
   background-color: white;*/
 }
 
+.tool-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-button {
+  background-color: var(--main);
+  color: white;
+}
+
+.main-icon {
+  
+}
+
 .warehouse-header {
   color: var(--main);
+}
+
+.inventory {
+  display: block;
+  width: 50%;
+}
+
+.expansion-panel-header {
+  padding: 16px;
+}
+
+.panel-description {
+  flex: 1;
 }
 
 table {
