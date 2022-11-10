@@ -15,7 +15,7 @@
             {{category.name}}
           </mat-panel-title>
           <mat-panel-description class="fs-5 panel-description">
-            Total: {{category.description}}
+            {{category.getDescription()}}
           </mat-panel-description>
         </mat-expansion-panel-header>
 
@@ -69,6 +69,6 @@
         </table>
       </mat-expansion-panel>
     </mat-accordion>
-    <add-item (newItemEvent)="addItem($event)"></add-item>
+    <add-item class="action-container" (newItemEvent)="addItem($event)"></add-item>
   </div>
 </div>
