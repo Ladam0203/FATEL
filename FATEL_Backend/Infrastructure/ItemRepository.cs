@@ -110,7 +110,7 @@ public class ItemRepository : IItemRepository
     {
         return _context.ItemTable.Any(i => i.Name == item.Name && 
                                            i.Width == item.Width && 
-                                           i.Quantity == item.Quantity &&
+                                           i.Length == item.Length &&
                                            i.Unit == item.Unit);
     }
 }
