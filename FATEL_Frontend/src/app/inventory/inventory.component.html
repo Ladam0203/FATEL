@@ -18,10 +18,9 @@
   </div>
 
   <div class="filter-bar">
-    <mat-form-field class="search-field" appearance="fill">
-      <mat-label>Search categories</mat-label>
-      <input matInput type="text" [(ngModel)]="query">
+    <mat-form-field class="search-field" appearance="outline">
       <mat-icon matPrefix>search</mat-icon>
+      <input matInput placeholder="Search categories" type="text" [(ngModel)]="query">
     </mat-form-field>
   </div>
 
