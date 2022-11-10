@@ -18,7 +18,7 @@ export class AddItemComponent implements OnInit {
   length?: number;
   width?: number;
   unit: Unit = Unit.Piece;
-  quantity: number = 10;
+  quantity: number = 0;
   note?: string;
   units: typeof Unit = Unit;
 
@@ -37,8 +37,14 @@ export class AddItemComponent implements OnInit {
       note: this.note??null
     }
     this.itemService.create(dto)
-      .then(item => this.newItemEvent.emit(item));
-
+      .then(item =>{
+        this.newItemEvent.emit(item);
+        this.name = "";
+        this.length = undefined;
+        this.width = undefined;
+        this.unit = Unit.Piece;
+        this.quantity = 0;
+        this.note = undefined;
+      })
   }
-
 }
