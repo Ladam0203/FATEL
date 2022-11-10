@@ -45,47 +45,11 @@ inventory, diary {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
+  left: -150px;
+  width: calc(80px + 150px);
+  background-color: var(--primary);
 }
 
-.sidenav {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  width: 80px;
-  background: var(--primary);
+.sidenav-container:hover {
+  animation-play-state: running;
 }
-
-.sidenav-component {
-  width: 100%;
-  text-align: center;
-  margin-top: 32px;
-}
-
-.sidenav-component:nth-child(2) {
-  margin-top: 60px;
-}
-
-.sidenav-logo {
-  margin-top: 28px;
-}
-
-.icon {
-  color: white;
-  transform: scale(1.5);
-}
-
-.warehouse-button {
-  width: 70%;
-  background-color: transparent;
-  border: none;
-  padding: 8px;
-}
-
-.warehouse-button:hover mat-icon {
-  border-bottom: 2px solid var(--info);
-}
-
-
-

@@ -22,6 +22,7 @@ import {FilterPipe} from "./pipes/FilterPipe";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Overlay} from "@angular/cdk/overlay";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import { MatSidenavContainerComponent } from './mat-sidenav-container/mat-sidenav-container.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
     DiaryComponent,
     KeysPipe,
     AddItemComponent,
-    FilterPipe
+    FilterPipe,
+    MatSidenavContainerComponent
   ],
   imports: [
     BrowserModule,

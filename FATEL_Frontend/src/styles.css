@@ -33,3 +33,7 @@ body {
 
   background-color: var(--light);
 }
+
+* > .mat-drawer-inner-container {
+  overflow: hidden !important;
+}
