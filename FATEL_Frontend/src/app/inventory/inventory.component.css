@@ -49,9 +49,16 @@
   width: 32px;
 }
 
+.filter-bar {
+  margin-top: 12px;
+}
+
+.search-field {
+  width: 380px;
+}
+
 .content-container {
   display: flex;
-  margin-top: 24px;
 }
 
 .inventory {

@@ -18,27 +18,16 @@
   </div>
 
   <div class="filter-bar">
-    <form class="example-form">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Number</mat-label>
-        <input type="text"
-               placeholder="Pick one"
-               aria-label="Number"
-               matInput
-               [formControl]="myControl"
-               [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option *ngFor="let category of categories | filter" [value]="category.name">
-            {{category.name}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </form>
+    <mat-form-field class="search-field" appearance="fill">
+      <mat-label>Search categories</mat-label>
+      <input matInput type="text" [(ngModel)]="query">
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
   </div>
 
   <div class="content-container">
     <mat-accordion multi class="inventory">
-      <mat-expansion-panel *ngFor="let category of categories">
+      <mat-expansion-panel *ngFor="let category of categories | filter: query">
         <mat-expansion-panel-header>
           <mat-panel-title class="fs-5 panel-title">
             {{category.name}}

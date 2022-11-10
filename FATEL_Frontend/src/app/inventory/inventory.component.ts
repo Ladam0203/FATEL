@@ -18,7 +18,7 @@ export class InventoryComponent implements OnInit {
   categories: Category[] = [];
   items: Item[] = [];
 
-  myControl = new FormControl('');
+  query: string = '';
 
   constructor(private itemService: ItemService) {
   }

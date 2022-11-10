@@ -9,9 +9,9 @@ export class FilterPipe implements PipeTransform {
     transform(items: any[], query: string): any[] {
       if (!items) return [];
       if (!query) return items;
-      //query = query.toLowerCase(); This might be important
+      query = query.toLowerCase(); //This might be important
       return items.filter(it => {
-        return it.name.includes(query);
+        return it.name.toLowerCase().includes(query);
       });
     }
 
