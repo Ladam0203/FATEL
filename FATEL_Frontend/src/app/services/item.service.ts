@@ -8,7 +8,7 @@ import axios from "axios";
 import {PostItemDTO} from "../entities/DTOs/PostItemDTO";
 
 export const customAxios = axios.create({
-  baseURL: 'http://localhost:5175',
+  baseURL: 'http://localhost:5175/api/item/',
 })
 
 @Injectable({
@@ -24,12 +24,15 @@ export class ItemService {
 
   }
 
-  readAll(): Observable<Item[]> {
-    return this.http.get<Item[]>(this.itemURL + 'readall')
+  async readAll(): Promise<Item[]> {
+    const response = await customAxios.get<Item[]>('readall');
+    return response.data;
+    /*return this.http.get<Item[]>(this.itemURL + 'readall')
       .pipe(
         tap(_ => this.log('fetched items')),
         catchError(this.handleError<Item[]>('readAll', []))
       );
+     */
   }
 
   async get(id: any){
@@ -38,7 +41,7 @@ export class ItemService {
   }
 
   async create(dto: PostItemDTO) {
-    const httpResult = await customAxios.post('api/item/create', dto);
+    const httpResult = await customAxios.post('create', dto);
     return httpResult.data;
   }
 

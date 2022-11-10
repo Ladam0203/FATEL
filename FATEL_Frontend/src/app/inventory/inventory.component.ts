@@ -22,7 +22,7 @@ export class InventoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.itemService.readAll()
-      .subscribe(items => {
+      .then(items =>{
         this.items = items;
         this.categoriseItems(this.items);
         this.buildDescriptions(this.categories);
