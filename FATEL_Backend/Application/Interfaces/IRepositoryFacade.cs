@@ -12,6 +12,7 @@ public interface IRepositoryFacade
     public Item UpdateQuantityAndRecord(Item item, Entry entry);
     public Item UpdateItem(Item item);
     public Item DeleteItem(int id);
+    public bool DoesIdenticalItemExist(Item item);
     List<Entry> ReadAllEntries();
     Item DeleteAndRecord(int id, Entry entry);
 }

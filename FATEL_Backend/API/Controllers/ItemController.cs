@@ -78,9 +78,13 @@ public class ItemController : ControllerBase
             var item = _itemService.Create(itemDto);
             return Created($"item/{item.Id}", item);
         }
-        catch(ValidationException e)
+        catch (ValidationException e)
         {
             return BadRequest(e.Message);
+        }
+        catch (ArgumentException e)
+        {
+            return StatusCode(403, e.Message);
         }
         catch (Exception e)
         {
