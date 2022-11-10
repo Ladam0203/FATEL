@@ -17,6 +17,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatOptionModule} from "@angular/material/core";
 import {KeysPipe} from "./pipes/KeysPipe";
 import {MatSelectModule} from "@angular/material/select";
+import { AddItemComponent } from './inventory/add-item/add-item.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {MatSelectModule} from "@angular/material/select";
     WarehouseComponent,
     InventoryComponent,
     DiaryComponent,
-    KeysPipe
+    KeysPipe,
+    AddItemComponent
   ],
   imports: [
     BrowserModule,

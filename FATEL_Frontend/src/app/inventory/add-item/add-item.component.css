@@ -1,0 +1,11 @@
+.action-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: normal;
+}
+
+.action-panel mat-form-field, .action-panel button {
+  width: 50%;
+  margin: 0 auto 0 auto;
+}

@@ -16,12 +16,6 @@ export class InventoryComponent implements OnInit {
   units: typeof Unit = Unit;
   categories: Category[] = [];
 
-  quantity: number = 10;
-  length: number = 10;
-  width: number = 10;
-  name: string = "";
-  unit: Unit = Unit.Piece;
-
   constructor(private itemService: ItemService) {
   }
 
