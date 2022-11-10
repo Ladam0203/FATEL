@@ -15,6 +15,7 @@ export class InventoryComponent implements OnInit {
 
   units: typeof Unit = Unit;
   categories: Category[] = [];
+  items: Item[] = [];
 
   constructor(private itemService: ItemService) {
   }
@@ -22,12 +23,20 @@ export class InventoryComponent implements OnInit {
   ngOnInit(): void {
     this.itemService.readAll()
       .subscribe(items => {
-        this.categoriseItems(items);
+        this.items = items;
+        this.categoriseItems(this.items);
         this.buildDescriptions(this.categories);
       });
   }
 
+  addItem(newItem: Item) {
+    this.items.push(newItem);
+    this.categoriseItems(this.items);
+    this.buildDescriptions(this.categories);
+  }
+
   private categoriseItems(items: Item[]): void {
+    this.categories = [];
     for (const item of items) {
       //if the item's name is not in the categories array
       if (!this.categories.map(value => value.name).includes(item.name))

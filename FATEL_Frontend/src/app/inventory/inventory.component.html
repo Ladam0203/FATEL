@@ -69,6 +69,6 @@
         </table>
       </mat-expansion-panel>
     </mat-accordion>
-    <add-item class="action-container"></add-item>
+    <add-item (newItemEvent)="addItem($event)"></add-item>
   </div>
 </div>

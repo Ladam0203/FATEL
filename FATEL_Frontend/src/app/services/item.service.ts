@@ -4,12 +4,19 @@ import {Unit} from "../entities/units";
 import {Observable, of} from "rxjs";
 import {Item} from "../entities/item";
 import {HttpClient} from "@angular/common/http";
+import axios from "axios";
+import {PostItemDTO} from "../entities/DTOs/PostItemDTO";
 
+export const customAxios = axios.create({
+  baseURL: 'http://localhost:5175',
+})
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemService {
+
+
 
   private itemURL = 'http://localhost:5175/api/item/';
 
@@ -25,23 +32,20 @@ export class ItemService {
       );
   }
 
-  /*async get(id: any){
+  async get(id: any){
     const response = await customAxios.get<any>('item/read/' + id);
     return response.data;
   }
 
-  async create(dto: {
-    Name: string, Width?: number, Length?: number,
-    Unit: Unit, Quantity: number, Note?: string
-  }) {
-    const httpResult = await customAxios.post('item/create', dto);
+  async create(dto: PostItemDTO) {
+    const httpResult = await customAxios.post('api/item/create', dto);
     return httpResult.data;
   }
 
   async delete(id: any){
     const result = await customAxios.delete('item/delete/' + id);
     return result.data;
-  }*/
+  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
