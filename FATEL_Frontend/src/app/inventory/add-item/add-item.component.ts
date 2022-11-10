@@ -4,6 +4,7 @@ import { Output, EventEmitter } from '@angular/core';
 import {Item} from "../../entities/item";
 import {ItemService} from "../../services/item.service";
 import {PostItemDTO} from "../../entities/DTOs/PostItemDTO";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'add-item',
@@ -21,10 +22,26 @@ export class AddItemComponent implements OnInit {
   quantity: number = 0;
   note?: string;
   units: typeof Unit = Unit;
+  itemForm = new FormGroup({
+    'itemName': new FormControl(),
+    'length': new FormControl(),
+  });
+
 
   constructor(private itemService: ItemService) { }
 
   ngOnInit(): void {
+
+    this.itemForm = new FormGroup({
+      itemName: new FormControl(this.name,[
+        Validators.required
+      ]),
+      length: new FormControl(this.length,[
+        Validators.required,
+        Validators.min(0),
+      ])
+    })
+
   }
 
   addNewItem() {
@@ -47,4 +64,9 @@ export class AddItemComponent implements OnInit {
         this.note = undefined;
       })
   }
+
+
+
+  get itemName(){
+    return this.itemForm.get('itemName');}
 }

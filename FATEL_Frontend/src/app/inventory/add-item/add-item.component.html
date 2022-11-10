@@ -2,7 +2,14 @@
   <div class="action-panel">
     <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>
-      <input matInput [(ngModel)]="name">
+      <input id="itemName" formControlName="itemName" matInput [(ngModel)]="name">
+      <div *ngIf="itemName?.invalid && (itemName?.dirty || itemName?.touched)"
+           class="alert alert-danger">
+
+        <div *ngIf="itemName?.errors?.['required']">
+          Name is required.
+        </div>
+      </div>
     </mat-form-field>
 
     <br>
@@ -32,7 +39,7 @@
     <ng-container *ngIf="unit == units.SquareMeter">
       <mat-form-field appearance="fill">
         <mat-label>Width</mat-label>
-        <input matInput [(ngModel)]="width">
+        <input type = "number" min ="0" matInput [(ngModel)]="width">
       </mat-form-field>
     </ng-container>
 
