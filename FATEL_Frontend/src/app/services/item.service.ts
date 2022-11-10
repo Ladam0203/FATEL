@@ -27,12 +27,6 @@ export class ItemService {
   async readAll(): Promise<Item[]> {
     const response = await customAxios.get<Item[]>('readall');
     return response.data;
-    /*return this.http.get<Item[]>(this.itemURL + 'readall')
-      .pipe(
-        tap(_ => this.log('fetched items')),
-        catchError(this.handleError<Item[]>('readAll', []))
-      );
-     */
   }
 
   async get(id: any){
