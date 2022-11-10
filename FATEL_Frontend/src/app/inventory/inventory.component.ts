@@ -24,41 +24,24 @@ export class InventoryComponent implements OnInit {
     this.itemService.readAll()
       .then(items =>{
         this.items = items;
-        this.categoriseItems(this.items);
-        this.buildDescriptions(this.categories);
+        this.categoriseItems();
       });
   }
 
   addItem(newItem: Item) {
     this.items.push(newItem);
-    this.categoriseItems(this.items);
-    this.buildDescriptions(this.categories);
+    this.categoriseItems();
   }
 
-  private categoriseItems(items: Item[]): void {
+  private categoriseItems(): void {
     this.categories = [];
-    for (const item of items) {
-      //if the item's name is not in the categories array
-      if (!this.categories.map(value => value.name).includes(item.name))
-        //add new category with the item's name & the item itself
-        this.categories.push({name: item.name, items: [item], description: ""})
-      else {
-        //if the item's name is in the categories array, get the first occurrence and add the current item
-        const category = this.categories.filter(value => value.name == item.name).at(0);
-        if (category)
-          category.items.push(item);
+    for (const item of this.items) {
+      let category = this.categories.find(c => c.name === item.name && c.unit === item.unit);
+      if (category == null) {
+        category = new Category(item.name, item.unit);
+        this.categories.push(category);
       }
-    }
-  }
-
-  private buildDescriptions(categories: Category[]) {
-    for (const category of categories) {
-      let total = 0;
-      let suffix = category.items[0].unit;
-      for (const item of category.items) {
-        total += item.quantity;
-      }
-      category.description = "" + total + UnitUtil.abbreviations(suffix);
+      category.items.push(item);
     }
   }
 
