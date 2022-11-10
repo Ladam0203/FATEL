@@ -9,3 +9,13 @@
   width: 50%;
   margin: 0 auto 0 auto;
 }
+
+.action-panel button {
+  border: 1px solid var(--primary);
+  transition: all 0.25s ease-in-out;
+}
+
+.action-panel button:hover {
+  background-color: var(--primary);
+  color: white;
+}

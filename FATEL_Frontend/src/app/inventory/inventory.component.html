@@ -17,6 +17,25 @@
     </div>
   </div>
 
+  <div class="filter-bar">
+    <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Number</mat-label>
+        <input type="text"
+               placeholder="Pick one"
+               aria-label="Number"
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let category of categories | filter" [value]="category.name">
+            {{category.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </div>
+
   <div class="content-container">
     <mat-accordion multi class="inventory">
       <mat-expansion-panel *ngFor="let category of categories">

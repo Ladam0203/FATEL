@@ -4,6 +4,7 @@ import {ItemService} from "../services/item.service";
 import {ITEMS} from "../mock-objects/mock-items";
 import {Category} from "../entities/category";
 import {Unit, UnitUtil} from "../entities/units";
+  import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'inventory',
@@ -16,6 +17,8 @@ export class InventoryComponent implements OnInit {
   units: typeof Unit = Unit;
   categories: Category[] = [];
   items: Item[] = [];
+
+  myControl = new FormControl('');
 
   constructor(private itemService: ItemService) {
   }

@@ -20,6 +20,7 @@ import {MatSelectModule} from "@angular/material/select";
 import { AddItemComponent } from './inventory/add-item/add-item.component';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Overlay} from "@angular/cdk/overlay";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {Overlay} from "@angular/cdk/overlay";
     MatInputModule,
     MatOptionModule,
     MatSelectModule,
+    MatAutocompleteModule,
   ],
   providers: [
     MatSnackBar,
