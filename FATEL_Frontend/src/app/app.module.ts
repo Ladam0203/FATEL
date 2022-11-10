@@ -19,6 +19,8 @@ import {KeysPipe} from "./pipes/KeysPipe";
 import {MatSelectModule} from "@angular/material/select";
 import { AddItemComponent } from './inventory/add-item/add-item.component';
 import {FilterPipe} from "./pipes/FilterPipe";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Overlay} from "@angular/cdk/overlay";
 
 @NgModule({
   declarations: [
@@ -45,7 +47,10 @@ import {FilterPipe} from "./pipes/FilterPipe";
     MatOptionModule,
     MatSelectModule,
   ],
-  providers: [],
+  providers: [
+    MatSnackBar,
+    Overlay,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

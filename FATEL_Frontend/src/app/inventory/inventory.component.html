@@ -1,10 +1,20 @@
 <div class="inventory-container">
   <div class="tool-bar">
     <h2 class="warehouse-header">Warehouse Inventory</h2>
-    <button mat-button class="main-button fs-5" (click)="buttonClick()">
-      <mat-icon class="main-icon" aria-hidden="false" aria-label="add icon" fontIcon="add"></mat-icon>
-      New Item
-    </button>
+    <div class="action-bar">
+      <button mat-button class="secondary-button fs-5" (click)="buttonClick()">
+        Export
+      </button>
+
+      <button mat-button class="secondary-button fs-5" (click)="buttonClick()">
+        Import
+      </button>
+
+      <button mat-button class="main-button fs-5" (click)="buttonClick()">
+        <mat-icon class="main-icon" aria-hidden="false" aria-label="add icon" fontIcon="add"></mat-icon>
+        New Item
+      </button>
+    </div>
   </div>
 
   <div class="content-container">

@@ -6,6 +6,7 @@ import {Item} from "../entities/item";
 import {HttpClient} from "@angular/common/http";
 import axios from "axios";
 import {PostItemDTO} from "../entities/DTOs/PostItemDTO";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 export const customAxios = axios.create({
   baseURL: 'http://localhost:5175/api/item/',
@@ -16,12 +17,31 @@ export const customAxios = axios.create({
 })
 export class ItemService {
 
-
-
-  private itemURL = 'http://localhost:5175/api/item/';
-
-  constructor(private http: HttpClient) {
-
+  constructor(private http: HttpClient,
+              private matSnackBar: MatSnackBar) {
+    customAxios.interceptors.response.use(
+      response => {
+        if(response.status==201){
+          this.matSnackBar.open("Item Created",
+            undefined,
+            {duration: 4000});
+        }
+        return response;
+      },
+      rejected =>{
+        if(rejected.response.status>=400 && rejected.response.status < 500) {
+          this.matSnackBar.open(rejected.response.data,
+            undefined,
+            {duration: 4000});
+        }
+        else if(rejected.response.status > 499){
+          this.matSnackBar.open("Something went wrong",
+            undefined,
+            {duration: 4000})
+        }
+        catchError(rejected);
+      }
+    )
   }
 
   async readAll(): Promise<Item[]> {
