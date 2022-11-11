@@ -6,6 +6,7 @@ import {ItemService} from "../../services/item.service";
 import {PostItemDTO} from "../../entities/DTOs/PostItemDTO";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {requiredIfMatches} from "../../validators/requiredIfMatches";
+import {RxwebValidators} from "@rxweb/reactive-form-validators";
 
 @Component({
   selector: 'add-item',
@@ -40,18 +41,17 @@ export class AddItemComponent implements OnInit {
       ]),
      length: new FormControl(null,[
         Validators.min(0),
-       Validators.required
-       //requiredIfMatches(this.itemForm.get('unit')?.value, Unit.Meter),
-       //requiredIfMatches(this.itemForm.get('unit')?.value, Unit.SquareMeter)
+       RxwebValidators.required({conditionalExpression:'x => x.unit.value == Unit.Meter' }),
       ]),
       width: new FormControl(null,[
         Validators.min(0),
-        //requiredIfMatches(this.itemForm.get('unit')?.value, Unit.SquareMeter)
+        RxwebValidators.required({conditionalExpression:'x => x.unit.value == Unit.Meter' }),
       ]),
       quantity: new FormControl(0,[
         Validators.required,
         Validators.min(0),
       ]),
+      notes: new FormControl()
     })
   }
 
@@ -66,6 +66,7 @@ export class AddItemComponent implements OnInit {
     }
     this.itemService.create(dto)
       .then(item =>{
+        console.log(dto);
         this.newItemEvent.emit(item);
         this.itemForm.reset();
       })

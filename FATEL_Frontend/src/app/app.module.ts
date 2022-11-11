@@ -22,6 +22,7 @@ import {FilterPipe} from "./pipes/FilterPipe";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Overlay} from "@angular/cdk/overlay";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {RxwebValidators} from "@rxweb/reactive-form-validators";
 
 @NgModule({
   declarations: [

@@ -20,7 +20,7 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Quantity</mat-label>
-      <input formControlName ="quantity" matInput>
+      <input formControlName ="quantity" type = "number" matInput>
     </mat-form-field>
 
     <ng-container *ngIf="itemForm.get('unit')?.value == units.Meter || itemForm.get('unit')?.value == units.SquareMeter">
