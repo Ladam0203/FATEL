@@ -10,7 +10,7 @@
         Import
       </button>
 
-      <button mat-button class="main-button fs-5" (click)="buttonClick()">
+      <button mat-button class="main-button fs-5" (click)="openAddItemComponent()">
         <mat-icon class="main-icon" aria-hidden="false" aria-label="add icon" fontIcon="add"></mat-icon>
         New Item
       </button>
@@ -86,6 +86,6 @@
         </table>
       </mat-expansion-panel>
     </mat-accordion>
-    <add-item class="action-container" (newItemEvent)="addItem($event)"></add-item>
+    <add-item *ngIf="showAddItemComponent" class="action-container" (newItemEvent)="addItem($event)" (close)="closeAddItemComponent()"></add-item>
   </div>
 </div>

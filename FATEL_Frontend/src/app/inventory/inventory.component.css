@@ -69,6 +69,7 @@
 
 .inventory {
   flex: 1;
+  min-width: 70%;
 }
 
 .panel-description {
@@ -84,4 +85,5 @@ table {
   flex: 1;
   align-self: flex-start;
   top: 0;
+  max-width: 30%;
 }

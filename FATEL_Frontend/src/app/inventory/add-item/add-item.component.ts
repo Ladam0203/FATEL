@@ -13,6 +13,7 @@ import {PostItemDTO} from "../../entities/DTOs/PostItemDTO";
 export class AddItemComponent implements OnInit {
 
   @Output() newItemEvent = new EventEmitter<Item>();
+  @Output() close: EventEmitter<void> = new EventEmitter<void>();
 
   name: string = "";
   length?: number;
@@ -46,5 +47,9 @@ export class AddItemComponent implements OnInit {
         this.quantity = 0;
         this.note = undefined;
       })
+  }
+
+  closeAddItemComponent() {
+    this.close.emit();
   }
 }

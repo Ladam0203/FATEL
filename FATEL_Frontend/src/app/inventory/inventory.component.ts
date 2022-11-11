@@ -20,6 +20,8 @@ export class InventoryComponent implements OnInit {
 
   query: string = '';
 
+  showAddItemComponent: boolean = false;
+
   constructor(private itemService: ItemService) {
   }
 
@@ -50,5 +52,13 @@ export class InventoryComponent implements OnInit {
 
   buttonClick() {
     alert('here');
+  }
+
+  openAddItemComponent() {
+    this.showAddItemComponent = true;
+  }
+
+  closeAddItemComponent() {
+    this.showAddItemComponent = false;
   }
 }

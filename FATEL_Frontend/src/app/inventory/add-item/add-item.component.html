@@ -44,6 +44,10 @@
     </mat-form-field>
 
     <br>
-    <button mat-button (click)="addNewItem()">ADD ITEM</button>
+    <div class="action-buttons-container">
+      <button class="add-item-button" mat-button (click)="addNewItem()">ADD ITEM</button>
+      <button class="close-component-button" mat-button (click)="closeAddItemComponent()">CLOSE</button>
+    </div>
+
   </div>
 </div>

@@ -5,17 +5,39 @@
   align-items: normal;
 }
 
-.action-panel mat-form-field, .action-panel button {
-  width: 50%;
+.action-panel mat-form-field, .action-buttons-container {
+  width: 66%;
   margin: 0 auto 0 auto;
 }
 
 .action-panel button {
-  border: 1px solid var(--primary);
   transition: all 0.25s ease-in-out;
 }
 
-.action-panel button:hover {
+.action-buttons-container {
+  display: flex;
+  justify-content: center;
+  column-gap: 12px;
+}
+
+.add-item-button {
   background-color: var(--primary);
-  color: white;
+  color: var(--white);
+  flex: 1;
+}
+
+.add-item-button:hover {
+  background-color: var(--primary);
+  color: var(--white);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.close-component-button {
+  border: 1px solid var(--primary);
+}
+
+.close-component-button:hover {
+  background-color: var(--danger);
+  border: 1px solid var(--danger);
+  color: var(--white);
 }
