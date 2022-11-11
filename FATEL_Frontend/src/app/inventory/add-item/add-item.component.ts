@@ -5,6 +5,7 @@ import {Item} from "../../entities/item";
 import {ItemService} from "../../services/item.service";
 import {PostItemDTO} from "../../entities/DTOs/PostItemDTO";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {requiredIfMatches} from "../../validators/requiredIfMatches";
 
 @Component({
   selector: 'add-item',
@@ -15,58 +16,59 @@ export class AddItemComponent implements OnInit {
 
   @Output() newItemEvent = new EventEmitter<Item>();
 
-  name: string = "";
-  length?: number;
-  width?: number;
-  unit: Unit = Unit.Piece;
-  quantity: number = 0;
-  note?: string;
   units: typeof Unit = Unit;
-  itemForm = new FormGroup({
-    'itemName': new FormControl(),
-    'length': new FormControl(),
-  });
 
+  itemForm: FormGroup = new FormGroup({
+    name: new FormControl(),
+    unit: new FormControl(),
+    length: new FormControl(),
+    width: new FormControl(),
+    quantity: new FormControl(),
+    note: new FormControl(),
+  });
 
   constructor(private itemService: ItemService) { }
 
   ngOnInit(): void {
 
     this.itemForm = new FormGroup({
-      itemName: new FormControl(this.name,[
+      name: new FormControl('',[
         Validators.required
       ]),
-      length: new FormControl(this.length,[
+      unit: new FormControl(Unit.Piece,[
+        Validators.required
+      ]),
+     length: new FormControl(null,[
+        Validators.min(0),
+       Validators.required
+       //requiredIfMatches(this.itemForm.get('unit')?.value, Unit.Meter),
+       //requiredIfMatches(this.itemForm.get('unit')?.value, Unit.SquareMeter)
+      ]),
+      width: new FormControl(null,[
+        Validators.min(0),
+        //requiredIfMatches(this.itemForm.get('unit')?.value, Unit.SquareMeter)
+      ]),
+      quantity: new FormControl(0,[
         Validators.required,
         Validators.min(0),
-      ])
+      ]),
     })
-
   }
 
   addNewItem() {
     let dto: PostItemDTO = {
-      name: this.name,
-      length: this.length??null,
-      width: this.width??null,
-      unit: this.unit,
-      quantity: this.quantity,
-      note: this.note??null
+      name:this.itemForm.get('name')?.value,
+      length: this.itemForm.get('length')?.value,
+      width: this.itemForm.get('width')?.value,
+      unit: this.itemForm.get('unit')?.value,
+      quantity: this.itemForm.get('quantity')?.value,
+      note: this.itemForm.get('note')?.value
     }
     this.itemService.create(dto)
       .then(item =>{
         this.newItemEvent.emit(item);
-        this.name = "";
-        this.length = undefined;
-        this.width = undefined;
-        this.unit = Unit.Piece;
-        this.quantity = 0;
-        this.note = undefined;
+        this.itemForm.reset();
       })
   }
 
-
-
-  get itemName(){
-    return this.itemForm.get('itemName');}
 }
