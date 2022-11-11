@@ -28,6 +28,7 @@
 
 .secondary-button {
   border: 1px solid var(--primary);
+  transition: background-color .2s, color .2s;
 }
 
 .secondary-button:hover {
