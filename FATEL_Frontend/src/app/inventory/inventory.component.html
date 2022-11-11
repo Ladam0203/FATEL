@@ -40,52 +40,60 @@
 
           <!-- ID Column -->
           <ng-container matColumnDef="id">
-            <th class="fs-5" mat-header-cell *matHeaderCellDef>#</th>
-            <td class="fs-5" mat-cell *matCellDef="let item"> {{item.id}} </td>
+            <th class="fs-5 ta-left" mat-header-cell mat-sort-header *matHeaderCellDef>#</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.id}} </td>
           </ng-container>
 
           <!-- Name Column -->
           <ng-container matColumnDef="name">
-            <th class="fs-5" mat-header-cell *matHeaderCellDef>Name</th>
-            <td class="fs-5" mat-cell *matCellDef="let item"> {{item.name}} </td>
+            <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Name</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.name}} </td>
           </ng-container>
 
           <!-- Width Column -->
           <ng-container matColumnDef="width">
-            <th class="fs-5" mat-header-cell *matHeaderCellDef>Width</th>
-            <td class="fs-5" mat-cell *matCellDef="let item"> {{item.width}} </td>
+            <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Width</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.width}} </td>
           </ng-container>
 
           <!-- Length Column -->
           <ng-container matColumnDef="length">
-            <th class="fs-5" mat-header-cell *matHeaderCellDef>Length</th>
-            <td class="fs-5" mat-cell *matCellDef="let item"> {{item.length}} </td>
+            <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Length</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.length}} </td>
           </ng-container>
 
           <!-- Unit Column -->
           <ng-container matColumnDef="unit">
-            <th class="fs-5" mat-header-cell *matHeaderCellDef>Unit</th>
-            <td class="fs-5" mat-cell *matCellDef="let item;"> {{units[item.unit]}} </td>
+            <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Unit</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item;"> {{units[item.unit]}} </td>
           </ng-container>
 
           <!-- Quantity Column -->
           <ng-container matColumnDef="quantity">
-            <th class="fs-5" mat-header-cell *matHeaderCellDef>Quantity</th>
-            <td class="fs-5" mat-cell *matCellDef="let item"> {{item.quantity}} </td>
+            <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Quantity</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.quantity}} </td>
           </ng-container>
 
           <!-- Note Column -->
           <ng-container matColumnDef="note">
-            <th class="fs-5" mat-header-cell *matHeaderCellDef>Note</th>
-            <td class="fs-5" mat-cell *matCellDef="let item"> {{item.note}} </td>
+            <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Note</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.note}} </td>
+          </ng-container>
+
+          <!-- Action Column -->
+          <ng-container matColumnDef="actions">
+            <th class="fs-5 ta-left edit-action" mat-header-cell *matHeaderCellDef>Actions</th>
+            <mat-cell class="action-cell" *matCellDef="let row">
+              <button class="edit-button fs-5" mat-button (click)="rowClick(row)">EDIT</button>
+            </mat-cell>
           </ng-container>
 
           <tr class="fs-5" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
         </table>
       </mat-expansion-panel>
     </mat-accordion>
-    <add-item *ngIf="showAddItemComponent" class="action-container" (newItemEvent)="addItem($event)" (close)="closeAddItemComponent()"></add-item>
+    <add-item *ngIf="showAddItemComponent" class="action-container" (newItemEvent)="addItem($event)"
+              (close)="closeAddItemComponent()"></add-item>
   </div>
 </div>

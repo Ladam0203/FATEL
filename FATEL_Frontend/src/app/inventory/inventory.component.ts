@@ -1,10 +1,8 @@
-  import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Item} from "../entities/item";
 import {ItemService} from "../services/item.service";
-import {ITEMS} from "../mock-objects/mock-items";
 import {Category} from "../entities/category";
-import {Unit, UnitUtil} from "../entities/units";
-  import {FormControl} from "@angular/forms";
+import {Unit} from "../entities/units";
 
 @Component({
   selector: 'inventory',
@@ -12,7 +10,7 @@ import {Unit, UnitUtil} from "../entities/units";
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'width', 'length', 'unit', 'quantity', 'note'];
+  displayedColumns: string[] = ['id', 'name', 'width', 'length', 'unit', 'quantity', 'note', 'actions'];
 
   units: typeof Unit = Unit;
   categories: Category[] = [];
@@ -27,7 +25,7 @@ export class InventoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.itemService.readAll()
-      .then(items =>{
+      .then(items => {
         this.items = items;
         this.categoriseItems();
       });
@@ -60,5 +58,10 @@ export class InventoryComponent implements OnInit {
 
   closeAddItemComponent() {
     this.showAddItemComponent = false;
+  }
+
+  rowClick(row: any) {
+    alert(row.id);
+    console.log(row)
   }
 }
