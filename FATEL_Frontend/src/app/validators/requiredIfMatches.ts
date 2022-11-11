@@ -1,9 +1,11 @@
-import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {AbstractControl, FormControl, ValidatorFn, Validators} from '@angular/forms';
 
 export function requiredIfMatches(actualValue: any, expectedValue: any): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const actual = control.parent?.get(actualValue)?.value;
-    const forbidden = actual === expectedValue && control.value === '';
-    return forbidden ? {'requiredIfMatches': {value: control.value}} : null;
-  };
+  //make form control required if actual value matches expected value
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    if (actualValue === expectedValue) {
+      return Validators.required(control);
+    }
+    return null;
+  }
 }
