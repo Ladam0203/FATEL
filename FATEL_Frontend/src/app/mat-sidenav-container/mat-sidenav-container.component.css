@@ -28,6 +28,7 @@
   justify-content: space-between;
 
   width: calc(150px + 80px);
+  height: 80px;
 }
 
 .sidenav-component-wrapper:not(:first-child) {
@@ -38,10 +39,6 @@
   padding-bottom: 8px;
 
   cursor: pointer;
-}
-
-.sidenav-component-wrapper:nth-child(2) {
-  margin-top: 32px;
 }
 
 .sidenav-component-wrapper:last-child {
@@ -58,6 +55,7 @@
 
 .sidenav-logo-wrapper {
   justify-content: flex-end;
+  align-self: center;
   padding-right: 0;
   transition: padding-right 0.7s;
 }
@@ -70,6 +68,7 @@
   width: 80px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .sidenav-heading {
@@ -84,7 +83,6 @@
 
 
 .sidenav-logo {
-  margin-top: 28px;
   transition: margin-right 0.5s;
   margin-right: 0;
 }

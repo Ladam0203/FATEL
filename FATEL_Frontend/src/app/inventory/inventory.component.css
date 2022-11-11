@@ -30,6 +30,11 @@
   border: 1px solid var(--primary);
 }
 
+.secondary-button:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
 .main-button {
   background-color: var(--primary);
   color: white;
