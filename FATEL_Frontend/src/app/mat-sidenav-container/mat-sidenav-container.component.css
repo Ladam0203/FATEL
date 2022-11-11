@@ -4,14 +4,15 @@
   align-items: flex-start;
 
   width: calc(80px + 150px);
-  background: rgba(0, 18, 51, 0.92);
+  background-color: rgba(0, 18, 51, 1);
   left: -150px;
 
-  transition: left 0.7s;
+  transition: left 0.7s, background-color 0.7s;
 }
 
 .sidenav:hover {
   left: 0;
+  background-color: rgba(0, 18, 51, .96);
 }
 
 .sidenav:hover .sidenav-logo-wrapper {
