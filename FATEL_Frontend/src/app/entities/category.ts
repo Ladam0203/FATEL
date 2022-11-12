@@ -18,4 +18,8 @@ export class Category {
     }
     return "" + totalQuantity + UnitUtil.abbreviations(this.unit);
   }
+
+export interface Category {
+  name: string;
+  items: Item[];
 }

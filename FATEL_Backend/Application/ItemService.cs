@@ -33,6 +33,14 @@ public class ItemService : IItemService
         if (!validation.IsValid) 
             throw new ValidationException(validation.ToString());
         var item = _mapper.Map<Item>(postItemDto);
+        if (_repository.DoesIdenticalItemExist(item))
+        {
+            throw new ArgumentException("Item with the same properties already exists");
+        }
+        if (item.Quantity == 0)
+        {
+            return _repository.CreateItem(item);
+        }
         double totalChange = item.Length.GetValueOrDefault(1) * item.Width.GetValueOrDefault(1) * item.Quantity;
         Entry entry = new()
         {
@@ -79,7 +87,7 @@ public class ItemService : IItemService
 
         //Check if stored item is the same as the one in the movement
         if (JsonConvert.SerializeObject(item) != JsonConvert.SerializeObject(movement.Item)) 
-            throw new ValidationException("Item in body does not match with stored Item");
+            throw new ValidationException("Item in body does not match with stored Item"); //TODO: This most probably should be a different exception
 
         //Change the item based on the movement
         item.Quantity += movement.Change;
@@ -98,6 +106,21 @@ public class ItemService : IItemService
 
     public Item Delete(int id)
     {
-        return _repository.DeleteItem(id);
+        Item item = _repository.ReadItem(id);
+        if (item.Quantity == 0)
+        {
+             return _repository.DeleteItem(item.Id);
+        }
+
+        double totalChange = item.Length.GetValueOrDefault(1) * item.Width.GetValueOrDefault(1) * item.Quantity * -1;
+        Entry entry = new()
+        {
+            Timestamp = DateTime.Now.ToUniversalTime(),
+            ItemId = item.Id,
+            ItemName = item.Name,
+            Change = totalChange,
+            QuantityAfterChange = 0  
+        };
+        return _repository.DeleteAndRecord(item.Id, entry);
     }
 }

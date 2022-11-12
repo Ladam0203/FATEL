@@ -105,4 +105,12 @@ public class ItemRepository : IItemRepository
             .Select(item => item.Length.GetValueOrDefault(1) * item.Width.GetValueOrDefault(1) * item.Quantity)
             .Sum();
     }
+
+    public bool DoesIdenticalExist(Item item)
+    {
+        return _context.ItemTable.Any(i => i.Name == item.Name && 
+                                           i.Width == item.Width && 
+                                           i.Length == item.Length &&
+                                           i.Unit == item.Unit);
+    }
 }

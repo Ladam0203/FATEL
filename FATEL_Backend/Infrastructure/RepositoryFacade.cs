@@ -33,7 +33,12 @@ public class RepositoryFacade : IRepositoryFacade
 
         return item;
     }
-    
+
+    public Item CreateItem(Item item)
+    {
+        return _itemRepository.Create(item);
+    }
+
     public Item CreateAndRecord(Item item, Entry entry)
     {
         using (var dbContextTransaction = _context.Database.BeginTransaction())
@@ -74,8 +79,29 @@ public class RepositoryFacade : IRepositoryFacade
         return _itemRepository.Delete(id);
     }
 
+    public bool DoesIdenticalItemExist(Item item)
+    {
+        return _itemRepository.DoesIdenticalExist(item);
+    }
+
     public List<Entry> ReadAllEntries()
     {
         return _entryRepository.ReadAll();
+    }
+
+    public Item DeleteAndRecord(int id, Entry entry)
+    {
+        Item item;
+        
+        using (var dbContextTransaction = _context.Database.BeginTransaction())
+        {
+           item = _itemRepository.Delete(id);
+            _entryRepository.Create(entry);
+                
+            _context.SaveChanges();
+
+            dbContextTransaction.Commit();
+        }
+        return item;
     }
 }
