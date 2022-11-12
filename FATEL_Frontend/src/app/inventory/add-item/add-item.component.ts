@@ -5,13 +5,9 @@ import {Item} from "../../entities/item";
 import {ItemService} from "../../services/item.service";
 import {PostItemDTO} from "../../entities/DTOs/PostItemDTO";
 import {
-  AbstractControl,
   FormControl,
   FormGroup,
   Validators,
-  ɵFormGroupRawValue,
-  ɵGetProperty,
-  ɵTypedOrUntyped
 } from "@angular/forms";
 
 @Component({
@@ -44,7 +40,7 @@ export class AddItemComponent implements OnInit {
       name: new FormControl('', [
         Validators.required
       ]),
-      unit: new FormControl(Unit.Piece, [
+      unit: new FormControl(null, [
         Validators.required
       ]),
       length: new FormControl(null, [
