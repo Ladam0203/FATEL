@@ -37,6 +37,7 @@ export class AddItemComponent implements OnInit {
       quantity: this.quantity,
       note: this.note??null
     }
+
     this.itemService.create(dto)
       .then(item =>{
         this.newItemEvent.emit(item);
@@ -46,7 +47,8 @@ export class AddItemComponent implements OnInit {
         this.unit = Unit.Piece;
         this.quantity = 0;
         this.note = undefined;
-      })
+        this.closeAddItemComponent();
+      });
   }
 
   closeAddItemComponent() {
