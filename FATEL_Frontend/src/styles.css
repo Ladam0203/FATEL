@@ -34,6 +34,19 @@ body {
   background-color: var(--light);
 }
 
-* > .mat-drawer-inner-container {
+.mat-drawer-inner-container {
   overflow: hidden !important;
+}
+
+.search-field .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+.search-field .mat-form-field-infix {
+  padding-bottom: 8px;
+  border-top: 0 solid rgba(0,0,0,0);
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: var(--primary);
 }
