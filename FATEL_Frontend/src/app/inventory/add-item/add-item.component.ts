@@ -31,6 +31,8 @@ export class AddItemComponent implements OnInit {
     note: new FormControl(),
   });
 
+  restrictedButtonUsage: boolean = false;
+
   constructor(private itemService: ItemService) {
   }
 
@@ -56,7 +58,8 @@ export class AddItemComponent implements OnInit {
         Validators.required,
       ]),
       notes: new FormControl()
-    })
+    });
+
   }
 
   shouldValidateLength() {
@@ -78,6 +81,11 @@ export class AddItemComponent implements OnInit {
   }
 
   addNewItem() {
+    if(this.itemForm.invalid){
+      this.restrictedButtonUsage = true;
+      return;
+    }
+
     let dto: PostItemDTO = {
       name: this.itemForm.get('name')?.value,
       length: this.itemForm.get('length')?.value,
