@@ -1,0 +1,78 @@
+<form [formGroup]="itemForm">
+<div class="action-container">
+  <div class="action-panel">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input formControlName="name" matInput>
+      <mat-error *ngIf="itemForm.get('name')?.hasError('required')">
+        Name is required
+      </mat-error>
+    </mat-form-field>
+    <br>
+
+    <!-- TODO: Add Select one... or something similar as default value -->
+    <mat-form-field appearance="fill">
+      <mat-label>Unit</mat-label>
+      <mat-select formControlName="unit">
+        <mat-option *ngIf="!itemForm.get('name')" [value]=null>Unit</mat-option>
+        <mat-option *ngFor="let unit of units | keys" [value]=units[unit]>
+          {{unit}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="itemForm.get('unit')?.hasError('required')">
+        Unit is required
+      </mat-error>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Quantity</mat-label>
+      <input formControlName ="quantity" type = "number" matInput>
+      <mat-error *ngIf="itemForm.get('quantity')?.hasError('required')">
+        Quantity is required
+      </mat-error>
+      <mat-error *ngIf="itemForm.get('quantity')?.hasError('min')">
+        Quantity must be greater than or equal to 0
+      </mat-error>
+    </mat-form-field>
+
+    <ng-container *ngIf="shouldValidateLength()">
+      <mat-form-field appearance="fill">
+        <mat-label>Length</mat-label>
+        <input formControlName="length" type="number" matInput>
+        <mat-error *ngIf="itemForm.get('length')?.hasError('required')">
+          Length is required
+        </mat-error>
+        <mat-error *ngIf="itemForm.get('length')?.hasError('min')">
+          Length must be greater than or equal to 0
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
+    <ng-container *ngIf="shouldValidateWidth()">
+      <mat-form-field appearance="fill">
+        <mat-label>Width</mat-label>
+        <input formControlName="width" type="number" matInput>
+        <mat-error *ngIf="itemForm.get('width')?.hasError('required')">
+          Width is required
+        </mat-error>
+        <mat-error *ngIf="itemForm.get('width')?.hasError('min')">
+          Width must be greater than or equal to 0
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
+
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Notes</mat-label>
+      <textarea formControlName="notes" matInput></textarea>
+    </mat-form-field>
+
+    <br>
+    <div class="action-buttons-container">
+      <button [disabled]="itemForm.invalid && restrictedButtonUsage" class="add-item-button" mat-button (click)="addNewItem()">ADD ITEM</button>
+      <button class="close-component-button" mat-button (click)="closeAddItemComponent()">CLOSE</button>
+    </div>
+  </div>
+</div>
+</form>

@@ -1,6 +1,3 @@
 .diary-container {
   height: 100%;
-
-  border: 2px solid black;
-  background-color: var(--grey);
 }
