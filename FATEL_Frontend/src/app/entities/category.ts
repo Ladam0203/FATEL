@@ -14,12 +14,8 @@ export class Category {
   getDescription(): string {
     let totalQuantity = 0;
     for (const item of this.items) {
-      totalQuantity += item.quantity * (item.length ?? 1)  * (item.width ?? 1);
+      totalQuantity += item.quantity * (item.length ?? 1) * (item.width ?? 1);
     }
     return "" + totalQuantity + UnitUtil.abbreviations(this.unit);
   }
-
-export interface Category {
-  name: string;
-  items: Item[];
 }
