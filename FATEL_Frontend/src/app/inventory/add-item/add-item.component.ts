@@ -4,9 +4,15 @@ import { Output, EventEmitter } from '@angular/core';
 import {Item} from "../../entities/item";
 import {ItemService} from "../../services/item.service";
 import {PostItemDTO} from "../../entities/DTOs/PostItemDTO";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {requiredIfMatches} from "../../validators/requiredIfMatches";
-import {RxwebValidators} from "@rxweb/reactive-form-validators";
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+  ɵFormGroupRawValue,
+  ɵGetProperty,
+  ɵTypedOrUntyped
+} from "@angular/forms";
 
 @Component({
   selector: 'add-item',
@@ -41,18 +47,38 @@ export class AddItemComponent implements OnInit {
       ]),
      length: new FormControl(null,[
         Validators.min(0),
-       RxwebValidators.required({conditionalExpression:'x => x.unit.value == Unit.Meter' }),
+        Validators.required
       ]),
       width: new FormControl(null,[
         Validators.min(0),
-        RxwebValidators.required({conditionalExpression:'x => x.unit.value == Unit.Meter' }),
+        Validators.required
       ]),
       quantity: new FormControl(0,[
-        Validators.required,
         Validators.min(0),
+        Validators.required,
       ]),
       notes: new FormControl()
     })
+  }
+
+  shouldValidateLength() {
+    if (this.itemForm.get('unit')?.value === Unit.Meter || this.itemForm.get('unit')?.value === Unit.SquareMeter) {
+      this.itemForm.get('length')?.enable();
+    }
+    else {
+      this.itemForm.get('length')?.disable();
+    }
+    return this.itemForm.get('length')?.enabled;
+  }
+
+  shouldValidateWidth() {
+    if (this.itemForm.get('unit')?.value === Unit.SquareMeter) {
+      this.itemForm.get('width')?.enable();
+    }
+    else {
+      this.itemForm.get('width')?.disable();
+    }
+    return this.itemForm.get('width')?.enabled;
   }
 
   addNewItem() {

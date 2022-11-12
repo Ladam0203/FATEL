@@ -23,13 +23,13 @@
       <input formControlName ="quantity" type = "number" matInput>
     </mat-form-field>
 
-    <ng-container *ngIf="itemForm.get('unit')?.value == units.Meter || itemForm.get('unit')?.value == units.SquareMeter">
+    <ng-container *ngIf="shouldValidateLength()">
       <mat-form-field appearance="fill">
         <mat-label>Length</mat-label>
         <input formControlName="length" type="number" matInput>
       </mat-form-field>
     </ng-container>
-    <ng-container *ngIf="itemForm.get('unit')?.value == units.SquareMeter">
+    <ng-container *ngIf="shouldValidateWidth()">
       <mat-form-field appearance="fill">
         <mat-label>Width</mat-label>
         <input formControlName="width" type="number" matInput>
