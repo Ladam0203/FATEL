@@ -1,9 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Unit} from "../../entities/units";
-import { Output, EventEmitter } from '@angular/core';
+import {Output, EventEmitter} from '@angular/core';
 import {Item} from "../../entities/item";
 import {ItemService} from "../../services/item.service";
 import {PostItemDTO} from "../../entities/DTOs/PostItemDTO";
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+  ɵFormGroupRawValue,
+  ɵGetProperty,
+  ɵTypedOrUntyped
+} from "@angular/forms";
 
 @Component({
   selector: 'add-item',
@@ -15,43 +24,82 @@ export class AddItemComponent implements OnInit {
   @Output() newItemEvent = new EventEmitter<Item>();
   @Output() close: EventEmitter<void> = new EventEmitter<void>();
 
-  name: string = "";
-  length?: number;
-  width?: number;
-  unit: Unit = Unit.Piece;
-  quantity: number = 0;
-  note?: string;
   units: typeof Unit = Unit;
 
-  constructor(private itemService: ItemService) { }
+  itemForm: FormGroup = new FormGroup({
+    name: new FormControl(),
+    unit: new FormControl(),
+    length: new FormControl(),
+    width: new FormControl(),
+    quantity: new FormControl(),
+    note: new FormControl(),
+  });
+
+  constructor(private itemService: ItemService) {
+  }
 
   ngOnInit(): void {
+
+    this.itemForm = new FormGroup({
+      name: new FormControl('', [
+        Validators.required
+      ]),
+      unit: new FormControl(Unit.Piece, [
+        Validators.required
+      ]),
+      length: new FormControl(null, [
+        Validators.min(0),
+        Validators.required
+      ]),
+      width: new FormControl(null, [
+        Validators.min(0),
+        Validators.required
+      ]),
+      quantity: new FormControl(0, [
+        Validators.min(0),
+        Validators.required,
+      ]),
+      notes: new FormControl()
+    })
+  }
+
+  shouldValidateLength() {
+    if (this.itemForm.get('unit')?.value === Unit.Meter || this.itemForm.get('unit')?.value === Unit.SquareMeter) {
+      this.itemForm.get('length')?.enable();
+    } else {
+      this.itemForm.get('length')?.disable();
+    }
+    return this.itemForm.get('length')?.enabled;
+  }
+
+  shouldValidateWidth() {
+    if (this.itemForm.get('unit')?.value === Unit.SquareMeter) {
+      this.itemForm.get('width')?.enable();
+    } else {
+      this.itemForm.get('width')?.disable();
+    }
+    return this.itemForm.get('width')?.enabled;
   }
 
   addNewItem() {
     let dto: PostItemDTO = {
-      name: this.name,
-      length: this.length??null,
-      width: this.width??null,
-      unit: this.unit,
-      quantity: this.quantity,
-      note: this.note??null
+      name: this.itemForm.get('name')?.value,
+      length: this.itemForm.get('length')?.value,
+      width: this.itemForm.get('width')?.value,
+      unit: this.itemForm.get('unit')?.value,
+      quantity: this.itemForm.get('quantity')?.value,
+      note: this.itemForm.get('note')?.value
     }
 
     this.itemService.create(dto)
-      .then(item =>{
+      .then(item => {
         this.newItemEvent.emit(item);
-        this.name = "";
-        this.length = undefined;
-        this.width = undefined;
-        this.unit = Unit.Piece;
-        this.quantity = 0;
-        this.note = undefined;
         this.closeAddItemComponent();
       });
   }
 
   closeAddItemComponent() {
+    this.itemForm.reset();
     this.close.emit();
   }
 }
