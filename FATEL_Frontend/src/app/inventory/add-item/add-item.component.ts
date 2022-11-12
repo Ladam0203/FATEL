@@ -40,7 +40,7 @@ export class AddItemComponent implements OnInit {
       name: new FormControl('', [
         Validators.required
       ]),
-      unit: new FormControl(Unit.Piece, [
+      unit: new FormControl(null, [
         Validators.required
       ]),
       length: new FormControl(null, [

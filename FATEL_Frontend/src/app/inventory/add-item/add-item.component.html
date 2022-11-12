@@ -14,10 +14,14 @@
     <mat-form-field appearance="fill">
       <mat-label>Unit</mat-label>
       <mat-select formControlName="unit">
+        <mat-option *ngIf="!itemForm.get('name')" [value]=null>Unit</mat-option>
         <mat-option *ngFor="let unit of units | keys" [value]=units[unit]>
           {{unit}}
         </mat-option>
       </mat-select>
+      <mat-error *ngIf="itemForm.get('unit')?.hasError('required')">
+        Unit is required
+      </mat-error>
     </mat-form-field>
     <br>
 
