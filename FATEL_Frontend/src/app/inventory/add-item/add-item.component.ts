@@ -83,6 +83,7 @@ export class AddItemComponent implements OnInit {
   addNewItem() {
     if(this.itemForm.invalid){
       this.restrictedButtonUsage = true;
+      this.itemForm.markAllAsTouched();
       return;
     }
 
