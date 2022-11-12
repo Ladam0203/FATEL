@@ -26,6 +26,18 @@
   flex: 1;
 }
 
+.add-item-button:disabled {
+  border: 1px solid var(--primary);
+  background-color: var(--white);
+  opacity: 0.5;
+}
+
+.add-item-button:disabled:hover {
+  background-color: var(--danger);
+  border: 1px solid var(--danger);
+  box-shadow: none;
+}
+
 .add-item-button:hover {
   background-color: var(--primary);
   color: var(--white);
