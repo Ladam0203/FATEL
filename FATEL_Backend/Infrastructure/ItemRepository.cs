@@ -5,35 +5,112 @@ namespace Infrastructure;
 
 public class ItemRepository : IItemRepository
 {
-    private AppDbContext _context;
+    private readonly AppDbContext _context;
     
     public ItemRepository(AppDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
+        /*
+        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+        {
+            Rebuild();
+            Seed();
+        }
+        */
     }
-    
+
+    private void Rebuild()
+    {
+        _context.Database.EnsureDeleted();
+        _context.Database.EnsureCreated();
+    }
+
+    private void Seed()
+    {
+        Item doorKnob = new Item()
+        {
+            Name = "Pánt", 
+            Unit = Unit.Piece,
+            Quantity = 5
+        };
+        Item plank = new Item()
+        {
+            Name = "Fenyőpadléc", 
+            Length = 5,
+            Unit = Unit.Meter,
+            Quantity = 2
+        };
+        Item floor1 = new Item()
+        {
+            Name = "Fenyőlambéria 12x95",
+            Length = 5,
+            Width = 0.0095f,
+            Unit = Unit.SquareMeter,
+            Quantity = 2,
+            Note = "Szar minőségű"
+        };
+        Item floor2 = new Item()
+        {
+            Name = "Fenyőlambéria 12x95",
+            Length = 2,
+            Width = 0.0095f,
+            Unit = Unit.SquareMeter,
+            Quantity = 2,
+        };
+        _context.ItemTable.Add(doorKnob);
+        _context.ItemTable.Add(plank);
+        _context.ItemTable.Add(floor1);
+        _context.ItemTable.Add(floor2);
+        _context.SaveChanges();
+    }
+
     public Item Create(Item item)
     {
-        throw new NotImplementedException();
+        _context.ItemTable.Add(item);
+        _context.SaveChanges();
+        return item;
     }
 
     public Item Read(int id)
     {
-        throw new NotImplementedException();
+        return _context.ItemTable.Find(id) ?? throw new KeyNotFoundException("Item with id " + id + " does not exist");
     }
 
     public List<Item> ReadAll()
     {
-        throw new NotImplementedException();
+        return _context.ItemTable.ToList();
     }
 
     public Item Update(Item item)
     {
-        throw new NotImplementedException();
+        if (_context.ItemTable.Find(item.Id) == null)
+            throw new KeyNotFoundException("Item with id " + item.Id + " does not exist");
+        _context.ChangeTracker.Clear();
+        _context.ItemTable.Update(item);
+        _context.SaveChanges();
+        return item;
     }
 
     public Item Delete(int id)
     {
-        throw new NotImplementedException();
+        Item item = _context.ItemTable.Find(id) ?? throw new KeyNotFoundException("Item with id " + id + " does not exist");
+        _context.ItemTable.Remove(item);
+        _context.SaveChanges();
+        return item;
+    }
+
+    public double ReadTotalQuantityOf(string itemName)
+    {
+        return _context.ItemTable.Where(item => item.Name == itemName)
+            .Select(item => item.Length.GetValueOrDefault(1) * item.Width.GetValueOrDefault(1) * item.Quantity)
+            .Sum();
+    }
+
+    public bool DoesIdenticalExist(Item item)
+    {
+        return _context.ItemTable.Any(i => i.Name == item.Name && 
+                                           i.Width == item.Width && 
+                                           i.Length == item.Length &&
+                                           i.Unit == item.Unit);
     }
 }

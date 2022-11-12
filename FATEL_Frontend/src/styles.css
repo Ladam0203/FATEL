@@ -1,0 +1,52 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+  --white: #ffffff;
+  --light: #e4e0e0;
+  --dark: #000105;
+  --primary: #001233;
+  --secondary: #24607c;
+  --info: #bf604d;
+  --success: #009756;
+  --warning: #dfc700;
+  --danger: #ec1500;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--light);
+}
+
+.mat-drawer-inner-container {
+  overflow: hidden !important;
+}
+
+.search-field .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+.search-field .mat-form-field-infix {
+  padding-bottom: 8px;
+  border-top: 0 solid rgba(0,0,0,0);
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: var(--primary);
+}

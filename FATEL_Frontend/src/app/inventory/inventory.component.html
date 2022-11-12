@@ -1,0 +1,91 @@
+<div class="inventory-container">
+  <div class="tool-bar">
+    <h2 class="warehouse-header">Warehouse Inventory</h2>
+    <div class="action-bar">
+      <button mat-button class="secondary-button fs-5" (click)="buttonClick()">
+        Export
+      </button>
+
+      <button mat-button class="secondary-button fs-5" (click)="buttonClick()">
+        Import
+      </button>
+
+      <button mat-button class="main-button fs-5" (click)="openAddItemComponent()">
+        <mat-icon class="main-icon" aria-hidden="false" aria-label="add icon" fontIcon="add"></mat-icon>
+        New Item
+      </button>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <mat-form-field class="search-field" appearance="outline">
+      <mat-icon matPrefix>search</mat-icon>
+      <input class="fs-5" matInput placeholder="Search" type="text" [(ngModel)]="query">
+    </mat-form-field>
+  </div>
+
+  <div class="content-container">
+    <mat-accordion multi class="inventory">
+      <mat-expansion-panel *ngFor="let category of categories | filter: query">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="fs-5 panel-title">
+            {{category.name}}
+          </mat-panel-title>
+          <mat-panel-description class="fs-5 panel-description">
+            {{category.getDescription()}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <table mat-table [dataSource]="category.items">
+
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th class="fs-5 ta-left" mat-header-cell mat-sort-header *matHeaderCellDef>#</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.id}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Name</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.name}} </td>
+          </ng-container>
+
+          <!-- Width Column -->
+          <ng-container matColumnDef="width">
+            <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Width</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.width}} </td>
+          </ng-container>
+
+          <!-- Length Column -->
+          <ng-container matColumnDef="length">
+            <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Length</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.length}} </td>
+          </ng-container>
+
+          <!-- Unit Column -->
+          <ng-container matColumnDef="unit">
+            <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Unit</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item;"> {{units[item.unit]}} </td>
+          </ng-container>
+
+          <!-- Quantity Column -->
+          <ng-container matColumnDef="quantity">
+            <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Quantity</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.quantity}} </td>
+          </ng-container>
+
+          <!-- Note Column -->
+          <ng-container matColumnDef="note">
+            <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Note</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.note}} </td>
+          </ng-container>
+
+          <tr class="fs-5" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <add-item *ngIf="showAddItemComponent" class="action-container" (newItemEvent)="addItem($event)"
+              (close)="closeAddItemComponent()"></add-item>
+  </div>
+</div>
