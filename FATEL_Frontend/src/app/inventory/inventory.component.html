@@ -80,14 +80,6 @@
             <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.note}} </td>
           </ng-container>
 
-          <!-- Action Column -->
-          <ng-container matColumnDef="actions">
-            <th class="fs-5 ta-left edit-action" mat-header-cell *matHeaderCellDef>Actions</th>
-            <mat-cell class="action-cell" *matCellDef="let row">
-              <button class="edit-button fs-5" mat-button (click)="rowClick(row)">EDIT</button>
-            </mat-cell>
-          </ng-container>
-
           <tr class="fs-5" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>

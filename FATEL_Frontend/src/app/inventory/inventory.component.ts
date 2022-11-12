@@ -10,7 +10,7 @@ import {Unit} from "../entities/units";
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'width', 'length', 'unit', 'quantity', 'note', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'width', 'length', 'unit', 'quantity', 'note'];
 
   units: typeof Unit = Unit;
   categories: Category[] = [];
