@@ -5,13 +5,9 @@ import {Item} from "../../entities/item";
 import {ItemService} from "../../services/item.service";
 import {PostItemDTO} from "../../entities/DTOs/PostItemDTO";
 import {
-  AbstractControl,
   FormControl,
   FormGroup,
   Validators,
-  ɵFormGroupRawValue,
-  ɵGetProperty,
-  ɵTypedOrUntyped
 } from "@angular/forms";
 
 @Component({
