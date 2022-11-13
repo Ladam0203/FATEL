@@ -57,7 +57,7 @@ export class AddItemComponent implements OnInit {
         Validators.min(0),
         Validators.required,
       ]),
-      notes: new FormControl()
+      note: new FormControl()
     });
 
   }
