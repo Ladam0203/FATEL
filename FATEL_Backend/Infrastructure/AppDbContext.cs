@@ -35,6 +35,11 @@ public class AppDbContext : DbContext
             .WithOne(i => i.Warehouse)
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Warehouse>()
+            .HasMany(w => w.Diary) //has many Entries, but we call a list of entries Diary
+            .WithOne(i => i.Warehouse)
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
     }
 
     #region #region Database sets
