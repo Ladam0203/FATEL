@@ -43,8 +43,8 @@
         <mat-error *ngIf="itemForm.get('length')?.hasError('required')">
           Length is required
         </mat-error>
-        <mat-error *ngIf="itemForm.get('length')?.hasError('min')">
-          Length must be greater than or equal to 0
+        <mat-error *ngIf="itemForm.get('length')?.hasError('greaterThan')">
+          Length must be greater than 0
         </mat-error>
       </mat-form-field>
     </ng-container>
@@ -55,8 +55,8 @@
         <mat-error *ngIf="itemForm.get('width')?.hasError('required')">
           Width is required
         </mat-error>
-        <mat-error *ngIf="itemForm.get('width')?.hasError('min')">
-          Width must be greater than or equal to 0
+        <mat-error *ngIf="itemForm.get('width')?.hasError('greaterThan')">
+          Width must be greater than 0
         </mat-error>
       </mat-form-field>
     </ng-container>
