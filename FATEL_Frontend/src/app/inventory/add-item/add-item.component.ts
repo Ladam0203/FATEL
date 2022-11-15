@@ -9,6 +9,9 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
+import {Store} from "@ngrx/store";
+import {selectShowAddItemComponentValue, setShowAddItemComponent} from "../add-item.actions";
+
 
 @Component({
   selector: 'add-item',
@@ -18,7 +21,6 @@ import {
 export class AddItemComponent implements OnInit {
 
   @Output() newItemEvent = new EventEmitter<Item>();
-  @Output() close: EventEmitter<void> = new EventEmitter<void>();
 
   units: typeof Unit = Unit;
 
@@ -33,7 +35,9 @@ export class AddItemComponent implements OnInit {
 
   restrictedButtonUsage: boolean = false;
 
-  constructor(private itemService: ItemService) {
+  showAddItemComponent = this.store.select(selectShowAddItemComponentValue);
+
+  constructor(private itemService: ItemService, private readonly store: Store<any>) {
   }
 
   ngOnInit(): void {
@@ -105,6 +109,6 @@ export class AddItemComponent implements OnInit {
 
   closeAddItemComponent() {
     this.itemForm.reset();
-    this.close.emit();
+    this.store.dispatch(setShowAddItemComponent({value: false}));
   }
 }

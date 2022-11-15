@@ -13,9 +13,6 @@
 .content-container {
   padding: 32px;
 
-  display: flex;
-  flex-wrap: wrap;
-
   min-height: 100%;
 
   border-radius: 8px;

@@ -1,8 +1,11 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Item} from "../entities/item";
 import {ItemService} from "../services/item.service";
 import {Category} from "../entities/category";
 import {Unit} from "../entities/units";
+import {Store} from "@ngrx/store";
+import {selectShowAddItemComponentValue} from "./add-item.actions";
+import {selectSearchbarQueryValue} from "./filter-bar.actions";
 
 @Component({
   selector: 'inventory',
@@ -10,17 +13,16 @@ import {Unit} from "../entities/units";
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'width', 'length', 'unit', 'quantity', 'note'];
+  displayedColumns: string[] = ['name', 'width', 'length', 'unit', 'quantity', 'note'];
 
   units: typeof Unit = Unit;
   categories: Category[] = [];
   items: Item[] = [];
 
-  query: string = '';
+  searchbarQuery = this.store.select(selectSearchbarQueryValue);
+  showAddItemComponent = this.store.select(selectShowAddItemComponentValue);
 
-  showAddItemComponent: boolean = false;
-
-  constructor(private itemService: ItemService) {
+  constructor(private itemService: ItemService, private readonly store: Store<any>) {
   }
 
   ngOnInit(): void {
@@ -46,22 +48,5 @@ export class InventoryComponent implements OnInit {
       }
       category.items.push(item);
     }
-  }
-
-  buttonClick() {
-    alert('here');
-  }
-
-  openAddItemComponent() {
-    this.showAddItemComponent = true;
-  }
-
-  closeAddItemComponent() {
-    this.showAddItemComponent = false;
-  }
-
-  rowClick(row: any) {
-    alert(row.id);
-    console.log(row)
   }
 }

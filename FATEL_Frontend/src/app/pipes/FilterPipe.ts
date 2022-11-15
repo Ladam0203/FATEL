@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class FilterPipe implements PipeTransform {
-    transform(items: any[], query: string): any[] {
+    transform(items: any[], query: string | null): any[] {
       if (!items) return [];
       if (!query) return items;
       query = query.toLowerCase(); //This might be important
@@ -14,6 +14,5 @@ export class FilterPipe implements PipeTransform {
         return it.name.toLowerCase().includes(query);
       });
     }
-
 }
 
