@@ -2,8 +2,8 @@ namespace Domain;
 
 public class Warehouse
 {
-    int Id { get; set; }
-    string Name { get; set; }
-    List<Item> Inventory { get; set; }
-    List<Entry> Diary { get; set;}
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public ICollection<Item> Inventory { get; set; }
+    public ICollection<Entry> Diary { get; set;}
 }

@@ -3,6 +3,8 @@
 public class Entry
 {
     public int Id { get; set; }
+    public int WarehouseId { get; set; }
+    public Warehouse Warehouse { get; set; }
     public DateTime Timestamp { get; set; }
     public int ItemId { get; set; }
     public string ItemName { get; set; }
