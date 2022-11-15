@@ -9,6 +9,7 @@ public class RepositoryFacade : IRepositoryFacade
     private readonly AppDbContext _context;
     private readonly IItemRepository _itemRepository;
     private readonly IEntryRepository _entryRepository;
+    private readonly IWarehouseRepository _warehouseRepository;
 
     public RepositoryFacade(AppDbContext context)
     {
@@ -16,6 +17,7 @@ public class RepositoryFacade : IRepositoryFacade
         
         _itemRepository = new ItemRepository(context);
         _entryRepository = new EntryRepository(context);
+        _warehouseRepository = new WarehouseRepository(context);
     }
     
     public Item UpdateQuantityAndRecord(Item item, Entry entry)

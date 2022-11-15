@@ -6,6 +6,13 @@ namespace Infrastructure;
 
 public class WarehouseRepository : IWarehouseRepository
 {
+    private readonly AppDbContext _context;
+    
+    public WarehouseRepository(AppDbContext context)
+    {
+        _context = context ?? throw new ArgumentNullException(nameof(context));
+    }
+    
     public Warehouse Create(PostWarehouseDTO dto)
     {
         throw new NotImplementedException();
