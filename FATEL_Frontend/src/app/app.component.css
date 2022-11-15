@@ -2,9 +2,10 @@
   position: absolute;
   left: 80px;
   top: 0;
-  overflow-y: scroll;
 
   height: 100%;
+  overflow-y: scroll;
+
   width: calc(100% - 80px);
 
   padding: 32px;
