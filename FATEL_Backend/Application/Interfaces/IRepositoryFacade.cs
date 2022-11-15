@@ -1,3 +1,4 @@
+using Application.DTOs;
 using Domain;
 
 namespace Application.Interfaces;
@@ -15,4 +16,9 @@ public interface IRepositoryFacade
     public bool DoesIdenticalItemExist(Item item);
     List<Entry> ReadAllEntries();
     Item DeleteAndRecord(int id, Entry entry);
+    Warehouse CreateWarehouse(PostWarehouseDTO dto);
+    List<Warehouse> ReadAllWarehouses();
+    //Read???
+    Warehouse UpdateWarehouse(PutWarehouseDTO dto);
+    Warehouse DeleteWarehouse(int id);
 }
