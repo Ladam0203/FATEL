@@ -1,8 +1,8 @@
+using Application.DTOs;
 using Application.Interfaces;
 using Domain;
-using Infrastructure;
 
-namespace Test;
+namespace Infrastructure;
 
 public class RepositoryFacade : IRepositoryFacade
 {
@@ -103,5 +103,25 @@ public class RepositoryFacade : IRepositoryFacade
             dbContextTransaction.Commit();
         }
         return item;
+    }
+
+    public Warehouse CreateWarehouse(PostWarehouseDTO dto)
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<Warehouse> ReadAllWarehouses()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Warehouse UpdateWarehouse(PutWarehouseDTO dto)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Warehouse DeleteWarehouse(int id)
+    {
+        throw new NotImplementedException();
     }
 }
