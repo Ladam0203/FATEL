@@ -1,32 +1,10 @@
 <div class="inventory-container">
-  <div class="tool-bar">
-    <h2 class="warehouse-header">Warehouse Inventory</h2>
-    <div class="action-bar">
-      <button mat-button class="secondary-button fs-5" (click)="buttonClick()">
-        Export
-      </button>
-
-      <button mat-button class="secondary-button fs-5" (click)="buttonClick()">
-        Import
-      </button>
-
-      <button mat-button class="main-button fs-5" (click)="openAddItemComponent()">
-        <mat-icon class="main-icon" aria-hidden="false" aria-label="add icon" fontIcon="add"></mat-icon>
-        New Item
-      </button>
-    </div>
-  </div>
-
-  <div class="filter-bar">
-    <mat-form-field class="search-field" appearance="outline">
-      <mat-icon matPrefix>search</mat-icon>
-      <input class="fs-5" matInput placeholder="Search" type="text" [(ngModel)]="query">
-    </mat-form-field>
-  </div>
+  <app-tool-bar class="tool-bar"></app-tool-bar>
+  <app-filter-bar class="filter-bar"></app-filter-bar>
 
   <div class="content-container">
     <mat-accordion multi class="inventory">
-      <mat-expansion-panel *ngFor="let category of categories | filter: query">
+      <mat-expansion-panel *ngFor="let category of categories | filter: (searchbarQuery | async)">
         <mat-expansion-panel-header>
           <mat-panel-title class="fs-5 panel-title">
             {{category.name}}
@@ -37,12 +15,6 @@
         </mat-expansion-panel-header>
 
         <table mat-table [dataSource]="category.items">
-
-          <!-- ID Column -->
-          <ng-container matColumnDef="id">
-            <th class="fs-5 ta-left" mat-header-cell mat-sort-header *matHeaderCellDef>#</th>
-            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.id}} </td>
-          </ng-container>
 
           <!-- Name Column -->
           <ng-container matColumnDef="name">
@@ -85,7 +57,6 @@
         </table>
       </mat-expansion-panel>
     </mat-accordion>
-    <add-item *ngIf="showAddItemComponent" class="action-container" (newItemEvent)="addItem($event)"
-              (close)="closeAddItemComponent()"></add-item>
+    <add-item *ngIf="showAddItemComponent | async" class="action-container" (newItemEvent)="addItem($event)"></add-item>
   </div>
 </div>

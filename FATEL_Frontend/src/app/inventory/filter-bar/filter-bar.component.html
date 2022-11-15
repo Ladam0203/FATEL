@@ -1,0 +1,10 @@
+<mat-form-field class="search-field" appearance="outline">
+  <mat-icon matPrefix>search</mat-icon>
+  <input class="fs-5"
+         matInput
+         placeholder="Search"
+         type="text"
+         [(ngModel)]="query"
+         (keyup)="queryChange()"
+  >
+</mat-form-field>

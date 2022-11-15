@@ -1,5 +1,8 @@
 .inventory-container {
   height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .tool-bar {
@@ -9,62 +12,8 @@
   padding-bottom: 16px;
 }
 
-.warehouse-header {
-  color: var(--primary);
-}
-
-.action-bar {
-  display: flex;
-  justify-content: space-between;
-}
-
-.action-bar button {
-  margin-inline: 12px;
-}
-
-.action-bar:last-child button {
-  margin-right: 0;
-}
-
-.secondary-button {
-  border: 1px solid var(--primary);
-  transition: background-color .2s, color .2s;
-}
-
-.secondary-button:hover {
-  background-color: var(--primary);
-  color: white;
-}
-
-.main-button {
-  background-color: var(--primary);
-  color: white;
-  padding: 0 12px 0 8px;
-
-  box-shadow: none;
-  transition: box-shadow 0.3s cubic-bezier(.25, .8, .25, 1);
-}
-
-.main-button:hover {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-}
-
-.main-icon {
-  font-size: 31px;
-  height: 32px;
-  width: 32px;
-}
-
 .filter-bar {
   margin: 16px 0;
-}
-
-.search-field {
-  width: 380px;
-}
-
-.search-field input {
-  margin-left: 8px;
 }
 
 .content-container {
