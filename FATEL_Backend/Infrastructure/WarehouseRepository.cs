@@ -13,7 +13,7 @@ public class WarehouseRepository : IWarehouseRepository
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
     
-    public Warehouse Create(PostWarehouseDTO dto)
+    public Warehouse Create(Warehouse warehouse)
     {
         throw new NotImplementedException();
     }
@@ -23,7 +23,7 @@ public class WarehouseRepository : IWarehouseRepository
         throw new NotImplementedException();
     }
 
-    public Warehouse Update(PutWarehouseDTO dto)
+    public Warehouse Update(Warehouse warehouse)
     {
         throw new NotImplementedException();
     }
