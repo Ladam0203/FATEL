@@ -40,5 +40,6 @@ public class AppDbContext : DbContext
     #region #region Database sets
     public DbSet<Item> ItemTable { get; set; }
     public DbSet<Entry> EntryTable { get; set; }
+    public DbSet<Warehouse> WarehouseTable { get; set; }
     #endregion
 }
