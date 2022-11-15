@@ -3,11 +3,11 @@ using Domain;
 
 namespace Application.Interfaces;
 
-public interface IWarehouseRepository
+public interface IWarehouseService
 {
-    public Warehouse Create(Warehouse warehouse);
+    public Warehouse Create(PostWarehouseDTO dto);
     public List<Warehouse> ReadAll();
     //Read???
-    public Warehouse Update(Warehouse warehouse);
+    public Warehouse Update(int id, PutWarehouseDTO dto);
     public Warehouse Delete(int id);
 }
