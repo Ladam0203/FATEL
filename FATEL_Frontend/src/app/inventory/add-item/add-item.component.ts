@@ -11,6 +11,7 @@ import {
 } from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {selectShowAddItemComponentValue, setShowAddItemComponent} from "../add-item.actions";
+import {greaterThanDirective} from "../../validators/greaterThan.directive";
 
 
 @Component({
@@ -50,11 +51,11 @@ export class AddItemComponent implements OnInit {
         Validators.required
       ]),
       length: new FormControl(null, [
-        Validators.min(0),
+        greaterThanDirective(),
         Validators.required
       ]),
       width: new FormControl(null, [
-        Validators.min(0),
+        greaterThanDirective(),
         Validators.required
       ]),
       quantity: new FormControl(0, [
