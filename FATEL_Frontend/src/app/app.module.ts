@@ -26,6 +26,7 @@ import {StoreModule} from '@ngrx/store';
 import {showAddItemComponentReducer} from "./inventory/add-item.actions";
 import {FilterBarComponent} from './inventory/filter-bar/filter-bar.component';
 import {searchbarQueryReducer} from "./inventory/filter-bar.actions";
+import { CategoriesComponent } from './inventory/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {searchbarQueryReducer} from "./inventory/filter-bar.actions";
     MatSidenavContainerComponent,
     ToolBarComponent,
     FilterBarComponent,
+    CategoriesComponent,
   ],
   imports: [
     BrowserModule,

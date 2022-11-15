@@ -1,0 +1,47 @@
+.inventory {
+  flex: 1;
+  min-width: 70%;
+}
+
+.mat-expansion-panel {
+  border: 1px solid rgba(0, 0, 0, .24);
+}
+
+.panel-description {
+  flex: 1;
+}
+
+table {
+  width: 100%;
+}
+
+.ta-left {
+  text-align: left !important;
+}
+
+.action-cell {
+  padding: 0;
+  height: 48px;
+  border-bottom: 1px solid rgba(0, 0, 0, .12);
+  justify-content: center;
+}
+
+.action-container {
+  position: sticky;
+  flex: 1;
+  align-self: flex-start;
+  top: 0;
+  max-width: 30%;
+}
+
+tr:last-of-type td {
+  border-bottom-width: 0 !important;
+}
+
+.mat-expansion-panel {
+  margin: 0 0 16px 0;
+}
+
+.mat-accordion .mat-expansion-panel:not(.mat-expanded), .mat-accordion .mat-expansion-panel:not(.mat-expansion-panel-spacing) {
+  border-radius: 4px !important;
+}
