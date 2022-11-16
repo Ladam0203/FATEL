@@ -12,7 +12,7 @@
 }
 
 .action-panel button {
-  transition: all 0.25s ease-in-out;
+  transition: all 0.2s ease-in;
 }
 
 .action-buttons-container {
@@ -22,23 +22,23 @@
   margin-top: -12px;
 }
 
-.add-item-button {
+.edit-item-button {
   background-color: var(--primary);
   color: var(--white);
   flex: 1;
 }
 
-.add-item-button:disabled {
+.edit-item-button:disabled {
   opacity: .5;
   color: var(--white);
   cursor: not-allowed;
 }
 
-.add-item-button:disabled:hover {
+.edit-item-button:disabled:hover {
   box-shadow: none;
 }
 
-.add-item-button:hover {
+.edit-item-button:hover {
   background-color: var(--primary);
   color: var(--white);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
