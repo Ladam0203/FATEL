@@ -76,6 +76,8 @@ export class CategoriesComponent implements OnInit {
   }
 
   openEditItemComponent(itemToEdit: Item) {
+    this.confirmDelete = true;
+    this.deletingId = undefined;
     this.store.dispatch(setShowEditItemComponent({item: itemToEdit}));
   }
 
