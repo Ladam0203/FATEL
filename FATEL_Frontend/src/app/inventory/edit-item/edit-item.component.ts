@@ -59,7 +59,10 @@ export class EditItemComponent implements OnInit {
       note: new FormControl()
     });
 
-    this.categoriesState.subscribe(value => this.setFields(value.editingItem));
+    this.categoriesState.subscribe(value => {
+      this.editingItem = value.editingItem;
+      this.setFields(value.editingItem)
+    });
   }
 
   private setFields(item: Item) {
@@ -112,6 +115,7 @@ export class EditItemComponent implements OnInit {
     }
 
     if(!this.editingItem?.id){
+      alert('item doesnt have an id');
       return;
     }
 
