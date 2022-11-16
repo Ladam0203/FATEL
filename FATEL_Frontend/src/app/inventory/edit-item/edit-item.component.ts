@@ -30,7 +30,7 @@ export class EditItemComponent implements OnInit {
   restrictedButtonUsage: boolean = false;
 
   text: string = 'APPLY CHANGES';
-  confirm: boolean = true;
+  confirmEdit: boolean = true;
 
   categoriesState = this.store.select('categoriesState');
 
@@ -108,14 +108,13 @@ export class EditItemComponent implements OnInit {
       return;
     }
 
-    if (this.confirm) {
+    if (this.confirmEdit) {
       this.text = 'CONFIRM';
-      this.confirm = false;
+      this.confirmEdit = false;
       return;
     }
 
     if(!this.editingItem?.id){
-      alert('item doesnt have an id');
       return;
     }
 
@@ -135,6 +134,6 @@ export class EditItemComponent implements OnInit {
       });
 
     this.text = 'APPLY CHANGES';
-    this.confirm = true;
+    this.confirmEdit = true;
   }
 }

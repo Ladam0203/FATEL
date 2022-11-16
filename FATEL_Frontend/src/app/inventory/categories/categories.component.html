@@ -47,16 +47,23 @@
         <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.note}} </td>
       </ng-container>
 
-      <!-- Edit Column -->
-      <ng-container matColumnDef="edit">
-        <th class="fs-5 ta-left edit-cell-header" mat-header-cell *matHeaderCellDef></th>
-        <mat-cell class="fs-5 ta-left edit-cell" *matCellDef="let row">
-          <button class="edit-item-button fs-6" mat-button (click)="openEditItemComponent(row)" [class.editing]="row.id == editingId">Edit</button>
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th class="fs-5 ta-left actions-cell-header" mat-header-cell *matHeaderCellDef></th>
+        <mat-cell class="fs-5 ta-left actions-cell" *matCellDef="let row">
+          <button class="edit-item-button fs-6" mat-button (click)="openEditItemComponent(row)"
+                  [class.editing]="row.id == editingItem?.id">Edit
+          </button>
+          <button class="delete-item-button fs-6" mat-button (click)="deleteItem(row)"
+                  [class.confirmDelete]="(!confirmDelete && row.id == deletingId)">
+            <mat-icon class="main-icon" aria-hidden="false" aria-label="delete icon" [innerHTML]="(!confirmDelete && row.id == deletingId) ? 'check' : 'delete'"></mat-icon>
+          </button>
         </mat-cell>
       </ng-container>
 
       <tr class="fs-5" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns;" [class.editing-row]="editingId == row.id"></tr>
+      <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns;"
+          [class.editing-row]="row.id == editingItem?.id"></tr>
     </table>
   </mat-expansion-panel>
 </mat-accordion>

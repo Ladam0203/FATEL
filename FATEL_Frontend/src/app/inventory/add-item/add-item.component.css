@@ -54,7 +54,7 @@
   color: var(--white);
 }
 
-.confirm:hover {
+.confirmDelete:hover {
   background-color: var(--success);
   border-color: var(--success);
 }

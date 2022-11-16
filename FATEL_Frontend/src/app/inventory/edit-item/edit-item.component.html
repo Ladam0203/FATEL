@@ -60,7 +60,7 @@
       <br>
 
       <div class="action-buttons-container">
-        <button [disabled]="itemForm.invalid && restrictedButtonUsage" class="edit-item-button" mat-button (click)="editItem()" [innerHTML]="text" [class.confirm]="!confirm"></button>
+        <button [disabled]="itemForm.invalid && restrictedButtonUsage" class="edit-item-button" mat-button (click)="editItem()" [innerHTML]="text" [class.confirm]="!confirmEdit"></button>
         <button class="close-component-button" mat-button (click)="closeEditItemComponent()">CLOSE</button>
       </div>
 
