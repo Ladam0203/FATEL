@@ -62,3 +62,7 @@ body {
 .mat-form-field-appearance-fill .mat-form-field-flex {
   background-color: var(--white);
 }
+
+.editing .mat-button-focus-overlay {
+  background: transparent !important;
+}

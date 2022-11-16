@@ -1,6 +1,7 @@
 <form [formGroup]="itemForm">
   <div class="action-container">
     <div class="action-panel">
+
       <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
         <input formControlName="name" matInput>
@@ -25,17 +26,6 @@
       </mat-form-field>
       <br>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Quantity</mat-label>
-        <input formControlName ="quantity" type = "number" matInput>
-        <mat-error *ngIf="itemForm.get('quantity')?.hasError('required')">
-          Quantity is required
-        </mat-error>
-        <mat-error *ngIf="itemForm.get('quantity')?.hasError('min')">
-          Quantity must be greater than or equal to 0
-        </mat-error>
-      </mat-form-field>
-
       <ng-container *ngIf="shouldValidateLength()">
         <mat-form-field appearance="fill">
           <mat-label>Length</mat-label>
@@ -48,6 +38,7 @@
           </mat-error>
         </mat-form-field>
       </ng-container>
+
       <ng-container *ngIf="shouldValidateWidth()">
         <mat-form-field appearance="fill">
           <mat-label>Width</mat-label>
@@ -60,19 +51,19 @@
           </mat-error>
         </mat-form-field>
       </ng-container>
-
       <br>
 
       <mat-form-field appearance="fill">
         <mat-label>Notes</mat-label>
         <textarea formControlName="note" matInput></textarea>
       </mat-form-field>
-
       <br>
+
       <div class="action-buttons-container">
         <button [disabled]="itemForm.invalid && restrictedButtonUsage" class="edit-item-button" mat-button (click)="editItem()" [innerHTML]="text" [class.confirm]="!confirm"></button>
         <button class="close-component-button" mat-button (click)="closeEditItemComponent()">CLOSE</button>
       </div>
+
     </div>
   </div>
 </form>

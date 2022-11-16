@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {selectShowAddItemComponentValue, setShowAddItemComponent} from "../states/add-item.actions";
+import {setShowAddItemComponent} from "../states/categories.states";
 
 @Component({
   selector: 'app-tool-bar',
@@ -8,8 +8,6 @@ import {selectShowAddItemComponentValue, setShowAddItemComponent} from "../state
   styleUrls: ['./tool-bar.component.css']
 })
 export class ToolBarComponent implements OnInit {
-
-  showAddItemComponent = this.store.select(selectShowAddItemComponentValue);
 
   constructor(private readonly store: Store<any>) {
   }
@@ -22,6 +20,6 @@ export class ToolBarComponent implements OnInit {
   }
 
   openAddItemComponent() {
-    this.store.dispatch(setShowAddItemComponent({value: true}));
+    this.store.dispatch(setShowAddItemComponent());
   }
 }

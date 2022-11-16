@@ -60,7 +60,7 @@ tr:last-of-type td {
   border-bottom: 1px solid rgba(0, 0, 0, .12);
 }
 
-tr:last-of-type .edit-cell{
+tr:last-of-type .edit-cell {
   border-bottom: none;
 }
 
@@ -75,6 +75,17 @@ tr:last-of-type .edit-cell{
 .edit-item-button:hover {
   background-color: var(--primary);
   color: var(--white);
+}
+
+.editing, .editing:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+  cursor: default;
+}
+
+.editing-row {
+  background-color: #eeecec;
 }
 
 .item-form {

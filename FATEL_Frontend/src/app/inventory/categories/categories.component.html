@@ -51,16 +51,16 @@
       <ng-container matColumnDef="edit">
         <th class="fs-5 ta-left edit-cell-header" mat-header-cell *matHeaderCellDef></th>
         <mat-cell class="fs-5 ta-left edit-cell" *matCellDef="let row">
-          <button class="edit-item-button fs-6" mat-button (click)="openEditItemComponent(row)">Edit</button>
+          <button class="edit-item-button fs-6" mat-button (click)="openEditItemComponent(row)" [class.editing]="row.id == editingId">Edit</button>
         </mat-cell>
       </ng-container>
 
       <tr class="fs-5" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns;" [class.editing-row]="editingId == row.id"></tr>
     </table>
   </mat-expansion-panel>
 </mat-accordion>
-<div *ngIf="(showAddItemComponent | async) || (showEditItemComponent | async)" class="action-container">
-  <add-item *ngIf="showAddItemComponent | async" (newItemEvent)="addItem($event)" class="item-form"></add-item>
-  <app-edit-item *ngIf="showEditItemComponent | async" (editItemEvent)="editItem($event)" class="item-form"></app-edit-item>
+<div *ngIf="!closed" class="action-container">
+  <add-item *ngIf="showAddItem" (newItemEvent)="addItem($event)" class="item-form"></add-item>
+  <app-edit-item *ngIf="showEditItem" (editItemEvent)="editItem($event)" class="item-form"></app-edit-item>
 </div>
