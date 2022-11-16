@@ -30,7 +30,3 @@ export const reducer = createReducer(
 export function CategoriesComponentReducer(state: CategoriesComponentState = initialState, action: Action) {
   return reducer(state, action);
 }
-
-export const selectAddItem = (state: CategoriesComponentState) => state.showAddItem;
-export const selectEditItem = (state: CategoriesComponentState) => state.showEditItem;
-export const selectClosed = (state: CategoriesComponentState) => state.closed;
