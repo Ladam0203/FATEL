@@ -58,3 +58,7 @@ body {
 .mat-expansion-panel {
   box-shadow: none !important;
 }
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: var(--white);
+}

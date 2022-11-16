@@ -32,6 +32,9 @@ table {
   align-self: flex-start;
   top: 0;
   max-width: 30%;
+  row-gap: 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 tr:last-of-type td {
@@ -44,4 +47,39 @@ tr:last-of-type td {
 
 .mat-accordion .mat-expansion-panel:not(.mat-expanded), .mat-accordion .mat-expansion-panel:not(.mat-expansion-panel-spacing) {
   border-radius: 4px !important;
+}
+
+.edit-cell-header {
+  width: 100px;
+}
+
+.edit-cell {
+  width: 100px;
+  height: 48px;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, .12);
+}
+
+tr:last-of-type .edit-cell{
+  border-bottom: none;
+}
+
+.edit-item-button {
+  background-color: var(--white);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  flex: 1;
+  transition: background-color .2s, color .2s;
+}
+
+.edit-item-button:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.item-form {
+  border: 1px solid rgba(0, 0, 0, .24);
+  border-radius: 8px;
+  margin-left: 20px;
+  padding: 16px 0;
 }

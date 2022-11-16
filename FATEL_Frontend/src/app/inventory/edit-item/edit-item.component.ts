@@ -1,27 +1,26 @@
-import {Component, OnInit} from '@angular/core';
-import {Unit} from "../../entities/units";
-import {Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Item} from "../../entities/item";
+import {Unit} from "../../entities/units";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {selectShowAddItemComponentValue, setShowAddItemComponent} from "../states/add-item.actions";
 import {ItemService} from "../../services/item.service";
+import {Store} from "@ngrx/store";
+import {greaterThanDirective} from "../../validators/greaterThan.directive";
 import {PostItemDTO} from "../../entities/DTOs/PostItemDTO";
 import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from "@angular/forms";
-import {Store} from "@ngrx/store";
-import {selectShowAddItemComponentValue, setShowAddItemComponent} from "../states/add-item.actions";
-import {greaterThanDirective} from "../../validators/greaterThan.directive";
-
+  selectEditItemComponentItem,
+  selectShowEditItemComponentValue,
+  setShowEditItemComponent
+} from "../states/edit-item.actions";
 
 @Component({
-  selector: 'add-item',
-  templateUrl: './add-item.component.html',
-  styleUrls: ['./add-item.component.css']
+  selector: 'app-edit-item',
+  templateUrl: './edit-item.component.html',
+  styleUrls: ['./edit-item.component.css']
 })
-export class AddItemComponent implements OnInit {
+export class EditItemComponent implements OnInit {
 
-  @Output() newItemEvent = new EventEmitter<Item>();
+  @Output() editItemEvent = new EventEmitter<Item>();
 
   units: typeof Unit = Unit;
 
@@ -36,10 +35,23 @@ export class AddItemComponent implements OnInit {
 
   restrictedButtonUsage: boolean = false;
 
-  showAddItemComponent = this.store.select(selectShowAddItemComponentValue);
+  private showEditItemComponent = this.store.select(selectShowEditItemComponentValue);
+  private editingItem = this.store.select(selectEditItemComponentItem);
 
-  text: string = 'ADD ITEM';
+  text: string = 'APPLY CHANGES';
   confirm: boolean = true;
+
+  private setFields(itemToEdit: Item) {
+    console.log(itemToEdit);
+    this.itemForm.setValue({
+      name: itemToEdit?.name,
+      unit: itemToEdit?.unit,
+      length: itemToEdit?.length,
+      width: itemToEdit?.width,
+      quantity: itemToEdit?.quantity,
+      note: itemToEdit?.note,
+    });
+  }
 
   constructor(private itemService: ItemService, private readonly store: Store<any>) {
   }
@@ -68,6 +80,10 @@ export class AddItemComponent implements OnInit {
       note: new FormControl()
     });
 
+    this.editingItem.subscribe(item => {
+      if (item)
+        this.setFields(item);
+    });
   }
 
   shouldValidateLength() {
@@ -88,20 +104,25 @@ export class AddItemComponent implements OnInit {
     return this.itemForm.get('width')?.enabled;
   }
 
-  addNewItem() {
-    if(this.itemForm.invalid){
+  closeEditItemComponent() {
+    this.itemForm.reset();
+    this.store.dispatch(setShowEditItemComponent({value: false}));
+  }
+
+  editItem() {
+    if (this.itemForm.invalid) {
       this.restrictedButtonUsage = true;
       this.itemForm.markAllAsTouched();
       return;
     }
 
-    if(this.confirm){
+    if (this.confirm) {
       this.text = 'CONFIRM';
       this.confirm = false;
       return;
     }
 
-    let dto: PostItemDTO = {
+    /*let dto: PostItemDTO = {
       name: this.itemForm.get('name')?.value,
       length: this.itemForm.get('length')?.value,
       width: this.itemForm.get('width')?.value,
@@ -112,16 +133,11 @@ export class AddItemComponent implements OnInit {
 
     this.itemService.create(dto)
       .then(item => {
-        this.newItemEvent.emit(item);
-        this.closeAddItemComponent();
-      });
+        this.editItemEvent.emit(item);
+        this.closeEditItemComponent();
+      });*/
 
-    this.text = 'ADD ITEM';
+    this.text = 'APPLY CHANGES';
     this.confirm = true;
-  }
-
-  closeAddItemComponent() {
-    this.itemForm.reset();
-    this.store.dispatch(setShowAddItemComponent({value: false}));
   }
 }
