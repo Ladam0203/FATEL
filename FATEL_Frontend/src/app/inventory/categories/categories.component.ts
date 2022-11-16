@@ -5,8 +5,9 @@ import {selectSearchbarQueryValue} from "../states/filter-bar.actions";
 import {Store} from "@ngrx/store";
 import {ItemService} from "../../services/item.service";
 import {Item} from "../../entities/item";
-import {selectShowAddItemComponentValue} from "../states/add-item.actions";
-import {selectShowEditItemComponentValue, setShowEditItemComponent} from "../states/edit-item.actions";
+import {
+  setShowEditItemComponent
+} from "../states/categories.states";
 
 @Component({
   selector: 'app-categories',
@@ -21,8 +22,14 @@ export class CategoriesComponent implements OnInit {
   items: Item[] = [];
 
   searchbarQuery = this.store.select(selectSearchbarQueryValue);
-  showAddItemComponent = this.store.select(selectShowAddItemComponentValue);
-  showEditItemComponent = this.store.select(selectShowEditItemComponentValue);
+
+  editingId: number | undefined;
+
+  categoriesState = this.store.select('categoriesState');
+
+  showAddItem: boolean = false;
+  showEditItem: boolean = false;
+  closed: boolean = true;
 
   constructor(private itemService: ItemService, private readonly store: Store<any>) {
   }
@@ -33,6 +40,13 @@ export class CategoriesComponent implements OnInit {
         this.items = items;
         this.categoriseItems();
       });
+
+    this.categoriesState.subscribe(value => {
+      this.showAddItem = value.showAddItem;
+      this.showEditItem = value.showEditItem;
+      this.closed = value.closed;
+      this.editingId = value.editingItem?.id;
+    });
   }
 
   private categoriseItems(): void {
@@ -59,6 +73,6 @@ export class CategoriesComponent implements OnInit {
   }
 
   openEditItemComponent(itemToEdit: Item) {
-    this.store.dispatch(setShowEditItemComponent({value: true, payload: itemToEdit}));
+    this.store.dispatch(setShowEditItemComponent({item: itemToEdit}));
   }
 }

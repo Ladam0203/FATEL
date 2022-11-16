@@ -1,10 +1,10 @@
 import {Unit} from "../units";
 
-export interface PostItemDTO {
-  name: string;
+export interface UpdateItemDTO {
+  id: number,
+  name: string,
   length?: number | null;
   width?: number | null;
   unit: Unit;
-  quantity: number;
   note?: string | null;
 }

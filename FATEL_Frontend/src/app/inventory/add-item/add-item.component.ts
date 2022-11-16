@@ -10,8 +10,8 @@ import {
   Validators,
 } from "@angular/forms";
 import {Store} from "@ngrx/store";
-import {selectShowAddItemComponentValue, setShowAddItemComponent} from "../states/add-item.actions";
 import {greaterThanDirective} from "../../validators/greaterThan.directive";
+import {close} from "../states/categories.states";
 
 
 @Component({
@@ -35,8 +35,6 @@ export class AddItemComponent implements OnInit {
   });
 
   restrictedButtonUsage: boolean = false;
-
-  showAddItemComponent = this.store.select(selectShowAddItemComponentValue);
 
   text: string = 'ADD ITEM';
   confirm: boolean = true;
@@ -89,13 +87,13 @@ export class AddItemComponent implements OnInit {
   }
 
   addNewItem() {
-    if(this.itemForm.invalid){
+    if (this.itemForm.invalid) {
       this.restrictedButtonUsage = true;
       this.itemForm.markAllAsTouched();
       return;
     }
 
-    if(this.confirm){
+    if (this.confirm) {
       this.text = 'CONFIRM';
       this.confirm = false;
       return;
@@ -122,6 +120,6 @@ export class AddItemComponent implements OnInit {
 
   closeAddItemComponent() {
     this.itemForm.reset();
-    this.store.dispatch(setShowAddItemComponent({value: false}));
+    this.store.dispatch(close());
   }
 }

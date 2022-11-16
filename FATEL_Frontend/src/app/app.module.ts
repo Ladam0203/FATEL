@@ -23,12 +23,11 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSidenavContainerComponent} from './mat-sidenav-container/mat-sidenav-container.component';
 import {ToolBarComponent} from './inventory/tool-bar/tool-bar.component';
 import {StoreModule} from '@ngrx/store';
-import {showAddItemComponentReducer} from "./inventory/states/add-item.actions";
 import {FilterBarComponent} from './inventory/filter-bar/filter-bar.component';
 import {searchbarQueryReducer} from "./inventory/states/filter-bar.actions";
 import { CategoriesComponent } from './inventory/categories/categories.component';
 import { EditItemComponent } from './inventory/edit-item/edit-item.component';
-import {showEditItemComponentReducer} from "./inventory/states/edit-item.actions";
+import {CategoriesComponentReducer} from "./inventory/states/categories.states";
 
 @NgModule({
   declarations: [
@@ -58,7 +57,7 @@ import {showEditItemComponentReducer} from "./inventory/states/edit-item.actions
     MatOptionModule,
     MatSelectModule,
     MatAutocompleteModule,
-    StoreModule.forRoot({showAddItemComponent: showAddItemComponentReducer, searchbarQuery: searchbarQueryReducer, showEditItemComponent: showEditItemComponentReducer}),
+    StoreModule.forRoot({searchbarQuery: searchbarQueryReducer, categoriesState: CategoriesComponentReducer}),
   ],
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent],
