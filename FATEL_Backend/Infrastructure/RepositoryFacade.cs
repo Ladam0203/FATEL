@@ -22,16 +22,16 @@ public class RepositoryFacade : IRepositoryFacade
     {
         using (var dbContextTransaction = _context.Database.BeginTransaction())
         {
-            _itemRepository.Update(item);
+            var newItem = _itemRepository.Update(item);
             
-            _entryRepository.Create(entry);
-                
+            var newEntry = _entryRepository.Create(entry);
+
             _context.SaveChanges();
 
             dbContextTransaction.Commit();
+            
+            return new ItemWithEntry(newItem, newEntry);
         }
-
-        return item;
     }
 
     public Item CreateItem(Item item)
@@ -46,13 +46,14 @@ public class RepositoryFacade : IRepositoryFacade
             var newItem = _itemRepository.Create(item);
             
             entry.ItemId = newItem.Id;
-            _entryRepository.Create(entry);
+            var newEntry = _entryRepository.Create(entry);
                 
             _context.SaveChanges();
 
             dbContextTransaction.Commit();
+
+            return new ItemWithEntry(newItem, newEntry);
         }
-        return item;
     }
 
     public Item ReadItem(int id)
@@ -91,17 +92,16 @@ public class RepositoryFacade : IRepositoryFacade
 
     public Item DeleteAndRecord(int id, Entry entry)
     {
-        Item item;
-        
         using (var dbContextTransaction = _context.Database.BeginTransaction())
         {
-           item = _itemRepository.Delete(id);
-            _entryRepository.Create(entry);
+            var newItem = _itemRepository.Delete(id);
+            var newEntry = _entryRepository.Create(entry);
                 
             _context.SaveChanges();
 
             dbContextTransaction.Commit();
+            
+            return new ItemWithEntry(newItem, newEntry);
         }
-        return item;
     }
 }
