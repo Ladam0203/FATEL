@@ -15,7 +15,7 @@ import {
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'width', 'length', 'unit', 'quantity', 'note', 'edit'];
+  displayedColumns: string[] = ['name', 'width', 'length', 'unit', 'quantity', 'note', 'actions'];
 
   units: typeof Unit = Unit;
   categories: Category[] = [];
@@ -23,13 +23,16 @@ export class CategoriesComponent implements OnInit {
 
   searchbarQuery = this.store.select(selectSearchbarQueryValue);
 
-  editingId: number | undefined;
+  editingItem: Item | undefined;
 
   categoriesState = this.store.select('categoriesState');
 
   showAddItem: boolean = false;
   showEditItem: boolean = false;
   closed: boolean = true;
+
+  confirmDelete: boolean = true;
+  deletingId: number | undefined;
 
   constructor(private itemService: ItemService, private readonly store: Store<any>) {
   }
@@ -45,7 +48,7 @@ export class CategoriesComponent implements OnInit {
       this.showAddItem = value.showAddItem;
       this.showEditItem = value.showEditItem;
       this.closed = value.closed;
-      this.editingId = value.editingItem?.id;
+      this.editingItem = value.editingItem;
     });
   }
 
@@ -73,6 +76,30 @@ export class CategoriesComponent implements OnInit {
   }
 
   openEditItemComponent(itemToEdit: Item) {
+    this.confirmDelete = true;
+    this.deletingId = undefined;
     this.store.dispatch(setShowEditItemComponent({item: itemToEdit}));
+  }
+
+  deleteItem(itemToDelete: Item) {
+    if(this.confirmDelete){
+      this.deletingId = itemToDelete.id;
+      this.confirmDelete = false;
+      return;
+    }
+
+    if(this.deletingId != itemToDelete.id){
+      this.deletingId = itemToDelete.id;
+      return;
+    }
+
+    this.itemService.delete(itemToDelete.id)
+      .then(item => {
+        this.items = this.items.filter(items => items.id != item.id);
+        this.categoriseItems();
+      })
+
+    this.deletingId = undefined;
+    this.confirmDelete = true;
   }
 }

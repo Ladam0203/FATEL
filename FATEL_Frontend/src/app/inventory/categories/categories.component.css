@@ -49,18 +49,17 @@ tr:last-of-type td {
   border-radius: 4px !important;
 }
 
-.edit-cell-header {
-  width: 100px;
+.actions-cell-header {
 }
 
-.edit-cell {
-  width: 100px;
+.actions-cell {
   height: 48px;
-  justify-content: center;
+  justify-content: right;
   border-bottom: 1px solid rgba(0, 0, 0, .12);
+  column-gap: 8px;
 }
 
-tr:last-of-type .edit-cell {
+tr:last-of-type .actions-cell {
   border-bottom: none;
 }
 
@@ -68,12 +67,24 @@ tr:last-of-type .edit-cell {
   background-color: var(--white);
   color: var(--primary);
   border: 1px solid var(--primary);
-  flex: 1;
   transition: background-color .2s, color .2s;
 }
 
 .edit-item-button:hover {
   background-color: var(--primary);
+  color: var(--white);
+}
+
+.delete-item-button {
+  background-color: var(--white);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  transition: background-color .2s, color .2s;
+}
+
+.delete-item-button:hover {
+  background-color: var(--danger);
+  border: 1px solid var(--danger);
   color: var(--white);
 }
 
@@ -93,4 +104,10 @@ tr:last-of-type .edit-cell {
   border-radius: 8px;
   margin-left: 20px;
   padding: 16px 0;
+}
+
+.confirmDelete, .confirmDelete:hover {
+  background-color: var(--danger);
+  border-color: var(--danger);
+  color: var(--white);
 }
