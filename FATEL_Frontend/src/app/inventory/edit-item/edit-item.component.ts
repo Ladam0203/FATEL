@@ -117,7 +117,7 @@ export class EditItemComponent implements OnInit {
     if(!this.editingItem?.id){
       return;
     }
-
+    
     let updateItem: UpdateItemDTO = {
       id: this.editingItem?.id,
       name: this.itemForm.get('name')?.value,
