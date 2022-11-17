@@ -21,7 +21,7 @@ public class WarehouseService : IWarehouseService
 
     public List<Warehouse> ReadAll()
     {
-        throw new NotImplementedException();
+        return _repository.ReadAllWarehouses();
     }
 
     public Warehouse Update(int id, PutWarehouseDTO dto)
