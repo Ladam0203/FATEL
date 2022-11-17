@@ -1,5 +1,8 @@
 ﻿using Application;
+using Application.DTOs;
 using Application.Interfaces;
+using Application.Validators;
+using AutoMapper;
 using Domain;
 using Moq;
 
@@ -69,5 +72,33 @@ public class WarehouseServiceTest
         Assert.Equal(mockWarehouses, readWarehouses);
         Assert.Equal(mockWarehouses.Count, readWarehouses.Count);
         mockRepository.Verify(r => r.ReadAllWarehouses(), Times.Once);
+    }
+
+    [Fact]
+    public void CreateWarehouse_WithValidInput()
+    {
+        var mockRepository = new Mock<IRepositoryFacade>();
+        List<Warehouse> mockWarehouses = new List<Warehouse>();
+        List<Entry> mockDiary = new List<Entry>();
+        List<Item> mockInventory = new List<Item>();
+        Warehouse warehouse = new Warehouse() { Name = "WarehouseTest", Diary = mockDiary, Inventory = mockInventory};
+        PostWarehouseDTO dto = new PostWarehouseDTO() { Name = "WarehouseTest" };
+
+        mockRepository.Setup(r => r.CreateWarehouse(It.IsAny<PostWarehouseDTO>())).Returns(() =>
+        {
+            mockWarehouses.Add(warehouse);
+            return warehouse;
+        });
+
+        IWarehouseService warehouseService = new WarehouseService(mockRepository.Object);
+        
+        //Act
+        Warehouse result = warehouseService.Create(dto);
+        
+        //Assert
+        Assert.NotNull(result);
+        Assert.True(result is Warehouse);
+        Assert.Equal(warehouse, result);
+        mockRepository.Verify(r => r.CreateWarehouse(It.IsAny<PostWarehouseDTO>()), Times.Once);
     }
 }
