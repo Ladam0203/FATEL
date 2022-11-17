@@ -2,5 +2,5 @@ namespace Application.DTOs;
 
 public class PostWarehouseDTO
 {
-    string Name { get; set; }
+    public string Name { get; set; }
 }
