@@ -20,7 +20,7 @@ public class WarehouseRepository : IWarehouseRepository
 
     public List<Warehouse> ReadAll()
     {
-        throw new NotImplementedException();
+        return _context.WarehouseTable.ToList();
     }
 
     public Warehouse Update(Warehouse warehouse)

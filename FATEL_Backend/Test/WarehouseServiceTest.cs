@@ -33,7 +33,7 @@ public class WarehouseServiceTest
 
         //Assert
         Assert.NotNull(warehouseService);
-        Assert.True(warehouseService is EntryService);
+        Assert.True(warehouseService is WarehouseService);
         //TODO: Test if the parameters were truly injected
     }
 

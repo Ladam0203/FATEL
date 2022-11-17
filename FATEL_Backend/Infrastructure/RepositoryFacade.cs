@@ -18,6 +18,10 @@ public class RepositoryFacade : IRepositoryFacade
         _itemRepository = new ItemRepository(context);
         _entryRepository = new EntryRepository(context);
         _warehouseRepository = new WarehouseRepository(context);
+        
+        //rebuild db
+        _context.Database.EnsureDeleted();
+        _context.Database.EnsureCreated();
     }
     
     public Item UpdateQuantityAndRecord(Item item, Entry entry)
@@ -114,7 +118,7 @@ public class RepositoryFacade : IRepositoryFacade
 
     public List<Warehouse> ReadAllWarehouses()
     {
-        throw new NotImplementedException();
+        return _warehouseRepository.ReadAll();
     }
 
     public Warehouse UpdateWarehouse(PutWarehouseDTO dto)
