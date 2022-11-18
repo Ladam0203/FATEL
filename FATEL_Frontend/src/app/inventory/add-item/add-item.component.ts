@@ -37,7 +37,7 @@ export class AddItemComponent implements OnInit {
   restrictedButtonUsage: boolean = false;
 
   text: string = 'ADD ITEM';
-  confirm: boolean = true;
+  confirmAdd: boolean = true;
 
   constructor(private itemService: ItemService, private readonly store: Store<any>) {
   }
@@ -93,9 +93,9 @@ export class AddItemComponent implements OnInit {
       return;
     }
 
-    if (this.confirm) {
+    if (this.confirmAdd) {
       this.text = 'CONFIRM';
-      this.confirm = false;
+      this.confirmAdd = false;
       return;
     }
 
@@ -115,7 +115,7 @@ export class AddItemComponent implements OnInit {
       });
 
     this.text = 'ADD ITEM';
-    this.confirm = true;
+    this.confirmAdd = true;
   }
 
   closeAddItemComponent() {

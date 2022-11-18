@@ -70,7 +70,7 @@
 
     <br>
     <div class="action-buttons-container">
-      <button [disabled]="itemForm.invalid && restrictedButtonUsage" class="add-item-button" mat-button (click)="addNewItem()" [innerHTML]="text" [class.confirm]="!confirm"></button>
+      <button [disabled]="itemForm.invalid && restrictedButtonUsage" class="add-item-button" mat-button (click)="addNewItem()" [innerHTML]="text" [class.confirmAdd]="!confirmAdd"></button>
       <button class="close-component-button" mat-button (click)="closeAddItemComponent()">CLOSE</button>
     </div>
   </div>
