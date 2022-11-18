@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+using Application.DTOs;
 using Application.Interfaces;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +28,29 @@ public class WarehouseController : ControllerBase
         catch (Exception e)
         {
             return StatusCode(500, e.ToString());
+        }
+    }
+
+    [HttpPost]
+    [Route("Create")]
+    public ActionResult<Warehouse> Create(PostWarehouseDTO warehouseDto)
+    {
+        try
+        {
+            var warehouse = _warehouseService.Create(warehouseDto);
+            return Created($"warehouse/{warehouse.Id}", warehouse);
+        }
+        catch (ValidationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        // catch (ArgumentException e)
+        // {
+        //     return StatusCode(403, e.Message);
+        // }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
         }
     }
 }

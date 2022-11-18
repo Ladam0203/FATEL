@@ -16,7 +16,7 @@ public interface IRepositoryFacade
     public bool DoesIdenticalItemExist(Item item);
     List<Entry> ReadAllEntries();
     Item DeleteAndRecord(int id, Entry entry);
-    Warehouse CreateWarehouse(PostWarehouseDTO dto);
+    Warehouse CreateWarehouse(Warehouse warehouse);
     List<Warehouse> ReadAllWarehouses();
     //Read???
     Warehouse UpdateWarehouse(PutWarehouseDTO dto);
