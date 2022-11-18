@@ -15,7 +15,9 @@ public class WarehouseRepository : IWarehouseRepository
     
     public Warehouse Create(Warehouse warehouse)
     {
-        throw new NotImplementedException();
+         _context.WarehouseTable.Add(warehouse);
+        _context.SaveChanges();
+        return warehouse;
     }
 
     public List<Warehouse> ReadAll()

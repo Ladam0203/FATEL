@@ -15,12 +15,52 @@ public class WarehouseServiceTest
     {
         //Arrange
         IWarehouseService warehouseService = null;
+        var mapper = new MapperConfiguration(configuration =>
+        {
+            configuration.CreateMap<PostWarehouseDTO, Warehouse>();
+        }).CreateMapper();
+        var postValidator = new PostWarehouseDTOValidator();
 
         //Act
-        var e = Assert.Throws<ArgumentNullException>(() => warehouseService = new WarehouseService(null));
+        var e = Assert.Throws<ArgumentNullException>(() => warehouseService = new WarehouseService(null, postValidator, mapper));
 
         //Assert
         Assert.Equal("Value cannot be null. (Parameter 'repository')", e.Message);
+        Assert.Null(warehouseService);
+    }
+    
+    [Fact]
+    public void CreateWarehouseService_WithNullMapper_ExpectArgumentNullException()
+    {
+        //Arrange
+        var mockRepository = new Mock<IRepositoryFacade>();
+        var postValidator = new PostWarehouseDTOValidator();
+        IWarehouseService warehouseService = null;
+
+        //Act
+        var e = Assert.Throws<ArgumentNullException>(() => warehouseService = new WarehouseService(mockRepository.Object, postValidator, null));
+
+        //Assert
+        Assert.Equal("Value cannot be null. (Parameter 'mapper')", e.Message);
+        Assert.Null(warehouseService);
+    }
+    
+    [Fact]
+    public void CreateWarehouseService_WithNullPostValidator_ExpectArgumentNullException()
+    {
+        //Arrange
+        var mockRepository = new Mock<IRepositoryFacade>();
+        var mapper = new MapperConfiguration(configuration =>
+        {
+            configuration.CreateMap<PostWarehouseDTO, Warehouse>();
+        }).CreateMapper();
+        IWarehouseService warehouseService = null;
+        
+        //Act
+        var e = Assert.Throws<ArgumentNullException>(() => warehouseService = new WarehouseService(mockRepository.Object, null, mapper));
+
+        //Assert
+        Assert.Equal("Value cannot be null. (Parameter 'postValidator')", e.Message);
         Assert.Null(warehouseService);
     }
 
@@ -29,9 +69,14 @@ public class WarehouseServiceTest
     {
         //Arrange
         var mockRepository = new Mock<IRepositoryFacade>();
+        var mapper = new MapperConfiguration(configuration =>
+        {
+            configuration.CreateMap<PostWarehouseDTO, Warehouse>();
+        }).CreateMapper();
+        var postValidator = new PostWarehouseDTOValidator();
 
         //Act
-        IWarehouseService warehouseService = new WarehouseService(mockRepository.Object);
+        IWarehouseService warehouseService = new WarehouseService(mockRepository.Object, postValidator, mapper);
         
 
         //Assert
@@ -61,8 +106,14 @@ public class WarehouseServiceTest
             }
         };
         mockRepository.Setup(r => r.ReadAllWarehouses()).Returns(mockWarehouses);
+        
+        var mapper = new MapperConfiguration(configuration =>
+        {
+            configuration.CreateMap<PostWarehouseDTO, Warehouse>();
+        }).CreateMapper();
+        var postValidator = new PostWarehouseDTOValidator();
 
-        IWarehouseService warehouseService = new WarehouseService(mockRepository.Object);
+        IWarehouseService warehouseService = new WarehouseService(mockRepository.Object, postValidator, mapper);
         //Act
         List<Warehouse> readWarehouses = warehouseService.ReadAll();
 
@@ -84,13 +135,19 @@ public class WarehouseServiceTest
         Warehouse warehouse = new Warehouse() { Name = "WarehouseTest", Diary = mockDiary, Inventory = mockInventory};
         PostWarehouseDTO dto = new PostWarehouseDTO() { Name = "WarehouseTest" };
 
-        mockRepository.Setup(r => r.CreateWarehouse(It.IsAny<PostWarehouseDTO>())).Returns(() =>
+        mockRepository.Setup(r => r.CreateWarehouse(It.IsAny<Warehouse>())).Returns(() =>
         {
             mockWarehouses.Add(warehouse);
             return warehouse;
         });
 
-        IWarehouseService warehouseService = new WarehouseService(mockRepository.Object);
+        var mapper = new MapperConfiguration(configuration =>
+        {
+            configuration.CreateMap<PostWarehouseDTO, Warehouse>();
+        }).CreateMapper();
+        var postValidator = new PostWarehouseDTOValidator();
+
+        IWarehouseService warehouseService = new WarehouseService(mockRepository.Object, postValidator, mapper);
         
         //Act
         Warehouse result = warehouseService.Create(dto);
@@ -99,6 +156,6 @@ public class WarehouseServiceTest
         Assert.NotNull(result);
         Assert.True(result is Warehouse);
         Assert.Equal(warehouse, result);
-        mockRepository.Verify(r => r.CreateWarehouse(It.IsAny<PostWarehouseDTO>()), Times.Once);
+        mockRepository.Verify(r => r.CreateWarehouse(It.IsAny<Warehouse>()), Times.Once);
     }
 }

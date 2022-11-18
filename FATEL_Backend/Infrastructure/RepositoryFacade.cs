@@ -110,10 +110,11 @@ public class RepositoryFacade : IRepositoryFacade
             return new ItemWithEntry(newItem, newEntry);
         }
     }
+    
 
-    public Warehouse CreateWarehouse(PostWarehouseDTO dto)
+    public Warehouse CreateWarehouse(Warehouse warehouse)
     {
-        throw new NotImplementedException();
+        return _warehouseRepository.Create(warehouse);
     }
 
     public List<Warehouse> ReadAllWarehouses()
