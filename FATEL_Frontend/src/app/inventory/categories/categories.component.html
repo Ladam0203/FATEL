@@ -51,16 +51,17 @@
       <ng-container matColumnDef="actions">
         <th class="fs-5 ta-left actions-cell-header" mat-header-cell *matHeaderCellDef></th>
         <mat-cell class="fs-5 ta-left actions-cell" *matCellDef="let row">
+          <!-- TODO: Add classes for formatting -->
+          <button class="edit-item-button fs-6" mat-button (click)="openRecordMovementComponent(row)">
+            <mat-icon class="main-icon" aria-hidden="false" aria-label="import_export">import_export</mat-icon>
+          </button>
           <button class="edit-item-button fs-6" mat-button (click)="openEditItemComponent(row)"
-                  [class.editing]="row.id == editingItem?.id">Edit
+                  [class.editing]="row.id == editingItem?.id">
+            <mat-icon class="main-icon" aria-hidden="false" aria-label="edit">edit</mat-icon>
           </button>
           <button class="delete-item-button fs-6" mat-button (click)="deleteItem(row)"
                   [class.confirmDelete]="(!confirmDelete && row.id == deletingId)">
             <mat-icon class="main-icon" aria-hidden="false" aria-label="delete icon" [innerHTML]="(!confirmDelete && row.id == deletingId) ? 'check' : 'delete'"></mat-icon>
-          </button>
-          <!-- TODO: Add classes -->
-          <button class="edit-item-button fs-6" mat-button (click)="openRecordMovementComponent(row)">
-            <mat-icon class="main-icon" aria-hidden="false" aria-label="import_export">import_export</mat-icon>
           </button>
         </mat-cell>
       </ng-container>

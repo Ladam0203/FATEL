@@ -1,1 +1,18 @@
-<p>record-movement works!</p>
+<form [formGroup]="movementForm">
+  <div class="action-container">
+    <div class="action-panel">
+      <mat-form-field appearance="fill">
+        <mat-label>Quantity</mat-label>
+        <input formControlName ="quantity" type = "number" matInput>
+        <mat-error *ngIf="movementForm.get('change')?.hasError('required')">
+          Change is required
+        </mat-error>
+        <mat-error *ngIf="movementForm.get('change')?.hasError('min')">
+          Change must be greater than or equal to 0
+        </mat-error>
+      </mat-form-field>
+
+      <!-- TODO: In/Out buttons -->
+    </div>
+  </div>
+</form>
