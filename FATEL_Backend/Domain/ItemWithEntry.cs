@@ -6,6 +6,11 @@ public class ItemWithEntry : Item
     {
         Id = item.Id;
         Name = item.Name;
+        Length = item.Length;
+        Width = item.Width;
+        Unit = item.Unit;
+        Quantity = item.Quantity;
+        Note = item.Note;
         Entry = entry;
     }
     
