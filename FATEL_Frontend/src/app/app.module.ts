@@ -28,6 +28,7 @@ import {searchbarQueryReducer} from "./inventory/states/filter-bar.actions";
 import { CategoriesComponent } from './inventory/categories/categories.component';
 import { EditItemComponent } from './inventory/edit-item/edit-item.component';
 import {CategoriesComponentReducer} from "./inventory/states/categories.states";
+import { RecordMovementComponent } from './inventory/record-movement/record-movement.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {CategoriesComponentReducer} from "./inventory/states/categories.states";
     FilterBarComponent,
     CategoriesComponent,
     EditItemComponent,
+    RecordMovementComponent,
   ],
   imports: [
     BrowserModule,

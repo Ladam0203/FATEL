@@ -58,6 +58,10 @@
                   [class.confirmDelete]="(!confirmDelete && row.id == deletingId)">
             <mat-icon class="main-icon" aria-hidden="false" aria-label="delete icon" [innerHTML]="(!confirmDelete && row.id == deletingId) ? 'check' : 'delete'"></mat-icon>
           </button>
+          <!-- TODO: Add classes -->
+          <button class="edit-item-button fs-6" mat-button (click)="openRecordMovementComponent(row)">
+            <mat-icon class="main-icon" aria-hidden="false" aria-label="import export icon"></mat-icon>
+          </button>
         </mat-cell>
       </ng-container>
 

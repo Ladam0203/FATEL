@@ -6,7 +6,8 @@ import {Store} from "@ngrx/store";
 import {ItemService} from "../../services/item.service";
 import {Item} from "../../entities/item";
 import {
-  setShowEditItemComponent
+  setShowAddItemComponent,
+  setShowEditItemComponent, setShowRecordMovementComponent
 } from "../states/categories.states";
 
 @Component({
@@ -101,5 +102,9 @@ export class CategoriesComponent implements OnInit {
 
     this.deletingId = undefined;
     this.confirmDelete = true;
+  }
+
+  openRecordMovementComponent(itemToRecordMovementOn : Item) {
+    this.store.dispatch(setShowRecordMovementComponent({item: itemToRecordMovementOn}));
   }
 }
