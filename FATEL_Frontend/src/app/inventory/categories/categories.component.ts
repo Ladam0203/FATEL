@@ -6,6 +6,7 @@ import {Store} from "@ngrx/store";
 import {ItemService} from "../../services/item.service";
 import {Item} from "../../entities/item";
 import {
+  close,
   setShowEditItemComponent
 } from "../states/categories.states";
 
@@ -82,13 +83,19 @@ export class CategoriesComponent implements OnInit {
   }
 
   deleteItem(itemToDelete: Item) {
-    if(this.confirmDelete){
+
+    setTimeout(() => {
+      this.deletingId = undefined;
+      this.confirmDelete = true;
+    }, 1500);
+
+    if (this.confirmDelete) {
       this.deletingId = itemToDelete.id;
       this.confirmDelete = false;
       return;
     }
 
-    if(this.deletingId != itemToDelete.id){
+    if (this.deletingId != itemToDelete.id) {
       this.deletingId = itemToDelete.id;
       return;
     }
@@ -101,5 +108,6 @@ export class CategoriesComponent implements OnInit {
 
     this.deletingId = undefined;
     this.confirmDelete = true;
+    this.store.dispatch(close());
   }
 }

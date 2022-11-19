@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Warehouse} from '../entities/warehouse'
-import {WAREHOUSES} from '../mock-objects/mock-warehouses';
 import {Observable, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError, map, tap} from 'rxjs/operators';
@@ -17,10 +16,6 @@ export class WarehouseService {
 
   constructor(private http: HttpClient) {
 
-  }
-
-  getAllWarehouses(): Warehouse[] {
-    return WAREHOUSES;
   }
   /*
   getAllWarehouses(): Observable<Warehouse[]> {
