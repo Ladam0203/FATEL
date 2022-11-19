@@ -7,7 +7,7 @@ public interface IRepositoryFacade
 {
     public Item ReadItem(int id);
     public List<Item> ReadAllItems();
-    public double ReadTotalQuantityOf(string itemName);
+    public double ReadTotalQuantityOf(Item item);
     public Item CreateItem(Item item);
     public Item CreateAndRecord(Item item, Entry entry);
     public Item UpdateQuantityAndRecord(Item item, Entry entry);
@@ -19,6 +19,6 @@ public interface IRepositoryFacade
     Warehouse CreateWarehouse(Warehouse warehouse);
     List<Warehouse> ReadAllWarehouses();
     //Read???
-    Warehouse UpdateWarehouse(PutWarehouseDTO dto);
+    Warehouse UpdateWarehouse(Warehouse warehouse);
     Warehouse DeleteWarehouse(int id);
 }

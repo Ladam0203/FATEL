@@ -10,4 +10,5 @@ public class PostItemDTO
     public Unit Unit { get; set; }
     public int Quantity { get; set; } //TODO: If we create an item with initial quantity a diary entry has to be made later on
     public string? Note { get; set; }
+    public  int WarehouseId { get; set; }
 }

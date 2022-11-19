@@ -99,10 +99,10 @@ public class ItemRepository : IItemRepository
         return item;
     }
 
-    public double ReadTotalQuantityOf(string itemName)
+    public double ReadTotalQuantityOf(Item item)
     {
-        return _context.ItemTable.Where(item => item.Name == itemName)
-            .Select(item => item.Length.GetValueOrDefault(1) * item.Width.GetValueOrDefault(1) * item.Quantity)
+        return _context.ItemTable.Where(i => i.Name == item.Name && i.WarehouseId == item.WarehouseId)
+            .Select(i => i.Length.GetValueOrDefault(1) * i.Width.GetValueOrDefault(1) * i.Quantity)
             .Sum();
     }
 
@@ -111,6 +111,7 @@ public class ItemRepository : IItemRepository
         return _context.ItemTable.Any(i => i.Name == item.Name && 
                                            i.Width == item.Width && 
                                            i.Length == item.Length &&
-                                           i.Unit == item.Unit);
+                                           i.Unit == item.Unit &&
+                                           i.WarehouseId == item.WarehouseId);
     }
 }
