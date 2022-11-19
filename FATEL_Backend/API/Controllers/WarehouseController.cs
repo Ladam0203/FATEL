@@ -53,4 +53,27 @@ public class WarehouseController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+    
+    [HttpPut]
+    [Route("Update/{id}")]
+    public ActionResult<Warehouse> Update([FromRoute] int id, [FromBody] PutWarehouseDTO warehouse)
+    {
+        try
+        {
+            var result = _warehouseService.Update(id, warehouse);
+            return Ok(result);
+        }
+        catch (ValidationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
 }

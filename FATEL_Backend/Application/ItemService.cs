@@ -48,7 +48,8 @@ public class ItemService : IItemService
             //We cannot deal with the Id here
             ItemName = item.Name,
             Change = totalChange,
-            QuantityAfterChange = totalChange //old total quantity plus new totalChange
+            QuantityAfterChange = totalChange, //old total quantity plus new totalChange
+            WarehouseId = item.WarehouseId
         };
         return _repository.CreateAndRecord(item, entry);
     }
@@ -99,7 +100,8 @@ public class ItemService : IItemService
             ItemId = item.Id,
             ItemName = item.Name,
             Change = totalChange,
-            QuantityAfterChange = _repository.ReadTotalQuantityOf(item.Name) + totalChange //old total quantity plus new totalChange
+            QuantityAfterChange = _repository.ReadTotalQuantityOf(item) + totalChange, //old total quantity plus new totalChange
+            WarehouseId = item.WarehouseId
         };
         return _repository.UpdateQuantityAndRecord(item, entry);
     }
@@ -119,7 +121,8 @@ public class ItemService : IItemService
             ItemId = item.Id,
             ItemName = item.Name,
             Change = totalChange,
-            QuantityAfterChange = 0  
+            QuantityAfterChange = 0,
+            WarehouseId = item.WarehouseId
         };
         return _repository.DeleteAndRecord(item.Id, entry);
     }
