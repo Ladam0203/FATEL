@@ -57,6 +57,7 @@ tr:last-of-type td {
   justify-content: right;
   border-bottom: 1px solid rgba(0, 0, 0, .12);
   column-gap: 8px;
+  float: right;
 }
 
 tr:last-of-type .actions-cell {

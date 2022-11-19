@@ -41,7 +41,7 @@
   cursor: pointer;
 }
 
-.sidenav-component-wrapper:last-child {
+div.sidenav-component-wrapper:last-child {
   border-bottom: 2px solid rgba(255, 255, 255, .75);
 }
 
@@ -92,12 +92,16 @@
   transform: scale(1.5);
 }
 
-.warehouse-button {
+.button {
   background-color: transparent;
   border: none;
   padding: 8px;
 }
 
-
-
-
+.sidenav-inventory-diary-wrapper {
+  bottom: 20px;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  width: calc(150px + 80px);
+}
