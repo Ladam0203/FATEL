@@ -1,7 +1,7 @@
-import {Unit} from './units'
 import {Entry} from "./entry";
+import {Unit} from "./units";
 
-export interface Item {
+export interface response {
   id: number;
   name: string;
   length?: number;
@@ -9,5 +9,5 @@ export interface Item {
   unit: Unit;
   quantity: number;
   note?: string;
-  entry?: Entry;
+  entry: Entry | undefined;
 }
