@@ -32,7 +32,7 @@ export class ItemService {
             undefined,
             {duration: 4000});
         } else if (rejected.response.status > 499) {
-          this.matSnackBar.open("Something went wrong",
+          this.matSnackBar.open(JSON.stringify(rejected.response),
             undefined,
             {duration: 4000})
         }
@@ -43,6 +43,7 @@ export class ItemService {
 
   async create(dto: PostItemDTO) {
     const response = await customAxios.post('create', dto);
+    console.log('data: ',response.data);
     return response.data;
   }
 
