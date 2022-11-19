@@ -7,7 +7,8 @@ import {ItemService} from "../../services/item.service";
 import {Item} from "../../entities/item";
 import {
   close,
-  setShowEditItemComponent
+  setShowEditItemComponent,
+  setShowRecordMovementComponent
 } from "../states/categories.states";
 
 @Component({
@@ -109,5 +110,9 @@ export class CategoriesComponent implements OnInit {
     this.deletingId = undefined;
     this.confirmDelete = true;
     this.store.dispatch(close());
+  }
+
+  openRecordMovementComponent(itemToRecordMovementOn : Item) {
+    this.store.dispatch(setShowRecordMovementComponent({item: itemToRecordMovementOn}));
   }
 }
