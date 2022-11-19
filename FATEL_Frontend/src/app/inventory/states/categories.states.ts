@@ -19,18 +19,18 @@ export interface CategoriesComponentState {
 export const initialState: CategoriesComponentState = {
   showAddItem: false,
   showEditItem: false,
+  showRecordMovement: false,
   closed: true,
   editingItem: undefined,
-  showRecordMovement: false,
   recordingMovementOnItem: undefined
 };
 
 export const reducer = createReducer(
   initialState,
-  on(setShowAddItemComponent, state => ({showAddItem: true, showEditItem: false, closed: false, editingItem: undefined, showRecordMovement: false, recordingMovementOnItem: undefined})),
-  on(setShowEditItemComponent, (state, {item}) => ({showAddItem: false, showEditItem: true, closed: false, editingItem: item, showRecordMovement: false, recordingMovementOnItem: undefined})),
-  on(setShowRecordMovementComponent, (state, {item}) => ({showAddItem: false, showEditItem: false, closed: false, editingItem: undefined, showRecordMovement: true, recordingMovementOnItem: item})),
-  on(close, state => ({showAddItem: false, showEditItem: false, closed: true, editingItem: undefined, showRecordMovement: false, recordingMovementOnItem: undefined})),
+  on(setShowAddItemComponent, state => ({...initialState, showAddItem: true, closed: false})),
+  on(setShowEditItemComponent, (state, {item}) => ({...initialState, showEditItem: true, editingItem: item, closed: false, })),
+  on(setShowRecordMovementComponent, (state, {item}) => ({...initialState, showRecordMovement: true, recordingMovementOnItem: item, closed: false, })),
+  on(close, state => ({...initialState}))
 );
 
 export function CategoriesComponentReducer(state: CategoriesComponentState = initialState, action: Action) {
