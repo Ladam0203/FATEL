@@ -7,7 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);;
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -26,6 +28,7 @@ var mapper = new MapperConfiguration(configuration =>
     configuration.CreateMap<PutItemDTO, Item>();
     configuration.CreateMap<PostItemDTO, Item>();
     configuration.CreateMap<PostWarehouseDTO, Warehouse>();
+    configuration.CreateMap<PutWarehouseDTO, Warehouse>();
 }).CreateMapper();
 builder.Services.AddSingleton(mapper);
 

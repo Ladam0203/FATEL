@@ -20,8 +20,8 @@ public class RepositoryFacade : IRepositoryFacade
         _warehouseRepository = new WarehouseRepository(context);
         
         //rebuild db
-        _context.Database.EnsureDeleted();
-        _context.Database.EnsureCreated();
+        //_context.Database.EnsureDeleted();
+        //_context.Database.EnsureCreated();
     }
     
     public Item UpdateQuantityAndRecord(Item item, Entry entry)
@@ -72,9 +72,9 @@ public class RepositoryFacade : IRepositoryFacade
         return _itemRepository.ReadAll();
     }
     
-    public double ReadTotalQuantityOf(string itemName)
+    public double ReadTotalQuantityOf(Item item)
     {
-        return _itemRepository.ReadTotalQuantityOf(itemName);
+        return _itemRepository.ReadTotalQuantityOf(item);
     }
 
     public Item UpdateItem(Item item)
@@ -122,13 +122,13 @@ public class RepositoryFacade : IRepositoryFacade
         return _warehouseRepository.ReadAll();
     }
 
-    public Warehouse UpdateWarehouse(PutWarehouseDTO dto)
+    public Warehouse UpdateWarehouse(Warehouse warehouse)
     {
-        throw new NotImplementedException();
+        return _warehouseRepository.Update(warehouse);
     }
 
     public Warehouse DeleteWarehouse(int id)
     {
-        throw new NotImplementedException();
+        return _warehouseRepository.Delete(id);
     }
 }
