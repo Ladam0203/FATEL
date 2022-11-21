@@ -75,4 +75,5 @@
 <div *ngIf="!closed" class="action-container">
   <add-item *ngIf="showAddItem" (newItemEvent)="addItem($event)" class="item-form"></add-item>
   <app-edit-item *ngIf="showEditItem" (editItemEvent)="editItem($event)" class="item-form"></app-edit-item>
+  <app-record-movement *ngIf="showRecordMovement" class="item-form"></app-record-movement>
 </div>

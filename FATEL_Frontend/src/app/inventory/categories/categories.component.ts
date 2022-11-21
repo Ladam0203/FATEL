@@ -31,6 +31,7 @@ export class CategoriesComponent implements OnInit {
 
   showAddItem: boolean = false;
   showEditItem: boolean = false;
+  showRecordMovement: boolean = false;
   closed: boolean = true;
 
   confirmDelete: boolean = true;
@@ -49,7 +50,9 @@ export class CategoriesComponent implements OnInit {
     this.categoriesState.subscribe(value => {
       this.showAddItem = value.showAddItem;
       this.showEditItem = value.showEditItem;
+      this.showRecordMovement = value.showRecordMovement;
       this.closed = value.closed;
+
       this.editingItem = value.editingItem;
     });
   }
