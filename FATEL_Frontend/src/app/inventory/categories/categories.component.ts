@@ -67,6 +67,7 @@ export class CategoriesComponent implements OnInit {
       }
       category.items.push(item);
     }
+    this.categories.sort((a, b) => a.name.localeCompare(b.name));
   }
 
   addItem(newItem: Item) {

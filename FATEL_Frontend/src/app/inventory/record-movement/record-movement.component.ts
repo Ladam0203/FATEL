@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {greaterThanDirective} from "../../validators/greaterThan.directive";
 import {ItemService} from "../../services/item.service";
 import {Store} from "@ngrx/store";
 import {Item} from "../../entities/item";
 import {Movement} from "../../entities/DTOs/Movement";
+import {close} from "../states/categories.states";
 
 @Component({
   selector: 'app-record-movement',
@@ -12,6 +13,8 @@ import {Movement} from "../../entities/DTOs/Movement";
   styleUrls: ['./record-movement.component.css']
 })
 export class RecordMovementComponent implements OnInit {
+
+  @Output() recordMovementEvent = new EventEmitter<Item>();
 
   movementForm: FormGroup = new FormGroup({
     change: new FormControl(),
@@ -51,7 +54,11 @@ export class RecordMovementComponent implements OnInit {
       change: this.movementForm.get('change')?.value,
     }
 
-    this.itemService.updateQuantity(movement).then(value => console.log(value));
+    this.itemService.updateQuantity(movement)
+      .then(item => {
+        this.recordMovementEvent.emit(item);
+        this.closeRecordMovementComponent();
+      });
   }
 
   withdraw() {
@@ -66,6 +73,11 @@ export class RecordMovementComponent implements OnInit {
     }
 
     this.itemService.updateQuantity(movement).then(value => console.log(value));
+    this.itemService.updateQuantity(movement)
+      .then(item => {
+        this.recordMovementEvent.emit(item);
+        this.closeRecordMovementComponent();
+      });
   }
 
   validation(): boolean {
@@ -84,5 +96,10 @@ export class RecordMovementComponent implements OnInit {
       return false;
 
     return true;
+  }
+
+  closeRecordMovementComponent() {
+    this.movementForm.reset();
+    this.store.dispatch(close());
   }
 }
