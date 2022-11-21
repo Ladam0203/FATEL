@@ -44,10 +44,6 @@ public class WarehouseController : ControllerBase
         {
             return BadRequest(e.Message);
         }
-        // catch (ArgumentException e)
-        // {
-        //     return StatusCode(403, e.Message);
-        // }
         catch (Exception e)
         {
             return StatusCode(500, e.Message);

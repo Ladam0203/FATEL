@@ -30,7 +30,7 @@ public class WarehouseService : IWarehouseService
         {
             throw new ValidationException(validation.ToString());
         }
-        //Maybe cech for the same name of warehouses
+        //Maybe check for the same name of warehouses
         var warehouse = _mapper.Map<Warehouse>(postWarehouseDto);
 
         return _repository.CreateWarehouse(warehouse);

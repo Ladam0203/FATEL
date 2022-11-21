@@ -20,14 +20,17 @@ public class WarehouseRepository : IWarehouseRepository
     
     public Warehouse Create(Warehouse warehouse)
     {
-         _context.WarehouseTable.Add(warehouse);
+        _context.WarehouseTable.Add(warehouse);
         _context.SaveChanges();
         return warehouse;
     }
 
     public List<Warehouse> ReadAll()
     {
-        return _context.WarehouseTable.Include(w => w.Inventory).Include(w => w.Diary).ToList();
+        return _context.WarehouseTable
+            .Include(w => w.Inventory)
+            .Include(w => w.Diary)
+            .ToList();
     }
 
     public Warehouse Update(Warehouse warehouse)

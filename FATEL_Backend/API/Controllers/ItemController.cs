@@ -27,9 +27,9 @@ public class ItemController : ControllerBase
         {
             return Ok(_itemService.Read(id));
         }
-        catch (KeyNotFoundException)
+        catch (KeyNotFoundException e)
         {
-            return NotFound("No Item found with the id " + id);
+            return NotFound(e.Message);
         }
         catch (Exception e)
         {
