@@ -158,4 +158,41 @@ public class WarehouseServiceTest
         Assert.Equal(warehouse, result);
         mockRepository.Verify(r => r.CreateWarehouse(It.IsAny<Warehouse>()), Times.Once);
     }
+
+    [Fact]
+    public void DeleteWarehouse()
+    {
+        var mockRepository = new Mock<IRepositoryFacade>();
+        int mockId = 1;
+        Warehouse warehouse1 = new Warehouse
+            { Id = 1, Name = "WareHouse1", Diary = new List<Entry>(), Inventory = new List<Item>() };
+        Warehouse warehouse2 = new Warehouse
+            { Id = 2, Name = "WareHouse2", Diary = new List<Entry>(), Inventory = new List<Item>() };
+        List<Warehouse> mockWarehouses = new List<Warehouse>();
+        mockWarehouses.Add(warehouse1);
+        mockWarehouses.Add(warehouse2);
+        mockRepository.Setup(r => r.DeleteWarehouse(mockId)).Returns(() =>
+        {
+            mockWarehouses.Remove(warehouse1);
+            return warehouse1;
+        });
+
+        IMapper mapper = new MapperConfiguration(configuration =>
+        {
+            configuration.CreateMap<PostWarehouseDTO, Warehouse>();
+        }).CreateMapper();
+        var validator = new PostWarehouseDTOValidator();
+
+        IWarehouseService warehouseService = new WarehouseService(mockRepository.Object, validator, mapper);
+
+        Warehouse deleteWarehouse = warehouseService.Delete(mockId);
+        
+        Assert.NotNull(deleteWarehouse);
+        Assert.True(deleteWarehouse is Warehouse);
+        Assert.Equal(warehouse1, deleteWarehouse);
+        Assert.Equal(mockId, deleteWarehouse.Id);
+        Assert.DoesNotContain(warehouse1, mockWarehouses);
+        Assert.Contains(warehouse2, mockWarehouses);
+        mockRepository.Verify(r => r.DeleteWarehouse(mockId), Times.Once);
+    }
 }
