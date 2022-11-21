@@ -190,6 +190,7 @@ public class WarehouseServiceTest
         mockRepository.Verify(r => r.CreateWarehouse(It.IsAny<Warehouse>()), Times.Once);
     }
 
+    [Fact]
     public void Update()
     {
         int mockId = 1;
