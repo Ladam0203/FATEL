@@ -66,6 +66,9 @@ public class ItemRepository : IItemRepository
 
     public Item Create(Item item)
     {
+        Warehouse warehouse = _context.WarehouseTable.Find(item.WarehouseId);
+        if (warehouse == null)
+            throw new KeyNotFoundException("Could not find Warehouse with Id: " + item.WarehouseId);
         _context.ItemTable.Add(item);
         _context.SaveChanges();
         return item;

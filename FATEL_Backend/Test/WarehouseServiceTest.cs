@@ -189,4 +189,34 @@ public class WarehouseServiceTest
         Assert.Equal(warehouse, result);
         mockRepository.Verify(r => r.CreateWarehouse(It.IsAny<Warehouse>()), Times.Once);
     }
+    
+    public void Update()
+    {
+        int mockId = 1;
+        PutWarehouseDTO dto = new PutWarehouseDTO() { Id = mockId, Name = "UpdatedWarehouse"};
+        Warehouse editedwWarehouse = new Warehouse() { Id = dto.Id, Name = dto.Name};
+        
+        var mockRepository = new Mock<IRepositoryFacade>();
+        mockRepository.Setup(r => r.UpdateWarehouse(It.IsAny<Warehouse>())).Returns(editedwWarehouse);
+        
+        var mapper = new MapperConfiguration(configuration =>
+        {
+            configuration.CreateMap<PostWarehouseDTO, Warehouse>();
+            configuration.CreateMap<PutWarehouseDTO, Warehouse>();
+        }).CreateMapper();
+        var validator = new PostWarehouseDTOValidator();
+        var putValidator = new PutWarehouseDTOValidator();
+
+        IWarehouseService warehouseService = new WarehouseService(mockRepository.Object, validator, putValidator,  mapper);
+        
+        //Act
+        Warehouse updated = warehouseService.Update(mockId, dto);
+        
+        //Assert
+        Assert.NotNull(updated);
+        Assert.True(updated is Warehouse);
+        Assert.Equal(editedwWarehouse, updated);
+        Assert.Equal(editedwWarehouse.Name, updated.Name);
+        mockRepository.Verify(r => r.UpdateWarehouse(It.IsAny<Warehouse>()), Times.Once);
+    }
 }
