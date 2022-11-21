@@ -38,9 +38,8 @@ export class RecordMovementComponent implements OnInit {
       ])
     });
 
-    this.categoriesState.subscribe(value => {
-        this.itemToRecordMovementOn = value.itemToRecordMovementOn;
-      });
+    this.categoriesState
+      .subscribe(value => this.itemToRecordMovementOn = value.selectedItem);
   }
 
   deposit() {
@@ -72,7 +71,6 @@ export class RecordMovementComponent implements OnInit {
       change: -(this.movementForm.get('change')?.value),
     }
 
-    this.itemService.updateQuantity(movement).then(value => console.log(value));
     this.itemService.updateQuantity(movement)
       .then(item => {
         this.recordMovementEvent.emit(item);

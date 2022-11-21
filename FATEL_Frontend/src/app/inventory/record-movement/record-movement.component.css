@@ -1,0 +1,61 @@
+.action-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: normal;
+  row-gap: 4px;
+  margin: 0 auto 0 auto;
+  width: 66%;
+}
+
+.action-panel mat-form-field, .buttons-container {
+  width: 100%;
+}
+
+.buttons-container {
+  display: flex;
+  column-gap: 16px;
+  margin-top: 8px;
+}
+
+.action-panel button {
+  transition: all 0.2s ease-in;
+}
+
+.withdraw-button, .deposit-button {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 4px 0 4px 0;
+  flex: 1;
+}
+
+.withdraw-button:hover {
+  background-color: var(--danger);
+}
+
+.deposit-button:hover {
+  background-color: var(--success);
+}
+
+.withdraw-button:disabled, .deposit-button:disabled {
+  opacity: .5;
+  color: var(--white);
+  cursor: not-allowed;
+}
+
+.withdraw-button:disabled:hover, .deposit-button:disabled:hover {
+  box-shadow: none;
+}
+
+.close-component-button {
+  border: 1px solid var(--primary);
+  margin-top: 16px;
+  color: var(--primary);
+}
+
+.close-component-button:hover {
+  background-color: var(--danger);
+  border: 1px solid var(--danger);
+  color: var(--white);
+}
+

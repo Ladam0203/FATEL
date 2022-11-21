@@ -25,7 +25,7 @@ export class CategoriesComponent implements OnInit {
 
   searchbarQuery = this.store.select(selectSearchbarQueryValue);
 
-  editingItem: Item | undefined;
+  selectedItem: Item | undefined;
 
   categoriesState = this.store.select('categoriesState');
 
@@ -53,7 +53,7 @@ export class CategoriesComponent implements OnInit {
       this.showRecordMovement = value.showRecordMovement;
       this.closed = value.closed;
 
-      this.editingItem = value.editingItem;
+      this.selectedItem = value.selectedItem;
     });
   }
 

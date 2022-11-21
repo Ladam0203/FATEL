@@ -52,11 +52,12 @@
         <th class="fs-5 ta-left actions-cell-header" mat-header-cell *matHeaderCellDef></th>
         <mat-cell class="fs-5 ta-left actions-cell" *matCellDef="let row">
           <!-- TODO: Add classes for formatting -->
-          <button class="edit-item-button fs-6" mat-button (click)="openRecordMovementComponent(row)">
+          <button class="edit-item-button fs-6" mat-button (click)="openRecordMovementComponent(row)"
+                  [class.editing]="row.id == selectedItem?.id && showRecordMovement">
             <mat-icon class="main-icon" aria-hidden="false" aria-label="import_export">import_export</mat-icon>
           </button>
           <button class="edit-item-button fs-6" mat-button (click)="openEditItemComponent(row)"
-                  [class.editing]="row.id == editingItem?.id">
+                  [class.editing]="row.id == selectedItem?.id && showEditItem">
             <mat-icon class="main-icon" aria-hidden="false" aria-label="edit">edit</mat-icon>
           </button>
           <button class="delete-item-button fs-6" mat-button (click)="deleteItem(row)"
@@ -68,7 +69,7 @@
 
       <tr class="fs-5" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns;"
-          [class.editing-row]="row.id == editingItem?.id"></tr>
+          [class.editing-row]="row.id == selectedItem?.id"></tr>
     </table>
   </mat-expansion-panel>
 </mat-accordion>
