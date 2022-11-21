@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import axios from "axios";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {Entry} from "../entities/entry";
 
 export const customAxios = axios.create({
