@@ -13,8 +13,7 @@ export const customAxios = axios.create({
 })
 export class ItemService {
 
-  constructor(private http: HttpClient,
-              private matSnackBar: MatSnackBar) {
+  constructor() {
     /*
     customAxios.interceptors.response.use(
       response => {
