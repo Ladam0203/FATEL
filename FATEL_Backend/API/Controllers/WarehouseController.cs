@@ -76,4 +76,22 @@ public class WarehouseController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+    
+    [HttpDelete]
+    [Route("Delete/{id}")]
+    public ActionResult<Warehouse> Delete([FromRoute] int id)
+    {
+        try
+        {
+            return Ok(_warehouseService.Delete(id));
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.ToString());
+        }
+    }
 }

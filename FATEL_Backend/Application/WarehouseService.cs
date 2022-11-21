@@ -55,6 +55,6 @@ public class WarehouseService : IWarehouseService
 
     public Warehouse Delete(int id)
     {
-        throw new NotImplementedException();
+        return _repository.DeleteWarehouse(id);
     }
 }

@@ -42,7 +42,10 @@ public class WarehouseRepository : IWarehouseRepository
 
     public Warehouse Delete(int id)
     {
-        throw new NotImplementedException();
+        Warehouse warehouse = _context.WarehouseTable.Find(id) ?? throw new KeyNotFoundException("Warehouse with id " + id + " does not exist");
+        _context.WarehouseTable.Remove(warehouse);
+        _context.SaveChanges();
+        return warehouse;
     }
     
     private void Rebuild()

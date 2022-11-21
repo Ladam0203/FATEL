@@ -129,6 +129,6 @@ public class RepositoryFacade : IRepositoryFacade
 
     public Warehouse DeleteWarehouse(int id)
     {
-        throw new NotImplementedException();
+        return _warehouseRepository.Delete(id);
     }
 }
