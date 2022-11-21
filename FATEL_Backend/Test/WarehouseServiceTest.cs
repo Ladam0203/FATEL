@@ -189,16 +189,16 @@ public class WarehouseServiceTest
         Assert.Equal(warehouse, result);
         mockRepository.Verify(r => r.CreateWarehouse(It.IsAny<Warehouse>()), Times.Once);
     }
-    
+
     public void Update()
     {
         int mockId = 1;
-        PutWarehouseDTO dto = new PutWarehouseDTO() { Id = mockId, Name = "UpdatedWarehouse"};
-        Warehouse editedwWarehouse = new Warehouse() { Id = dto.Id, Name = dto.Name};
-        
+        PutWarehouseDTO dto = new PutWarehouseDTO() { Id = mockId, Name = "UpdatedWarehouse" };
+        Warehouse editedwWarehouse = new Warehouse() { Id = dto.Id, Name = dto.Name };
+
         var mockRepository = new Mock<IRepositoryFacade>();
         mockRepository.Setup(r => r.UpdateWarehouse(It.IsAny<Warehouse>())).Returns(editedwWarehouse);
-        
+
         var mapper = new MapperConfiguration(configuration =>
         {
             configuration.CreateMap<PostWarehouseDTO, Warehouse>();
@@ -207,16 +207,55 @@ public class WarehouseServiceTest
         var validator = new PostWarehouseDTOValidator();
         var putValidator = new PutWarehouseDTOValidator();
 
-        IWarehouseService warehouseService = new WarehouseService(mockRepository.Object, validator, putValidator,  mapper);
-        
+        IWarehouseService warehouseService =
+            new WarehouseService(mockRepository.Object, validator, putValidator, mapper);
+
         //Act
         Warehouse updated = warehouseService.Update(mockId, dto);
-        
+
         //Assert
         Assert.NotNull(updated);
         Assert.True(updated is Warehouse);
         Assert.Equal(editedwWarehouse, updated);
         Assert.Equal(editedwWarehouse.Name, updated.Name);
         mockRepository.Verify(r => r.UpdateWarehouse(It.IsAny<Warehouse>()), Times.Once);
+    }
+
+    [Fact]
+    public void DeleteWarehouse()
+    {
+        var mockRepository = new Mock<IRepositoryFacade>();
+        int mockId = 1;
+        Warehouse warehouse1 = new Warehouse
+            { Id = 1, Name = "WareHouse1", Diary = new List<Entry>(), Inventory = new List<Item>() };
+        Warehouse warehouse2 = new Warehouse
+            { Id = 2, Name = "WareHouse2", Diary = new List<Entry>(), Inventory = new List<Item>() };
+        List<Warehouse> mockWarehouses = new List<Warehouse>();
+        mockWarehouses.Add(warehouse1);
+        mockWarehouses.Add(warehouse2);
+        mockRepository.Setup(r => r.DeleteWarehouse(mockId)).Returns(() =>
+        {
+            mockWarehouses.Remove(warehouse1);
+            return warehouse1;
+        });
+
+        IMapper mapper = new MapperConfiguration(configuration =>
+        {
+            configuration.CreateMap<PostWarehouseDTO, Warehouse>();
+        }).CreateMapper();
+        var postValidator = new PostWarehouseDTOValidator();
+        var putValidator = new PutWarehouseDTOValidator();
+
+        IWarehouseService warehouseService = new WarehouseService(mockRepository.Object, postValidator, putValidator, mapper);
+
+        Warehouse deleteWarehouse = warehouseService.Delete(mockId);
+        
+        Assert.NotNull(deleteWarehouse);
+        Assert.True(deleteWarehouse is Warehouse);
+        Assert.Equal(warehouse1, deleteWarehouse);
+        Assert.Equal(mockId, deleteWarehouse.Id);
+        Assert.DoesNotContain(warehouse1, mockWarehouses);
+        Assert.Contains(warehouse2, mockWarehouses);
+        mockRepository.Verify(r => r.DeleteWarehouse(mockId), Times.Once);
     }
 }
