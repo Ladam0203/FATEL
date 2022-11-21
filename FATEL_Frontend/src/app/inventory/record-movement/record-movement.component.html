@@ -1,7 +1,7 @@
 <form [formGroup]="movementForm">
   <div class="action-container">
     <div class="action-panel">
-      <button mat-button class="main-button fs-5">
+      <button mat-button class="withdraw-button fs-5" (click)="withdraw()">
         <mat-icon class="main-icon" aria-hidden="false" aria-label="add icon" fontIcon="arrow_upward"></mat-icon>
       </button>
       <mat-form-field appearance="fill">
@@ -13,7 +13,7 @@
           Change must be greater than or equal to 0
         </mat-error>
       </mat-form-field>
-      <button mat-button class="main-button fs-5">
+      <button mat-button class="deposit-button fs-5" (click)="deposit()">
         <mat-icon class="main-icon" aria-hidden="false" aria-label="add icon" fontIcon="arrow_downward"></mat-icon>
       </button>
     </div>

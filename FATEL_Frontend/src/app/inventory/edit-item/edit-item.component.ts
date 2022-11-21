@@ -61,12 +61,12 @@ export class EditItemComponent implements OnInit {
 
     this.categoriesState.subscribe(value => {
       this.editingItem = value.editingItem;
-      this.setFields(value.editingItem)
+      this.setFields(value.editingItem);
     });
   }
 
   private setFields(item: Item) {
-    if(!item)
+    if (!item)
       return;
     this.itemForm.setValue({
       name: item?.name,
@@ -114,10 +114,9 @@ export class EditItemComponent implements OnInit {
       return;
     }
 
-    if(!this.editingItem?.id){
+    if (!this.editingItem?.id)
       return;
-    }
-    
+
     let updateItem: UpdateItemDTO = {
       id: this.editingItem?.id,
       name: this.itemForm.get('name')?.value,
