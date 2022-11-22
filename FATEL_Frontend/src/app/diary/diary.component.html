@@ -1,3 +1,4 @@
+<h2 class="warehouse-header">Warehouse Diary</h2>
 <app-filter-bar></app-filter-bar>
 <table mat-table [dataSource]="entries | filter: 'itemName' : ((searchbarQuery | async) ?? '')">
 
