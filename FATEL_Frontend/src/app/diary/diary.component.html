@@ -1,62 +1,30 @@
-<mat-expansion-panel *ngFor="let entry of entries">
-  <table mat-table>
+<app-filter-bar></app-filter-bar>
+<table mat-table [dataSource]="entries">
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Timestamp</th>
-      <td class="fs-5 ta-left" mat-cell> {{entry.timestamp}} </td>
-    </ng-container>
+  <!-- Timestamp Column -->
+  <ng-container matColumnDef="timestamp">
+    <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Timestamp</th>
+    <td class="fs-5 ta-left" mat-cell *matCellDef="let entry"> {{entry.timestamp | date:'medium'}} </td>
+  </ng-container>
 
-    <!-- Width Column -->
-    <ng-container matColumnDef="width">
-      <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Item Name</th>
-      <td class="fs-5 ta-left" mat-cell > {{entry.itemName}} </td>
-    </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="itemName">
+    <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Name</th>
+    <td class="fs-5 ta-left" mat-cell *matCellDef="let entry"> {{entry.itemName}} </td>
+  </ng-container>
 
-    <!-- Length Column -->
-    <ng-container matColumnDef="length">
-      <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Change</th>
-      <td class="fs-5 ta-left" mat-cell > {{entry.change}} </td>
-    </ng-container>
+  <!-- Change Column -->
+  <ng-container matColumnDef="change">
+    <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Change</th>
+    <td class="fs-5 ta-left" mat-cell *matCellDef="let entry"> {{entry.change}} </td>
+  </ng-container>
 
-    <!-- Unit Column -->
-    <ng-container matColumnDef="unit">
-      <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Unit</th>
-      <td class="fs-5 ta-left" mat-cell *matCellDef="let item;"> {{units[item.unit]}} </td>
-    </ng-container>
+  <!-- Quantity After Change Column -->
+  <ng-container matColumnDef="quantityAfterChange">
+    <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>After</th>
+    <td class="fs-5 ta-left" mat-cell *matCellDef="let entry"> {{entry.quantityAfterChange}} </td>
+  </ng-container>
 
-    <!-- Quantity Column -->
-    <ng-container matColumnDef="quantity">
-      <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Quantity</th>
-      <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.quantity}} </td>
-    </ng-container>
-
-    <!-- Note Column -->
-    <ng-container matColumnDef="note">
-      <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Note</th>
-      <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.note}} </td>
-    </ng-container>
-
-    <!-- Actions Column -->
-    <ng-container matColumnDef="actions">
-      <th class="fs-5 ta-left actions-cell-header" mat-header-cell *matHeaderCellDef></th>
-      <mat-cell class="fs-5 ta-left actions-cell" *matCellDef="let row">
-        <!-- TODO: Add classes for formatting -->
-        <button class="edit-item-button fs-6" mat-button (click)="openRecordMovementComponent(row)">
-          <mat-icon class="main-icon" aria-hidden="false" aria-label="import_export">import_export</mat-icon>
-        </button>
-        <button class="edit-item-button fs-6" mat-button (click)="openEditItemComponent(row)"
-                [class.editing]="row.id == editingItem?.id">
-          <mat-icon class="main-icon" aria-hidden="false" aria-label="edit">edit</mat-icon>
-        </button>
-        <button class="delete-item-button fs-6" mat-button (click)="deleteItem(row)"
-                [class.confirmDelete]="(!confirmDelete && row.id == deletingId)">
-          <mat-icon class="main-icon" aria-hidden="false" aria-label="delete icon" [innerHTML]="(!confirmDelete && row.id == deletingId) ? 'check' : 'delete'"></mat-icon>
-        </button>
-      </mat-cell>
-    </ng-container>
-
-    <tr class="fs-5" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns;"
-        [class.editing-row]="row.id == editingItem?.id"></tr>
-  </table>
+  <tr class="fs-5" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
