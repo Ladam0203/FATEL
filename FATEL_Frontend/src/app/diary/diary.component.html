@@ -4,7 +4,7 @@
   <!-- Timestamp Column -->
   <ng-container matColumnDef="timestamp">
     <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Timestamp</th>
-    <td class="fs-5 ta-left" mat-cell *matCellDef="let entry"> {{entry.timestamp | date:'medium'}} </td>
+    <td class="fs-5 ta-left" mat-cell *matCellDef="let entry"> {{entry.timestamp | date:'yyyy.MM.dd HH:mm'}} </td>
   </ng-container>
 
   <!-- Name Column -->
