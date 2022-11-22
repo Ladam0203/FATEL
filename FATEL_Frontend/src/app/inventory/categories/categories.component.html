@@ -1,5 +1,5 @@
 <mat-accordion multi class="inventory">
-  <mat-expansion-panel *ngFor="let category of categories | filter: (searchbarQuery | async)">
+  <mat-expansion-panel *ngFor="let category of categories | filter: 'name' : ((searchbarQuery | async) ?? '')">
     <mat-expansion-panel-header>
       <mat-panel-title class="fs-5">
         {{category.name}}
@@ -51,8 +51,13 @@
       <ng-container matColumnDef="actions">
         <th class="fs-5 ta-left actions-cell-header" mat-header-cell *matHeaderCellDef></th>
         <mat-cell class="fs-5 ta-left actions-cell" *matCellDef="let row">
+          <!-- TODO: Add classes for formatting -->
+          <button class="edit-item-button fs-6" mat-button (click)="openRecordMovementComponent(row)">
+            <mat-icon class="main-icon" aria-hidden="false" aria-label="import_export">import_export</mat-icon>
+          </button>
           <button class="edit-item-button fs-6" mat-button (click)="openEditItemComponent(row)"
-                  [class.editing]="row.id == editingItem?.id">Edit
+                  [class.editing]="row.id == editingItem?.id">
+            <mat-icon class="main-icon" aria-hidden="false" aria-label="edit">edit</mat-icon>
           </button>
           <button class="delete-item-button fs-6" mat-button (click)="deleteItem(row)"
                   [class.confirmDelete]="(!confirmDelete && row.id == deletingId)">
@@ -70,4 +75,5 @@
 <div *ngIf="!closed" class="action-container">
   <add-item *ngIf="showAddItem" (newItemEvent)="addItem($event)" class="item-form"></add-item>
   <app-edit-item *ngIf="showEditItem" (editItemEvent)="editItem($event)" class="item-form"></app-edit-item>
+  <app-record-movement *ngIf="showRecordMovement" (recordMovementEvent)="editItem($event)" class="item-form"></app-record-movement>
 </div>

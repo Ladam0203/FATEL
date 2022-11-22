@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -9,5 +8,11 @@ import {FormBuilder} from "@angular/forms";
 export class AppComponent {
   title = 'FATEL_Frontend';
 
+  showInventory: boolean = false;
+
   constructor() {}
+
+  onShowInventory(value: boolean) {
+    this.showInventory = value;
+  }
 }
