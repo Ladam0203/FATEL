@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
 
 @Component({
@@ -7,6 +7,8 @@ import {FormBuilder} from "@angular/forms";
   styleUrls: ['./mat-sidenav-container.component.css']
 })
 export class MatSidenavContainerComponent implements OnInit {
+
+  @Output() showInventoryEvent = new EventEmitter<boolean>();
 
   options = this._formBuilder.group({
     bottom: 0,
@@ -19,4 +21,11 @@ export class MatSidenavContainerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  showInventory() {
+    this.showInventoryEvent.emit(true);
+  }
+
+  showDiary() {
+    this.showInventoryEvent.emit(false);
+  }
 }

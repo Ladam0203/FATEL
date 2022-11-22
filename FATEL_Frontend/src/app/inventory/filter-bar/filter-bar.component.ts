@@ -16,6 +16,7 @@ export class FilterBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.searchbarQuery.subscribe(value => this.query = value);
   }
 
   queryChange() {

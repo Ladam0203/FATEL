@@ -44,7 +44,7 @@ export class RecordMovementComponent implements OnInit {
 
   deposit() {
 
-    if(!this.validation())
+    if (!this.validation())
       return;
 
     let movement: Movement = {

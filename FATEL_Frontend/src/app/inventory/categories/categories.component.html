@@ -1,5 +1,5 @@
 <mat-accordion multi class="inventory">
-  <mat-expansion-panel *ngFor="let category of categories | filter: (searchbarQuery | async)">
+  <mat-expansion-panel *ngFor="let category of categories | filter: 'name' : ((searchbarQuery | async) ?? '')">
     <mat-expansion-panel-header>
       <mat-panel-title class="fs-5">
         {{category.name}}
@@ -62,7 +62,8 @@
           </button>
           <button class="delete-item-button fs-6" mat-button (click)="deleteItem(row)"
                   [class.confirmDelete]="(!confirmDelete && row.id == deletingId)">
-            <mat-icon class="main-icon" aria-hidden="false" aria-label="delete icon" [innerHTML]="(!confirmDelete && row.id == deletingId) ? 'check' : 'delete'"></mat-icon>
+            <mat-icon class="main-icon" aria-hidden="false" aria-label="delete icon"
+                      [innerHTML]="(!confirmDelete && row.id == deletingId) ? 'check' : 'delete'"></mat-icon>
           </button>
         </mat-cell>
       </ng-container>
@@ -76,5 +77,6 @@
 <div *ngIf="!closed" class="action-container">
   <add-item *ngIf="showAddItem" (newItemEvent)="addItem($event)" class="item-form"></add-item>
   <app-edit-item *ngIf="showEditItem" (editItemEvent)="editItem($event)" class="item-form"></app-edit-item>
-  <app-record-movement *ngIf="showRecordMovement" (recordMovementEvent)="editItem($event)" class="item-form"></app-record-movement>
+  <app-record-movement *ngIf="showRecordMovement" (recordMovementEvent)="editItem($event)"
+                       class="item-form"></app-record-movement>
 </div>

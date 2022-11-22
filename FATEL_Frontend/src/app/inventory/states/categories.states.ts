@@ -32,12 +32,14 @@ export const reducer = createReducer(
     ...initialState,
     showEditItem: true,
     closed: false,
+
     selectedItem: item,
   })),
   on(setShowRecordMovementComponent, (state, {item}) => ({
     ...initialState,
     showRecordMovement: true,
     closed: false,
+    
     selectedItem: item,
   })),
   on(close, state => ({...initialState}))
