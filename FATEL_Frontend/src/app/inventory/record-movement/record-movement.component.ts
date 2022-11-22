@@ -43,10 +43,10 @@ export class RecordMovementComponent implements OnInit {
   }
 
   deposit() {
-    /*
+
     if(!this.validation())
       return;
-    */
+
     let movement: Movement = {
       // @ts-ignore
       item: this.itemToRecordMovementOn,
@@ -61,10 +61,10 @@ export class RecordMovementComponent implements OnInit {
   }
 
   withdraw() {
-    /*
+
     if (!this.validation())
       return;
-    */
+
     let movement: Movement = {
       // @ts-ignore
       item: this.itemToRecordMovementOn,
