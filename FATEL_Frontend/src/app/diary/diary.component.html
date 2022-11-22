@@ -1,5 +1,5 @@
 <app-filter-bar></app-filter-bar>
-<table mat-table [dataSource]="entries">
+<table mat-table [dataSource]="entries | filter: 'itemName' : ((searchbarQuery | async) ?? '')">
 
   <!-- Timestamp Column -->
   <ng-container matColumnDef="timestamp">
