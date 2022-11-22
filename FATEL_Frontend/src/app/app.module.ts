@@ -29,6 +29,7 @@ import { CategoriesComponent } from './inventory/categories/categories.component
 import { EditItemComponent } from './inventory/edit-item/edit-item.component';
 import {CategoriesComponentReducer} from "./inventory/states/categories.states";
 import { RecordMovementComponent } from './inventory/record-movement/record-movement.component';
+import { DiaryComponent } from './diary/diary.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { RecordMovementComponent } from './inventory/record-movement/record-move
     CategoriesComponent,
     EditItemComponent,
     RecordMovementComponent,
+    DiaryComponent,
   ],
   imports: [
     BrowserModule,

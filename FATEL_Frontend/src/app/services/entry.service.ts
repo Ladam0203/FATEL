@@ -9,7 +9,7 @@ export const customAxios = axios.create({
 @Injectable({
   providedIn: 'root'
 })
-export class ItemService {
+export class EntryService {
 
   constructor() {
     /*
