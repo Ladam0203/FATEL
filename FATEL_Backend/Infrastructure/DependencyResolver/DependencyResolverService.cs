@@ -1,7 +1,5 @@
 ﻿using Application.Interfaces;
-using Domain;
 using Microsoft.Extensions.DependencyInjection;
-using Test;
 
 namespace Infrastructure.DependencyResolver;
 

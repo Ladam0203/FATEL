@@ -1,14 +1,15 @@
+using Application.DTOs;
 using Application.Interfaces;
 using Domain;
-using Infrastructure;
 
-namespace Test;
+namespace Infrastructure;
 
 public class RepositoryFacade : IRepositoryFacade
 {
     private readonly AppDbContext _context;
     private readonly IItemRepository _itemRepository;
     private readonly IEntryRepository _entryRepository;
+    private readonly IWarehouseRepository _warehouseRepository;
 
     public RepositoryFacade(AppDbContext context)
     {
@@ -16,6 +17,11 @@ public class RepositoryFacade : IRepositoryFacade
         
         _itemRepository = new ItemRepository(context);
         _entryRepository = new EntryRepository(context);
+        _warehouseRepository = new WarehouseRepository(context);
+        
+        //rebuild db
+        //_context.Database.EnsureDeleted();
+        //_context.Database.EnsureCreated();
     }
     
     public Item UpdateQuantityAndRecord(Item item, Entry entry)
@@ -66,9 +72,9 @@ public class RepositoryFacade : IRepositoryFacade
         return _itemRepository.ReadAll();
     }
     
-    public double ReadTotalQuantityOf(string itemName)
+    public double ReadTotalQuantityOf(Item item)
     {
-        return _itemRepository.ReadTotalQuantityOf(itemName);
+        return _itemRepository.ReadTotalQuantityOf(item);
     }
 
     public Item UpdateItem(Item item)
@@ -103,5 +109,26 @@ public class RepositoryFacade : IRepositoryFacade
             
             return new ItemWithEntry(newItem, newEntry);
         }
+    }
+    
+
+    public Warehouse CreateWarehouse(Warehouse warehouse)
+    {
+        return _warehouseRepository.Create(warehouse);
+    }
+
+    public List<Warehouse> ReadAllWarehouses()
+    {
+        return _warehouseRepository.ReadAll();
+    }
+
+    public Warehouse UpdateWarehouse(Warehouse warehouse)
+    {
+        return _warehouseRepository.Update(warehouse);
+    }
+
+    public Warehouse DeleteWarehouse(int id)
+    {
+        return _warehouseRepository.Delete(id);
     }
 }
