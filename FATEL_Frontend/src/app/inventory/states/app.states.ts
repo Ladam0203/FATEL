@@ -9,7 +9,6 @@ export const close = createAction('[Categories Component] Close All');
 
 export const setSelectedWarehouse = createAction('[Sidenav Component] Set Warehouse', props<{ warehouse: Warehouse }>());
 
-
 export interface AppState {
   showAddItem: boolean,
   showEditItem: boolean,
@@ -71,6 +70,6 @@ export const reducer = createReducer(
   })),
 );
 
-export function CategoriesComponentReducer(state: AppState = initialState, action: Action) {
+export function AppReducer(state: AppState = initialState, action: Action) {
   return reducer(state, action);
 }

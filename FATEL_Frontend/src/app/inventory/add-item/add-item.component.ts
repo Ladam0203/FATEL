@@ -39,7 +39,7 @@ export class AddItemComponent implements OnInit {
   text: string = 'ADD ITEM';
   confirmAdd: boolean = true;
 
-  categoriesState = this.store.select('categoriesState');
+  appState = this.store.select('appState');
 
   warehouseId: number | undefined;
 
@@ -48,7 +48,7 @@ export class AddItemComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.categoriesState.subscribe(state => {
+    this.appState.subscribe(state => {
       this.warehouseId = state.selectedWarehouse.id;
     });
 

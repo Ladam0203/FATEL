@@ -20,7 +20,7 @@ export class RecordMovementComponent implements OnInit {
     change: new FormControl(),
   });
 
-  categoriesState = this.store.select('categoriesState');
+  appState = this.store.select('appState');
 
   itemToRecordMovementOn: Item | undefined;
 
@@ -38,7 +38,7 @@ export class RecordMovementComponent implements OnInit {
       ])
     });
 
-    this.categoriesState
+    this.appState
       .subscribe(value => this.itemToRecordMovementOn = value.selectedItem);
   }
 
