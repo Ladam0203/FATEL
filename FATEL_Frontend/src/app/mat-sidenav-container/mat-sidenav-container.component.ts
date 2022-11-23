@@ -1,5 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
+import {Store} from "@ngrx/store";
+import {Warehouse} from "../entities/warehouse";
+import {WarehouseService} from "../services/warehouse.service";
 
 @Component({
   selector: 'app-mat-sidenav-container',
@@ -16,7 +19,13 @@ export class MatSidenavContainerComponent implements OnInit {
     top: 0,
   });
 
-  constructor(private _formBuilder: FormBuilder) { }
+  categoriesState = this.store.select('categoriesState');
+
+  //TODO: Fetch warehouses from service
+  warehouses: Warehouse[] = [];
+
+  constructor(private _formBuilder: FormBuilder, private service: WarehouseService, private readonly store: Store<any>) {
+  }
 
   ngOnInit(): void {
   }
