@@ -53,7 +53,7 @@ public class RepositoryFacade : IRepositoryFacade
             
             entry.ItemId = newItem.Id;
             var newEntry = _entryRepository.Create(entry);
-                
+
             _context.SaveChanges();
 
             dbContextTransaction.Commit();

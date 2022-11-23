@@ -71,6 +71,7 @@ public class ItemRepository : IItemRepository
             throw new KeyNotFoundException("Could not find Warehouse with Id: " + item.WarehouseId);
         _context.ItemTable.Add(item);
         _context.SaveChanges();
+        item.Warehouse = null;
         return item;
     }
 
