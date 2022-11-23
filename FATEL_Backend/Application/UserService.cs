@@ -15,8 +15,8 @@ public class UserService : IUserService
 
     public UserService(IUserRepository userRepository, IAuthenticationHelper authenticationHelper)
     {
-        _userRepository = userRepository;
-        _authenticationHelper = authenticationHelper;
+        _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
+        _authenticationHelper = authenticationHelper?? throw new ArgumentNullException(nameof(authenticationHelper));
         
     }
     

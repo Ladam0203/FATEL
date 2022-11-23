@@ -8,7 +8,6 @@ namespace API.Controllers;
 
 
 [ApiController]
-
 [Route("api/[Controller]")]
 public class ItemController : ControllerBase
 {
