@@ -23,7 +23,6 @@ export class DiaryComponent implements OnInit {
     this.entryService.readAll()
       .then(entries => {
         this.entries = entries;
-        console.log(entries);
       });
   }
 
