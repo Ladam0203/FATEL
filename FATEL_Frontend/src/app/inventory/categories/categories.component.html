@@ -52,28 +52,31 @@
         <th class="fs-5 ta-left actions-cell-header" mat-header-cell *matHeaderCellDef></th>
         <mat-cell class="fs-5 ta-left actions-cell" *matCellDef="let row">
           <!-- TODO: Add classes for formatting -->
-          <button class="edit-item-button fs-6" mat-button (click)="openRecordMovementComponent(row)">
+          <button class="edit-item-button fs-6" mat-button (click)="openRecordMovementComponent(row)"
+                  [class.editing]="row.id == selectedItem?.id && showRecordMovement">
             <mat-icon class="main-icon" aria-hidden="false" aria-label="import_export">import_export</mat-icon>
           </button>
           <button class="edit-item-button fs-6" mat-button (click)="openEditItemComponent(row)"
-                  [class.editing]="row.id == editingItem?.id">
+                  [class.editing]="row.id == selectedItem?.id && showEditItem">
             <mat-icon class="main-icon" aria-hidden="false" aria-label="edit">edit</mat-icon>
           </button>
           <button class="delete-item-button fs-6" mat-button (click)="deleteItem(row)"
                   [class.confirmDelete]="(!confirmDelete && row.id == deletingId)">
-            <mat-icon class="main-icon" aria-hidden="false" aria-label="delete icon" [innerHTML]="(!confirmDelete && row.id == deletingId) ? 'check' : 'delete'"></mat-icon>
+            <mat-icon class="main-icon" aria-hidden="false" aria-label="delete icon"
+                      [innerHTML]="(!confirmDelete && row.id == deletingId) ? 'check' : 'delete'"></mat-icon>
           </button>
         </mat-cell>
       </ng-container>
 
       <tr class="fs-5" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns;"
-          [class.editing-row]="row.id == editingItem?.id"></tr>
+          [class.editing-row]="row.id == selectedItem?.id"></tr>
     </table>
   </mat-expansion-panel>
 </mat-accordion>
 <div *ngIf="!closed" class="action-container">
   <add-item *ngIf="showAddItem" (newItemEvent)="addItem($event)" class="item-form"></add-item>
   <app-edit-item *ngIf="showEditItem" (editItemEvent)="editItem($event)" class="item-form"></app-edit-item>
-  <app-record-movement *ngIf="showRecordMovement" (recordMovementEvent)="editItem($event)" class="item-form"></app-record-movement>
+  <app-record-movement *ngIf="showRecordMovement" (recordMovementEvent)="editItem($event)"
+                       class="item-form"></app-record-movement>
 </div>

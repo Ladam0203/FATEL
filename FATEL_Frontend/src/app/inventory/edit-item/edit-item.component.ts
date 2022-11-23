@@ -60,14 +60,15 @@ export class EditItemComponent implements OnInit {
     });
 
     this.categoriesState.subscribe(value => {
-      this.editingItem = value.editingItem;
-      this.setFields(value.editingItem);
+      this.editingItem = value.selectedItem;
+      this.setFields(value.selectedItem);
     });
   }
 
   private setFields(item: Item) {
     if (!item)
       return;
+
     this.itemForm.setValue({
       name: item?.name,
       unit: item?.unit,

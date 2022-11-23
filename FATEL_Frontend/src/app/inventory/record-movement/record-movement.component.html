@@ -1,21 +1,27 @@
 <form [formGroup]="movementForm">
-  <div class="action-container">
-    <div class="action-panel">
-      <button mat-button class="withdraw-button fs-5" (click)="withdraw()">
+  <div class="action-panel">
+    <mat-form-field appearance="fill">
+      <input formControlName="change" type="number" matInput>
+      <mat-label>Change</mat-label>
+      <mat-error *ngIf="movementForm.get('change')?.hasError('required')">
+        Change is required
+      </mat-error>
+      <mat-error *ngIf="movementForm.get('change')?.hasError('min')">
+        Change must be greater than or equal to 0
+      </mat-error>
+    </mat-form-field>
+    <div class="buttons-container">
+      <button mat-button class="deposit-button fs-5" (click)="deposit()">
+        <ng-container>IN</ng-container>
         <mat-icon class="main-icon" aria-hidden="false" aria-label="add icon" fontIcon="arrow_upward"></mat-icon>
       </button>
-      <mat-form-field appearance="fill">
-        <input formControlName="change" type="number" matInput>
-        <mat-error *ngIf="movementForm.get('change')?.hasError('required')">
-          Change is required
-        </mat-error>
-        <mat-error *ngIf="movementForm.get('change')?.hasError('min')">
-          Change must be greater than or equal to 0
-        </mat-error>
-      </mat-form-field>
-      <button mat-button class="deposit-button fs-5" (click)="deposit()">
+      <button mat-button class="withdraw-button fs-5" (click)="withdraw()">
+        <ng-container>OUT</ng-container>
         <mat-icon class="main-icon" aria-hidden="false" aria-label="add icon" fontIcon="arrow_downward"></mat-icon>
       </button>
     </div>
+    <button mat-button class="close-component-button" (click)="closeRecordMovementComponent()">
+      CLOSE
+    </button>
   </div>
 </form>

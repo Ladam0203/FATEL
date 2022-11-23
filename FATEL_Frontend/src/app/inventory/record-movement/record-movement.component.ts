@@ -38,16 +38,15 @@ export class RecordMovementComponent implements OnInit {
       ])
     });
 
-    this.categoriesState.subscribe(value => {
-        this.itemToRecordMovementOn = value.itemToRecordMovementOn;
-      });
+    this.categoriesState
+      .subscribe(value => this.itemToRecordMovementOn = value.selectedItem);
   }
 
   deposit() {
-    /*
-    if(!this.validation())
+
+    if (!this.validation())
       return;
-    */
+
     let movement: Movement = {
       // @ts-ignore
       item: this.itemToRecordMovementOn,
@@ -62,17 +61,16 @@ export class RecordMovementComponent implements OnInit {
   }
 
   withdraw() {
-    /*
+
     if (!this.validation())
       return;
-    */
+
     let movement: Movement = {
       // @ts-ignore
       item: this.itemToRecordMovementOn,
       change: -(this.movementForm.get('change')?.value),
     }
 
-    this.itemService.updateQuantity(movement).then(value => console.log(value));
     this.itemService.updateQuantity(movement)
       .then(item => {
         this.recordMovementEvent.emit(item);

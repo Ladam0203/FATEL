@@ -12,8 +12,8 @@ export interface CategoriesComponentState {
   showEditItem: boolean,
   showRecordMovement: boolean,
   closed: boolean,
-  editingItem: Item | undefined,
-  itemToRecordMovementOn: Item | undefined
+
+  selectedItem: Item | undefined
 }
 
 export const initialState: CategoriesComponentState = {
@@ -21,8 +21,8 @@ export const initialState: CategoriesComponentState = {
   showEditItem: false,
   showRecordMovement: false,
   closed: true,
-  editingItem: undefined,
-  itemToRecordMovementOn: undefined
+
+  selectedItem: undefined
 };
 
 export const reducer = createReducer(
@@ -31,14 +31,16 @@ export const reducer = createReducer(
   on(setShowEditItemComponent, (state, {item}) => ({
     ...initialState,
     showEditItem: true,
-    editingItem: item,
     closed: false,
+
+    selectedItem: item,
   })),
   on(setShowRecordMovementComponent, (state, {item}) => ({
     ...initialState,
     showRecordMovement: true,
-    itemToRecordMovementOn: item,
     closed: false,
+    
+    selectedItem: item,
   })),
   on(close, state => ({...initialState}))
 );
