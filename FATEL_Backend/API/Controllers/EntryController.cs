@@ -1,9 +1,11 @@
 ﻿using Application.Interfaces;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[Controller]")]
 public class EntryController : ControllerBase

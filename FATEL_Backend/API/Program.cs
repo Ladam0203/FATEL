@@ -1,11 +1,19 @@
+using System.Text;
+using Application;
 using Application.DTOs;
+using Application.Interfaces;
 using AutoMapper;
 using Domain;
 using FluentValidation;
 using Infrastructure;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
+
+string secret = builder.Configuration.GetSection("AppSettings")["Secret"];
+Byte[] secretBytes = Encoding.ASCII.GetBytes(secret);
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -21,6 +29,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 Application.DependencyResolver.DependencyResolverService.RegisterApplicationLayer(builder.Services);
 Infrastructure.DependencyResolver.DependencyResolverService.RegisterInfrastructureLayer(builder.Services);
+builder.Services.AddSingleton<IAuthenticationHelper>(new AuthenticationHelper(secretBytes));
 
 //Mapper
 var mapper = new MapperConfiguration(configuration =>
@@ -31,6 +40,17 @@ var mapper = new MapperConfiguration(configuration =>
     configuration.CreateMap<PutWarehouseDTO, Warehouse>();
 }).CreateMapper();
 builder.Services.AddSingleton(mapper);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(secretBytes),
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.FromMinutes(5)
+    });
 
 builder.Services.AddCors();
 
@@ -48,6 +68,9 @@ app.UseCors(opts =>
     opts.AllowAnyMethod();
     opts.AllowAnyOrigin();
 });
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseHttpsRedirection();
 

@@ -1,16 +1,23 @@
-﻿using System.Security.Claims;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Application.DTOs;
 using Application.Interfaces;
 using Domain;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Application;
 
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
+    private readonly IAuthenticationHelper _authenticationHelper;
     
-    public UserService(IUserRepository userRepository)
+
+    public UserService(IUserRepository userRepository, IAuthenticationHelper authenticationHelper)
     {
         _userRepository = userRepository;
+        _authenticationHelper = authenticationHelper;
+        
     }
     
     public bool Login(string username, string password, out string token)
@@ -25,57 +32,37 @@ public class UserService : IUserService
         }
 
         //Correct password?
-        if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+        if (!_authenticationHelper.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
         {
             token = null;
             return false;
         }
 
-        token = GenerateToken(user);
+        token = _authenticationHelper.GenerateToken(user);
         return true;
     }
-
-    public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+    
+    public bool CreateUser(LoginDTO dto)
     {
-        using (var hmac = new System.Security.Cryptography.HMACSHA512())
-        {
-            passwordSalt = hmac.Key;
-            passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-        }
-    }
+        var user = _userRepository.GetAll().FirstOrDefault(u => u.Username == dto.Username);
 
-    public bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
-    {
-        using (var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt))
-        {
-            var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            for (int i = 0; i < computedHash.Length; i++)
-            {
-                if (computedHash[i] != storedHash[i]) return false;
-            }
-        }
-        return true;
-    }
+        //Does already contain a user with the given username?
+        if (user != null)
+            return false;
 
-    public string GenerateToken(User user)
-    {
-        var claims = new List<Claim>
+        byte[] salt;
+        byte[] passwordHash;
+        _authenticationHelper.CreatePasswordHash(dto.Password, out passwordHash, out salt);
+
+        user = new User()
         {
-            new Claim("name", user.Username),
-            new Claim("id", user.Id.ToString())
+            Username = dto.Username,
+            PasswordHash = passwordHash,
+            PasswordSalt = salt
         };
-        
-        var token = new JwtSecurityToken(
-            new JwtHeader(new SigningCredentials(
-                new SymmetricSecurityKey(secretBytes),
-                SecurityAlgorithms.HmacSha256)),
-            new JwtPayload(null, // issuer - not needed (ValidateIssuer = false)
-                null, // audience - not needed (ValidateAudience = false)
-                claims.ToArray(), //I add the claims to the token!
-                DateTime.Now, // notBefore
-                DateTime.Now.AddMinutes(10))); // expires
 
-        return new JwtSecurityTokenHandler().WriteToken(token);
-    }
+        _userRepository.Add(user);
+
+        return true;
     }
 }
