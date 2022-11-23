@@ -12,6 +12,7 @@ public class ItemWithEntry : Item
         Quantity = item.Quantity;
         Note = item.Note;
         Entry = entry;
+        WarehouseId = item.WarehouseId;
     }
     
     public Entry Entry { get; set; }
