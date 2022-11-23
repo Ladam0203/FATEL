@@ -6,7 +6,7 @@ import {ItemService} from "../../services/item.service";
 import {Store} from "@ngrx/store";
 import {greaterThanDirective} from "../../validators/greaterThan.directive";
 import {UpdateItemDTO} from "../../entities/DTOs/UpdateItemDTO";
-import {close} from "../states/categories.states";
+import {close} from "../states/app.states";
 
 @Component({
   selector: 'app-edit-item',

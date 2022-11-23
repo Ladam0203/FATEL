@@ -16,14 +16,17 @@ export class DiaryComponent implements OnInit {
   entries: Entry[] = [];
   searchbarQuery = this.store.select(selectSearchbarQueryValue);
 
+  categoriesState = this.store.select('categoriesState');
+
+  name: string = 'Warehouse';
+
   constructor(private entryService: EntryService, private readonly store: Store<any>) {
   }
 
   ngOnInit(): void {
-    this.entryService.readAll()
-      .then(entries => {
-        this.entries = entries;
-      });
+    this.categoriesState.subscribe(state => {
+      this.entries = state.selectedWarehouse.diary;
+      this.name = state.selectedWarehouse.name;
+    })
   }
-
 }

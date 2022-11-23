@@ -9,7 +9,7 @@ import {
   close,
   setShowEditItemComponent,
   setShowRecordMovementComponent
-} from "../states/categories.states";
+} from "../states/app.states";
 
 @Component({
   selector: 'app-categories',
@@ -41,19 +41,16 @@ export class CategoriesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.itemService.readAll()
-      .then(items => {
-        this.items = items;
-        this.categoriseItems();
-      });
+    this.categoriesState.subscribe(state => {
+      this.showAddItem = state.showAddItem;
+      this.showEditItem = state.showEditItem;
+      this.showRecordMovement = state.showRecordMovement;
+      this.closed = state.closed;
 
-    this.categoriesState.subscribe(value => {
-      this.showAddItem = value.showAddItem;
-      this.showEditItem = value.showEditItem;
-      this.showRecordMovement = value.showRecordMovement;
-      this.closed = value.closed;
+      this.selectedItem = state.selectedItem;
 
-      this.selectedItem = value.selectedItem;
+      this.items = state.selectedWarehouse.inventory;
+      this.categoriseItems();
     });
   }
 

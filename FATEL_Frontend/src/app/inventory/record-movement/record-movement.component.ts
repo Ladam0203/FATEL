@@ -5,7 +5,7 @@ import {ItemService} from "../../services/item.service";
 import {Store} from "@ngrx/store";
 import {Item} from "../../entities/item";
 import {Movement} from "../../entities/DTOs/Movement";
-import {close} from "../states/categories.states";
+import {close} from "../states/app.states";
 
 @Component({
   selector: 'app-record-movement',
