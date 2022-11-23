@@ -8,8 +8,10 @@ import {Item} from "../../entities/item";
 import {
   close,
   setShowEditItemComponent,
-  setShowRecordMovementComponent
+  setShowRecordMovementComponent,
+  addItem,
 } from "../states/app.states";
+import {Warehouse} from "../../entities/warehouse";
 
 @Component({
   selector: 'app-categories',
@@ -32,7 +34,10 @@ export class CategoriesComponent implements OnInit {
   showAddItem: boolean = false;
   showEditItem: boolean = false;
   showRecordMovement: boolean = false;
+
   closed: boolean = true;
+
+  warehouse: Warehouse | undefined;
 
   confirmDelete: boolean = true;
   deletingId: number | undefined;
@@ -50,6 +55,9 @@ export class CategoriesComponent implements OnInit {
       this.selectedItem = state.selectedItem;
 
       this.items = state.selectedWarehouse.inventory;
+
+      this.warehouse = state.selectedWarehouse;
+
       this.categoriseItems();
     });
   }
@@ -68,8 +76,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   addItem(newItem: Item) {
-
-    this.items.push(newItem);
+    this.store.dispatch(addItem({item: newItem}))
     this.categoriseItems();
   }
 
