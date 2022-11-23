@@ -28,7 +28,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Entry>()
             .Property(e => e.Id)
             .ValueGeneratedOnAdd();
-        
+
         //Warehouse
         modelBuilder.Entity<Warehouse>()
             .Property(w => w.Id)

@@ -17,6 +17,7 @@ public class EntryRepository : IEntryRepository
     {
         _context.EntryTable.Add(entry);
         _context.SaveChanges();
+        entry.Warehouse = null;
         return entry;
     }
 
