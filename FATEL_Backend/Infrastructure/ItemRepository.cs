@@ -91,6 +91,7 @@ public class ItemRepository : IItemRepository
             throw new KeyNotFoundException("Item with id " + item.Id + " does not exist");
         _context.ChangeTracker.Clear();
         _context.ItemTable.Update(item);
+        _context.Entry(item).Property(i => i.WarehouseId).IsModified = false;
         _context.SaveChanges();
         return item;
     }
