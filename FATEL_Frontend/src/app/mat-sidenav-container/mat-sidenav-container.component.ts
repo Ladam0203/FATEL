@@ -20,7 +20,7 @@ export class MatSidenavContainerComponent implements OnInit {
     top: 0,
   });
 
-  categoriesState = this.store.select('categoriesState');
+  appState = this.store.select('appState');
 
   warehouses: Warehouse[] = [];
 
@@ -46,7 +46,6 @@ export class MatSidenavContainerComponent implements OnInit {
   }
 
   onSelectWarehouse(warehouse: Warehouse) {
-    //TODO: tell the store that we want to switch warehouse a.k.a dispatch the command
     this.store.dispatch(setSelectedWarehouse({warehouse: warehouse}));
   }
 }
