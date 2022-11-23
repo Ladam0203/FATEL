@@ -9,7 +9,7 @@ import {setShowAddItemComponent} from "../states/app.states";
 })
 export class ToolBarComponent implements OnInit {
 
-  categoriesState = this.store.select('categoriesState');
+  appState = this.store.select('appState');
 
   name: string = 'Warehouse';
 
@@ -17,7 +17,7 @@ export class ToolBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categoriesState.subscribe(state => {
+    this.appState.subscribe(state => {
       this.name = state.selectedWarehouse.name;
     });
   }

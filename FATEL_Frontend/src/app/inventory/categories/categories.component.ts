@@ -27,7 +27,7 @@ export class CategoriesComponent implements OnInit {
 
   selectedItem: Item | undefined;
 
-  categoriesState = this.store.select('categoriesState');
+  appState = this.store.select('appState');
 
   showAddItem: boolean = false;
   showEditItem: boolean = false;
@@ -41,7 +41,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categoriesState.subscribe(state => {
+    this.appState.subscribe(state => {
       this.showAddItem = state.showAddItem;
       this.showEditItem = state.showEditItem;
       this.showRecordMovement = state.showRecordMovement;
@@ -68,6 +68,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   addItem(newItem: Item) {
+
     this.items.push(newItem);
     this.categoriseItems();
   }

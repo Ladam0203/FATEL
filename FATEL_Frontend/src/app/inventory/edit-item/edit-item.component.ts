@@ -32,7 +32,7 @@ export class EditItemComponent implements OnInit {
   text: string = 'APPLY CHANGES';
   confirmEdit: boolean = true;
 
-  categoriesState = this.store.select('categoriesState');
+  appState = this.store.select('appState');
 
   editingItem: Item | undefined;
 
@@ -59,7 +59,7 @@ export class EditItemComponent implements OnInit {
       note: new FormControl()
     });
 
-    this.categoriesState.subscribe(value => {
+    this.appState.subscribe(value => {
       this.editingItem = value.selectedItem;
       this.setFields(value.selectedItem);
     });
