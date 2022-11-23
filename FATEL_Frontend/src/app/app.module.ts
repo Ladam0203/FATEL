@@ -27,7 +27,7 @@ import {FilterBarComponent} from './inventory/filter-bar/filter-bar.component';
 import {searchbarQueryReducer} from "./inventory/states/filter-bar.actions";
 import {CategoriesComponent} from './inventory/categories/categories.component';
 import {EditItemComponent} from './inventory/edit-item/edit-item.component';
-import {CategoriesComponentReducer} from "./inventory/states/categories.states";
+import {CategoriesComponentReducer} from "./inventory/states/app.states";
 import {RecordMovementComponent} from './inventory/record-movement/record-movement.component';
 import {DiaryComponent} from './diary/diary.component';
 

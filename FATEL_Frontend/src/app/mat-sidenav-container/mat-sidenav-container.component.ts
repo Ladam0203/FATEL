@@ -3,6 +3,7 @@ import {FormBuilder} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {Warehouse} from "../entities/warehouse";
 import {WarehouseService} from "../services/warehouse.service";
+import {setSelectedWarehouse} from "../inventory/states/app.states";
 
 @Component({
   selector: 'app-mat-sidenav-container',
@@ -21,13 +22,19 @@ export class MatSidenavContainerComponent implements OnInit {
 
   categoriesState = this.store.select('categoriesState');
 
-  //TODO: Fetch warehouses from service
   warehouses: Warehouse[] = [];
 
   constructor(private _formBuilder: FormBuilder, private service: WarehouseService, private readonly store: Store<any>) {
   }
 
   ngOnInit(): void {
+    this.service.readAll().then(warehouses => {
+      this.warehouses = warehouses;
+
+      let firstWarehouse = this.warehouses[0];
+      if (firstWarehouse)
+        this.store.dispatch(setSelectedWarehouse({warehouse: firstWarehouse}));
+    });
   }
 
   showInventory() {
@@ -36,5 +43,10 @@ export class MatSidenavContainerComponent implements OnInit {
 
   showDiary() {
     this.showInventoryEvent.emit(false);
+  }
+
+  onSelectWarehouse(warehouse: Warehouse) {
+    //TODO: tell the store that we want to switch warehouse a.k.a dispatch the command
+    this.store.dispatch(setSelectedWarehouse({warehouse: warehouse}));
   }
 }
