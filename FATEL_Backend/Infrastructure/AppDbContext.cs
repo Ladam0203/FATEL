@@ -20,6 +20,9 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Item>()
             .Property(item => item.Id)
             .ValueGeneratedOnAdd();
+
+        modelBuilder.Entity<Item>()
+            .Ignore(item => item.Warehouse);
         
         //Warehouse
         modelBuilder.Entity<Entry>()
