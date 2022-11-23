@@ -39,10 +39,18 @@ export class AddItemComponent implements OnInit {
   text: string = 'ADD ITEM';
   confirmAdd: boolean = true;
 
+  categoriesState = this.store.select('categoriesState');
+
+  warehouseId: number | undefined;
+
   constructor(private itemService: ItemService, private readonly store: Store<any>) {
   }
 
   ngOnInit(): void {
+
+    this.categoriesState.subscribe(state => {
+      this.warehouseId = state.selectedWarehouse.id;
+    });
 
     this.itemForm = new FormGroup({
       name: new FormControl('', [
@@ -99,7 +107,11 @@ export class AddItemComponent implements OnInit {
       return;
     }
 
+    if(!this.warehouseId)
+      return;
+
     let dto: PostItemDTO = {
+      warehouseId: this.warehouseId,
       name: this.itemForm.get('name')?.value,
       length: this.itemForm.get('length')?.value,
       width: this.itemForm.get('width')?.value,
@@ -108,8 +120,10 @@ export class AddItemComponent implements OnInit {
       note: this.itemForm.get('note')?.value
     }
 
+    console.log('dto: ', dto);
     this.itemService.create(dto)
       .then(item => {
+        console.log('item: ', item);
         this.newItemEvent.emit(item);
         this.closeAddItemComponent();
       });
