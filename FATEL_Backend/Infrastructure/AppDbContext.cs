@@ -45,13 +45,14 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<User>()
             .Property(u => u.Id)
             .ValueGeneratedOnAdd();
-        
     }
 
     #region #region Database sets
+    
     public DbSet<Item> ItemTable { get; set; }
     public DbSet<Entry> EntryTable { get; set; }
     public DbSet<Warehouse> WarehouseTable { get; set; }
     public DbSet<User> UserTable { get; set; }
+    
     #endregion
 }

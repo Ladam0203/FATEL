@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import axios from "axios";
 import {PostItemDTO} from "../entities/DTOs/PostItemDTO";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Movement} from "../entities/DTOs/Movement";
 
 export const customAxios = axios.create({
   baseURL: 'http://localhost:5175/api/item/',
@@ -43,7 +44,6 @@ export class ItemService {
 
   async create(dto: PostItemDTO) {
     const response = await customAxios.post('create', dto);
-    console.log('data: ',response.data);
     return response.data;
   }
 
@@ -54,6 +54,12 @@ export class ItemService {
 
   async update(item: any) {
     const response = await customAxios.put<any>('update/' + item.id, item);
+    return response.data;
+  }
+
+  async updateQuantity(movement: Movement) {
+    // TODO: Extract the diary entry
+    const response = await customAxios.put<Item>('updateQuantity/' + movement.item.id, movement);
     return response.data;
   }
 

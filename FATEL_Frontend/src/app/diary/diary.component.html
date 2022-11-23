@@ -1,0 +1,36 @@
+<div class="diary-container">
+  <div class="header-container">
+    <h2 class="warehouse-header">Warehouse Diary</h2>
+  </div>
+  <app-filter-bar class="filter-bar"></app-filter-bar>
+  <table mat-table [dataSource]="entries | filter: 'itemName' : ((searchbarQuery | async) ?? '')">
+
+    <!-- Timestamp Column -->
+    <ng-container matColumnDef="timestamp">
+      <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Timestamp</th>
+      <td class="fs-5 ta-left" mat-cell *matCellDef="let entry"> {{entry.timestamp | date:'yyyy.MM.dd HH:mm'}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="itemName">
+      <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Name</th>
+      <td class="fs-5 ta-left" mat-cell *matCellDef="let entry"> {{entry.itemName}} </td>
+    </ng-container>
+
+    <!-- Change Column -->
+    <ng-container matColumnDef="change">
+      <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Change</th>
+      <td class="fs-5 ta-left" mat-cell *matCellDef="let entry"> {{entry.change}} </td>
+    </ng-container>
+
+    <!-- Quantity After Change Column -->
+    <ng-container matColumnDef="quantityAfterChange">
+      <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>After</th>
+      <td class="fs-5 ta-left" mat-cell *matCellDef="let entry"> {{entry.quantityAfterChange}} </td>
+    </ng-container>
+
+    <tr class="fs-5" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+</div>
