@@ -1,6 +1,7 @@
 import {createAction, createReducer, on, Action, props} from "@ngrx/store";
 import {Item} from "../../entities/item";
 import {Warehouse} from "../../entities/warehouse";
+import {Entry} from "../../entities/entry";
 
 export const setShowAddItemComponent = createAction('[Categories Component] Show Add Item');
 export const setShowEditItemComponent = createAction('[Categories Component] Show Edit Item', props<{ item: Item }>());
@@ -11,7 +12,9 @@ export const setSelectedWarehouse = createAction('[Sidenav Component] Set Wareho
 
 export const addItemAction = createAction('[Add Item Component] Add Item', props<{ item: Item }>());
 export const editItemAction = createAction('[Edit Item Component] Edit Item', props<{ item: Item }>());
-export const deleteItemAction = createAction('[Categories Component] Delete Item', props<{item: Item}>());
+export const deleteItemAction = createAction('[Categories Component] Delete Item', props<{ item: Item }>());
+
+export const addEntryAction = createAction('[Add Item Component] Add Entry', props<{ entry: Entry }>());
 
 export interface AppState {
   showAddItem: boolean,
@@ -105,7 +108,16 @@ export const reducer = createReducer(
     }
   })),
 
-
+  on(addEntryAction, (state, {entry}) => ({
+    ...state,
+    selectedWarehouse: {
+      ...state.selectedWarehouse,
+      diary: [
+        ...state.selectedWarehouse.diary,
+        entry
+      ]
+    }
+  })),
 );
 
 export function AppReducer(state: AppState = initialState, action: Action) {

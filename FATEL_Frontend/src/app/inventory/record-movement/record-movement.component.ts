@@ -14,7 +14,7 @@ import {close} from "../states/app.states";
 })
 export class RecordMovementComponent implements OnInit {
 
-  @Output() recordMovementEvent = new EventEmitter<Item>();
+  @Output() recordMovementEvent = new EventEmitter<any>();
 
   movementForm: FormGroup = new FormGroup({
     change: new FormControl(),
@@ -54,8 +54,8 @@ export class RecordMovementComponent implements OnInit {
     }
 
     this.itemService.updateQuantity(movement)
-      .then(item => {
-        this.recordMovementEvent.emit(item);
+      .then(data => {
+        this.recordMovementEvent.emit(data);
         this.closeRecordMovementComponent();
       });
   }
@@ -72,8 +72,8 @@ export class RecordMovementComponent implements OnInit {
     }
 
     this.itemService.updateQuantity(movement)
-      .then(item => {
-        this.recordMovementEvent.emit(item);
+      .then(data => {
+        this.recordMovementEvent.emit(data);
         this.closeRecordMovementComponent();
       });
   }

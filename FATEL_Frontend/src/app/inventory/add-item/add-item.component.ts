@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Unit} from "../../entities/units";
 import {Output, EventEmitter} from '@angular/core';
-import {Item} from "../../entities/item";
 import {ItemService} from "../../services/item.service";
 import {PostItemDTO} from "../../entities/DTOs/PostItemDTO";
 import {
@@ -21,7 +20,7 @@ import {close} from "../states/app.states";
 })
 export class AddItemComponent implements OnInit {
 
-  @Output() newItemEvent = new EventEmitter<Item>();
+  @Output() newItemEvent = new EventEmitter<any>();
 
   units: typeof Unit = Unit;
 
@@ -107,7 +106,7 @@ export class AddItemComponent implements OnInit {
       return;
     }
 
-    if(!this.warehouseId)
+    if (!this.warehouseId)
       return;
 
     let dto: PostItemDTO = {
@@ -121,8 +120,8 @@ export class AddItemComponent implements OnInit {
     }
 
     this.itemService.create(dto)
-      .then(item => {
-        this.newItemEvent.emit(item);
+      .then(data => {
+        this.newItemEvent.emit(data);
         this.closeAddItemComponent();
       });
 
