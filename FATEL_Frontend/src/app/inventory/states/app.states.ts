@@ -11,6 +11,7 @@ export const setSelectedWarehouse = createAction('[Sidenav Component] Set Wareho
 
 export const addItemAction = createAction('[Add Item Component] Add Item', props<{ item: Item }>());
 export const editItemAction = createAction('[Edit Item Component] Edit Item', props<{ item: Item }>());
+export const deleteItemAction = createAction('[Categories Component] Delete Item', props<{item: Item}>());
 
 export interface AppState {
   showAddItem: boolean,
@@ -93,6 +94,18 @@ export const reducer = createReducer(
       ]
     }
   })),
+
+  on(deleteItemAction, (state, {item}) => ({
+    ...state,
+    selectedWarehouse: {
+      ...state.selectedWarehouse,
+      inventory: [
+        ...state.selectedWarehouse.inventory.filter(items => items.id != item.id)
+      ]
+    }
+  })),
+
+
 );
 
 export function AppReducer(state: AppState = initialState, action: Action) {

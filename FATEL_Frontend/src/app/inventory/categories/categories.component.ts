@@ -10,7 +10,7 @@ import {
   setShowEditItemComponent,
   setShowRecordMovementComponent,
   addItemAction,
-  editItemAction,
+  editItemAction, deleteItemAction,
 } from "../states/app.states";
 import {Warehouse} from "../../entities/warehouse";
 
@@ -96,7 +96,7 @@ export class CategoriesComponent implements OnInit {
     setTimeout(() => {
       this.deletingId = undefined;
       this.confirmDelete = true;
-    }, 1500);
+    }, 3000);
 
     if (this.confirmDelete) {
       this.deletingId = itemToDelete.id;
@@ -111,13 +111,12 @@ export class CategoriesComponent implements OnInit {
 
     this.itemService.delete(itemToDelete.id)
       .then(item => {
-        this.items = this.items.filter(items => items.id != item.id);
-        this.categoriseItems();
+        this.store.dispatch(deleteItemAction({item: item}));
+        this.store.dispatch(close());
       })
 
     this.deletingId = undefined;
     this.confirmDelete = true;
-    this.store.dispatch(close());
   }
 
   openRecordMovementComponent(itemToRecordMovementOn: Item) {
