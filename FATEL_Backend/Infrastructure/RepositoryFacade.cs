@@ -36,6 +36,7 @@ public class RepositoryFacade : IRepositoryFacade
 
             dbContextTransaction.Commit();
             
+            newEntry.Warehouse = null;
             return new ItemWithEntry(newItem, newEntry);
         }
     }
@@ -57,7 +58,8 @@ public class RepositoryFacade : IRepositoryFacade
             _context.SaveChanges();
 
             dbContextTransaction.Commit();
-
+            
+            newEntry.Warehouse = null;
             return new ItemWithEntry(newItem, newEntry);
         }
     }
