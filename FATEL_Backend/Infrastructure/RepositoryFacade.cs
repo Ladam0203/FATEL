@@ -107,6 +107,8 @@ public class RepositoryFacade : IRepositoryFacade
 
             dbContextTransaction.Commit();
             
+            newItem.Warehouse = null;
+            newEntry.Warehouse = null;
             return new ItemWithEntry(newItem, newEntry);
         }
     }
