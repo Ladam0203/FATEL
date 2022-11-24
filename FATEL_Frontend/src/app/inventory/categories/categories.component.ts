@@ -9,7 +9,8 @@ import {
   close,
   setShowEditItemComponent,
   setShowRecordMovementComponent,
-  addItem,
+  addItemAction,
+  editItemAction,
 } from "../states/app.states";
 import {Warehouse} from "../../entities/warehouse";
 
@@ -54,11 +55,12 @@ export class CategoriesComponent implements OnInit {
 
       this.selectedItem = state.selectedItem;
 
-      this.items = state.selectedWarehouse.inventory;
+      if (this.items != state.selectedWarehouse.inventory) {
+        this.items = state.selectedWarehouse.inventory;
+        this.categoriseItems();
+      }
 
       this.warehouse = state.selectedWarehouse;
-
-      this.categoriseItems();
     });
   }
 
@@ -76,14 +78,11 @@ export class CategoriesComponent implements OnInit {
   }
 
   addItem(newItem: Item) {
-    this.store.dispatch(addItem({item: newItem}))
-    this.categoriseItems();
+    this.store.dispatch(addItemAction({item: newItem}));
   }
 
   editItem(editItem: Item) {
-    this.items = this.items.filter(item => item.id != editItem.id);
-    this.items.push(editItem);
-    this.categoriseItems();
+    this.store.dispatch(editItemAction({item: editItem}));
   }
 
   openEditItemComponent(itemToEdit: Item) {

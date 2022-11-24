@@ -120,10 +120,8 @@ export class AddItemComponent implements OnInit {
       note: this.itemForm.get('note')?.value
     }
 
-    console.log('dto: ', dto);
     this.itemService.create(dto)
       .then(item => {
-        console.log('item: ', item);
         this.newItemEvent.emit(item);
         this.closeAddItemComponent();
       });
