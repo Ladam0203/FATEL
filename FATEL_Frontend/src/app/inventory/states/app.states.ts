@@ -8,7 +8,9 @@ export const setShowRecordMovementComponent = createAction('[Categories Componen
 export const close = createAction('[Categories Component] Close All');
 
 export const setSelectedWarehouse = createAction('[Sidenav Component] Set Warehouse', props<{ warehouse: Warehouse }>());
-export const addItem = createAction('[Add Item Component] Add Item', props<{item: Item }>());
+
+export const addItemAction = createAction('[Add Item Component] Add Item', props<{ item: Item }>());
+export const editItemAction = createAction('[Edit Item Component] Edit Item', props<{ item: Item }>());
 
 export interface AppState {
   showAddItem: boolean,
@@ -70,12 +72,23 @@ export const reducer = createReducer(
     selectedWarehouse: warehouse,
   })),
 
-  on(addItem, (state, {item}) => ({
+  on(addItemAction, (state, {item}) => ({
     ...state,
     selectedWarehouse: {
       ...state.selectedWarehouse,
       inventory: [
-        ...state.selectedWarehouse?.inventory,
+        ...state.selectedWarehouse.inventory,
+        item
+      ]
+    }
+  })),
+
+  on(editItemAction, (state, {item}) => ({
+    ...state,
+    selectedWarehouse: {
+      ...state.selectedWarehouse,
+      inventory: [
+        ...state.selectedWarehouse.inventory.filter(items => items.id != item.id),
         item
       ]
     }
