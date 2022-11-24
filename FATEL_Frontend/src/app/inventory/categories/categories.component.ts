@@ -10,7 +10,7 @@ import {
   setShowEditItemComponent,
   setShowRecordMovementComponent,
   addItemAction,
-  editItemAction, deleteItemAction,
+  editItemAction, deleteItemAction, addEntryAction,
 } from "../states/app.states";
 import {Warehouse} from "../../entities/warehouse";
 
@@ -77,12 +77,17 @@ export class CategoriesComponent implements OnInit {
     this.categories.sort((a, b) => a.name.localeCompare(b.name));
   }
 
-  addItem(newItem: Item) {
-    this.store.dispatch(addItemAction({item: newItem}));
+  addItem(data: any) {
+    this.store.dispatch(addItemAction({item: data.item}));
+    if(data.entry)
+      this.store.dispatch(addEntryAction({entry: data.entry}));
   }
 
-  editItem(editItem: Item) {
-    this.store.dispatch(editItemAction({item: editItem}));
+  editItem(data: any) {
+    console.log('data: ', data);
+    this.store.dispatch(editItemAction({item: data.item}));
+    if(data.entry)
+      this.store.dispatch(addEntryAction({entry: data.entry}))
   }
 
   openEditItemComponent(itemToEdit: Item) {
@@ -110,8 +115,9 @@ export class CategoriesComponent implements OnInit {
     }
 
     this.itemService.delete(itemToDelete.id)
-      .then(item => {
-        this.store.dispatch(deleteItemAction({item: item}));
+      .then(data => {
+        this.store.dispatch(deleteItemAction({item: data.item}));
+        this.store.dispatch(addEntryAction({entry: data.entry}));
         this.store.dispatch(close());
       })
 

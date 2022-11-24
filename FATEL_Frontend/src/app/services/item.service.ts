@@ -44,7 +44,22 @@ export class ItemService {
 
   async create(dto: PostItemDTO) {
     const response = await customAxios.post('create', dto);
-    return response.data;
+    return this.mapResponse(response.data);
+  }
+
+  private mapResponse(data: any) {
+    return {
+      item: {
+        id: data.id,
+        name: data.name,
+        length: data.length,
+        width: data.width,
+        unit: data.unit,
+        quantity: data.quantity,
+        note: data.note,
+      },
+      entry: data.entry
+    };
   }
 
   async readAll(): Promise<Item[]> {
@@ -54,18 +69,18 @@ export class ItemService {
 
   async update(item: any) {
     const response = await customAxios.put<any>('update/' + item.id, item);
-    return response.data;
+    return this.mapResponse(response.data);
   }
 
   async updateQuantity(movement: Movement) {
-    // TODO: Extract the diary entry
     const response = await customAxios.put<Item>('updateQuantity/' + movement.item.id, movement);
-    return response.data;
+    console.log(response.data);
+    return this.mapResponse(response.data);
   }
 
   async delete(id: any) {
     const response = await customAxios.delete('delete/' + id);
-    return response.data;
+    return this.mapResponse(response.data);
   }
 
   async get(id: any) {

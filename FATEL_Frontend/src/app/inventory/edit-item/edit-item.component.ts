@@ -15,7 +15,7 @@ import {close} from "../states/app.states";
 })
 export class EditItemComponent implements OnInit {
 
-  @Output() editItemEvent = new EventEmitter<Item>();
+  @Output() editItemEvent = new EventEmitter<any>();
 
   units: typeof Unit = Unit;
 
@@ -128,8 +128,8 @@ export class EditItemComponent implements OnInit {
     }
 
     this.itemService.update(updateItem)
-      .then(item => {
-        this.editItemEvent.emit(item);
+      .then(data => {
+        this.editItemEvent.emit(data);
         this.closeEditItemComponent();
       });
 
