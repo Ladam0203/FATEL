@@ -48,4 +48,24 @@ export class MatSidenavContainerComponent implements OnInit {
   onSelectWarehouse(warehouse: Warehouse) {
     this.store.dispatch(setSelectedWarehouse({warehouse: warehouse}));
   }
+
+  createWarehouse() {
+    this.service.create({name: "New Warehouse"}).then(warehouse => {
+      console.log("Created warehouse: " + warehouse);
+      this.warehouses.push(warehouse);
+    });
+  }
+
+  //Is this right?
+  updateWarehouse(warehouse: Warehouse) {
+    this.service.update(warehouse).then(() => {
+      this.warehouses = this.warehouses.filter(w => w.id != warehouse.id);
+    });
+  }
+
+  deleteWarehouse(warehouse: Warehouse) {
+    this.service.delete(warehouse.id).then(() => {
+      this.warehouses = this.warehouses.filter(w => w.id != warehouse.id);
+    });
+  }
 }
