@@ -121,9 +121,9 @@ export class EditItemComponent implements OnInit {
     let updateItem: UpdateItemDTO = {
       id: this.editingItem?.id,
       name: this.itemForm.get('name')?.value,
-      length: this.itemForm.get('length')?.value,
-      width: this.itemForm.get('width')?.value,
       unit: this.itemForm.get('unit')?.value,
+      length: this.itemForm.get('length')?.disabled ? null : this.itemForm.get('length')?.value,
+      width: this.itemForm.get('width')?.disabled ? null : this.itemForm.get('width')?.value,
       note: this.itemForm.get('note')?.value == "" ? null : this.itemForm.get('note')?.value,
     }
 
