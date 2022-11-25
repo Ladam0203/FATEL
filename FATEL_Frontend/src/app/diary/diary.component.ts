@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Entry} from "../entities/entry";
 import {EntryService} from "../services/entry.service";
 import {selectSearchbarQueryValue} from "../inventory/states/filter-bar.actions";
@@ -10,6 +10,7 @@ import {Store} from "@ngrx/store";
   styleUrls: ['./diary.component.css']
 })
 export class DiaryComponent implements OnInit {
+
 
   displayedColumns: string[] = ['timestamp', 'itemName', 'change', 'quantityAfterChange'];
 
@@ -28,6 +29,7 @@ export class DiaryComponent implements OnInit {
     this.appState.subscribe(state => {
       this.name = state.selectedWarehouse.name;
       this.entries = state.selectedWarehouse.diary;
+      this.entries = [...this.entries].sort((a, b) => Number(new Date(a.timestamp)) - Number(new Date(b.timestamp)))
     })
   }
 }
