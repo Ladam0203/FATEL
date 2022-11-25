@@ -14,6 +14,7 @@ export class DiaryComponent implements OnInit {
   displayedColumns: string[] = ['timestamp', 'itemName', 'change', 'quantityAfterChange'];
 
   entries: Entry[] = [];
+  sortedEntries: Entry[] = [];
   searchbarQuery = this.store.select(selectSearchbarQueryValue);
 
   appState = this.store.select('appState');
@@ -25,8 +26,8 @@ export class DiaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.appState.subscribe(state => {
-      this.entries = state.selectedWarehouse.diary;
       this.name = state.selectedWarehouse.name;
+      this.entries = state.selectedWarehouse.diary;
     })
   }
 }
