@@ -21,13 +21,18 @@
 
 .warehouse-wrapper {
   height: 400px;
+
+  /* make Y axis scrollable */
   overflow-y: scroll;
   overflow-x: hidden;
+
+  /* hide scrollbar */
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
 .warehouse-wrapper::-webkit-scrollbar {
+  /* hide scrollbar */
   display: none;
 }
 
