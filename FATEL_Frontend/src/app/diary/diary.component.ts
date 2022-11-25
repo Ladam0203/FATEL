@@ -29,7 +29,7 @@ export class DiaryComponent implements OnInit {
     this.appState.subscribe(state => {
       this.name = state.selectedWarehouse.name;
       this.entries = state.selectedWarehouse.diary;
-      this.entries = [...this.entries].sort((a, b) => Number(new Date(a.timestamp)) - Number(new Date(b.timestamp)))
+      this.entries = [...this.entries].sort((a, b) => Number(new Date(a.timestamp)) - Number(new Date(b.timestamp))).reverse()
     })
   }
 }
