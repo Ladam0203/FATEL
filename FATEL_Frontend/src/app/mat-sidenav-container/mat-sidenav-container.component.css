@@ -19,6 +19,18 @@
   padding-right: calc(50% - 36px);
 }
 
+.warehouse-wrapper {
+  height: 400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.warehouse-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
 .sidenav-component-wrapper {
   display: flex;
   flex-wrap: nowrap;
@@ -31,7 +43,7 @@
   height: 80px;
 }
 
-.sidenav-component-wrapper:not(:first-child) {
+.warehouse-wrapper .sidenav-component-wrapper {
   margin-top: 0;
   border-top: 2px solid rgba(255, 255, 255, .75);
 
@@ -41,12 +53,30 @@
   cursor: pointer;
 }
 
-div.sidenav-component-wrapper:last-child {
+.warehouse-wrapper .sidenav-component-wrapper:not:last-child {
   border-bottom: 2px solid rgba(255, 255, 255, .75);
 }
 
-.sidenav-component-wrapper:hover:not(:first-child) mat-icon {
+.warehouse-wrapper .sidenav-component-wrapper:first-child {
+  border-top: none;
+}
+
+.warehouse-wrapper .sidenav-component-wrapper:hover mat-icon {
   border-bottom: 1px solid var(--white);
+}
+
+.add-warehouse-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
+
+  width: calc(150px + 80px);
+  height: 80px;
+
+  border-top: 2px solid rgba(255, 255, 255, .75);
 }
 
 .sidenav-heading-wrapper > a {
@@ -58,6 +88,7 @@ div.sidenav-component-wrapper:last-child {
   align-self: center;
   padding-right: 0;
   transition: padding-right 0.7s;
+  border-bottom: 2px solid rgba(255, 255, 255, .75);
 }
 
 .sidenav-heading-wrapper {
@@ -90,6 +121,14 @@ div.sidenav-component-wrapper:last-child {
 .icon {
   color: white;
   transform: scale(1.5);
+}
+
+.add-warehouse-button .icon {
+  transform: scale(1.7);
+}
+
+.add-warehouse-button:hover .icon {
+  color: var(--success);
 }
 
 .button {
