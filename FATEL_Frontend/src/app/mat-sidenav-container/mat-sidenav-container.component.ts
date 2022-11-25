@@ -35,6 +35,15 @@ export class MatSidenavContainerComponent implements OnInit {
       if (firstWarehouse)
         this.store.dispatch(setSelectedWarehouse({warehouse: firstWarehouse}));
     });
+    this.appState.subscribe(state => {
+      if (state.selectedWarehouse) {
+        let warehouse = this.warehouses.find(w => w.id == state.selectedWarehouse.id);
+        if (warehouse) {
+          let index = this.warehouses.indexOf(warehouse)
+          this.warehouses[index] = state.selectedWarehouse;
+        }
+      }
+    });
   }
 
   showInventory() {
