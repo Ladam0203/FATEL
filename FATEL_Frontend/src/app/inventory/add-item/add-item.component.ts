@@ -122,11 +122,10 @@ export class AddItemComponent implements OnInit {
     this.itemService.create(dto)
       .then(data => {
         this.newItemEvent.emit(data);
+        this.text = 'ADD ITEM';
+        this.confirmAdd = true;
         this.closeAddItemComponent();
       });
-
-    this.text = 'ADD ITEM';
-    this.confirmAdd = true;
   }
 
   closeAddItemComponent() {
