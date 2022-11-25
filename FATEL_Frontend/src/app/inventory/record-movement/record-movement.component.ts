@@ -25,7 +25,9 @@ export class RecordMovementComponent implements OnInit {
   itemToRecordMovementOn: Item | undefined;
 
   restrictedButtonUsage: boolean = false;
-  confirmMove: boolean = true;
+
+  confirmDeposit: boolean = true;
+  confirmWithdraw: boolean = true;
 
   constructor(private itemService: ItemService, private readonly store: Store<any>) {
   }
@@ -42,10 +44,17 @@ export class RecordMovementComponent implements OnInit {
       .subscribe(value => this.itemToRecordMovementOn = value.selectedItem);
   }
 
+
   deposit() {
 
     if (!this.validation())
       return;
+
+    if (this.confirmDeposit) {
+      this.confirmDeposit = false;
+      this.confirmWithdraw = true;
+      return;
+    }
 
     let movement: Movement = {
       // @ts-ignore
@@ -56,14 +65,22 @@ export class RecordMovementComponent implements OnInit {
     this.itemService.updateQuantity(movement)
       .then(data => {
         this.recordMovementEvent.emit(data);
+        this.confirmDeposit = true;
         this.closeRecordMovementComponent();
       });
   }
+
 
   withdraw() {
 
     if (!this.validation())
       return;
+
+    if (this.confirmWithdraw) {
+      this.confirmWithdraw = false;
+      this.confirmDeposit = true;
+      return;
+    }
 
     let movement: Movement = {
       // @ts-ignore
@@ -74,19 +91,16 @@ export class RecordMovementComponent implements OnInit {
     this.itemService.updateQuantity(movement)
       .then(data => {
         this.recordMovementEvent.emit(data);
+        this.confirmWithdraw = true;
         this.closeRecordMovementComponent();
       });
   }
+
 
   validation(): boolean {
     if (this.movementForm.invalid) {
       this.restrictedButtonUsage = true;
       this.movementForm.markAllAsTouched();
-      return false;
-    }
-
-    if (this.confirmMove) {
-      this.confirmMove = false;
       return false;
     }
 

@@ -59,3 +59,14 @@
   color: var(--white);
 }
 
+.confirmDeposit, .confirmDeposit:hover {
+  background-color: var(--success);
+  border-color: var(--success);
+}
+
+.confirmWithdraw, .confirmWithdraw:hover {
+  background-color: var(--danger);
+  border-color: var(--danger);
+}
+
+
