@@ -21,7 +21,6 @@ export class WarehouseService {
   }
 
   async create(dto: PostWarehouseDTO): Promise<Warehouse> {
-    console.log("called")
     const response = await customAxios.post<Warehouse>('create', dto);
     return response.data;
   }
