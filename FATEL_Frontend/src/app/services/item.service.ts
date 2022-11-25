@@ -74,7 +74,6 @@ export class ItemService {
 
   async updateQuantity(movement: Movement) {
     const response = await customAxios.put<Item>('updateQuantity/' + movement.item.id, movement);
-    console.log(response.data);
     return this.mapResponse(response.data);
   }
 

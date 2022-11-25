@@ -84,7 +84,6 @@ export class CategoriesComponent implements OnInit {
   }
 
   editItem(data: any) {
-    console.log('data: ', data);
     this.store.dispatch(editItemAction({item: data.item}));
     if(data.entry)
       this.store.dispatch(addEntryAction({entry: data.entry}))
