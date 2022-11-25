@@ -30,6 +30,7 @@ import {EditItemComponent} from './inventory/edit-item/edit-item.component';
 import {AppReducer} from "./inventory/states/app.states";
 import {RecordMovementComponent} from './inventory/record-movement/record-movement.component';
 import {DiaryComponent} from './diary/diary.component';
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -46,23 +47,24 @@ import {DiaryComponent} from './diary/diary.component';
     RecordMovementComponent,
     DiaryComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    NgbModule,
-    NgMaterialModule,
-    MatTableModule,
-    MatSidenavModule,
-    MatCheckboxModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatAutocompleteModule,
-    StoreModule.forRoot({searchbarQuery: searchbarQueryReducer, appState: AppReducer}),
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        NgbModule,
+        NgMaterialModule,
+        MatTableModule,
+        MatSidenavModule,
+        MatCheckboxModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatAutocompleteModule,
+        StoreModule.forRoot({searchbarQuery: searchbarQueryReducer, appState: AppReducer}),
+        MatSortModule,
+    ],
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent],
 })
