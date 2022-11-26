@@ -16,6 +16,8 @@ export const deleteItemAction = createAction('[Categories Component] Delete Item
 
 export const addEntryAction = createAction('[Add Item Component] Add Entry', props<{ entry: Entry }>());
 
+export const editWarehouseAction = createAction('[Tool Bar Component] Edit Warehouse', props<{ warehouse: Warehouse }>());
+
 export interface AppState {
   showAddItem: boolean,
   showEditItem: boolean,
@@ -116,6 +118,14 @@ export const reducer = createReducer(
         ...state.selectedWarehouse.diary,
         entry
       ]
+    }
+  })),
+
+  on(editWarehouseAction, (state, {warehouse}) => ({
+    ...state,
+    selectedWarehouse: {
+      ...state.selectedWarehouse,
+      name: warehouse.name
     }
   })),
 );

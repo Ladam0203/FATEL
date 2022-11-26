@@ -1,9 +1,9 @@
 <div class="warehouse-action-bar">
   <h2 class="warehouse-header">INVENTORY</h2>
   <hr class="divider">
-  <h2 *ngIf="!editing" class="warehouse-header">{{name}}</h2>
-  <input *ngIf="editing" value="{{name}}" class="edit-field">
-  <button mat-button class="edit-button fs-5" (click)="editing ? otherFunc() : onEditWarehouse()">
+  <h2 *ngIf="!editing" class="warehouse-header">{{warehouse?.name}}</h2>
+  <input *ngIf="editing" value="{{warehouse?.name}}" class="edit-field" [(ngModel)]="name">
+  <button mat-button class="edit-button fs-5" (click)="editing ? editWarehouse() : onEditWarehouse()">
     <mat-icon [innerHTML]="editing ? 'check' : 'edit' "></mat-icon>
   </button>
 </div>

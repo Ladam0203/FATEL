@@ -26,7 +26,7 @@ export class WarehouseService {
   }
 
   async update(dto: PutWarehouseDTO): Promise<Warehouse> {
-    const response = await customAxios.put<Warehouse>('update', dto);
+    const response = await customAxios.put<Warehouse>(`update/${dto.id}`, dto);
     return response.data;
   }
 
