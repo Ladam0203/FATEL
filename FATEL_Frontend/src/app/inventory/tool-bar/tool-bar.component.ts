@@ -13,6 +13,8 @@ export class ToolBarComponent implements OnInit {
 
   name: string = 'Warehouse';
 
+  editing: boolean = false;
+
   constructor(private readonly store: Store<any>) {
   }
 
@@ -24,5 +26,13 @@ export class ToolBarComponent implements OnInit {
 
   openAddItemComponent() {
     this.store.dispatch(setShowAddItemComponent());
+  }
+
+  onEditWarehouse() {
+    this.editing = true;
+  }
+  otherFunc() {
+    console.log('here')
+    this.editing = false;
   }
 }
