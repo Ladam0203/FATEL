@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {setShowAddItemComponent} from "../states/app.states";
+import { Warehouse } from 'src/app/entities/warehouse';
+import {editWarehouseAction, setShowAddItemComponent} from "../states/app.states";
+import {WarehouseService} from "../../services/warehouse.service";
 
 @Component({
   selector: 'app-tool-bar',
@@ -11,16 +13,17 @@ export class ToolBarComponent implements OnInit {
 
   appState = this.store.select('appState');
 
-  name: string = 'Warehouse';
+  name : string | undefined;
+  warehouse : Warehouse | undefined;
 
   editing: boolean = false;
 
-  constructor(private readonly store: Store<any>) {
-  }
+  constructor(private readonly store: Store<any>, private service: WarehouseService) { }
 
   ngOnInit(): void {
     this.appState.subscribe(state => {
-      this.name = state.selectedWarehouse.name;
+      this.warehouse = state.selectedWarehouse;
+      this.name = this.warehouse?.name;
     });
   }
 
@@ -31,8 +34,24 @@ export class ToolBarComponent implements OnInit {
   onEditWarehouse() {
     this.editing = true;
   }
-  otherFunc() {
-    console.log('here')
+
+  editWarehouse() {
+    if (!this.warehouse) {
+      return;
+    }
+    if (!this.name) {
+      return;
+    }
+    if (this.name == '') {
+      return;
+    }
+
     this.editing = false;
+
+    this.service.update({id: this.warehouse.id, name: this.name})
+      .then(warehouse =>
+      {
+        this.store.dispatch(editWarehouseAction({warehouse: warehouse}));
+      });
   }
 }
