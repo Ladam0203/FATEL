@@ -1,53 +1,38 @@
 import {Injectable} from '@angular/core';
 import {Warehouse} from '../entities/warehouse'
-import {WAREHOUSES} from '../mock-objects/mock-warehouses';
-import {Observable, of} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {catchError, map, tap} from 'rxjs/operators';
+import axios from "axios";
+import {PostWarehouseDTO} from "../entities/DTOs/PostWarehouseDTO";
+import {PutWarehouseDTO} from "../entities/DTOs/PutWarehouseDTO";
+
+export const customAxios = axios.create({
+  baseURL: 'http://localhost:5175/api/warehouse/',
+})
 
 @Injectable({
   providedIn: 'root'
 })
 export class WarehouseService {
-  private warehouseUrl = 'api/warehouse'; //URL to web api
-
-  httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  constructor() {
   }
 
-  constructor(private http: HttpClient) {
-
+  async readAll(): Promise<Warehouse[]> {
+    const response = await customAxios.get<Warehouse[]>('readall');
+    return response.data;
   }
 
-  getAllWarehouses(): Warehouse[] {
-    return WAREHOUSES;
-  }
-  /*
-  getAllWarehouses(): Observable<Warehouse[]> {
-    return this.http.get<Warehouse[]>(this.warehouseUrl)
-      .pipe(
-        tap(_ => this.log('fetched warehouses')),
-        catchError(this.handleError<Warehouse[]>('getAllWarehouses', []))
-      );
-  }*/
-
-  private handleError<T>(operation = 'operation', result?: T){
-    return (error: any): Observable<T> => {
-      console.error(error);
-      this.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    }
+  async create(dto: PostWarehouseDTO): Promise<Warehouse> {
+    const response = await customAxios.post<Warehouse>('create', dto);
+    return response.data;
   }
 
-  getWarehouse(id: number): Observable<Warehouse> {
-    const url = `${this.warehouseUrl}/${id}`;
-    return this.http.get<Warehouse>(url).pipe(
-      tap(_ => this.log(`fetched warehouse id=${id}`)),
-      catchError(this.handleError<Warehouse>(`getWarehouse id=${id}`))
-    )
+  async update(dto: PutWarehouseDTO): Promise<Warehouse> {
+    const response = await customAxios.put<Warehouse>(`update/${dto.id}`, dto);
+    return response.data;
   }
 
-  private log(message: string){
-    console.log(message);
+  async delete(id: number): Promise<Warehouse> {
+    const response = await customAxios.delete(`delete/${id}`);
+    return response.data;
   }
 }
+

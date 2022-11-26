@@ -48,7 +48,8 @@ public class ItemService : IItemService
             //We cannot deal with the Id here
             ItemName = item.Name,
             Change = totalChange,
-            QuantityAfterChange = totalChange //old total quantity plus new totalChange
+            QuantityAfterChange = totalChange, //old total quantity plus new totalChange
+            WarehouseId = item.WarehouseId
         };
         return _repository.CreateAndRecord(item, entry);
     }
@@ -85,10 +86,6 @@ public class ItemService : IItemService
         //Check if item with id exists, if not, this will throw a KeyNotFoundException
         Item item = _repository.ReadItem(movement.Item.Id);
 
-        //Check if stored item is the same as the one in the movement
-        if (JsonConvert.SerializeObject(item) != JsonConvert.SerializeObject(movement.Item)) 
-            throw new ValidationException("Item in body does not match with stored Item"); //TODO: This most probably should be a different exception
-
         //Change the item based on the movement
         item.Quantity += movement.Change;
         //Create a diary entry
@@ -99,7 +96,8 @@ public class ItemService : IItemService
             ItemId = item.Id,
             ItemName = item.Name,
             Change = totalChange,
-            QuantityAfterChange = _repository.ReadTotalQuantityOf(item.Name) + totalChange //old total quantity plus new totalChange
+            QuantityAfterChange = _repository.ReadTotalQuantityOf(item) + totalChange, //old total quantity plus new totalChange
+            WarehouseId = item.WarehouseId
         };
         return _repository.UpdateQuantityAndRecord(item, entry);
     }
@@ -119,7 +117,8 @@ public class ItemService : IItemService
             ItemId = item.Id,
             ItemName = item.Name,
             Change = totalChange,
-            QuantityAfterChange = 0  
+            QuantityAfterChange = 0,
+            WarehouseId = item.WarehouseId
         };
         return _repository.DeleteAndRecord(item.Id, entry);
     }

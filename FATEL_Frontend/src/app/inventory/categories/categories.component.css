@@ -1,0 +1,117 @@
+.inventory {
+  flex: 1;
+  min-width: 70%;
+}
+
+.mat-expansion-panel {
+  border: 1px solid rgba(0, 0, 0, .24);
+}
+
+.panel-description {
+  flex: 1;
+}
+
+table {
+  width: 100%;
+}
+
+.ta-left {
+  text-align: left !important;
+}
+
+.action-cell {
+  padding: 0;
+  height: 48px;
+  border-bottom: 1px solid rgba(0, 0, 0, .12);
+  justify-content: center;
+}
+
+.action-container {
+  position: sticky;
+  flex: 1;
+  align-self: flex-start;
+  top: 0;
+  max-width: 30%;
+  row-gap: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+tr:last-of-type td {
+  border-bottom-width: 0 !important;
+}
+
+.mat-expansion-panel {
+  margin: 0 0 16px 0;
+}
+
+.mat-accordion .mat-expansion-panel:not(.mat-expanded), .mat-accordion .mat-expansion-panel:not(.mat-expansion-panel-spacing) {
+  border-radius: 4px !important;
+}
+
+.actions-cell-header {
+}
+
+.actions-cell {
+  height: 48px;
+  justify-content: right;
+  column-gap: 8px;
+  float: right;
+}
+
+tr:last-of-type .actions-cell {
+  border-bottom: none;
+}
+
+tr:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, .12);
+}
+
+.edit-item-button {
+  background-color: var(--white);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  transition: background-color .2s, color .2s;
+}
+
+.edit-item-button:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.delete-item-button {
+  background-color: var(--white);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  transition: background-color .2s, color .2s;
+}
+
+.delete-item-button:hover {
+  background-color: var(--danger);
+  border: 1px solid var(--danger);
+  color: var(--white);
+}
+
+.editing, .editing:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+  cursor: default;
+}
+
+.editing-row {
+  background-color: #eeecec;
+}
+
+.item-form {
+  border: 1px solid rgba(0, 0, 0, .24);
+  border-radius: 8px;
+  margin-left: 20px;
+  padding: 16px 0;
+}
+
+.confirmDelete, .confirmDelete:hover {
+  background-color: var(--danger);
+  border-color: var(--danger);
+  color: var(--white);
+}

@@ -1,0 +1,110 @@
+.warehouse-action-bar {
+  display: flex;
+  flex-direction: row;
+}
+
+.warehouse-header {
+  color: var(--primary);
+}
+
+.edit-field {
+  border: none;
+  color: var(--primary);
+}
+
+.edit-field:focus {
+  border: none;
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+.divider {
+  border-left: 1px solid var(--primary);
+  height: 2em;
+  margin: 4px 12px 0 12px;
+}
+
+.warehouse-action-wrapper {
+  align-self: center;
+  margin-left: 8px;
+}
+
+.warehouse-action-button {
+  color: var(--primary);
+}
+
+.warehouse-action-button:hover {
+  background-color: #eeecec;
+}
+
+.warehouse-action-button mat-icon {
+  font-size: 18px;
+}
+
+.delete-warehouse-button {
+  margin-left: 4px;
+}
+
+.editing {
+  background-color: #eeecec;
+}
+
+.editing:hover {
+  background-color: var(--success);
+}
+
+.editing:hover mat-icon, .deleting:hover mat-icon {
+  color: var(--white);
+}
+
+.deleting {
+  background-color: #eeecec;
+}
+
+.deleting:hover {
+  background-color: var(--danger);
+}
+
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.action-bar button {
+  margin-inline: 12px;
+}
+
+.action-bar:last-child button {
+  margin-right: 0;
+}
+
+.secondary-button {
+  border: 1px solid var(--primary);
+  transition: background-color .2s, color .2s;
+  color: var(--primary);
+}
+
+.secondary-button:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+.main-button {
+  background-color: var(--primary);
+  color: white;
+  padding: 0 12px 0 8px;
+
+  box-shadow: none;
+  transition: box-shadow 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.main-button:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.main-icon {
+  font-size: 31px;
+  height: 32px;
+  width: 32px;
+}

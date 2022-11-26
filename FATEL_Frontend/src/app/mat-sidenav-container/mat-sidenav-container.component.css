@@ -19,6 +19,23 @@
   padding-right: calc(50% - 36px);
 }
 
+.warehouse-wrapper {
+  height: 400px;
+
+  /* make Y axis scrollable */
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  /* hide scrollbar */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.warehouse-wrapper::-webkit-scrollbar {
+  /* hide scrollbar */
+  display: none;
+}
+
 .sidenav-component-wrapper {
   display: flex;
   flex-wrap: nowrap;
@@ -31,9 +48,9 @@
   height: 80px;
 }
 
-.sidenav-component-wrapper:not(:first-child) {
+.warehouse-wrapper .sidenav-component-wrapper {
   margin-top: 0;
-  border-top: 2px solid rgba(255, 255, 255, .75);
+  border-bottom: 2px solid rgba(255, 255, 255, .75);
 
   padding-top: 8px;
   padding-bottom: 8px;
@@ -41,12 +58,30 @@
   cursor: pointer;
 }
 
-.sidenav-component-wrapper:last-child {
-  border-bottom: 2px solid rgba(255, 255, 255, .75);
+.warehouse-wrapper .sidenav-component-wrapper:last-child {
+  border-bottom: transparent;
 }
 
-.sidenav-component-wrapper:hover:not(:first-child) mat-icon {
+.warehouse-wrapper .sidenav-component-wrapper:first-child {
+  border-top: none;
+}
+
+.warehouse-wrapper .sidenav-component-wrapper:hover mat-icon {
   border-bottom: 1px solid var(--white);
+}
+
+.add-warehouse-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
+
+  width: calc(150px + 80px);
+  height: 80px;
+
+  border-top: 2px solid rgba(255, 255, 255, .75);
 }
 
 .sidenav-heading-wrapper > a {
@@ -58,10 +93,12 @@
   align-self: center;
   padding-right: 0;
   transition: padding-right 0.7s;
+  border-bottom: 2px solid rgba(255, 255, 255, .75);
 }
 
 .sidenav-heading-wrapper {
   width: 150px;
+  display: flex;
 }
 
 .sidenav-icon-wrapper {
@@ -92,12 +129,24 @@
   transform: scale(1.5);
 }
 
-.warehouse-button {
+.add-warehouse-button .icon {
+  transform: scale(1.7);
+}
+
+.add-warehouse-button:hover .icon {
+  color: var(--success);
+}
+
+.button {
   background-color: transparent;
   border: none;
   padding: 8px;
 }
 
-
-
-
+.sidenav-inventory-diary-wrapper {
+  bottom: 20px;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  width: calc(150px + 80px);
+}

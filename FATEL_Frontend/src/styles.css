@@ -50,3 +50,19 @@ body {
 .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
   color: var(--primary);
 }
+
+.mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+.mat-expansion-panel {
+  box-shadow: none !important;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: var(--white);
+}
+
+.editing .mat-button-focus-overlay {
+  background: transparent !important;
+}

@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
-import {catchError, tap} from 'rxjs/operators';
-import {Unit} from "../entities/units";
-import {Observable, of} from "rxjs";
+import {catchError} from 'rxjs/operators';
 import {Item} from "../entities/item";
 import {HttpClient} from "@angular/common/http";
 import axios from "axios";
 import {PostItemDTO} from "../entities/DTOs/PostItemDTO";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Movement} from "../entities/DTOs/Movement";
 
 export const customAxios = axios.create({
   baseURL: 'http://localhost:5175/api/item/',
@@ -21,21 +20,20 @@ export class ItemService {
               private matSnackBar: MatSnackBar) {
     customAxios.interceptors.response.use(
       response => {
-        if(response.status==201){
+        if (response.status == 201) {
           this.matSnackBar.open("Item Created",
             undefined,
             {duration: 4000});
         }
         return response;
       },
-      rejected =>{
-        if(rejected.response.status>=400 && rejected.response.status < 500) {
+      rejected => {
+        if (rejected.response.status >= 400 && rejected.response.status < 500) {
           this.matSnackBar.open(rejected.response.data,
             undefined,
             {duration: 4000});
-        }
-        else if(rejected.response.status > 499){
-          this.matSnackBar.open("Something went wrong",
+        } else if (rejected.response.status > 499) {
+          this.matSnackBar.open(JSON.stringify(rejected.response),
             undefined,
             {duration: 4000})
         }
@@ -44,41 +42,48 @@ export class ItemService {
     )
   }
 
+  async create(dto: PostItemDTO) {
+    const response = await customAxios.post('create', dto);
+    return this.mapResponse(response.data);
+  }
+
+  private mapResponse(data: any) {
+    return {
+      item: {
+        id: data.id,
+        name: data.name,
+        length: data.length,
+        width: data.width,
+        unit: data.unit,
+        quantity: data.quantity,
+        note: data.note,
+      },
+      entry: data.entry
+    };
+  }
+
   async readAll(): Promise<Item[]> {
     const response = await customAxios.get<Item[]>('readall');
     return response.data;
   }
 
-  async get(id: any){
-    const response = await customAxios.get<any>('item/read/' + id);
+  async update(item: any) {
+    const response = await customAxios.put<any>('update/' + item.id, item);
+    return this.mapResponse(response.data);
+  }
+
+  async updateQuantity(movement: Movement) {
+    const response = await customAxios.put<Item>('updateQuantity/' + movement.item.id, movement);
+    return this.mapResponse(response.data);
+  }
+
+  async delete(id: any) {
+    const response = await customAxios.delete('delete/' + id);
+    return this.mapResponse(response.data);
+  }
+
+  async get(id: any) {
+    const response = await customAxios.get<any>('read/' + id);
     return response.data;
-  }
-
-  async create(dto: PostItemDTO) {
-    const httpResult = await customAxios.post('create', dto);
-    return httpResult.data;
-  }
-
-  async delete(id: any){
-    const result = await customAxios.delete('item/delete/' + id);
-    return result.data;
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
-
-  private log(message: string) {
-    console.log(`ItemService: ${message}`);
   }
 }

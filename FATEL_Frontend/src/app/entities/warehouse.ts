@@ -2,8 +2,8 @@ import {Item} from "./item";
 import {Entry} from "./entry";
 
 export interface Warehouse {
-  Id: number;
-  Name: string;
-  Inventory: Item[];
-  Diary: Entry[];
+  id: number;
+  name: string;
+  inventory: Item[];
+  diary: Entry[];
 }

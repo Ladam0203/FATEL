@@ -36,35 +36,6 @@ public class ItemRepositoryTest
         Assert.True(itemRepository is ItemRepository);
         //TODO: Test if the repository is truly injected
     }
-    
-    [Fact]
-    public void CreateItem()
-    {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseInMemoryDatabase(databaseName: "ItemDatabase")
-            .Options;
-
-        using (var context = new AppDbContext(options))
-        {
-            //Arrange
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
-            
-            Item item = new Item()
-            {Id = 1, Name = "Item1", Quantity = 1 };
-            
-            IItemRepository repo = new ItemRepository(context);
-            
-            //Act
-            Item result = repo.Create(item);
-            Item foundResult = context.ItemTable.Find(result.Id);
-            
-            
-            //Assert
-            Assert.Equal(item, result);
-            Assert.Equal(item, foundResult);
-        }
-    }
 
     [Fact]
     public void ReadAllItems()

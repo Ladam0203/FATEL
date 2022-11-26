@@ -1,0 +1,82 @@
+<mat-accordion multi class="inventory">
+  <mat-expansion-panel *ngFor="let category of categories | filter: 'name' : ((searchbarQuery | async) ?? '')">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="fs-5">
+        {{category.name}}
+      </mat-panel-title>
+      <mat-panel-description class="fs-5 panel-description">
+        {{category.getDescription()}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <table mat-table [dataSource]="category.items">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Name</th>
+        <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.name}} </td>
+      </ng-container>
+
+      <!-- Width Column -->
+      <ng-container matColumnDef="width">
+        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Width</th>
+        <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.width}} </td>
+      </ng-container>
+
+      <!-- Length Column -->
+      <ng-container matColumnDef="length">
+        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Length</th>
+        <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.length}} </td>
+      </ng-container>
+
+      <!-- Unit Column -->
+      <ng-container matColumnDef="unit">
+        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Unit</th>
+        <td class="fs-5 ta-left" mat-cell *matCellDef="let item;"> {{units[item.unit]}} </td>
+      </ng-container>
+
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="quantity">
+        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Quantity</th>
+        <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.quantity}} </td>
+      </ng-container>
+
+      <!-- Note Column -->
+      <ng-container matColumnDef="note">
+        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Note</th>
+        <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.note}} </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th class="fs-5 ta-left actions-cell-header" mat-header-cell *matHeaderCellDef></th>
+        <mat-cell class="fs-5 ta-left actions-cell" *matCellDef="let row">
+          <!-- TODO: Add classes for formatting -->
+          <button class="edit-item-button fs-6" mat-button (click)="openRecordMovementComponent(row)"
+                  [class.editing]="row.id == selectedItem?.id && showRecordMovement">
+            <mat-icon class="main-icon" aria-hidden="false" aria-label="import_export">import_export</mat-icon>
+          </button>
+          <button class="edit-item-button fs-6" mat-button (click)="openEditItemComponent(row)"
+                  [class.editing]="row.id == selectedItem?.id && showEditItem">
+            <mat-icon class="main-icon" aria-hidden="false" aria-label="edit">edit</mat-icon>
+          </button>
+          <button class="delete-item-button fs-6" mat-button (click)="deleteItem(row)"
+                  [class.confirmDelete]="(!confirmDelete && row.id == deletingId)">
+            <mat-icon class="main-icon" aria-hidden="false" aria-label="delete icon"
+                      [innerHTML]="(!confirmDelete && row.id == deletingId) ? 'check' : 'delete'"></mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <tr class="fs-5" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns;"
+          [class.editing-row]="row.id == selectedItem?.id"></tr>
+    </table>
+  </mat-expansion-panel>
+</mat-accordion>
+<div *ngIf="!closed" class="action-container">
+  <add-item *ngIf="showAddItem" (newItemEvent)="addItem($event)" class="item-form"></add-item>
+  <app-edit-item *ngIf="showEditItem" (editItemEvent)="editItem($event)" class="item-form"></app-edit-item>
+  <app-record-movement *ngIf="showRecordMovement" (recordMovementEvent)="editItem($event)"
+                       class="item-form"></app-record-movement>
+</div>

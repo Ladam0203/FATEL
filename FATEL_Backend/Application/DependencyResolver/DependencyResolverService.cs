@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+using Application.Interfaces;
+using Domain;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.DependencyResolver;
@@ -9,5 +10,7 @@ public static class DependencyResolverService
     {
         services.AddScoped<IItemService, ItemService>();
         services.AddScoped<IEntryService, EntryService>();
+        services.AddScoped<IWarehouseService, WarehouseService>();
+        services.AddScoped<IUserService, UserService>();
     }
 }

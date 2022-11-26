@@ -1,4 +1,5 @@
 import {Unit} from './units'
+import {Entry} from "./entry";
 
 export interface Item {
   id: number;
@@ -8,4 +9,5 @@ export interface Item {
   unit: Unit;
   quantity: number;
   note?: string;
+  entry?: Entry;
 }

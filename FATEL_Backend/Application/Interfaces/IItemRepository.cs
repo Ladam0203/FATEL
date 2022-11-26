@@ -9,6 +9,6 @@ public interface IItemRepository
     public List<Item> ReadAll();
     public Item Update(Item item);
     public Item Delete(int id);
-    public double ReadTotalQuantityOf(string itemName);
+    public double ReadTotalQuantityOf(Item item);
     public bool DoesIdenticalExist(Item item);
 }

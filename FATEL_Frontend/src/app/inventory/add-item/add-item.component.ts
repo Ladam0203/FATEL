@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Unit} from "../../entities/units";
 import {Output, EventEmitter} from '@angular/core';
-import {Item} from "../../entities/item";
 import {ItemService} from "../../services/item.service";
 import {PostItemDTO} from "../../entities/DTOs/PostItemDTO";
 import {
@@ -9,6 +8,10 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
+import {Store} from "@ngrx/store";
+import {greaterThanDirective} from "../../validators/greaterThan.directive";
+import {close} from "../states/app.states";
+
 
 @Component({
   selector: 'add-item',
@@ -17,8 +20,7 @@ import {
 })
 export class AddItemComponent implements OnInit {
 
-  @Output() newItemEvent = new EventEmitter<Item>();
-  @Output() close: EventEmitter<void> = new EventEmitter<void>();
+  @Output() newItemEvent = new EventEmitter<any>();
 
   units: typeof Unit = Unit;
 
@@ -33,10 +35,21 @@ export class AddItemComponent implements OnInit {
 
   restrictedButtonUsage: boolean = false;
 
-  constructor(private itemService: ItemService) {
+  text: string = 'ADD ITEM';
+  confirmAdd: boolean = true;
+
+  appState = this.store.select('appState');
+
+  warehouseId: number | undefined;
+
+  constructor(private itemService: ItemService, private readonly store: Store<any>) {
   }
 
   ngOnInit(): void {
+
+    this.appState.subscribe(state => {
+      this.warehouseId = state.selectedWarehouse.id;
+    });
 
     this.itemForm = new FormGroup({
       name: new FormControl('', [
@@ -46,18 +59,18 @@ export class AddItemComponent implements OnInit {
         Validators.required
       ]),
       length: new FormControl(null, [
-        Validators.min(0),
+        greaterThanDirective(),
         Validators.required
       ]),
       width: new FormControl(null, [
-        Validators.min(0),
+        greaterThanDirective(),
         Validators.required
       ]),
       quantity: new FormControl(0, [
         Validators.min(0),
         Validators.required,
       ]),
-      notes: new FormControl()
+      note: new FormControl()
     });
 
   }
@@ -81,13 +94,23 @@ export class AddItemComponent implements OnInit {
   }
 
   addNewItem() {
-    if(this.itemForm.invalid){
+    if (this.itemForm.invalid) {
       this.restrictedButtonUsage = true;
       this.itemForm.markAllAsTouched();
       return;
     }
 
+    if (this.confirmAdd) {
+      this.text = 'CONFIRM';
+      this.confirmAdd = false;
+      return;
+    }
+
+    if (!this.warehouseId)
+      return;
+
     let dto: PostItemDTO = {
+      warehouseId: this.warehouseId,
       name: this.itemForm.get('name')?.value,
       length: this.itemForm.get('length')?.value,
       width: this.itemForm.get('width')?.value,
@@ -97,14 +120,16 @@ export class AddItemComponent implements OnInit {
     }
 
     this.itemService.create(dto)
-      .then(item => {
-        this.newItemEvent.emit(item);
+      .then(data => {
+        this.newItemEvent.emit(data);
+        this.text = 'ADD ITEM';
+        this.confirmAdd = true;
         this.closeAddItemComponent();
       });
   }
 
   closeAddItemComponent() {
     this.itemForm.reset();
-    this.close.emit();
+    this.store.dispatch(close());
   }
 }

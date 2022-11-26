@@ -1,0 +1,60 @@
+.action-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: normal;
+  row-gap: 4px;
+}
+
+.action-panel mat-form-field, .action-buttons-container {
+  width: 66%;
+  margin: 0 auto 0 auto;
+}
+
+.action-panel button {
+  transition: all 0.2s ease-in;
+}
+
+.action-buttons-container {
+  display: flex;
+  justify-content: center;
+  column-gap: 12px;
+  margin-top: -12px;
+}
+
+.edit-item-button {
+  background-color: var(--primary);
+  color: var(--white);
+  flex: 1;
+}
+
+.edit-item-button:disabled {
+  opacity: .5;
+  color: var(--white);
+  cursor: not-allowed;
+}
+
+.edit-item-button:disabled:hover {
+  box-shadow: none;
+}
+
+.edit-item-button:hover {
+  background-color: var(--primary);
+  color: var(--white);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.close-component-button {
+  border: 1px solid var(--primary);
+}
+
+.close-component-button:hover {
+  background-color: var(--danger);
+  border: 1px solid var(--danger);
+  color: var(--white);
+}
+
+.confirmEdit, .confirmEdit:hover {
+  background-color: var(--success);
+  border-color: var(--success);
+}
