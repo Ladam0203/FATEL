@@ -50,7 +50,7 @@
 
 .warehouse-wrapper .sidenav-component-wrapper {
   margin-top: 0;
-  border-top: 2px solid rgba(255, 255, 255, .75);
+  border-bottom: 2px solid rgba(255, 255, 255, .75);
 
   padding-top: 8px;
   padding-bottom: 8px;
@@ -58,8 +58,8 @@
   cursor: pointer;
 }
 
-.warehouse-wrapper .sidenav-component-wrapper:not:last-child {
-  border-bottom: 2px solid rgba(255, 255, 255, .75);
+.warehouse-wrapper .sidenav-component-wrapper:last-child {
+  border-bottom: transparent;
 }
 
 .warehouse-wrapper .sidenav-component-wrapper:first-child {
@@ -98,6 +98,7 @@
 
 .sidenav-heading-wrapper {
   width: 150px;
+  display: flex;
 }
 
 .sidenav-icon-wrapper {
