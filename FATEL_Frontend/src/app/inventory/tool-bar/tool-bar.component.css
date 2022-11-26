@@ -7,13 +7,39 @@
   color: var(--primary);
 }
 
+.edit-field {
+  border: none;
+  color: var(--primary);
+}
+
+.edit-field:focus {
+  border: none;
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
 .divider {
-  border-left: 2px solid red;
+  border-left: 1px solid var(--primary);
+  height: 2em;
+  margin: 4px 12px 0 12px;
 }
 
 .edit-button {
   transform: scale(0.75);
   color: var(--primary);
+}
+
+.editing {
+  background-color: #eeecec;
+}
+
+.editing:hover {
+  background-color: var(--success);
+}
+
+.editing:hover mat-icon {
+  color: var(--white);
 }
 
 .action-bar {
