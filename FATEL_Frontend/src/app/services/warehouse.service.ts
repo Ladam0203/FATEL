@@ -30,7 +30,7 @@ export class WarehouseService {
     return response.data;
   }
 
-  async delete(id: number): Promise<void> {
+  async delete(id: number): Promise<Warehouse> {
     const response = await customAxios.delete(`delete/${id}`);
     return response.data;
   }

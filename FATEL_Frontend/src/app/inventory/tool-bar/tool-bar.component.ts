@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import { Warehouse } from 'src/app/entities/warehouse';
-import {editWarehouseAction, setShowAddItemComponent} from "../states/app.states";
+import {deleteWarehouseAction, editWarehouseAction, setShowAddItemComponent} from "../states/app.states";
 import {WarehouseService} from "../../services/warehouse.service";
 
 @Component({
@@ -53,5 +53,16 @@ export class ToolBarComponent implements OnInit {
       {
         this.store.dispatch(editWarehouseAction({warehouse: warehouse}));
       });
+  }
+
+  deleteWarehouse() {
+    if (!this.warehouse) {
+      return;
+    }
+
+    this.service.delete(this.warehouse.id)
+      .then(warehouse => {
+        this.store.dispatch(deleteWarehouseAction({warehouse: warehouse}));
+      })
   }
 }

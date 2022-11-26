@@ -6,6 +6,9 @@
   <button mat-button class="edit-button fs-5" (click)="editing ? editWarehouse() : onEditWarehouse()" [class.editing]="editing">
     <mat-icon [innerHTML]="editing ? 'check' : 'edit' "></mat-icon>
   </button>
+  <button mat-button class="delete-item-button fs-5" (click)="deleteWarehouse()">
+    <mat-icon>delete</mat-icon>
+  </button>
 </div>
 <div class="action-bar">
   <button mat-button class="secondary-button fs-5">
