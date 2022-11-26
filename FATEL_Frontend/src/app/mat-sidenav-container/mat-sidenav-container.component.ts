@@ -35,14 +35,23 @@ export class MatSidenavContainerComponent implements OnInit {
       if (firstWarehouse)
         this.store.dispatch(setSelectedWarehouse({warehouse: firstWarehouse}));
     });
+
     this.appState.subscribe(state => {
-      if (state.selectedWarehouse) {
-        let warehouse = this.warehouses.find(w => w.id == state.selectedWarehouse.id);
-        if (warehouse) {
-          let index = this.warehouses.indexOf(warehouse)
-          this.warehouses[index] = state.selectedWarehouse;
-        }
+      if (!state.selectedWarehouse) {
+        return;
       }
+      if (state.selectedWarehouse.name == null) {
+        let index = this.warehouses.findIndex(warehouse => warehouse.id == state.selectedWarehouse.id);
+        this.store.dispatch(setSelectedWarehouse({warehouse: this.warehouses[index - 1]}));
+        this.warehouses = this.warehouses.filter(w => w.id != state.selectedWarehouse.id);
+        return;
+      }
+      let warehouse = this.warehouses.find(w => w.id == state.selectedWarehouse.id);
+      if (!warehouse) {
+        return;
+      }
+      let index = this.warehouses.indexOf(warehouse)
+      this.warehouses[index] = state.selectedWarehouse;
     });
   }
 
@@ -62,19 +71,6 @@ export class MatSidenavContainerComponent implements OnInit {
     this.service.create({name: "New Warehouse"}).then(warehouse => {
       console.log("Created warehouse: " + warehouse);
       this.warehouses.push(warehouse);
-    });
-  }
-
-  //Is this right?
-  updateWarehouse(warehouse: Warehouse) {
-    this.service.update(warehouse).then(() => {
-      this.warehouses = this.warehouses.filter(w => w.id != warehouse.id);
-    });
-  }
-
-  deleteWarehouse(warehouse: Warehouse) {
-    this.service.delete(warehouse.id).then(() => {
-      this.warehouses = this.warehouses.filter(w => w.id != warehouse.id);
     });
   }
 }
