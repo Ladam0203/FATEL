@@ -25,9 +25,25 @@
   margin: 4px 12px 0 12px;
 }
 
-.edit-button {
-  transform: scale(0.75);
+.warehouse-action-wrapper {
+  align-self: center;
+  margin-left: 8px;
+}
+
+.warehouse-action-button {
   color: var(--primary);
+}
+
+.warehouse-action-button:hover {
+  background-color: #eeecec;
+}
+
+.warehouse-action-button mat-icon {
+  font-size: 18px;
+}
+
+.delete-warehouse-button {
+  margin-left: 4px;
 }
 
 .editing {
@@ -38,8 +54,16 @@
   background-color: var(--success);
 }
 
-.editing:hover mat-icon {
+.editing:hover mat-icon, .deleting:hover mat-icon {
   color: var(--white);
+}
+
+.deleting {
+  background-color: #eeecec;
+}
+
+.deleting:hover {
+  background-color: var(--danger);
 }
 
 .action-bar {

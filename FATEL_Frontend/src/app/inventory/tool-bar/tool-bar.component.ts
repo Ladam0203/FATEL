@@ -17,6 +17,7 @@ export class ToolBarComponent implements OnInit {
   warehouse : Warehouse | undefined;
 
   editing: boolean = false;
+  deleting: boolean = false;
 
   constructor(private readonly store: Store<any>, private service: WarehouseService) { }
 
@@ -56,6 +57,15 @@ export class ToolBarComponent implements OnInit {
   }
 
   deleteWarehouse() {
+
+    if(!this.deleting){
+      this.deleting = true;
+      setTimeout(() => {
+        this.deleting = false;
+      }, 3000);
+      return;
+    }
+
     if (!this.warehouse) {
       return;
     }
@@ -64,5 +74,7 @@ export class ToolBarComponent implements OnInit {
       .then(warehouse => {
         this.store.dispatch(deleteWarehouseAction({warehouse: warehouse}));
       })
+
+    this.deleting = false;
   }
 }

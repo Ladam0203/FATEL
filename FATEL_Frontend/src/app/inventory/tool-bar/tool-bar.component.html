@@ -1,14 +1,16 @@
 <div class="warehouse-action-bar">
   <h2 class="warehouse-header">Inventory</h2>
   <hr class="divider">
-  <h2 *ngIf="!editing" class="warehouse-header">{{warehouse?.name}}</h2>
+  <h2 *ngIf="!editing" class="warehouse-header fs-2">{{warehouse?.name}}</h2>
   <input *ngIf="editing" value="{{warehouse?.name}}" class="edit-field fs-5" [(ngModel)]="name">
-  <button mat-button class="edit-button fs-5" (click)="editing ? editWarehouse() : onEditWarehouse()">
-    <mat-icon [innerHTML]="editing ? 'check' : 'edit' "></mat-icon>
-  </button>
-  <button mat-button class="delete-item-button fs-5" (click)="deleteWarehouse()">
-    <mat-icon>delete</mat-icon>
-  </button>
+  <div class="warehouse-action-wrapper">
+    <button mat-button class="warehouse-action-button fs-5" (click)="editing ? editWarehouse() : onEditWarehouse()" [class.editing]="editing">
+      <mat-icon [innerHTML]="editing ? 'check' : 'edit' "></mat-icon>
+    </button>
+    <button *ngIf="!editing" mat-button class="warehouse-action-button fs-5 delete-warehouse-button" (click)="deleteWarehouse()" [class.deleting]="deleting">
+      <mat-icon [innerHTML]="deleting ? 'check' : 'delete' "></mat-icon>
+    </button>
+  </div>
 </div>
 <div class="action-bar">
   <button mat-button class="secondary-button fs-5">
