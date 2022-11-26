@@ -1,5 +1,18 @@
+.warehouse-action-bar {
+  display: flex;
+  flex-direction: row;
+}
 
 .warehouse-header {
+  color: var(--primary);
+}
+
+.divider {
+  border-left: 2px solid red;
+}
+
+.edit-button {
+  transform: scale(0.75);
   color: var(--primary);
 }
 
