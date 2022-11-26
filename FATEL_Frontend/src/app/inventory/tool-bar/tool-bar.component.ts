@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import { Warehouse } from 'src/app/entities/warehouse';
-import {editWarehouseAction, setShowAddItemComponent} from "../states/app.states";
+import {deleteWarehouseAction, editWarehouseAction, setShowAddItemComponent} from "../states/app.states";
 import {WarehouseService} from "../../services/warehouse.service";
 
 @Component({
@@ -17,6 +17,7 @@ export class ToolBarComponent implements OnInit {
   warehouse : Warehouse | undefined;
 
   editing: boolean = false;
+  deleting: boolean = false;
 
   constructor(private readonly store: Store<any>, private service: WarehouseService) { }
 
@@ -53,5 +54,27 @@ export class ToolBarComponent implements OnInit {
       {
         this.store.dispatch(editWarehouseAction({warehouse: warehouse}));
       });
+  }
+
+  deleteWarehouse() {
+
+    if(!this.deleting){
+      this.deleting = true;
+      setTimeout(() => {
+        this.deleting = false;
+      }, 3000);
+      return;
+    }
+
+    if (!this.warehouse) {
+      return;
+    }
+
+    this.service.delete(this.warehouse.id)
+      .then(warehouse => {
+        this.store.dispatch(deleteWarehouseAction({warehouse: warehouse}));
+      })
+
+    this.deleting = false;
   }
 }

@@ -97,14 +97,13 @@ export class CategoriesComponent implements OnInit {
 
   deleteItem(itemToDelete: Item) {
 
-    setTimeout(() => {
-      this.deletingId = undefined;
-      this.confirmDelete = true;
-    }, 3000);
-
     if (this.confirmDelete) {
       this.deletingId = itemToDelete.id;
       this.confirmDelete = false;
+      setTimeout(() => {
+        this.deletingId = undefined;
+        this.confirmDelete = true;
+      }, 3000);
       return;
     }
 

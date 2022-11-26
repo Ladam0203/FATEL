@@ -17,6 +17,7 @@ export const deleteItemAction = createAction('[Categories Component] Delete Item
 export const addEntryAction = createAction('[Add Item Component] Add Entry', props<{ entry: Entry }>());
 
 export const editWarehouseAction = createAction('[Tool Bar Component] Edit Warehouse', props<{ warehouse: Warehouse }>());
+export const deleteWarehouseAction = createAction('[Tool Bar Component] Delete Warehouse', props<{ warehouse: Warehouse }>());
 
 export interface AppState {
   showAddItem: boolean,
@@ -128,6 +129,12 @@ export const reducer = createReducer(
       name: warehouse.name
     }
   })),
+
+  on(deleteWarehouseAction, (state, {warehouse}) => ({
+    ...state,
+    //@ts-ignore
+    selectedWarehouse: {id: warehouse.id, name: null},
+  }))
 );
 
 export function AppReducer(state: AppState = initialState, action: Action) {
