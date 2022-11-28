@@ -31,6 +31,7 @@ import {AppReducer} from "./inventory/states/app.states";
 import {RecordMovementComponent} from './inventory/record-movement/record-movement.component';
 import {DiaryComponent} from './diary/diary.component';
 import {MatSortModule} from "@angular/material/sort";
+import { WarehouseActionBarComponent } from './warehouse-action-bar/warehouse-action-bar.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {MatSortModule} from "@angular/material/sort";
     EditItemComponent,
     RecordMovementComponent,
     DiaryComponent,
+    WarehouseActionBarComponent,
   ],
     imports: [
         BrowserModule,

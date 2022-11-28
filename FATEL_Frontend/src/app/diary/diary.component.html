@@ -1,7 +1,5 @@
 <div class="diary-container">
-  <div class="header-container">
-    <h2 class="warehouse-header">DIARY | {{name}}</h2>
-  </div>
+  <app-warehouse-action-bar></app-warehouse-action-bar>
   <app-filter-bar class="filter-bar"></app-filter-bar>
   <table mat-table [dataSource]="entries | filter: 'itemName' : ((searchbarQuery | async) ?? '')">
 
