@@ -1,0 +1,15 @@
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+  text-align: center;
+}
+
+.icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  margin-top: 20px;
+}
