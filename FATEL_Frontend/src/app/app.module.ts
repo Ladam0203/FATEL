@@ -48,6 +48,7 @@ import { WarehouseActionBarComponent } from './warehouse-action-bar/warehouse-ac
     RecordMovementComponent,
     DiaryComponent,
     WarehouseActionBarComponent,
+
   ],
     imports: [
         BrowserModule,
