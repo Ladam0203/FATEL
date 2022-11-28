@@ -4,9 +4,13 @@
 ></app-mat-sidenav-container>
 
 <div class="main-container">
-  <div class="content-container">
+  <div class="content-container" *ngIf="selectedWarehouse; else noWarehouse">
     <inventory *ngIf="showInventory"></inventory>
     <diary *ngIf="!showInventory"></diary>
   </div>
+
+  <ng-template #noWarehouse>
+    Create a warehouse to get started!
+  </ng-template>
 </div>
 
