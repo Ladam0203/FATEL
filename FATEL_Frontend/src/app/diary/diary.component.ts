@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Entry} from "../entities/entry";
 import {EntryService} from "../services/entry.service";
-import {selectSearchbarQueryValue} from "../inventory/states/filter-bar.actions";
+import {selectSearchbarQueryValue} from "../states/filter-bar.actions";
 import {Store} from "@ngrx/store";
 
 @Component({

@@ -1,6 +1,6 @@
 import {Unit} from "../units";
 
-export interface UpdateItemDTO {
+export interface PutItemDTO {
   id: number,
   name: string,
   length?: number | null;

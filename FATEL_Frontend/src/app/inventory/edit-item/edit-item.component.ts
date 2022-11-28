@@ -5,8 +5,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ItemService} from "../../services/item.service";
 import {Store} from "@ngrx/store";
 import {greaterThanDirective} from "../../validators/greaterThan.directive";
-import {UpdateItemDTO} from "../../entities/DTOs/UpdateItemDTO";
-import {close} from "../states/app.states";
+import {PutItemDTO} from "../../entities/DTOs/PutItemDTO";
+import {close} from "../../states/app.states";
 
 @Component({
   selector: 'app-edit-item',
@@ -120,7 +120,7 @@ export class EditItemComponent implements OnInit {
     if (!this.editingItem?.id)
       return;
 
-    let updateItem: UpdateItemDTO = {
+    let updateItem: PutItemDTO = {
       id: this.editingItem?.id,
       name: this.itemForm.get('name')?.value,
       unit: this.itemForm.get('unit')?.value,

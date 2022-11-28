@@ -10,7 +10,7 @@ import {
 } from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {greaterThanDirective} from "../../validators/greaterThan.directive";
-import {close} from "../states/app.states";
+import {close} from "../../states/app.states";
 
 
 @Component({
