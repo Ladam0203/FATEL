@@ -1,5 +1,5 @@
 <div class="diary-container">
-  <app-warehouse-action-bar toolbarHeader="Diary"></app-warehouse-action-bar>
+  <app-warehouse-action-bar toolbarHeader="Diary" class="header-container"></app-warehouse-action-bar>
   <app-filter-bar class="filter-bar"></app-filter-bar>
   <table mat-table [dataSource]="entries | filter: 'itemName' : ((searchbarQuery | async) ?? '')">
 
