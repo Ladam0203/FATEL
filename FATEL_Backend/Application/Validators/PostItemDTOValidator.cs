@@ -1,6 +1,7 @@
 ﻿using Application.DTOs;
 using Domain;
 using FluentValidation;
+using FluentValidation.Validators;
 
 namespace Application.Validators;
 

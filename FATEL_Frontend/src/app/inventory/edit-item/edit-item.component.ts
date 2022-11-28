@@ -49,10 +49,12 @@ export class EditItemComponent implements OnInit {
         Validators.required
       ]),
       length: new FormControl(null, [
+        Validators.pattern(/^\d*(?:[.,]\d{1,3})?$/),
         greaterThanDirective(),
         Validators.required
       ]),
       width: new FormControl(null, [
+        Validators.pattern(/^\d*(?:[.,]\d{1,3})?$/),
         greaterThanDirective(),
         Validators.required
       ]),

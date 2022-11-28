@@ -35,6 +35,7 @@ export class RecordMovementComponent implements OnInit {
   ngOnInit(): void {
     this.movementForm = new FormGroup({
       change: new FormControl('', [
+        Validators.pattern(/^\d*$/),
         Validators.required,
         greaterThanDirective()
       ])
