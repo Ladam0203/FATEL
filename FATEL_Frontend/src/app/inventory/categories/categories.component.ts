@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Unit} from "../../entities/units";
 import {Category} from "../../entities/category";
-import {selectSearchbarQueryValue} from "../states/filter-bar.actions";
+import {selectSearchbarQueryValue} from "../../states/filter-bar.actions";
 import {Store} from "@ngrx/store";
 import {ItemService} from "../../services/item.service";
 import {Item} from "../../entities/item";
@@ -11,7 +11,7 @@ import {
   setShowRecordMovementComponent,
   addItemAction,
   editItemAction, deleteItemAction, addEntryAction,
-} from "../states/app.states";
+} from "../../states/app.states";
 import {Warehouse} from "../../entities/warehouse";
 
 @Component({
