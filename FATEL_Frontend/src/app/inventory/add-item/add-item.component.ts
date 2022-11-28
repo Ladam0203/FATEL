@@ -59,14 +59,17 @@ export class AddItemComponent implements OnInit {
         Validators.required
       ]),
       length: new FormControl(null, [
+        Validators.pattern(/^\d*(?:[.,]\d{1,3})?$/),
         greaterThanDirective(),
         Validators.required
       ]),
       width: new FormControl(null, [
+        Validators.pattern(/^\d*(?:[.,]\d{1,3})?$/),
         greaterThanDirective(),
         Validators.required
       ]),
       quantity: new FormControl(0, [
+        Validators.pattern(/^\d*$/),
         Validators.min(0),
         Validators.required,
       ]),
