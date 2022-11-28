@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Warehouse} from "../entities/warehouse";
 import {Store} from "@ngrx/store";
 import {WarehouseService} from "../services/warehouse.service";
@@ -18,6 +18,8 @@ export class WarehouseActionBarComponent implements OnInit {
 
   editing: boolean = false;
   deleting: boolean = false;
+
+  @Input() toolbarHeader: string = '';
 
   constructor(private readonly store: Store<any>, private service: WarehouseService) { }
 
