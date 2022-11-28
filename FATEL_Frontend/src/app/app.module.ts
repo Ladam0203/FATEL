@@ -32,6 +32,7 @@ import {RecordMovementComponent} from './inventory/record-movement/record-moveme
 import {DiaryComponent} from './diary/diary.component';
 import {MatSortModule} from "@angular/material/sort";
 import { WarehouseActionBarComponent } from './warehouse-action-bar/warehouse-action-bar.component';
+import { NoWarehouseComponent } from './no-warehouse/no-warehouse.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { WarehouseActionBarComponent } from './warehouse-action-bar/warehouse-ac
     RecordMovementComponent,
     DiaryComponent,
     WarehouseActionBarComponent,
-
+    NoWarehouseComponent,
   ],
     imports: [
         BrowserModule,

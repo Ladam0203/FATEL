@@ -50,3 +50,8 @@ inventory, diary {
 .sidenav-container:hover {
   animation-play-state: running;
 }
+
+.no-warehouse-container {
+  height: 80vh;
+  display: block;
+}
