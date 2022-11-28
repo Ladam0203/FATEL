@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {setShowAddItemComponent} from "../states/app.states";
+import {setShowAddItemComponent} from "../../states/app.states";
 
 @Component({
   selector: 'app-tool-bar',
