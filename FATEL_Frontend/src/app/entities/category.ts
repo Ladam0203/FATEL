@@ -15,6 +15,7 @@ export class Category {
     let totalQuantity = 0;
     for (const item of this.items) {
       totalQuantity += item.quantity * (item.length ?? 1) * (item.width ?? 1);
+      totalQuantity = Number(totalQuantity.toFixed(3));
     }
     return "" + totalQuantity + UnitUtil.abbreviations(this.unit);
   }
