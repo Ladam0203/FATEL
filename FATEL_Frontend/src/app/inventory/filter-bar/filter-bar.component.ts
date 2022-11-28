@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {selectSearchbarQueryValue, setSearchbarQuery} from "../states/filter-bar.actions";
+import {selectSearchbarQueryValue, setSearchbarQuery} from "../../states/filter-bar.actions";
 
 @Component({
   selector: 'app-filter-bar',

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Warehouse} from "../entities/warehouse";
 import {Store} from "@ngrx/store";
 import {WarehouseService} from "../services/warehouse.service";
-import {deleteWarehouseAction, editWarehouseAction} from "../inventory/states/app.states";
+import {deleteWarehouseAction, editWarehouseAction} from "../states/app.states";
 
 @Component({
   selector: 'app-warehouse-action-bar',

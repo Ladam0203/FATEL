@@ -24,10 +24,10 @@ import {MatSidenavContainerComponent} from './mat-sidenav-container/mat-sidenav-
 import {ToolBarComponent} from './inventory/tool-bar/tool-bar.component';
 import {StoreModule} from '@ngrx/store';
 import {FilterBarComponent} from './inventory/filter-bar/filter-bar.component';
-import {searchbarQueryReducer} from "./inventory/states/filter-bar.actions";
+import {searchbarQueryReducer} from "./states/filter-bar.actions";
 import {CategoriesComponent} from './inventory/categories/categories.component';
 import {EditItemComponent} from './inventory/edit-item/edit-item.component';
-import {AppReducer} from "./inventory/states/app.states";
+import {AppReducer} from "./states/app.states";
 import {RecordMovementComponent} from './inventory/record-movement/record-movement.component';
 import {DiaryComponent} from './diary/diary.component';
 import {MatSortModule} from "@angular/material/sort";

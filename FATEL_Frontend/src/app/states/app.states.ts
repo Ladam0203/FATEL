@@ -1,7 +1,7 @@
 import {createAction, createReducer, on, Action, props} from "@ngrx/store";
-import {Item} from "../../entities/item";
-import {Warehouse} from "../../entities/warehouse";
-import {Entry} from "../../entities/entry";
+import {Item} from "../entities/item";
+import {Warehouse} from "../entities/warehouse";
+import {Entry} from "../entities/entry";
 
 export const setShowAddItemComponent = createAction('[Categories Component] Show Add Item');
 export const setShowEditItemComponent = createAction('[Categories Component] Show Edit Item', props<{ item: Item }>());
