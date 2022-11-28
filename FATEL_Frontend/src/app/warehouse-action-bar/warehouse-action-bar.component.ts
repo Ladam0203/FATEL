@@ -25,6 +25,11 @@ export class WarehouseActionBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.appState.subscribe(state => {
+      if (this.warehouse != state.selectedWarehouse) {
+        this.editing = false;
+        this.deleting = false;
+      }
+
       this.warehouse = state.selectedWarehouse;
       this.name = this.warehouse?.name;
     });
