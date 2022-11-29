@@ -16,24 +16,27 @@ export class ReportService {
     doc.addFileToVFS('Roboto-Regular.ttf', RobotoRegular);
     doc.addFont('Roboto-Regular.ttf', 'Roboto-Regular', 'regular');
 
+    let lowercaseFields = fields.map(f => f.toLowerCase());
+
     let parsedData: any[][] = [];
     data.forEach((item) => {
       let row: any[] = [];
-      fields.forEach((field) => {
-      row.push(item[field]);
+      lowercaseFields.forEach((lF) => {
+      row.push(item[lF]);
       });
       parsedData.push(row);
     });
+    console.log(parsedData);
     //TODO: Add header
     autoTable(doc, {
         head: [fields],
-        body: data,
+        body: parsedData,
         styles: {
-          font: 'Roboto-Light',
+          font: 'Roboto-Regular',
         },
         theme: "plain",
       }
     );
-    doc.save('inventory.pdf');
+    doc.save(header+'.pdf');
   }
 }

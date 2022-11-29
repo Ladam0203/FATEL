@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {setShowAddItemComponent} from "../../states/app.states";
 import {ReportService} from "../../services/report/report.service";
+import {Unit} from "../../entities/units";
+import {Warehouse} from "../../entities/warehouse";
 
 @Component({
   selector: 'app-tool-bar',
@@ -10,11 +12,18 @@ import {ReportService} from "../../services/report/report.service";
 })
 
 export class ToolBarComponent implements OnInit {
+  appState = this.store.select('appState');
+
+  warehouse: Warehouse | undefined;
+  units: typeof Unit = Unit;
 
   constructor(private readonly store: Store<any>, private readonly reportService: ReportService) {
   }
 
   ngOnInit(): void {
+    this.appState.subscribe(state => {
+      this.warehouse = state.selectedWarehouse;
+    });
   }
 
   openAddItemComponent() {
@@ -22,6 +31,10 @@ export class ToolBarComponent implements OnInit {
   }
 
   exportPDF() {
-    this.reportService.createReport()
+    if (!this.warehouse) {
+      return;
+    }
+
+    this.reportService.createReport("TODO", ['Name', 'Width', 'Length', 'Unit', 'Quantity'] , this.warehouse.inventory);
   }
 }
