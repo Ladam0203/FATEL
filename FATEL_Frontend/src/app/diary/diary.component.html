@@ -1,6 +1,16 @@
 <div class="diary-container">
   <app-warehouse-action-bar toolbarHeader="Diary" class="header-container"></app-warehouse-action-bar>
   <app-filter-bar class="filter-bar"></app-filter-bar>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Filter Entries By Year</mat-label>
+    <mat-select [(value)] = "year">
+      <mat-option *ngFor="let year of entryYears" [value]=year>
+        {{year}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <table mat-table [dataSource]="entries | filter: 'itemName' : ((searchbarQuery | async) ?? '')">
 
     <!-- Timestamp Column -->
