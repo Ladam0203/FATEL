@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import jsPDF from "jspdf";
 import {RobotoRegular} from "./Roboto-Regular";
 import autoTable from "jspdf-autotable";
+import {Unit} from "../../entities/units";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportService {
+  units: typeof Unit = Unit;
 
   constructor() { }
 
@@ -22,7 +24,12 @@ export class ReportService {
     data.forEach((item) => {
       let row: any[] = [];
       lowercaseFields.forEach((lF) => {
-      row.push(item[lF]);
+        if (lF === 'unit') {
+          row.push(this.units[item[lF]]);
+        }
+        else {
+          row.push(item[lF]);
+        }
       });
       parsedData.push(row);
     });
