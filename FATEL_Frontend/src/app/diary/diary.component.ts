@@ -3,6 +3,7 @@ import {Entry} from "../entities/entry";
 import {EntryService} from "../services/entry.service";
 import {selectSearchbarQueryValue} from "../states/filter-bar.actions";
 import {Store} from "@ngrx/store";
+import {Observable, of} from "rxjs";
 
 @Component({
   selector: 'diary',
@@ -18,13 +19,11 @@ export class DiaryComponent implements OnInit {
   sortedEntries: Entry[] = [];
   entryYears: string[] = [];
 
-  year: string = "";
-
   searchbarQuery = this.store.select(selectSearchbarQueryValue);
-
 
   appState = this.store.select('appState');
 
+  year: string = "";
   name: string = 'Warehouse';
 
   constructor(private entryService: EntryService, private readonly store: Store<any>) {
