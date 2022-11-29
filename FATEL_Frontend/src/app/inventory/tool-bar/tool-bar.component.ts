@@ -3,6 +3,7 @@ import {Store} from '@ngrx/store';
 import {setShowAddItemComponent} from "../../states/app.states";
 import {ReportService} from "../../services/report/report.service";
 import {Warehouse} from "../../entities/warehouse";
+import {selectSearchbarQueryValue} from "../../states/filter-bar.actions";
 
 @Component({
   selector: 'app-tool-bar',
@@ -14,7 +15,8 @@ export class ToolBarComponent implements OnInit {
   appState = this.store.select('appState');
 
   warehouse: Warehouse | undefined;
-  searchBarQuery: string | undefined;
+  searchbarQuery = this.store.select(selectSearchbarQueryValue);
+  query = '';
 
   constructor(private readonly store: Store<any>, private readonly reportService: ReportService) {
   }
@@ -22,7 +24,7 @@ export class ToolBarComponent implements OnInit {
   ngOnInit(): void {
     this.appState.subscribe(state => {
       this.warehouse = state.selectedWarehouse;
-      this.searchBarQuery = state.searchBarQuery;
+      this.searchbarQuery.subscribe(value => this.query = value);
     });
   }
 
@@ -36,8 +38,7 @@ export class ToolBarComponent implements OnInit {
     }
 
     let filtered = this.warehouse.inventory.filter(item =>
-      item.name.toLowerCase().indexOf(this.searchBarQuery?.toLowerCase() || '') !=-1);
-    console.log(filtered);
-    this.reportService.createReport(this.warehouse.name, ['Name', 'Width', 'Length', 'Unit', 'Quantity'] , filtered);
+      item.name.toLowerCase().indexOf(this.query.toLowerCase() || '') !=-1);
+    this.reportService.createReport(this.warehouse.name, "Inventory",['Name', 'Width', 'Length', 'Unit', 'Quantity'] , filtered);
   }
 }

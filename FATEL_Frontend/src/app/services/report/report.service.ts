@@ -12,7 +12,7 @@ export class ReportService {
 
   constructor() { }
 
-  createReport(header: string, fields: string[], data: any[]) {
+  createReport(title: string, subtitle: string, fields: string[], data: any[]) {
     const doc = new jsPDF('p', 'pt', 'a4');
 
     doc.addFileToVFS('Roboto-Regular.ttf', RobotoRegular);
@@ -35,7 +35,12 @@ export class ReportService {
     });
     console.log(parsedData);
 
-    doc.text(header + " " + new Date().toLocaleDateString(), 20, 25);
+    //date in hungarian format
+    let now = new Date();
+    let huDate = new Date().toLocaleDateString("hu-HU");
+    let fileDate = now.getFullYear().toString() + (now.getMonth() + 1).toString() + now.getDate().toString();
+
+    doc.text(subtitle + " | " + title + " - " + huDate, 20, 25);
     autoTable(doc, {
         head: [fields],
         body: parsedData,
@@ -45,6 +50,6 @@ export class ReportService {
         theme: "plain",
       }
     );
-    doc.save(header+'.pdf');
+    doc.save(title +  fileDate + '.pdf');
   }
 }
