@@ -35,6 +35,6 @@ export class ToolBarComponent implements OnInit {
       return;
     }
 
-    this.reportService.createReport("TODO", ['Name', 'Width', 'Length', 'Unit', 'Quantity'] , this.warehouse.inventory);
+    this.reportService.createReport(this.warehouse.name, ['Name', 'Width', 'Length', 'Unit', 'Quantity'] , this.warehouse.inventory);
   }
 }

@@ -27,7 +27,8 @@ export class ReportService {
       parsedData.push(row);
     });
     console.log(parsedData);
-    //TODO: Add header
+
+    doc.text(header + " " + new Date().toLocaleDateString(), 20, 25);
     autoTable(doc, {
         head: [fields],
         body: parsedData,
