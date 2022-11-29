@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import jsPDF from "jspdf";
 import {RobotoRegular} from "./Roboto-Regular";
 import autoTable from "jspdf-autotable";
@@ -8,27 +8,32 @@ import autoTable from "jspdf-autotable";
 })
 export class ReportService {
 
-  constructor() {
-  }
+  constructor() { }
 
-  createReport(header: string, columns: string[], data: any[]) {
+  createReport(header: string, fields: string[], data: any[]) {
     const doc = new jsPDF('p', 'pt', 'a4');
 
     doc.addFileToVFS('Roboto-Regular.ttf', RobotoRegular);
     doc.addFont('Roboto-Regular.ttf', 'Roboto-Regular', 'regular');
 
+    let parsedData: any[][] = [];
+    data.forEach((item) => {
+      let row: any[] = [];
+      fields.forEach((field) => {
+      row.push(item[field]);
+      });
+      parsedData.push(row);
+    });
+    //TODO: Add header
     autoTable(doc, {
-      
-        head: [['Name', 'Width', 'Length', 'Unit', 'Quantity']],
+        head: [fields],
         body: data,
         styles: {
           font: 'Roboto-Light',
         },
-        theme: "striped",
-
+        theme: "plain",
       }
     );
     doc.save('inventory.pdf');
-
   }
 }
