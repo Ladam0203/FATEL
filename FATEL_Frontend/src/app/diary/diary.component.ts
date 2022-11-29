@@ -16,7 +16,12 @@ export class DiaryComponent implements OnInit {
 
   entries: Entry[] = [];
   sortedEntries: Entry[] = [];
+  entryYears: string[] = [];
+
+  year: string = "";
+
   searchbarQuery = this.store.select(selectSearchbarQueryValue);
+
 
   appState = this.store.select('appState');
 
@@ -29,7 +34,17 @@ export class DiaryComponent implements OnInit {
     this.appState.subscribe(state => {
       this.name = state.selectedWarehouse.name;
       this.entries = state.selectedWarehouse.diary;
+      this.getEntryYears();
       this.entries = [...this.entries].sort((a, b) => Number(new Date(a.timestamp)) - Number(new Date(b.timestamp))).reverse()
     })
+  }
+
+  getEntryYears(): void {
+    for (const entry of this.entries) {
+      let year = entry.timestamp.substring(0,4);
+      if(!this.entryYears.includes(year))
+        this.entryYears.push(year)
+    }
+    this.entryYears.push("2001");
   }
 }
