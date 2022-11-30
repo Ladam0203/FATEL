@@ -35,26 +35,8 @@ export class ReportService {
       parsedData.push(row);
     });
     console.log(parsedData);
-
-    doc.text(header + " " + new Date().toLocaleDateString(), 20, 25);
-    autoTable(doc, {
-        head: [fields],
-        body: parsedData,
-        styles: {
-          font: 'Roboto-Regular',
-        },
-        theme: "plain",
-      }
-    );
-    doc.save(header + '.pdf');
-  }
-
-  createDiaryReport(warehouseName: string, data: Entry[]) {
-    const doc = new jsPDF('p', 'pt', 'a4');
-
-    doc.addFileToVFS('Roboto-Regular.ttf', RobotoRegular);
-    doc.addFont('Roboto-Regular.ttf', 'Roboto-Regular', 'regular');
-
+    
+    //date in hungarian format
     let now = new Date();
     let huDate = new Date().toLocaleDateString("hu-HU");
     let fileDate = now.getFullYear().toString() + (now.getMonth() + 1).toString() + now.getDate().toString();
