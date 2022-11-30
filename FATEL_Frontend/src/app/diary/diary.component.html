@@ -1,8 +1,18 @@
 <div class="diary-container">
-  <app-warehouse-action-bar toolbarHeader="Diary" class="header-container"></app-warehouse-action-bar>
+
+    <div class="tool-bar">
+      <app-warehouse-action-bar toolbarHeader="Diary"></app-warehouse-action-bar>
+      <div class="action-bar">
+
+        <button mat-button class="main-button fs-5" (click)="exportPDF()">
+          Export
+        </button>
+
+      </div>
+    </div>
+
   <div class="search-filter-wrapper">
     <app-filter-bar class=""></app-filter-bar>
-    <button (click)="exportPDF()">Export</button>
     <mat-form-field class="year-filter" appearance="outline" floatLabel="never">
       <mat-select [(value)]="year" class="fs-5" disableOptionCentering placeholder="Filter Entries By Year">
         <mat-option [value]="" class="fs-5">
@@ -13,6 +23,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+
   </div>
 
   <table mat-table [dataSource]="entries
