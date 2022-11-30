@@ -49,12 +49,15 @@ export class ReportService {
     doc.save(header + '.pdf');
   }
 
-  createDiaryReport(header: string, fields: string[], data: Entry[]) {
+  createDiaryReport(warehouseName: string, data: Entry[]) {
     const doc = new jsPDF('p', 'pt', 'a4');
 
     doc.addFileToVFS('Roboto-Regular.ttf', RobotoRegular);
     doc.addFont('Roboto-Regular.ttf', 'Roboto-Regular', 'regular');
-    let lowercaseFields = fields.map(f => f.toLowerCase());
+
+    let now = new Date();
+    let huDate = new Date().toLocaleDateString("hu-HU");
+    let fileDate = now.getFullYear().toString() + (now.getMonth() + 1).toString() + now.getDate().toString();
 
     let parsedData: any[][] = [];
     data.forEach((entry) => {
@@ -64,9 +67,9 @@ export class ReportService {
     console.log(parsedData);
 
 
-    doc.text("Diary " + header + " " + new Date().toLocaleDateString(), 20, 25);
+    doc.text("Diary " + warehouseName + " " + huDate, 20, 25);
     autoTable(doc, {
-        head: [fields],
+        head: [['Timestamp', 'Item Name', 'Change', 'After'],],
         body: parsedData,
         styles: {
           font: 'Roboto-Regular',
@@ -74,6 +77,6 @@ export class ReportService {
         theme: "striped",
       }
     );
-    doc.save(header + '.pdf');
+    doc.save(warehouseName + fileDate + '.pdf');
   }
 }
