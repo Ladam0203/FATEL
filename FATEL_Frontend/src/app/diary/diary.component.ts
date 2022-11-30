@@ -51,8 +51,8 @@ export class DiaryComponent implements OnInit {
       return;
     }
 
-    let filtered = this.warehouse.diary.filter(entry =>
-      entry.itemName.toLowerCase().indexOf(this.query.toLowerCase() || '') != -1 && entry.timestamp.includes(this.year ?? ''));
+    let filtered = this.entries
+      .filter(entry => entry.itemName.toLowerCase().indexOf(this.query.toLowerCase() || '') != -1 && entry.timestamp.includes(this.year ?? ''));
     this.reportService.createDiaryReport(this.warehouse.name, filtered);
 
   }
