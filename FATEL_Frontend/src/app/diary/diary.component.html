@@ -1,7 +1,23 @@
 <div class="diary-container">
   <app-warehouse-action-bar toolbarHeader="Diary" class="header-container"></app-warehouse-action-bar>
+  <button (click)="exportPDF()">Export</button>
   <app-filter-bar class="filter-bar"></app-filter-bar>
-  <table mat-table [dataSource]="entries | filter: 'itemName' : ((searchbarQuery | async) ?? '')">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Filter Entries By Year</mat-label>
+    <mat-select [(value)] = "year">
+      <mat-option [value]="">
+        None
+      </mat-option>
+      <mat-option *ngFor="let year of entryYears" [value]=year>
+        {{year}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="entries
+   | filter: 'itemName' : ((searchbarQuery | async) ?? '')
+   | filter: 'timestamp' : ((year))">
 
     <!-- Timestamp Column -->
     <ng-container matColumnDef="timestamp">
