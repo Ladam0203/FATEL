@@ -10,6 +10,20 @@
   border-bottom: 1px solid rgba(0, 0, 0, .24);
 }
 
+.search-filter-wrapper {
+  display: flex;
+  flex-direction: row;
+  column-gap: 80px;
+
+  margin: 12px 0 16px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(0, 0, 0, .08);
+}
+
+.year-filter {
+  width: 250px;
+}
+
 .warehouse-header {
   color: var(--primary);
 }

@@ -20,7 +20,7 @@ export class DiaryComponent implements OnInit {
   entries: Entry[] = [];
   sortedEntries: Entry[] = [];
   entryYears: string[] = [];
-
+  
   searchbarQuery = this.store.select(selectSearchbarQueryValue);
   query: String = "";
   appState = this.store.select('appState');
@@ -44,8 +44,6 @@ export class DiaryComponent implements OnInit {
       this.searchbarQuery.subscribe(value => this.query = value);
     })
   }
-
-
   exportPDF() {
     if (!this.warehouse) {
       return;
@@ -63,7 +61,5 @@ export class DiaryComponent implements OnInit {
       if (!this.entryYears.includes(year))
         this.entryYears.push(year)
     }
-    this.entryYears.push("2001");
   }
-
 }
