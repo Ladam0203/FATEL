@@ -37,8 +37,8 @@ export class ToolBarComponent implements OnInit {
       return;
     }
 
-    let filtered = this.warehouse.inventory.filter(item =>
-      item.name.toLowerCase().indexOf(this.query.toLowerCase() || '') !=-1);
-    this.reportService.createReport(this.warehouse.name, "Inventory",['Name', 'Width', 'Length', 'Unit', 'Quantity'] , filtered);
+    let filtered = this.warehouse.inventory
+      .filter(item => item.name.toLowerCase().indexOf(this.query.toLowerCase() || '') !=-1);
+    this.reportService.createInventoryReport(this.warehouse.name, filtered);
   }
 }
