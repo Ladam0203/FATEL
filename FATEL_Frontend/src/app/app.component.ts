@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {Warehouse} from "./entities/warehouse";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,10 @@ export class AppComponent implements OnInit {
 
   selectedWarehouse: Warehouse | undefined;
 
-  constructor(private readonly store: Store<any>) {}
+  constructor(private readonly store: Store<any>, private translate: TranslateService) {
+    translate.setDefaultLang('en');
+    translate.use('en');
+  }
 
   ngOnInit(): void {
     this.store.select('appState').subscribe(state => {

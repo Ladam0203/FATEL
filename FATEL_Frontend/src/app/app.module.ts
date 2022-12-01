@@ -34,6 +34,11 @@ import {MatSortModule} from "@angular/material/sort";
 import { WarehouseActionBarComponent } from './warehouse-action-bar/warehouse-action-bar.component';
 import { NoWarehouseComponent } from './no-warehouse/no-warehouse.component';
 
+// import ngx-translate and the http loader
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient} from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,9 +73,20 @@ import { NoWarehouseComponent } from './no-warehouse/no-warehouse.component';
         MatAutocompleteModule,
         StoreModule.forRoot({searchbarQuery: searchbarQueryReducer, appState: AppReducer}),
         MatSortModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+          }
+        })
     ],
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent],
 })
 export class AppModule {
+}
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
 }
