@@ -61,8 +61,8 @@
     },
     "ADD-BUTTON": {
       "LABEL": {
-        "DEFAULT": "Add item",
-        "CONFIRM": "Confirm"
+        "DEFAULT": "ADD",
+        "CONFIRM": "CONFIRM"
       }
     },
     "CLOSE-BUTTON": {
@@ -77,6 +77,49 @@
       "UNIT": "Unit",
       "QUANTITY": "Quantity",
       "NOTE": "Note"
+    }
+  },
+  "EDIT-ITEM-COMPONENT": {
+    "NAME-FIELD" : {
+      "LABEL": "Name",
+      "ERROR": {
+        "REQUIRED": "Name is required"
+      }
+    },
+    "UNIT-FIELD": {
+      "LABEL": "Unit",
+      "DEFAULT": "Unit",
+      "ERROR": {
+        "REQUIRED": "Unit is required"
+      }
+    },
+    "LENGTH-FIELD": {
+      "LABEL": "Length",
+      "ERROR": {
+        "REQUIRED": "Length is required",
+        "GREATER-THAN-ZERO": "Length must be greater than 0",
+        "THREE-DECIMALS": "Length must not contain more than 3 decimal places"
+      }
+    },
+    "WIDTH-FIELD": {
+      "LABEL": "Width",
+      "ERROR": {
+        "REQUIRED": "Width is required",
+        "GREATER-THAN-ZERO": "Width must be greater than 0",
+        "THREE-DECIMALS": "Width must not contain more than 3 decimal places"
+      }
+    },
+    "NOTE-FIELD": {
+      "LABEL": "Note"
+    },
+    "EDIT-BUTTON": {
+      "LABEL": {
+        "DEFAULT": "SAVE",
+        "CONFIRM": "CONFIRM"
+      }
+    },
+    "CLOSE-BUTTON": {
+      "LABEL": "Close"
     }
   }
 }

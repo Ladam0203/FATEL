@@ -29,7 +29,7 @@ export class EditItemComponent implements OnInit {
 
   restrictedButtonUsage: boolean = false;
 
-  text: string = 'APPLY CHANGES';
+  text: string = 'EDIT-ITEM-COMPONENT.EDIT-BUTTON.LABEL.DEFAULT';
   confirmEdit: boolean = true;
 
   appState = this.store.select('appState');
@@ -112,7 +112,7 @@ export class EditItemComponent implements OnInit {
     }
 
     if (this.confirmEdit) {
-      this.text = 'CONFIRM';
+      this.text = 'EDIT-ITEM-COMPONENT.EDIT-BUTTON.LABEL.CONFIRM';
       this.confirmEdit = false;
       return;
     }
