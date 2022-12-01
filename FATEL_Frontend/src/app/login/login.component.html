@@ -4,7 +4,7 @@
     <div class="left-side">
         <img src="assets/wood.png" class="wood-image">
         <p class="welcome-text">Welcome to<br>
-          <span class="VHF-font">FATEL X CRAM</span><br><br>
+          <span class="VHF-font">FATEL X CRAM</span><br>
           Please, log in.
         </p>
     </div>
@@ -12,23 +12,26 @@
     <div class="right-side">
 
       <div class="login-form-wrapper">
-        <mat-form-field class="example-full-width" appearance="fill">
+        <mat-form-field class="login-form-field" appearance="fill">
           <mat-label>Username</mat-label>
           <input [(ngModel)]="username" matInput>
         </mat-form-field>
         <br>
 
-        <mat-form-field class="example-full-width" appearance="fill">
+        <mat-form-field class="login-form-field" appearance="fill">
           <mat-label>Password</mat-label>
-          <input [(ngModel)]="password" matInput type="password">
+          <input [(ngModel)]="password" matInput [type]="hide ? 'password' : 'text'">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </mat-form-field>
         <br>
 
-        <button mat-raised-button (click)="login()">Log In</button>
+        <button class="login-button" mat-button (click)="login()">Enter
+          <mat-icon>navigate_next</mat-icon>
+        </button>
       </div>
 
       <div class="workers">
-        <img src="assets/workers.png">
+        <img src="assets/workers.png" width="378">
       </div>
     </div>
   </div>

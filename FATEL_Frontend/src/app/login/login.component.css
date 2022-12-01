@@ -54,11 +54,26 @@
 }
 
 .login-form-wrapper {
-  margin: 0 auto;
+  margin: 150px auto 0 auto;
+}
+
+.login-form-field, .login-button {
+  font-family: "Nunito Sans", serif;
+  width: 340px;
+}
+
+.login-button {
+  height: 48px;
+  color: var(--white);
+  background-color: dodgerblue;
+  font-size: 20px;
+}
+
+.login-button mat-icon {
+  margin-top: -2px;
 }
 
 .workers {
   margin: 0 auto;
-
 }
 
