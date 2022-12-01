@@ -56,7 +56,7 @@
         "THREE-DECIMALS": "A szélesség maximum 3 tizedesjeggyel rendelkezhet"
       }
     },
-    "NOTES-FIELD": {
+    "NOTE-FIELD": {
       "LABEL": "Megjegyzés"
     },
     "ADD-BUTTON": {
@@ -67,6 +67,16 @@
     },
     "CLOSE-BUTTON": {
       "LABEL": "Bezárás"
+    }
+  },
+  "CATEGORIES-COMPONENT": {
+    "ITEMS-TABLE": {
+      "NAME": "Név",
+      "WIDTH": "Szélesség",
+      "LENGTH": "Hosszúság",
+      "UNIT": "Mértékegység",
+      "QUANTITY": "Mennyiség",
+      "NOTE": "Megjegyzés"
     }
   }
 }
