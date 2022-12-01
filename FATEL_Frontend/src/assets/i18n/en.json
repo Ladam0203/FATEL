@@ -158,5 +158,18 @@
   },
   "NO-WAREHOUSE-COMPONENT": {
     "MESSAGE": "Start by creating a warehouse on the left"
+  },
+  "REPORT": {
+    "INVENTORY": {
+      "NAME": "Name",
+      "QUANTITY": "Quantity",
+      "UNIT": "Unit"
+    },
+    "DIARY": {
+      "TIMESTAMP": "Timestamp",
+      "NAME": "Name",
+      "CHANGE": "Change",
+      "AFTER": "After"
+    }
   }
 }

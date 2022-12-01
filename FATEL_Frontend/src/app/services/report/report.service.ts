@@ -4,6 +4,7 @@ import {RobotoRegular} from "./Roboto-Regular";
 import autoTable from "jspdf-autotable";
 import {Unit} from "../../entities/units";
 import {Entry} from "../../entities/entry";
+import {TranslateService} from "@ngx-translate/core";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import {Entry} from "../../entities/entry";
 export class ReportService {
   units: typeof Unit = Unit;
 
-  constructor() {
+  constructor(private translate: TranslateService) {
   }
 
   createInventoryReport(warehouseName: string, inventory: any[]) {
@@ -19,7 +20,11 @@ export class ReportService {
 
     let parsedData: any[][] = [];
     inventory.forEach((item) => {
-      let row: any[] = [item.name, Number(item.quantity.toFixed(3)), this.units[item.unit]];
+      let row: any[] = [
+        item.name,
+        Number(item.quantity.toFixed(3)),
+        this.translate.instant(this.units[item.unit])
+      ];
       parsedData.push(row);
     });
 
@@ -28,9 +33,13 @@ export class ReportService {
     let huDate = new Date().toLocaleDateString("hu-HU");
     let fileDate = now.getFullYear().toString() + (now.getMonth() + 1).toString() + now.getDate().toString();
 
-    doc.text("Inventory " + warehouseName + " " + huDate, 20, 25);
+    doc.text( this.translate.instant("INVENTORY") + " | " + warehouseName + " " + huDate, 20, 25);
     autoTable(doc, {
-        head: [['Name', 'Quantity', 'Unit'],],
+        head: [
+          [this.translate.instant('REPORT.INVENTORY.NAME'),
+            this.translate.instant('REPORT.INVENTORY.QUANTITY'),
+            this.translate.instant('REPORT.INVENTORY.UNIT')]
+        ],
         body: parsedData,
         styles: {
           font: 'Roboto-Regular',
@@ -55,9 +64,14 @@ export class ReportService {
     let huDate = new Date().toLocaleDateString("hu-HU");
     let fileDate = now.getFullYear().toString() + (now.getMonth() + 1).toString() + now.getDate().toString();
 
-    doc.text("Diary " + warehouseName + " " + huDate, 20, 25);
+    doc.text(this.translate.instant("DIARY") + " | " + warehouseName + " " + huDate, 20, 25);
     autoTable(doc, {
-        head: [['Timestamp', 'Item Name', 'Change', 'After'],],
+        head: [
+          [this.translate.instant('REPORT.DIARY.TIMESTAMP'),
+            this.translate.instant('REPORT.DIARY.NAME'),
+            this.translate.instant('REPORT.DIARY.CHANGE'),
+            this.translate.instant('REPORT.DIARY.AFTER')]
+        ],
         body: parsedData,
         styles: {
           font: 'Roboto-Regular',

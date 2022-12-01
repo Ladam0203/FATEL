@@ -17,7 +17,7 @@
       "TIMESTAMP": "Dátum",
       "NAME": "Név",
       "CHANGE": "Mozgás",
-      "AFTER": "Utána"
+      "AFTER": "Új menny."
     }
   },
   "ADD-ITEM-COMPONENT": {
@@ -158,5 +158,18 @@
   },
   "NO-WAREHOUSE-COMPONENT": {
     "MESSAGE": "Kezdj egy raktár létrehozásával a bal oldalon!"
+  },
+  "REPORT": {
+    "INVENTORY": {
+      "NAME": "Név",
+      "QUANTITY": "Menny.",
+      "UNIT": "Mért."
+    },
+    "DIARY": {
+      "TIMESTAMP": "Dátum",
+      "NAME": "Név",
+      "CHANGE": "Változás",
+      "AFTER": "Új menny."
+    }
   }
 }
