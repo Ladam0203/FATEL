@@ -145,5 +145,12 @@
     "CLOSE-BUTTON": {
       "LABEL": "Bezárás"
     }
-  }
-}
+  },
+  "TOOL-BAR-COMPONENT": {
+    "EXPORT-BUTTON": {
+      "LABEL": "Exportálás"
+    },
+    "NEW-ITEM-BUTTON": {
+      "LABEL": "Új tétel"
+    }
+}}
