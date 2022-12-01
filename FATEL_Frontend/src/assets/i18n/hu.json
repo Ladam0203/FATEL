@@ -153,4 +153,8 @@
     "NEW-ITEM-BUTTON": {
       "LABEL": "Új tétel"
     }
-}}
+  },
+  "NO-WAREHOUSE-COMPONENT": {
+    "MESSAGE": "Kezdj egy raktár létrehozásával a bal oldalon!"
+  }
+}
