@@ -1,4 +1,9 @@
 {
+  "Meter": "Meter",
+  "SquareMeter": "Square meter",
+  "Piece": "Piece",
+
+
   "DIARY":
   {
     "EXPORT-BUTTON-TEXT": "Export",
@@ -11,6 +16,48 @@
       "NAME": "Name",
       "CHANGE": "Change",
       "AFTER": "After"
+    }
+  },
+  "ADD-ITEM-COMPONENT": {
+    "NAME-FIELD" : {
+      "LABEL": "Name",
+      "ERROR": {
+        "REQUIRED": "Name is required"
+      }
+    },
+    "UNIT-FIELD": {
+      "LABEL": "Unit",
+      "DEFAULT": "Unit",
+      "ERROR": {
+        "REQUIRED": "Unit is required"
+      }
+    },
+    "QUANTITY-FIELD": {
+      "LABEL": "Quantity",
+      "ERROR": {
+        "REQUIRED": "Quantity is required",
+        "GREATER-THAN-OR-ZERO": "Quantity must be greater than or equal to 0",
+        "WHOLE-NUMBER": "Quantity must be a whole number"
+      }
+    },
+    "LENGTH-FIELD": {
+      "LABEL": "Length",
+      "ERROR": {
+        "REQUIRED": "Length is required",
+        "GREATER-THAN-ZERO": "Length must be greater than 0",
+        "THREE-DECIMALS": "Length must not contain more than 3 decimal places"
+      }
+    },
+    "WIDTH-FIELD": {
+      "LABEL": "Width",
+      "ERROR": {
+        "REQUIRED": "Width is required",
+        "GREATER-THAN-ZERO": "Width must be greater than 0",
+        "THREE-DECIMALS": "Width must not contain more than 3 decimal places"
+      }
+    },
+    "NOTES-FIELD": {
+      "LABEL": "Notes"
     }
   }
 }
