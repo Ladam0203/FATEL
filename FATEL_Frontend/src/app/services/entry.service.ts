@@ -5,9 +5,6 @@ import {environment} from "../../environments/environment";
 
 export const customAxios = axios.create({
   baseURL: environment.baseUrl,
-  headers: {
-    Authorization:`Bearer ${localStorage.getItem('token')}`
-  }
 })
 
 @Injectable({
@@ -43,7 +40,11 @@ export class EntryService {
   }
 
   async readAll(): Promise<Entry[]> {
-    const response = await customAxios.get<Entry[]>('entry/readall');
+    const response = await customAxios.get<Entry[]>('entry/readall', {
+      headers: {
+        Authorization:`Bearer ${localStorage.getItem('token')}`
+      }
+    });
     return response.data;
   }
 }

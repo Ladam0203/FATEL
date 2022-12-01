@@ -10,9 +10,6 @@ import {environment} from "../../environments/environment";
 
 export const customAxios = axios.create({
   baseURL: environment.baseUrl,
-  headers: {
-    Authorization:`Bearer ${localStorage.getItem('token')}`
-  }
 })
 
 @Injectable({
@@ -47,7 +44,11 @@ export class ItemService {
   }
 
   async create(dto: PostItemDTO) {
-    const response = await customAxios.post('item/create', dto);
+    const response = await customAxios.post('item/create', dto, {
+      headers: {
+        Authorization:`Bearer ${localStorage.getItem('token')}`
+      }
+    });
     return this.mapResponse(response.data);
   }
 
@@ -67,27 +68,47 @@ export class ItemService {
   }
 
   async readAll(): Promise<Item[]> {
-    const response = await customAxios.get<Item[]>('item/readall');
+    const response = await customAxios.get<Item[]>('item/readall', {
+      headers: {
+        Authorization:`Bearer ${localStorage.getItem('token')}`
+      }
+    });
     return response.data;
   }
 
   async update(item: any) {
-    const response = await customAxios.put<any>('item/update/' + item.id, item);
+    const response = await customAxios.put<any>('item/update/' + item.id, item, {
+      headers: {
+        Authorization:`Bearer ${localStorage.getItem('token')}`
+      }
+    });
     return this.mapResponse(response.data);
   }
 
   async updateQuantity(movement: Movement) {
-    const response = await customAxios.put<Item>('item/updateQuantity/' + movement.item.id, movement);
+    const response = await customAxios.put<Item>('item/updateQuantity/' + movement.item.id, movement,{
+      headers: {
+        Authorization:`Bearer ${localStorage.getItem('token')}`
+      }
+    });
     return this.mapResponse(response.data);
   }
 
   async delete(id: any) {
-    const response = await customAxios.delete('item/delete/' + id);
+    const response = await customAxios.delete('item/delete/' + id, {
+      headers: {
+        Authorization:`Bearer ${localStorage.getItem('token')}`
+      }
+    });
     return this.mapResponse(response.data);
   }
 
   async get(id: any) {
-    const response = await customAxios.get<any>('item/read/' + id);
+    const response = await customAxios.get<any>('item/read/' + id, {
+      headers: {
+        Authorization:`Bearer ${localStorage.getItem('token')}`
+      }
+    });
     return response.data;
   }
 }
