@@ -2,8 +2,10 @@
   "Meter": "Méter",
   "SquareMeter": "Négyzetméter",
   "Piece": "Darab",
+  "INVENTORY": "Leltár",
+  "DIARY": "Napló",
 
-  "DIARY": {
+  "DIARY-COMPONENT": {
     "EXPORT-BUTTON" : {
       "LABEL": "Exportálás"
     },
