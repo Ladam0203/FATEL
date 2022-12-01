@@ -1,3 +1,16 @@
 {
-  "example": "example"
+  "DIARY":
+  {
+    "EXPORT-BUTTON-TEXT": "Export",
+    "YEAR-FILTER": {
+      "PLACEHOLDER": "Year",
+      "ALL": "All"
+    },
+    "ENTRIES-TABLE": {
+      "TIMESTAMP": "Timestamp",
+      "NAME": "Name",
+      "CHANGE": "Change",
+      "AFTER": "After"
+    }
+  }
 }
