@@ -29,6 +29,7 @@ public class UserController : ControllerBase
         return Unauthorized("Username or password is incorrect");
     }
     
+    [Authorize]
     [HttpPost]
     [Route("Register")]
     public IActionResult Register([FromBody] LoginDTO model)

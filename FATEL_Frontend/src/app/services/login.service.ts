@@ -15,7 +15,7 @@ export class LoginService {
   constructor() { }
 
   async login(dto: Login){
-    const result = await customAxios.post('login', dto);
+    const result = await customAxios.post('user/login', dto);
     return result.data;
   }
 

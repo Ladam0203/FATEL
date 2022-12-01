@@ -26,4 +26,8 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('token', token);
   }
 
+  logout(){
+    localStorage.removeItem('token');
+
+  }
 }
