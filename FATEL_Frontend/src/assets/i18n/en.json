@@ -59,6 +59,12 @@
     "NOTES-FIELD": {
       "LABEL": "Notes"
     },
+    "ADD-BUTTON": {
+      "LABEL": {
+        "DEFAULT": "Add item",
+        "CONFIRM": "Confirm"
+      }
+    },
     "CLOSE-BUTTON": {
       "LABEL": "Close"
     }
