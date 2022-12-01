@@ -1,22 +1,34 @@
-<app-mat-sidenav-container
-  class="sidenav-container"
-  (showInventoryEvent)="onShowInventory($event)"
-></app-mat-sidenav-container>
+<ng-container *ngIf="userLoggedIn; else noLogin">
 
-<div class="main-container">
-  <div class="content-container">
+  <app-mat-sidenav-container
+    class="sidenav-container"
+    (showInventoryEvent)="onShowInventory($event)"
+  ></app-mat-sidenav-container>
 
-    <ng-container *ngIf="selectedWarehouse; else noWarehouse">
+  <div class="main-container">
+    <div class="content-container">
 
-      <inventory *ngIf="showInventory"></inventory>
-      <diary *ngIf="!showInventory"></diary>
+      <ng-container *ngIf="selectedWarehouse; else noWarehouse">
 
-    </ng-container>
+        <inventory *ngIf="showInventory"></inventory>
+        <diary *ngIf="!showInventory"></diary>
 
-    <ng-template #noWarehouse>
-      <app-no-warehouse class="no-warehouse-container"></app-no-warehouse>
-    </ng-template>
+      </ng-container>
+
+      <ng-template #noWarehouse>
+        <app-no-warehouse class="no-warehouse-container"></app-no-warehouse>
+      </ng-template>
+    </div>
   </div>
-</div>
-<app-login></app-login>
+
+</ng-container>
+
+
+
+
+<ng-template #noLogin>
+
+  <app-login></app-login>
+
+</ng-template>
 

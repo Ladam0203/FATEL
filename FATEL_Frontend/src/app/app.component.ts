@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
 
   selectedWarehouse: Warehouse | undefined;
 
+  userLoggedIn: boolean = false;
+
   constructor(private readonly store: Store<any>) {}
 
   ngOnInit(): void {

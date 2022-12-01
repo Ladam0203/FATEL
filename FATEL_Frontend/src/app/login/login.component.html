@@ -1,14 +1,37 @@
-<mat-form-field class="example-full-width" appearance="fill">
-  <mat-label>Username</mat-label>
-  <input [(ngModel)]="username" matInput>
-</mat-form-field>
-<br>
+<div class="login-container">
+  <div class="login-wrapper">
 
-<mat-form-field class="example-full-width" appearance="fill">
-  <mat-label>Password</mat-label>
-  <input [(ngModel)]="password" matInput type = "password">
-</mat-form-field>
-<br>
+    <div class="left-side">
+        <img src="assets/wood.png" class="wood-image">
+        <p class="welcome-text">Welcome to<br>
+          <span class="VHF-font">FATEL X CRAM</span><br><br>
+          Please, log in.
+        </p>
+    </div>
 
-<button mat-raised-button (click)="login()">Log In</button>
-<button mat-raised-button (click)="logout()">Log Out</button>
+    <div class="right-side">
+
+      <div class="login-form-wrapper">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Username</mat-label>
+          <input [(ngModel)]="username" matInput>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input [(ngModel)]="password" matInput type="password">
+        </mat-form-field>
+        <br>
+
+        <button mat-raised-button (click)="login()">Log In</button>
+      </div>
+
+      <div class="workers">
+        <img src="assets/workers.png">
+      </div>
+    </div>
+  </div>
+</div>
+
+

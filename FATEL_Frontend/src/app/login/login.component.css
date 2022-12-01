@@ -1,0 +1,64 @@
+.login-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.login-wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.left-side {
+  width: 55%;
+  background-image: url("src/assets/blue-skies.png");
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  row-gap: 80px;
+}
+
+.wood-image {
+  width: 128px;
+  height: 128px;
+
+  margin-top: 80px;
+}
+
+.welcome-text {
+  font-family: "Nunito Sans", serif;
+  font-size: 2.5rem;
+  color: var(--white);
+
+}
+
+.VHF-font {
+  font-family: "Very Happy Family", serif;
+  font-size: 6rem;
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-around;
+
+  flex: 1;
+  background: var(--white);
+}
+
+.login-form-wrapper {
+  margin: 0 auto;
+}
+
+.workers {
+  margin: 0 auto;
+
+}
+
