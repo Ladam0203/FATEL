@@ -126,5 +126,24 @@
     "SEARCH-BAR": {
       "PLACEHOLDER": "Search"
     }
+  },
+  "RECORD-MOVEMENT-COMPONENT" : {
+    "CHANGE-FIELD" : {
+      "LABEL": "Change",
+      "ERROR": {
+        "REQUIRED": "Change is required",
+        "GREATER-THAN-ZERO": "Change must be greater than 0",
+        "WHOLE-NUMBER": "Change must be a whole number"
+      }
+    },
+    "IN-BUTTON": {
+      "LABEL": "IN"
+    },
+    "OUT-BUTTON": {
+      "LABEL": "OUT"
+    },
+    "CLOSE-BUTTON": {
+      "LABEL": "Close"
+    }
   }
 }

@@ -14,7 +14,7 @@
     "ENTRIES-TABLE": {
       "TIMESTAMP": "Dátum",
       "NAME": "Név",
-      "CHANGE": "Változás",
+      "CHANGE": "Mozgás",
       "AFTER": "Utána"
     }
   },
@@ -125,6 +125,25 @@
   "FILTER-BAR-COMPONENT" : {
     "SEARCH-BAR": {
       "PLACEHOLDER": "Keresés"
+    }
+  },
+  "RECORD-MOVEMENT-COMPONENT" : {
+    "CHANGE-FIELD" : {
+      "LABEL": "Mozgás",
+      "ERROR": {
+        "REQUIRED": "A mozgás megadása kötelező",
+        "GREATER-THAN-ZERO": "A mozgásnak 0-nál nagyobbnak kell lennie",
+        "WHOLE-NUMBER": "A mozgásnak egész számnak kell lennie"
+      }
+    },
+    "IN-BUTTON": {
+      "LABEL": "BE"
+    },
+    "OUT-BUTTON": {
+      "LABEL": "KI"
+    },
+    "CLOSE-BUTTON": {
+      "LABEL": "Bezárás"
     }
   }
 }

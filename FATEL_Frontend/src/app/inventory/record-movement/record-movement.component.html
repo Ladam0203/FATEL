@@ -2,29 +2,29 @@
   <div class="action-panel">
     <mat-form-field appearance="fill">
       <input formControlName="change" type="number" matInput>
-      <mat-label>Change</mat-label>
+      <mat-label>{{'RECORD-MOVEMENT-COMPONENT.CHANGE-FIELD.LABEL' | translate}}</mat-label>
       <mat-error *ngIf="movementForm.get('change')?.hasError('required')">
-        Change is required
+        {{'RECORD-MOVEMENT-COMPONENT.CHANGE-FIELD.ERROR.REQUIRED' | translate}}
       </mat-error>
       <mat-error *ngIf="movementForm.get('change')?.hasError('min')">
-        Change must be greater than or equal to 0
+        {{'RECORD-MOVEMENT-COMPONENT.CHANGE-FIELD.ERROR.GREATER-THAN-ZERO' | translate}}
       </mat-error>
       <mat-error *ngIf="movementForm.get('change')?.hasError('pattern')">
-        Change must be a whole number
+        {{'RECORD-MOVEMENT-COMPONENT.CHANGE-FIELD.ERROR.WHOLE-NUMBER' | translate}}
       </mat-error>
     </mat-form-field>
     <div class="buttons-container">
       <button mat-button class="deposit-button fs-5" (click)="deposit()" [class.confirmDeposit]="!confirmDeposit">
-        <ng-container>IN</ng-container>
+        <ng-container>{{'RECORD-MOVEMENT-COMPONENT.IN-BUTTON.LABEL' | translate}}</ng-container>
         <mat-icon class="main-icon" aria-hidden="false" aria-label="deposit icon" [innerHTML]=" confirmDeposit ? 'arrow_upward' : 'check' "></mat-icon>
       </button>
       <button mat-button class="withdraw-button fs-5" (click)="withdraw()" [class.confirmWithdraw]="!confirmWithdraw">
-        <ng-container>OUT</ng-container>
+        <ng-container>{{'RECORD-MOVEMENT-COMPONENT.OUT-BUTTON.LABEL' | translate}}</ng-container>
         <mat-icon class="main-icon" aria-hidden="false" aria-label="withdraw icon" [innerHTML]=" confirmWithdraw ? 'arrow_downward' : 'check' "></mat-icon>
       </button>
     </div>
     <button mat-button class="close-component-button" (click)="closeRecordMovementComponent()">
-      CLOSE
+      {{'RECORD-MOVEMENT-COMPONENT.CLOSE-BUTTON.LABEL' | translate}}
     </button>
   </div>
 </form>
