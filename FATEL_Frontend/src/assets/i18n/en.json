@@ -145,5 +145,13 @@
     "CLOSE-BUTTON": {
       "LABEL": "Close"
     }
+  },
+  "TOOL-BAR-COMPONENT": {
+    "EXPORT-BUTTON": {
+      "LABEL": "Export"
+    },
+    "NEW-ITEM-BUTTON": {
+      "LABEL": "New item"
+    }
   }
 }
