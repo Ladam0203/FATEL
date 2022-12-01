@@ -16,8 +16,8 @@ export class AppComponent implements OnInit {
   selectedWarehouse: Warehouse | undefined;
 
   constructor(private readonly store: Store<any>, private translate: TranslateService) {
-    translate.setDefaultLang('en');
-    translate.use('en');
+    translate.setDefaultLang('hu');
+    translate.use('hu');
   }
 
   ngOnInit(): void {
