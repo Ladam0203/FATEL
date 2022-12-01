@@ -34,6 +34,9 @@ import {MatSortModule} from "@angular/material/sort";
 import { WarehouseActionBarComponent } from './warehouse-action-bar/warehouse-action-bar.component';
 import { NoWarehouseComponent } from './no-warehouse/no-warehouse.component';
 import { LoginComponent } from './login/login.component';
+import { FatelComponent } from './fatel/fatel.component';
+import {RouterOutlet} from "@angular/router";
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
@@ -52,25 +55,28 @@ import { LoginComponent } from './login/login.component';
     WarehouseActionBarComponent,
     NoWarehouseComponent,
     LoginComponent,
+    FatelComponent,
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        NgbModule,
-        NgMaterialModule,
-        MatTableModule,
-        MatSidenavModule,
-        MatCheckboxModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatOptionModule,
-        MatSelectModule,
-        MatAutocompleteModule,
-        StoreModule.forRoot({searchbarQuery: searchbarQueryReducer, appState: AppReducer}),
-        MatSortModule,
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    NgbModule,
+    NgMaterialModule,
+    MatTableModule,
+    MatSidenavModule,
+    MatCheckboxModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    StoreModule.forRoot({searchbarQuery: searchbarQueryReducer, appState: AppReducer}),
+    MatSortModule,
+    RouterOutlet,
+    AppRoutingModule,
+  ],
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent],
 })
