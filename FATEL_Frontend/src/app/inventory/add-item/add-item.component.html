@@ -79,7 +79,7 @@
     <br>
     <div class="action-buttons-container">
       <button [disabled]="itemForm.invalid && restrictedButtonUsage" class="add-item-button" mat-button (click)="addNewItem()" [innerHTML]="text" [class.confirmAdd]="!confirmAdd"></button>
-      <button class="close-component-button" mat-button (click)="closeAddItemComponent()">CLOSE</button>
+      <button class="close-component-button" mat-button (click)="closeAddItemComponent()">{{'ADD-ITEM-COMPONENT.CLOSE-BUTTON.LABEL' | translate}}</button>
     </div>
   </div>
 </div>
