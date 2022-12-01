@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Login} from "../entities/DTOs/login";
 import {LoginService} from "../services/login.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -11,8 +12,9 @@ export class LoginComponent implements OnInit {
 
   username: string = "";
   password: string = "";
+  unauthorized: boolean = true;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService,  private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -23,11 +25,18 @@ export class LoginComponent implements OnInit {
       password: this.password
     };
     const token = await this.loginService.login(loginDto);
-    localStorage.setItem('token', token);
+    if(!token)
+    {
+      this.unauthorized = token;
+    }
+    else
+    {
+      localStorage.setItem('token', token);
+      await this.router.navigate(['']);
+    }
   }
 
   logout(){
     localStorage.removeItem('token');
-
   }
 }
