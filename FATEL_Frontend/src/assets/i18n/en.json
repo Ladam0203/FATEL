@@ -56,8 +56,8 @@
         "THREE-DECIMALS": "Width must not contain more than 3 decimal places"
       }
     },
-    "NOTES-FIELD": {
-      "LABEL": "Notes"
+    "NOTE-FIELD": {
+      "LABEL": "Note"
     },
     "ADD-BUTTON": {
       "LABEL": {
@@ -67,6 +67,16 @@
     },
     "CLOSE-BUTTON": {
       "LABEL": "Close"
+    }
+  },
+  "CATEGORIES-COMPONENT": {
+    "ITEMS-TABLE": {
+      "NAME": "Name",
+      "WIDTH": "Width",
+      "LENGTH": "Length",
+      "UNIT": "Unit",
+      "QUANTITY": "Quantity",
+      "NOTE": "Note"
     }
   }
 }
