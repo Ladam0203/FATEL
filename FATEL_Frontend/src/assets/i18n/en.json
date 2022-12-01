@@ -58,6 +58,9 @@
     },
     "NOTES-FIELD": {
       "LABEL": "Notes"
+    },
+    "CLOSE-BUTTON": {
+      "LABEL": "Close"
     }
   }
 }
