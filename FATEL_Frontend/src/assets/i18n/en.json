@@ -2,9 +2,11 @@
   "Meter": "Meter",
   "SquareMeter": "Square meter",
   "Piece": "Piece",
+  "INVENTORY": "Inventory",
+  "DIARY": "Diary",
 
 
-  "DIARY":
+  "DIARY-COMPONENT":
   {
     "EXPORT-BUTTON-TEXT": "Export",
     "YEAR-FILTER": {
