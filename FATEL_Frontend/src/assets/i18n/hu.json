@@ -121,5 +121,10 @@
     "CLOSE-BUTTON": {
       "LABEL": "Bezárás"
     }
+  },
+  "FILTER-BAR-COMPONENT" : {
+    "SEARCH-BAR": {
+      "PLACEHOLDER": "Keresés"
+    }
   }
 }
