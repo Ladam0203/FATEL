@@ -1,3 +1,16 @@
 {
-  "example": "hungarian example"
+  "DIARY":
+  {
+    "EXPORT-BUTTON-TEXT": "Exportálás",
+    "YEAR-FILTER": {
+      "PLACEHOLDER": "Év",
+      "ALL": "Összes"
+    },
+    "ENTRIES-TABLE": {
+      "TIMESTAMP": "Dátum",
+      "NAME": "Név",
+      "CHANGE": "Változás",
+      "AFTER": "Utána"
+    }
+  }
 }
