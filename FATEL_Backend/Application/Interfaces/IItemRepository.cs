@@ -9,7 +9,7 @@ public interface IItemRepository
     List<Item> ReadAll();
     Item Update(Item item);
 
-    List<Item> UpdateRange(List<Item> items);
+    List<Item> UpdateNameRange(List<Item> items);
     Item Delete(int id);
     double ReadTotalQuantityOf(Item item);
     bool DoesIdenticalExist(Item item);

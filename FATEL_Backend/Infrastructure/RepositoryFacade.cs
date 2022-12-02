@@ -86,7 +86,7 @@ public class RepositoryFacade : IRepositoryFacade
 
     public List<Item> UpdateItemRange(List<Item> items)
     {
-        return _itemRepository.UpdateRange(items);
+        return _itemRepository.UpdateNameRange(items);
     }
 
     public Item DeleteItem(int id)
