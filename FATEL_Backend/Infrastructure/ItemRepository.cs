@@ -103,17 +103,16 @@ public class ItemRepository : IItemRepository
             throw new KeyNotFoundException("One or more items do not exist");
         
         //Attach the items and set their name to changed to register
-        _context.ChangeTracker.Clear();
         _context.ItemTable.AttachRange(items);
         foreach (var item in items)
         {
             _context.Entry(item).Property(i => i.Name).IsModified = true;
         }
         _context.SaveChanges();
-        
-        //Return the full, modified items
-        return _context.ItemTable
-            .Where(item => items.Select(i => i.Id).Contains(item.Id)).ToList();
+        //This is needed here, otherwise the return will be hollow at unchanged places
+        _context.ChangeTracker.Clear();
+
+        return _context.ItemTable.Where(i => items.Select(item => item.Id).Contains(i.Id)).ToList();
     }
 
     public Item Delete(int id)
