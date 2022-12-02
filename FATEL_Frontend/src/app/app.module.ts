@@ -33,6 +33,10 @@ import {DiaryComponent} from './diary/diary.component';
 import {MatSortModule} from "@angular/material/sort";
 import { WarehouseActionBarComponent } from './warehouse-action-bar/warehouse-action-bar.component';
 import { NoWarehouseComponent } from './no-warehouse/no-warehouse.component';
+import { LoginComponent } from './login/login.component';
+import { FatelComponent } from './fatel/fatel.component';
+import {RouterOutlet} from "@angular/router";
+import {AppRoutingModule} from "./app-routing.module";
 
 // import ngx-translate and the http loader
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
@@ -55,32 +59,37 @@ import {HttpClient} from '@angular/common/http';
     DiaryComponent,
     WarehouseActionBarComponent,
     NoWarehouseComponent,
+    LoginComponent,
+    FatelComponent,
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        NgbModule,
-        NgMaterialModule,
-        MatTableModule,
-        MatSidenavModule,
-        MatCheckboxModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatOptionModule,
-        MatSelectModule,
-        MatAutocompleteModule,
-        StoreModule.forRoot({searchbarQuery: searchbarQueryReducer, appState: AppReducer}),
-        MatSortModule,
-        TranslateModule.forRoot({
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    NgbModule,
+    NgMaterialModule,
+    MatTableModule,
+    MatSidenavModule,
+    MatCheckboxModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    StoreModule.forRoot({searchbarQuery: searchbarQueryReducer, appState: AppReducer}),
+    MatSortModule,
+    RouterOutlet,
+    AppRoutingModule,
+    TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
           }
         })
-    ],
+  ],
+
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent],
 })

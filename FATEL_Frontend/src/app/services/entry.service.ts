@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import axios from "axios";
 import {Entry} from "../entities/entry";
+import {environment} from "../../environments/environment";
 
 export const customAxios = axios.create({
-  baseURL: 'http://localhost:5175/api/entry/',
+  baseURL: environment.baseUrl,
 })
 
 @Injectable({
@@ -39,7 +40,11 @@ export class EntryService {
   }
 
   async readAll(): Promise<Entry[]> {
-    const response = await customAxios.get<Entry[]>('readall');
+    const response = await customAxios.get<Entry[]>('entry/readall', {
+      headers: {
+        Authorization:`Bearer ${localStorage.getItem('token')}`
+      }
+    });
     return response.data;
   }
 }
