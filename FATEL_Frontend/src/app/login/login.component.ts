@@ -38,7 +38,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  logout(){
+  async logout(){
     localStorage.removeItem('token');
+    await this.router.navigate(['login'])
   }
 }
