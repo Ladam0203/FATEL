@@ -21,12 +21,13 @@ public class ItemServiceTest
         }).CreateMapper();
         var validator = new PostItemDTOValidator();
         var putValidator = new PutItemDTOValidator();
+        var patchValidator = new PatchItemNameDTOValidator();
         var movementValidator = new MovementValidator();
 
         IItemService itemService = null;
 
         //Act
-        var e = Assert.Throws<ArgumentNullException>(() => itemService = new ItemService(null, mapper, validator, putValidator, movementValidator));
+        var e = Assert.Throws<ArgumentNullException>(() => itemService = new ItemService(null, mapper, validator, putValidator, patchValidator, movementValidator));
 
         //Assert
         Assert.Equal("Value cannot be null. (Parameter 'repository')", e.Message);
@@ -40,6 +41,7 @@ public class ItemServiceTest
         var mockRepository = new Mock<IRepositoryFacade>();
         var validator = new PostItemDTOValidator();
         var putValidator = new PutItemDTOValidator();
+        var patchValidator = new PatchItemNameDTOValidator();
         var movementValidator = new MovementValidator();
 
         IItemService itemService = null;
