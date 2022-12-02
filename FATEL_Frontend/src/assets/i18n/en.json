@@ -171,5 +171,18 @@
       "CHANGE": "Change",
       "AFTER": "After"
     }
+  },
+  "LOGIN-COMPONENT": {
+    "WELCOME-TEXT": "Welcome to",
+    "LOGIN-TEXT": "Please log in.",
+    "USERNAME-FIELD": {
+      "LABEL": "Username"
+    },
+    "PASSWORD-FIELD": {
+      "LABEL": "Password"
+    },
+    "ENTER-BUTTON": {
+      "LABEL": "Login"
+    }
   }
 }
