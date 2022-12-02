@@ -78,7 +78,7 @@ public class ItemService : IItemService
         return _repository.UpdateItem(item);
     }
 
-    public List<Item> UpdateRange(List<PatchItemNameDTO> dtos)
+    public List<Item> UpdateNameRange(List<PatchItemNameDTO> dtos)
     {
         foreach (var dto in dtos)
         {
