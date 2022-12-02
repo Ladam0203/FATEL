@@ -114,7 +114,29 @@ public class ItemController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
-    
+
+    [HttpPatch]
+    [Route("UpdateRange")]
+    public ActionResult<List<Item>> UpdateRange(List<PatchItemNameDTO> dtos)
+    {
+        try
+        {
+            return Ok(_itemService.UpdateRange(dtos));
+        }
+        catch (ValidationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+
     [HttpPut]
     [Route("UpdateQuantity/{id}")]
     public ActionResult<Item> UpdateQuantity([FromRoute] int id, [FromBody] Movement movement)
