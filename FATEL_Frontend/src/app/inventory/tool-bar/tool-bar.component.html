@@ -1,7 +1,7 @@
-<app-warehouse-action-bar toolbarHeader="Inventory"></app-warehouse-action-bar>
+<app-warehouse-action-bar toolbarHeader="{{'INVENTORY' | translate}}"></app-warehouse-action-bar>
 <div class="action-bar">
   <button mat-button class="secondary-button fs-5" (click)="exportPDF()">
-    Export
+    {{ 'TOOL-BAR-COMPONENT.EXPORT-BUTTON.LABEL' | translate }}
   </button>
 
   <button mat-button class="main-button fs-5" (click)="openAddItemComponent()">
@@ -11,6 +11,6 @@
       aria-label="add icon"
       fontIcon="add"
     ></mat-icon>
-    New Item
+    {{ 'TOOL-BAR-COMPONENT.NEW-ITEM-BUTTON.LABEL' | translate }}
   </button>
 </div>

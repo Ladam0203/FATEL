@@ -2,70 +2,69 @@
 <div class="action-container">
   <div class="action-panel">
     <mat-form-field appearance="fill">
-      <mat-label>Name</mat-label>
+      <mat-label>{{'ADD-ITEM-COMPONENT.NAME-FIELD.LABEL' | translate}}</mat-label>
       <input formControlName="name" matInput>
       <mat-error *ngIf="itemForm.get('name')?.hasError('required')">
-        Name is required
+        {{'ADD-ITEM-COMPONENT.NAME-FIELD.ERROR.REQUIRED' | translate}}
       </mat-error>
     </mat-form-field>
     <br>
 
-    <!-- TODO: Add Select one... or something similar as default value -->
     <mat-form-field appearance="fill">
-      <mat-label>Unit</mat-label>
+      <mat-label>{{'ADD-ITEM-COMPONENT.UNIT-FIELD.LABEL' | translate}}</mat-label>
       <mat-select formControlName="unit">
-        <mat-option *ngIf="!itemForm.get('name')" [value]=null>Unit</mat-option>
+        <mat-option *ngIf="!itemForm.get('name')" [value]=null>{{'ADD-ITEM-COMPONENT.UNIT-FIELD.DEFAULT' | translate}}</mat-option>
         <mat-option *ngFor="let unit of units | keys" [value]=units[unit]>
-          {{unit}}
+          {{unit | translate}}
         </mat-option>
       </mat-select>
       <mat-error *ngIf="itemForm.get('unit')?.hasError('required')">
-        Unit is required
+        {{'ADD-ITEM-COMPONENT.UNIT-FIELD.ERROR.REQUIRED' | translate}}
       </mat-error>
     </mat-form-field>
     <br>
 
     <mat-form-field appearance="fill">
-      <mat-label>Quantity</mat-label>
+      <mat-label>{{'ADD-ITEM-COMPONENT.QUANTITY-FIELD.LABEL' | translate}}</mat-label>
       <input formControlName ="quantity" type = "number" matInput>
       <mat-error *ngIf="itemForm.get('quantity')?.hasError('required')">
-        Quantity is required
+        {{'ADD-ITEM-COMPONENT.QUANTITY-FIELD.ERROR.REQUIRED' | translate}}
       </mat-error>
       <mat-error *ngIf="itemForm.get('quantity')?.hasError('min')">
-        Quantity must be greater than or equal to 0
+        {{'ADD-ITEM-COMPONENT.QUANTITY-FIELD.ERROR.GREATER-THAN-OR-ZERO' | translate}}
       </mat-error>
       <mat-error *ngIf="itemForm.get('quantity')?.hasError('pattern')">
-        Quantity must be a whole number
+        {{'ADD-ITEM-COMPONENT.QUANTITY-FIELD.ERROR.WHOLE-NUMBER' | translate}}
       </mat-error>
     </mat-form-field>
 
     <ng-container *ngIf="shouldValidateLength()">
       <mat-form-field appearance="fill">
-        <mat-label>Length</mat-label>
+        <mat-label>{{'ADD-ITEM-COMPONENT.LENGTH-FIELD.LABEL' | translate}}</mat-label>
         <input formControlName="length" type="number" matInput>
         <mat-error *ngIf="itemForm.get('length')?.hasError('required')">
-          Length is required
+          {{'ADD-ITEM-COMPONENT.LENGTH-FIELD.ERROR.REQUIRED' | translate}}
         </mat-error>
         <mat-error *ngIf="itemForm.get('length')?.hasError('greaterThan')">
-          Length must be greater than 0
+          {{'ADD-ITEM-COMPONENT.LENGTH-FIELD.ERROR.GREATER-THAN-ZERO' | translate}}
         </mat-error>
         <mat-error *ngIf="itemForm.get('length')?.hasError('pattern')">
-          Length must not contain more than 3 decimal places
+          {{'ADD-ITEM-COMPONENT.LENGTH-FIELD.ERROR.THREE-DECIMALS' | translate}}
         </mat-error>
       </mat-form-field>
     </ng-container>
     <ng-container *ngIf="shouldValidateWidth()">
       <mat-form-field appearance="fill">
-        <mat-label>Width</mat-label>
+        <mat-label>{{'ADD-ITEM-COMPONENT.WIDTH-FIELD.LABEL' | translate}}</mat-label>
         <input formControlName="width" type="number" matInput>
         <mat-error *ngIf="itemForm.get('width')?.hasError('required')">
-          Width is required
+          {{'ADD-ITEM-COMPONENT.WIDTH-FIELD.ERROR.REQUIRED' | translate}}
         </mat-error>
         <mat-error *ngIf="itemForm.get('width')?.hasError('greaterThan')">
-          Width must be greater than 0
+          {{'ADD-ITEM-COMPONENT.WIDTH-FIELD.ERROR.GREATER-THAN-ZERO' | translate}}
         </mat-error>
         <mat-error *ngIf="itemForm.get('width')?.hasError('pattern')">
-          Width must not contain more than 3 decimal places
+          {{'ADD-ITEM-COMPONENT.WIDTH-FIELD.ERROR.THREE-DECIMALS' | translate}}
         </mat-error>
       </mat-form-field>
     </ng-container>
@@ -73,14 +72,14 @@
     <br>
 
     <mat-form-field appearance="fill">
-      <mat-label>Notes</mat-label>
+      <mat-label>{{'ADD-ITEM-COMPONENT.NOTE-FIELD.LABEL' | translate}}</mat-label>
       <textarea formControlName="note" matInput></textarea>
     </mat-form-field>
 
     <br>
     <div class="action-buttons-container">
-      <button [disabled]="itemForm.invalid && restrictedButtonUsage" class="add-item-button" mat-button (click)="addNewItem()" [innerHTML]="text" [class.confirmAdd]="!confirmAdd"></button>
-      <button class="close-component-button" mat-button (click)="closeAddItemComponent()">CLOSE</button>
+      <button [disabled]="itemForm.invalid && restrictedButtonUsage" class="add-item-button" mat-button (click)="addNewItem()" [innerHTML]="text | translate" [class.confirmAdd]="!confirmAdd"></button>
+      <button class="close-component-button" mat-button (click)="closeAddItemComponent()">{{'ADD-ITEM-COMPONENT.CLOSE-BUTTON.LABEL' | translate}}</button>
     </div>
   </div>
 </div>

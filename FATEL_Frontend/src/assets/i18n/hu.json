@@ -1,0 +1,175 @@
+{
+  "Meter": "Méter",
+  "SquareMeter": "Négyzetméter",
+  "Piece": "Darab",
+  "INVENTORY": "Leltár",
+  "DIARY": "Napló",
+
+  "DIARY-COMPONENT": {
+    "EXPORT-BUTTON" : {
+      "LABEL": "Exportálás"
+    },
+    "YEAR-FILTER": {
+      "PLACEHOLDER": "Év",
+      "ALL": "Összes"
+    },
+    "ENTRIES-TABLE": {
+      "TIMESTAMP": "Dátum",
+      "NAME": "Név",
+      "CHANGE": "Mozgás",
+      "AFTER": "Új menny."
+    }
+  },
+  "ADD-ITEM-COMPONENT": {
+    "NAME-FIELD" : {
+      "LABEL": "Név",
+      "ERROR": {
+        "REQUIRED": "A név megadása kötelező"
+      }
+    },
+    "UNIT-FIELD": {
+      "LABEL": "Mértékegység",
+      "DEFAULT": "Mértékegység",
+      "ERROR": {
+        "REQUIRED": "A mértékegység megadása kötelező"
+      }
+    },
+    "QUANTITY-FIELD": {
+      "LABEL": "Mennyiség",
+      "ERROR": {
+        "REQUIRED": "A mennyiség megadása kötelező",
+        "GREATER-THAN-OR-ZERO": "A mennyiségnek pozitív számnak kell lennie",
+        "WHOLE-NUMBER": "A mennyiségnek egész számnak kell lennie"
+      }
+    },
+    "LENGTH-FIELD": {
+      "LABEL": "Hosszúság",
+      "ERROR": {
+        "REQUIRED": "A hosszúság megadása kötelező",
+        "GREATER-THAN-ZERO": "A hosszúságnak 0-nál nagyobbnak kell lennie",
+        "THREE-DECIMALS": "A hosszúság maximum 3 tizedesjeggyel rendelkezhet"
+      }
+    },
+    "WIDTH-FIELD": {
+      "LABEL": "Szélesség",
+      "ERROR": {
+        "REQUIRED": "A szélesség megadása kötelező",
+        "GREATER-THAN-ZERO": "A szélességnak 0-nál nagyobbnak kell lennie",
+        "THREE-DECIMALS": "A szélesség maximum 3 tizedesjeggyel rendelkezhet"
+      }
+    },
+    "NOTE-FIELD": {
+      "LABEL": "Megjegyzés"
+    },
+    "ADD-BUTTON": {
+      "LABEL": {
+        "DEFAULT": "HOZZÁADÁS",
+        "CONFIRM": "MEGERŐSÍTÉS"
+      }
+    },
+    "CLOSE-BUTTON": {
+      "LABEL": "Bezárás"
+    }
+  },
+  "CATEGORIES-COMPONENT": {
+    "ITEMS-TABLE": {
+      "NAME": "Név",
+      "WIDTH": "Szél.",
+      "LENGTH": "Hossz.",
+      "UNIT": "Mért.",
+      "QUANTITY": "Menny.",
+      "NOTE": "Megj."
+    }
+  },
+  "EDIT-ITEM-COMPONENT": {
+    "NAME-FIELD" : {
+      "LABEL": "Név",
+      "ERROR": {
+        "REQUIRED": "A név megadása kötelező"
+      }
+    },
+    "UNIT-FIELD": {
+      "LABEL": "Mértékegység",
+      "DEFAULT": "Mértékegység",
+      "ERROR": {
+        "REQUIRED": "A mértékegység megadása kötelező"
+      }
+    },
+    "LENGTH-FIELD": {
+      "LABEL": "Hosszúság",
+      "ERROR": {
+        "REQUIRED": "A hosszúság megadása kötelező",
+        "GREATER-THAN-ZERO": "A hosszúságnak 0-nál nagyobbnak kell lennie",
+        "THREE-DECIMALS": "A hosszúság maximum 3 tizedesjeggyel rendelkezhet"
+      }
+    },
+    "WIDTH-FIELD": {
+      "LABEL": "Szélesség",
+      "ERROR": {
+        "REQUIRED": "A szélesség megadása kötelező",
+        "GREATER-THAN-ZERO": "A szélességnak 0-nál nagyobbnak kell lennie",
+        "THREE-DECIMALS": "A szélesség maximum 3 tizedesjeggyel rendelkezhet"
+      }
+    },
+    "NOTE-FIELD": {
+      "LABEL": "Megjegyzés"
+    },
+    "EDIT-BUTTON": {
+      "LABEL": {
+        "DEFAULT": "MENTÉS",
+        "CONFIRM": "MEGERŐSÍTÉS"
+      }
+    },
+    "CLOSE-BUTTON": {
+      "LABEL": "Bezárás"
+    }
+  },
+  "FILTER-BAR-COMPONENT" : {
+    "SEARCH-BAR": {
+      "PLACEHOLDER": "Keresés"
+    }
+  },
+  "RECORD-MOVEMENT-COMPONENT" : {
+    "CHANGE-FIELD" : {
+      "LABEL": "Mozgás",
+      "ERROR": {
+        "REQUIRED": "A mozgás megadása kötelező",
+        "GREATER-THAN-ZERO": "A mozgásnak 0-nál nagyobbnak kell lennie",
+        "WHOLE-NUMBER": "A mozgásnak egész számnak kell lennie"
+      }
+    },
+    "IN-BUTTON": {
+      "LABEL": "BE"
+    },
+    "OUT-BUTTON": {
+      "LABEL": "KI"
+    },
+    "CLOSE-BUTTON": {
+      "LABEL": "Bezárás"
+    }
+  },
+  "TOOL-BAR-COMPONENT": {
+    "EXPORT-BUTTON": {
+      "LABEL": "Exportálás"
+    },
+    "NEW-ITEM-BUTTON": {
+      "LABEL": "Új tétel"
+    }
+  },
+  "NO-WAREHOUSE-COMPONENT": {
+    "MESSAGE": "Kezdj egy raktár létrehozásával a bal oldalon!"
+  },
+  "REPORT": {
+    "INVENTORY": {
+      "NAME": "Név",
+      "QUANTITY": "Menny.",
+      "UNIT": "Mért."
+    },
+    "DIARY": {
+      "TIMESTAMP": "Dátum",
+      "NAME": "Név",
+      "CHANGE": "Változás",
+      "AFTER": "Új menny."
+    }
+  }
+}

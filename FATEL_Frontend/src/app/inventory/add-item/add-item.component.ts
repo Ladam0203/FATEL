@@ -35,7 +35,7 @@ export class AddItemComponent implements OnInit {
 
   restrictedButtonUsage: boolean = false;
 
-  text: string = 'ADD ITEM';
+  text: string = 'ADD-ITEM-COMPONENT.ADD-BUTTON.LABEL.DEFAULT';
   confirmAdd: boolean = true;
 
   appState = this.store.select('appState');
@@ -104,7 +104,7 @@ export class AddItemComponent implements OnInit {
     }
 
     if (this.confirmAdd) {
-      this.text = 'CONFIRM';
+      this.text = 'ADD-ITEM-COMPONENT.ADD-BUTTON.LABEL.CONFIRM';
       this.confirmAdd = false;
       return;
     }

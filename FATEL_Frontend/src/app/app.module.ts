@@ -38,6 +38,11 @@ import { FatelComponent } from './fatel/fatel.component';
 import {RouterOutlet} from "@angular/router";
 import {AppRoutingModule} from "./app-routing.module";
 
+// import ngx-translate and the http loader
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient} from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,9 +81,21 @@ import {AppRoutingModule} from "./app-routing.module";
     MatSortModule,
     RouterOutlet,
     AppRoutingModule,
+    TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+          }
+        })
   ],
+
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent],
 })
 export class AppModule {
+}
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
 }
