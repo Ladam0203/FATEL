@@ -1,4 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: Nunito Sans;
+  src: url("src/assets/NunitoSansRegular.ttf");
+}
+
+@font-face {
+  font-family: Very Happy Family;
+  src: url("src/assets/VeryHappyFamily.ttf");
+}
+
 :root {
   --white: #ffffff;
   --light: #e4e0e0;
@@ -52,7 +62,7 @@ body {
 
 .search-field .mat-form-field-infix {
   padding-bottom: 8px;
-  border-top: 0 solid rgba(0,0,0,0);
+  border-top: 0 solid rgba(0, 0, 0, 0);
 }
 
 .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
@@ -93,7 +103,7 @@ body {
 
 .year-filter .mat-form-field-infix {
   padding-bottom: 8px;
-  border-top: 0 solid rgba(0,0,0,0);
+  border-top: 0 solid rgba(0, 0, 0, 0);
 }
 
 .mat-form-field-appearance-outline .mat-select-arrow-wrapper {
