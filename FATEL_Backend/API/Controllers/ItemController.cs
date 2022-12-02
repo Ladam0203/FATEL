@@ -116,12 +116,12 @@ public class ItemController : ControllerBase
     }
 
     [HttpPatch]
-    [Route("UpdateRange")]
-    public ActionResult<List<Item>> UpdateRange(List<PatchItemNameDTO> dtos)
+    [Route("UpdateNameRange")]
+    public ActionResult<List<Item>> UpdateNameRange(List<PatchItemNameDTO> dtos)
     {
         try
         {
-            return Ok(_itemService.UpdateRange(dtos));
+            return Ok(_itemService.UpdateNameRange(dtos));
         }
         catch (ValidationException e)
         {

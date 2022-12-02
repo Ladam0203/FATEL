@@ -97,12 +97,23 @@ public class ItemRepository : IItemRepository
 
     public List<Item> UpdateNameRange(List<Item> items)
     {
-        var newItems = _context.ItemTable
-            .Where(item => items.Select(i => i.Id).Contains(item.Id))
-            .ToList();
-        newItems.ForEach(item => item.Name = items[0].Name);
+        //Validate ids
+        var validIds = _context.ItemTable.Select(x => x.Id).ToList();
+        if (items.Select(item => item.Id).Any(id => !validIds.Contains(id)))
+            throw new KeyNotFoundException("One or more items do not exist");
+        
+        //Attach the items and set their name to changed to register
+        _context.ChangeTracker.Clear();
+        _context.ItemTable.AttachRange(items);
+        foreach (var item in items)
+        {
+            _context.Entry(item).Property(i => i.Name).IsModified = true;
+        }
         _context.SaveChanges();
-        return newItems;
+        
+        //Return the full, modified items
+        return _context.ItemTable
+            .Where(item => items.Select(i => i.Id).Contains(item.Id)).ToList();
     }
 
     public Item Delete(int id)
