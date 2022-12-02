@@ -8,7 +8,9 @@
 
   "DIARY-COMPONENT":
   {
-    "EXPORT-BUTTON-TEXT": "Export",
+    "EXPORT-BUTTON": {
+      "LABEL": "Export"
+    },
     "YEAR-FILTER": {
       "PLACEHOLDER": "Year",
       "ALL": "All"
