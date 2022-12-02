@@ -4,6 +4,7 @@ import {Store} from "@ngrx/store";
 import {Warehouse} from "../entities/warehouse";
 import {WarehouseService} from "../services/warehouse.service";
 import {setSelectedWarehouse} from "../states/app.states";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-mat-sidenav-container',
@@ -22,9 +23,12 @@ export class MatSidenavContainerComponent implements OnInit {
 
   appState = this.store.select('appState');
 
+  inventoryActive: boolean = true;
+  warehouseActive: number = 0;
+
   warehouses: Warehouse[] = [];
 
-  constructor(private _formBuilder: FormBuilder, private service: WarehouseService, private readonly store: Store<any>) {
+  constructor(private _formBuilder: FormBuilder, private service: WarehouseService, private readonly store: Store<any>, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -56,14 +60,17 @@ export class MatSidenavContainerComponent implements OnInit {
   }
 
   showInventory() {
-    this.showInventoryEvent.emit(true);
+    this.inventoryActive = true;
+    this.showInventoryEvent.emit(this.inventoryActive);
   }
 
   showDiary() {
-    this.showInventoryEvent.emit(false);
+    this.inventoryActive = false;
+    this.showInventoryEvent.emit(this.inventoryActive);
   }
 
-  onSelectWarehouse(warehouse: Warehouse) {
+  onSelectWarehouse(index: number, warehouse: Warehouse) {
+    this.warehouseActive = index;
     this.store.dispatch(setSelectedWarehouse({warehouse: warehouse}));
   }
 
@@ -72,5 +79,10 @@ export class MatSidenavContainerComponent implements OnInit {
       console.log("Created warehouse: " + warehouse);
       this.warehouses.push(warehouse);
     });
+  }
+
+  async logout(){
+    localStorage.removeItem('token');
+    await this.router.navigate(['login'])
   }
 }

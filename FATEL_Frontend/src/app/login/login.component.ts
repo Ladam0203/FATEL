@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   hide: boolean = true;
 
-  constructor(private loginService: LoginService,  private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -36,10 +36,5 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('token', token);
       await this.router.navigate(['']);
     }
-  }
-
-  async logout(){
-    localStorage.removeItem('token');
-    await this.router.navigate(['login'])
   }
 }
