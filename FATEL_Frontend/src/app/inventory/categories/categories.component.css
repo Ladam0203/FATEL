@@ -7,6 +7,10 @@
   border: 1px solid rgba(0, 0, 0, .24);
 }
 
+.category-expansion-panel-header {
+  height: 60px;
+}
+
 .panel-description {
   flex: 1;
 }
@@ -21,7 +25,6 @@ table {
 
 .action-cell {
   padding: 0;
-  height: 48px;
   border-bottom: 1px solid rgba(0, 0, 0, .12);
   justify-content: center;
 }
@@ -50,10 +53,11 @@ tr:last-of-type td {
 }
 
 .actions-cell-header {
+  height: 60px;
 }
 
 .actions-cell {
-  height: 48px;
+  height: 60px;
   justify-content: right;
   column-gap: 8px;
   float: right;
