@@ -95,6 +95,22 @@ public class ItemRepository : IItemRepository
         return item;
     }
 
+    public List<Item> UpdateRange(List<Item> items)
+    {
+        var newItems = _context.ItemTable
+            .Where(item => items.Select(i => i.Id).Contains(item.Id))
+            .ToList();
+        newItems.ForEach(item => item.Name = items[0].Name);
+        _context.SaveChanges();
+        return newItems;
+    }
+    
+    private bool IsIdListValid(IEnumerable<int> idList)
+    {
+        var validIds = _context.ItemTable.Select(x => x.Id).ToList();
+        return idList.All(x => validIds.Contains(x));
+    }
+
     public Item Delete(int id)
     {
         Item item = _context.ItemTable.Find(id) ?? throw new KeyNotFoundException("Item with id " + id + " does not exist");
