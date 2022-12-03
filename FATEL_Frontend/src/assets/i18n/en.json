@@ -8,7 +8,9 @@
 
   "DIARY-COMPONENT":
   {
-    "EXPORT-BUTTON-TEXT": "Export",
+    "EXPORT-BUTTON": {
+      "LABEL": "Export"
+    },
     "YEAR-FILTER": {
       "PLACEHOLDER": "Year",
       "ALL": "All"
@@ -170,6 +172,19 @@
       "NAME": "Name",
       "CHANGE": "Change",
       "AFTER": "After"
+    }
+  },
+  "LOGIN-COMPONENT": {
+    "WELCOME-TEXT": "Welcome to",
+    "LOGIN-TEXT": "Please log in.",
+    "USERNAME-FIELD": {
+      "LABEL": "Username"
+    },
+    "PASSWORD-FIELD": {
+      "LABEL": "Password"
+    },
+    "ENTER-BUTTON": {
+      "LABEL": "Login"
     }
   }
 }

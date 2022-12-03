@@ -94,21 +94,25 @@ public class ItemRepository : IItemRepository
         _context.SaveChanges();
         return item;
     }
-
-    public List<Item> UpdateRange(List<Item> items)
-    {
-        var newItems = _context.ItemTable
-            .Where(item => items.Select(i => i.Id).Contains(item.Id))
-            .ToList();
-        newItems.ForEach(item => item.Name = items[0].Name);
-        _context.SaveChanges();
-        return newItems;
-    }
     
-    private bool IsIdListValid(IEnumerable<int> idList)
+    public List<Item> UpdateNameRange(List<Item> items)
     {
+        //Validate ids
         var validIds = _context.ItemTable.Select(x => x.Id).ToList();
-        return idList.All(x => validIds.Contains(x));
+        if (items.Select(item => item.Id).Any(id => !validIds.Contains(id)))
+            throw new KeyNotFoundException("One or more items do not exist");
+        
+        //Attach the items and set their name to changed to register
+        _context.ItemTable.AttachRange(items);
+        foreach (var item in items)
+        {
+            _context.Entry(item).Property(i => i.Name).IsModified = true;
+        }
+        _context.SaveChanges();
+        //This is needed here, otherwise the return will be hollow at unchanged places
+        _context.ChangeTracker.Clear();
+
+        return _context.ItemTable.Where(i => items.Select(item => item.Id).Contains(i.Id)).ToList();
     }
 
     public Item Delete(int id)

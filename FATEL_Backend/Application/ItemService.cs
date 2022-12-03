@@ -1,11 +1,8 @@
-using System.ComponentModel.DataAnnotations;
-using System.Reflection.Metadata.Ecma335;
 using Application.DTOs;
 using Application.Interfaces;
 using AutoMapper;
 using Domain;
 using FluentValidation;
-using Newtonsoft.Json;
 using ValidationException = FluentValidation.ValidationException;
 
 namespace Application;
@@ -77,8 +74,8 @@ public class ItemService : IItemService
         Item item = _mapper.Map<Item>(dto);
         return _repository.UpdateItem(item);
     }
-
-    public List<Item> UpdateRange(List<PatchItemNameDTO> dtos)
+    
+    public List<Item> UpdateNameRange(List<PatchItemNameDTO> dtos)
     {
         foreach (var dto in dtos)
         {

@@ -13,15 +13,17 @@
       </div>
 
       <div class="warehouse-wrapper">
-        <div *ngFor="let warehouse of warehouses" class="sidenav-component-wrapper"
-             (click)="onSelectWarehouse(warehouse)">
+        <div *ngFor="let warehouse of warehouses; let i = index" class="sidenav-component-wrapper"
+             (click)="onSelectWarehouse(i, warehouse)">
           <div class="sidenav-heading-wrapper">
             <a class="sidenav-heading">{{warehouse.name}}</a>
           </div>
           <div class="sidenav-icon-wrapper">
             <div class="sidenav-icon">
               <button class="button">
-                <mat-icon class="icon" aria-hidden="false" aria-label="warehouse icon" fontIcon="home"></mat-icon>
+                <mat-icon class="icon" aria-hidden="false" aria-label="warehouse icon"
+                          [class.active-warehouse-icon]="warehouseActive==i">home
+                </mat-icon>
               </button>
             </div>
           </div>
@@ -31,26 +33,29 @@
 
     <div class="add-warehouse-wrapper">
       <button class="button add-warehouse-button" (click)="createWarehouse()">
-        <mat-icon class="icon" aria-hidden="false" aria-label="add icon" fontIcon="add"></mat-icon>
+        <mat-icon class="icon" aria-hidden="false" aria-label="add icon">add</mat-icon>
       </button>
     </div>
 
 
     <div class="sidenav-inventory-diary-wrapper">
-      <div class="sidenav-icon-wrapper">
-        <div class="sidenav-icon-inventory-diary">
-          <button class="button" (click)="showInventory()">
-            <mat-icon class="icon" aria-hidden="false" aria-label="inventory icon" fontIcon="book"></mat-icon>
-          </button>
-        </div>
+
+      <div class="sidenav-icon-wrapper vertical-action-group">
+        <button class="button" (click)="logout()">
+          <mat-icon class="icon logout-icon" aria-hidden="false" aria-label="logout icon">exit_to_app</mat-icon>
+        </button>
+        <button class="button" (click)="showDiary()">
+          <mat-icon class="icon" aria-hidden="false" aria-label="diary icon" [class.active-icon]="!inventoryActive"
+                    [class.inactive-icon]="inventoryActive">event_note
+          </mat-icon>
+        </button>
+        <button class="button" (click)="showInventory()">
+          <mat-icon class="icon" aria-hidden="false" aria-label="inventory icon" [class.active-icon]="inventoryActive"
+                    [class.inactive-icon]="!inventoryActive">book
+          </mat-icon>
+        </button>
       </div>
-      <div class="sidenav-icon-wrapper">
-        <div class="sidenav-icon-inventory-diary">
-          <button class="button" (click)="showDiary()">
-            <mat-icon class="icon" aria-hidden="false" aria-label="diary icon" fontIcon="event_note"></mat-icon>
-          </button>
-        </div>
-      </div>
+
     </div>
 
 

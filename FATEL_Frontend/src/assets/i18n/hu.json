@@ -171,5 +171,18 @@
       "CHANGE": "Változás",
       "AFTER": "Új menny."
     }
+  },
+  "LOGIN-COMPONENT": {
+    "WELCOME-TEXT": "Üdvözöli a",
+    "LOGIN-TEXT": "Kérjük jelentkezzen be.",
+    "USERNAME-FIELD": {
+      "LABEL": "Felhasználónév"
+    },
+    "PASSWORD-FIELD": {
+      "LABEL": "Jelszó"
+    },
+    "ENTER-BUTTON": {
+      "LABEL": "Belépés"
+    }
   }
 }

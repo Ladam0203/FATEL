@@ -46,6 +46,8 @@
 
   width: calc(150px + 80px);
   height: 80px;
+
+  overflow: hidden;
 }
 
 .warehouse-wrapper .sidenav-component-wrapper {
@@ -134,7 +136,7 @@
 }
 
 .add-warehouse-button:hover .icon {
-  color: var(--success);
+  color: #04ff93;
 }
 
 .button {
@@ -146,7 +148,46 @@
 .sidenav-inventory-diary-wrapper {
   bottom: 20px;
   position: fixed;
+
   display: flex;
-  justify-content: space-between;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+
   width: calc(150px + 80px);
+}
+
+.vertical-action-group {
+  display: flex;
+  flex-direction: column-reverse;
+  row-gap: 28px;
+  column-gap: 28px;
+}
+
+.logout-icon {
+  color: #ff503f;
+}
+
+.active-icon {
+  color: #5cabd0;
+}
+
+.inactive-icon {
+  color: var(--light);
+}
+
+.active-warehouse-icon {
+  color: #04ff93;
+}
+
+@media only screen and (max-height: 740px) {
+
+  .vertical-action-group {
+    flex-direction: row;
+    width: 100% !important;
+  }
+
+  .vertical-action-group .button:first-child {
+    margin-left: 0;
+  }
+
 }
