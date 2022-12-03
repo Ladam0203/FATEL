@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Entry} from "../entities/entry";
-import {EntryService} from "../services/entry.service";
 import {selectSearchbarQueryValue} from "../states/filter-bar.actions";
 import {Store} from "@ngrx/store";
 import {Warehouse} from "../entities/warehouse";
@@ -20,7 +19,7 @@ export class DiaryComponent implements OnInit {
   entries: Entry[] = [];
   sortedEntries: Entry[] = [];
   entryYears: string[] = [];
-  
+
   searchbarQuery = this.store.select(selectSearchbarQueryValue);
   query: String = "";
   appState = this.store.select('appState');
@@ -31,7 +30,7 @@ export class DiaryComponent implements OnInit {
   warehouse: Warehouse | undefined;
 
 
-  constructor(private entryService: EntryService, private readonly store: Store<any>, private readonly reportService: ReportService) {
+  constructor(private readonly store: Store<any>, private readonly reportService: ReportService) {
   }
 
   ngOnInit(): void {
