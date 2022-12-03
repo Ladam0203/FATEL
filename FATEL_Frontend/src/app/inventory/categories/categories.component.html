@@ -2,11 +2,14 @@
   <mat-expansion-panel #mep="matExpansionPanel" *ngFor="let category of categories | filter: 'name' : ((searchbarQuery | async) ?? '')">
     <mat-expansion-panel-header>
       <mat-panel-title class="fs-5">
-        {{category.name}}
-      </mat-panel-title>
-        <button class="edit-item-button fs-6" mat-button *ngIf="!mep.expanded">
-          <mat-icon class="main-icon" aria-hidden="false" aria-label="edit">edit</mat-icon>
+        <div *ngIf="editingCategory !== category">{{category.name}}</div>
+        <div  *ngIf="editingCategory === category && mep.expanded">
+          <input type="text" class="form-control" [(ngModel)]="category.name" />
+        </div>
+        <button mat-button class="warehouse-action-button fs-5" *ngIf="mep.expanded" (click)="editingCategory ? editCategory($event) : onEditCategory($event, category)" [class.editing]="editingCategory === category">
+          <mat-icon [innerHTML]="editingCategory === category ? 'check' : 'edit' "></mat-icon>
         </button>
+      </mat-panel-title>
       <mat-panel-description class="fs-5 panel-description">
         {{category.getDescription() }}
       </mat-panel-description>
