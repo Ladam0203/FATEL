@@ -10,7 +10,7 @@
 .divider {
   border-left: 1px solid var(--primary);
   height: 2em;
-  margin: 4px 12px 0 12px;
+  margin: 6px 20px 0 20px;
 }
 
 .edit-field {

@@ -22,7 +22,8 @@
             <div class="sidenav-icon">
               <button class="button">
                 <mat-icon class="icon" aria-hidden="false" aria-label="warehouse icon"
-                          [class.active-warehouse-icon]="warehouseActive==i">home
+                          [class.active-icon]="warehouseActive==i"
+                          [class.inactive-icon]="warehouseActive!==i">home
                 </mat-icon>
               </button>
             </div>
@@ -44,7 +45,9 @@
         <button class="button" (click)="logout()">
           <mat-icon class="icon logout-icon" aria-hidden="false" aria-label="logout icon">exit_to_app</mat-icon>
         </button>
-        <button class="button" (click)="showDiary()">
+        <button class="button" (click)="showDiary()"
+        matTooltip="Open Diary"
+        matTooltipPosition="right">
           <mat-icon class="icon" aria-hidden="false" aria-label="diary icon" [class.active-icon]="!inventoryActive"
                     [class.inactive-icon]="inventoryActive">event_note
           </mat-icon>
