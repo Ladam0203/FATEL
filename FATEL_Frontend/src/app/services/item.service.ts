@@ -26,7 +26,7 @@ export class ItemService {
     customAxios.interceptors.response.use(
       response => {
         if (response.status == 201) {
-          this.matSnackBar.open(translate.instant("ITEM-SERVICE.SNACKBAR.ITEM-CREATED"),
+          this.matSnackBar.open(translate.instant("API-SERVICE.SNACKBAR.ITEM-CREATED"),
             undefined,
             {duration: 4000});
         }
@@ -35,22 +35,22 @@ export class ItemService {
       rejected => {
         if(!rejected.response)
         {
-          this.matSnackBar.open(translate.instant("ITEM-SERVICE.SNACKBAR.NO-CONNECTION"),
+          this.matSnackBar.open(translate.instant("API-SERVICE.SNACKBAR.NO-CONNECTION"),
             undefined,
             {duration: 4000});
         }
         else if (rejected.response.status == 401) {
-          this.matSnackBar.open(translate.instant("ITEM-SERVICE.SNACKBAR.TOKEN-EXPIRED"),
+          this.matSnackBar.open(translate.instant("API-SERVICE.SNACKBAR.INVALID-TOKEN"),
             undefined,
             {duration: 4000});
           this.router.navigate(['./login'])
         }
         else if (rejected.response.status == 403) {
-          this.matSnackBar.open(translate.instant("ITEM-SERVICE.SNACKBAR.SAME-ITEM-EXISTS"),
+          this.matSnackBar.open(translate.instant("API-SERVICE.SNACKBAR.SAME-ITEM-EXISTS"),
             undefined,
             {duration: 4000});
         } else if (rejected.response.status == 500) {
-          this.matSnackBar.open("ITEM-SERVICE.SNACKBAR.INTERNAL-SERVER-ERROR",
+          this.matSnackBar.open("API-SERVICE.SNACKBAR.INTERNAL-SERVER-ERROR",
             undefined,
             {duration: 4000})
         }
