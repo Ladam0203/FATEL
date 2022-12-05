@@ -109,3 +109,7 @@ body {
 .mat-form-field-appearance-outline .mat-select-arrow-wrapper {
   transform: translateY(0) !important;
 }
+
+.mat-select-arrow {
+  color: var(--primary) !important;
+}

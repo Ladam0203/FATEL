@@ -1,5 +1,6 @@
 <mat-accordion multi class="inventory">
-  <mat-expansion-panel #mep="matExpansionPanel" *ngFor="let category of categories | filter: 'name' : ((searchbarQuery | async) ?? '')">
+
+  <mat-expansion-panel *ngFor="let category of categories | filter: 'name' : ((searchbarQuery | async) ?? '')">
     <mat-expansion-panel-header>
       <mat-panel-title class="fs-5">
         {{category.name}}

@@ -175,10 +175,6 @@
   color: var(--light);
 }
 
-.active-warehouse-icon {
-  color: #04ff93;
-}
-
 @media only screen and (max-height: 740px) {
 
   .vertical-action-group {

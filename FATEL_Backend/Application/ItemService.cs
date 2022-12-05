@@ -74,7 +74,6 @@ public class ItemService : IItemService
         Item item = _mapper.Map<Item>(dto);
         return _repository.UpdateItem(item);
     }
-    
     public List<Item> UpdateNameRange(List<PatchItemNameDTO> dtos)
     {
         foreach (var dto in dtos)

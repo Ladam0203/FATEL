@@ -115,6 +115,26 @@ public class ItemRepository : IItemRepository
         return _context.ItemTable.Where(i => items.Select(item => item.Id).Contains(i.Id)).ToList();
     }
 
+    public List<Item> UpdateNameRange(List<Item> items)
+    {
+        //Validate ids
+        var validIds = _context.ItemTable.Select(x => x.Id).ToList();
+        if (items.Select(item => item.Id).Any(id => !validIds.Contains(id)))
+            throw new KeyNotFoundException("One or more items do not exist");
+        
+        //Attach the items and set their name to changed to register
+        _context.ItemTable.AttachRange(items);
+        foreach (var item in items)
+        {
+            _context.Entry(item).Property(i => i.Name).IsModified = true;
+        }
+        _context.SaveChanges();
+        //This is needed here, otherwise the return will be hollow at unchanged places
+        _context.ChangeTracker.Clear();
+
+        return _context.ItemTable.Where(i => items.Select(item => item.Id).Contains(i.Id)).ToList();
+    }
+
     public Item Delete(int id)
     {
         Item item = _context.ItemTable.Find(id) ?? throw new KeyNotFoundException("Item with id " + id + " does not exist");
