@@ -43,6 +43,15 @@ export class ItemService {
             {duration: 4000});
           this.router.navigate(['./login'])
         }
+        else if (rejected.response.status >= 400 && rejected.response.status < 500) {
+          this.matSnackBar.open(rejected.response.data,
+            undefined,
+            {duration: 4000});
+        } else if (rejected.response.status > 499) {
+          this.matSnackBar.open(JSON.stringify(rejected.response),
+            undefined,
+            {duration: 4000})
+        }
         catchError(rejected);
       }
     )
