@@ -4,6 +4,8 @@ import axios from "axios";
 import {environment} from "../../environments/environment";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {catchError} from "rxjs/operators";
+import { Router } from '@angular/router';
+import {TranslateService} from "@ngx-translate/core";
 
 export const customAxios = axios.create({
   baseURL: environment.baseUrl
@@ -14,7 +16,8 @@ export const customAxios = axios.create({
 })
 export class LoginService {
 
-  constructor(private matSnackBar: MatSnackBar) {
+  constructor(private matSnackBar: MatSnackBar,
+              private translate: TranslateService,) {
     customAxios.interceptors.response.use(
       response => {
         return response;
@@ -22,12 +25,12 @@ export class LoginService {
       rejected =>{
         if(!rejected.response)
         {
-          this.matSnackBar.open("Could not connect to server",
+          this.matSnackBar.open(translate.instant("API-SERVICE.SNACKBAR.NO-CONNECTION"),
             undefined,
             {duration: 4000});
         }
         else if(rejected.response.status == 401){
-          this.matSnackBar.open("Incorrect username or password",
+          this.matSnackBar.open(translate.instant("API-SERVICE.SNACKBAR.INCORRECT-CREDENTIALS"),
             undefined,
             {duration: 4000});
         }
