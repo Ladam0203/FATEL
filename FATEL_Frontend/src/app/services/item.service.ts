@@ -7,6 +7,7 @@ import {PostItemDTO} from "../entities/DTOs/PostItemDTO";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Movement} from "../entities/DTOs/Movement";
 import {environment} from "../../environments/environment";
+import {Router} from "@angular/router";
 
 export const customAxios = axios.create({
   baseURL: environment.baseUrl,
@@ -18,7 +19,8 @@ export const customAxios = axios.create({
 export class ItemService {
 
   constructor(private http: HttpClient,
-              private matSnackBar: MatSnackBar) {
+              private matSnackBar: MatSnackBar,
+              private router: Router) {
     customAxios.interceptors.response.use(
       response => {
         if (response.status == 201) {
@@ -29,14 +31,17 @@ export class ItemService {
         return response;
       },
       rejected => {
-        if (rejected.response.status >= 400 && rejected.response.status < 500) {
-          this.matSnackBar.open(rejected.response.data,
+        if(!rejected.response)
+        {
+          this.matSnackBar.open("Could not connect to server",
             undefined,
             {duration: 4000});
-        } else if (rejected.response.status > 499) {
-          this.matSnackBar.open(JSON.stringify(rejected.response),
+        }
+        else if (rejected.response.status ==401) {
+          this.matSnackBar.open("Please login to continue",
             undefined,
-            {duration: 4000})
+            {duration: 4000});
+          this.router.navigate(['./login'])
         }
         catchError(rejected);
       }
@@ -50,30 +55,6 @@ export class ItemService {
       }
     });
     return this.mapResponse(response.data);
-  }
-
-  private mapResponse(data: any) {
-    return {
-      item: {
-        id: data.id,
-        name: data.name,
-        length: data.length,
-        width: data.width,
-        unit: data.unit,
-        quantity: data.quantity,
-        note: data.note,
-      },
-      entry: data.entry
-    };
-  }
-
-  async readAll(): Promise<Item[]> {
-    const response = await customAxios.get<Item[]>('item/readall', {
-      headers: {
-        Authorization:`Bearer ${localStorage.getItem('token')}`
-      }
-    });
-    return response.data;
   }
 
   async update(item: any) {
@@ -103,12 +84,18 @@ export class ItemService {
     return this.mapResponse(response.data);
   }
 
-  async get(id: any) {
-    const response = await customAxios.get<any>('item/read/' + id, {
-      headers: {
-        Authorization:`Bearer ${localStorage.getItem('token')}`
-      }
-    });
-    return response.data;
+  private mapResponse(data: any) {
+    return {
+      item: {
+        id: data.id,
+        name: data.name,
+        length: data.length,
+        width: data.width,
+        unit: data.unit,
+        quantity: data.quantity,
+        note: data.note,
+      },
+      entry: data.entry
+    };
   }
 }

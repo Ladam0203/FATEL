@@ -4,6 +4,9 @@ import axios from "axios";
 import {PostWarehouseDTO} from "../entities/DTOs/PostWarehouseDTO";
 import {PutWarehouseDTO} from "../entities/DTOs/PutWarehouseDTO";
 import {environment} from "../../environments/environment";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
+import {catchError} from "rxjs/operators";
 
 export const customAxios = axios.create({
   baseURL: environment.baseUrl,
@@ -13,7 +16,33 @@ export const customAxios = axios.create({
   providedIn: 'root'
 })
 export class WarehouseService {
-  constructor() {
+  constructor(private matSnackBar: MatSnackBar,
+              private router: Router) {
+    customAxios.interceptors.response.use(
+      response => {
+        if (response.status == 201) {
+          this.matSnackBar.open("Warehouse Created",
+            undefined,
+            {duration: 4000});
+        }
+        return response;
+      },
+      rejected => {
+        if(!rejected.response)
+        {
+          this.matSnackBar.open("Could not connect to server",
+            undefined,
+            {duration: 4000});
+        }
+        else if (rejected.response.status ==401) {
+          this.matSnackBar.open("Please login to continue",
+            undefined,
+            {duration: 4000});
+          this.router.navigate(['./login'])
+        }
+        catchError(rejected);
+      }
+    )
   }
 
   async readAll(): Promise<Warehouse[]> {

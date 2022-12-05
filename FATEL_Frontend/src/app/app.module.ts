@@ -42,6 +42,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient} from '@angular/common/http';
+import { EditCategoryComponent } from './inventory/edit-category/edit-category.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import {HttpClient} from '@angular/common/http';
     NoWarehouseComponent,
     LoginComponent,
     FatelComponent,
+    EditCategoryComponent,
   ],
   imports: [
     BrowserModule,

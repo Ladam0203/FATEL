@@ -10,7 +10,7 @@ import {
   setShowEditItemComponent,
   setShowRecordMovementComponent,
   addItemAction,
-  editItemAction, deleteItemAction, addEntryAction,
+  editItemAction, deleteItemAction, addEntryAction
 } from "../../states/app.states";
 import {Warehouse} from "../../entities/warehouse";
 
@@ -42,6 +42,8 @@ export class CategoriesComponent implements OnInit {
 
   confirmDelete: boolean = true;
   deletingId: number | undefined;
+
+  //editingCategory: Category | undefined;
 
   constructor(private itemService: ItemService, private readonly store: Store<any>) {
   }
@@ -126,4 +128,15 @@ export class CategoriesComponent implements OnInit {
   openRecordMovementComponent(itemToRecordMovementOn: Item) {
     this.store.dispatch(setShowRecordMovementComponent({item: itemToRecordMovementOn}));
   }
+
+  /*
+  editCategory($event: any) {
+    $event.stopPropagation();
+  }
+
+  onEditCategory($event: any, category: Category) {
+    $event.stopPropagation();
+    this.editingCategory = category;
+  }
+  */
 }
