@@ -46,11 +46,11 @@ export class ItemService {
           this.router.navigate(['./login'])
         }
         else if (rejected.response.status == 403) {
-          this.matSnackBar.open("Item with same properties already exists",
+          this.matSnackBar.open(translate.instant("ITEM-SERVICE.SNACKBAR.SAME-ITEM-EXISTS"),
             undefined,
             {duration: 4000});
         } else if (rejected.response.status == 500) {
-          this.matSnackBar.open("Internal server error",
+          this.matSnackBar.open("ITEM-SERVICE.SNACKBAR.INTERNAL-SERVER-ERROR",
             undefined,
             {duration: 4000})
         }

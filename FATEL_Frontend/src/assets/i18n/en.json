@@ -192,7 +192,9 @@
     "SNACKBAR": {
       "ITEM-CREATED": "Item created successfully",
       "NO-CONNECTION": "Could not connect to server",
-      "TOKEN-EXPIRED": "Please login to continue"
+      "TOKEN-EXPIRED": "Please login to continue",
+      "SAME-ITEM-EXISTS": "Similar item already exists",
+      "INTERNAL-SERVER-ERROR": "Internal server error"
     }
   }
 }
