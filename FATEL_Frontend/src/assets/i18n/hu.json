@@ -183,13 +183,16 @@
     },
     "ENTER-BUTTON": {
       "LABEL": "Belépés"
-    },
-    "ITEM-SERVICE":
-    {
-      "SNACKBAR": {
-        "ITEM-CREATED": "Tétel sikeresen létrehozva",
-        "NO-CONNECTION": "Could not connect to server",
-        "TOKEN-EXPIRED": "Please login to continue"
-      }
+    }
+  },
+  "ITEM-SERVICE":
+  {
+    "SNACKBAR": {
+      "ITEM-CREATED": "Tétel sikeresen létrehozva",
+      "NO-CONNECTION": "Nem sikerült csatlakozni a szerverhez",
+      "TOKEN-EXPIRED": "Kérjük jelentkezzen be újra",
+      "SAME-ITEM-EXISTS": "Már létezik hasonló tétel",
+      "INTERNAL-SERVER-ERROR": "Szerver hiba"
+    }
   }
 }
