@@ -43,7 +43,7 @@ export class CategoriesComponent implements OnInit {
   confirmDelete: boolean = true;
   deletingId: number | undefined;
 
-  editingCategory: Category | undefined;
+  //editingCategory: Category | undefined;
 
   constructor(private itemService: ItemService, private readonly store: Store<any>) {
   }
@@ -129,6 +129,7 @@ export class CategoriesComponent implements OnInit {
     this.store.dispatch(setShowRecordMovementComponent({item: itemToRecordMovementOn}));
   }
 
+  /*
   editCategory($event: any) {
     $event.stopPropagation();
   }
@@ -137,4 +138,5 @@ export class CategoriesComponent implements OnInit {
     $event.stopPropagation();
     this.editingCategory = category;
   }
+  */
 }
