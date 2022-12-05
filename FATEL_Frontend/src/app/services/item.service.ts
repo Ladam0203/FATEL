@@ -8,6 +8,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {Movement} from "../entities/DTOs/Movement";
 import {environment} from "../../environments/environment";
 import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
 
 export const customAxios = axios.create({
   baseURL: environment.baseUrl,
@@ -20,11 +21,12 @@ export class ItemService {
 
   constructor(private http: HttpClient,
               private matSnackBar: MatSnackBar,
-              private router: Router) {
+              private router: Router,
+              private translate: TranslateService) {
     customAxios.interceptors.response.use(
       response => {
         if (response.status == 201) {
-          this.matSnackBar.open("Item Created",
+          this.matSnackBar.open(translate.instant("ITEM-SERVICE.SNACKBAR.ITEM-CREATED"),
             undefined,
             {duration: 4000});
         }
@@ -33,12 +35,12 @@ export class ItemService {
       rejected => {
         if(!rejected.response)
         {
-          this.matSnackBar.open("Could not connect to server",
+          this.matSnackBar.open(translate.instant("ITEM-SERVICE.SNACKBAR.NO-CONNECTION"),
             undefined,
             {duration: 4000});
         }
         else if (rejected.response.status == 401) {
-          this.matSnackBar.open("Please login to continue",
+          this.matSnackBar.open(translate.instant("ITEM-SERVICE.SNACKBAR.TOKEN-EXPIRED"),
             undefined,
             {duration: 4000});
           this.router.navigate(['./login'])

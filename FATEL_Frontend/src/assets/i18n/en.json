@@ -186,5 +186,13 @@
     "ENTER-BUTTON": {
       "LABEL": "Login"
     }
+  },
+  "ITEM-SERVICE":
+  {
+    "SNACKBAR": {
+      "ITEM-CREATED": "Item created successfully",
+      "NO-CONNECTION": "Could not connect to server",
+      "TOKEN-EXPIRED": "Please login to continue"
+    }
   }
 }
