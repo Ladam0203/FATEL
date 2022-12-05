@@ -37,18 +37,18 @@ export class ItemService {
             undefined,
             {duration: 4000});
         }
-        else if (rejected.response.status ==401) {
+        else if (rejected.response.status == 401) {
           this.matSnackBar.open("Please login to continue",
             undefined,
             {duration: 4000});
           this.router.navigate(['./login'])
         }
-        else if (rejected.response.status >= 400 && rejected.response.status < 500) {
-          this.matSnackBar.open(rejected.response.data,
+        else if (rejected.response.status == 403) {
+          this.matSnackBar.open("Item with same properties already exists",
             undefined,
             {duration: 4000});
-        } else if (rejected.response.status > 499) {
-          this.matSnackBar.open(JSON.stringify(rejected.response),
+        } else if (rejected.response.status == 500) {
+          this.matSnackBar.open("Internal server error",
             undefined,
             {duration: 4000})
         }
