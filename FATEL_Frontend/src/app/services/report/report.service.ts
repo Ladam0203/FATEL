@@ -53,7 +53,7 @@ export class ReportService {
 
     let parsedCategoryData: any[] [] = [];
     this.categories.forEach((category) => {
-      let row = [category.name, getTotalQuantity(category.items), this.units[category.unit]];
+      let row = [category.name, getTotalQuantity(category.items), this.translate.instant(this.units[category.unit])];
       parsedCategoryData.push(row);
       if (category.unit !== this.units.Piece) {
         category.items.forEach((item) => {
