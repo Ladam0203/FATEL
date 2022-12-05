@@ -5,9 +5,6 @@
       <mat-panel-title class="fs-5">
         {{category.name}}
       </mat-panel-title>
-        <button class="edit-item-button fs-6" mat-button *ngIf="!mep.expanded">
-          <mat-icon class="main-icon" aria-hidden="false" aria-label="edit">edit</mat-icon>
-        </button>
       <mat-panel-description class="fs-5 panel-description">
         {{category.getDescription() }}
       </mat-panel-description>
