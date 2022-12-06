@@ -5,7 +5,7 @@
       <mat-panel-title class="fs-5">
         <div *ngIf="category !== editingCategory">
           {{category.name}}
-          <button mat-icon-button *ngIf="mep.expanded" (click)="$event.stopPropagation();onEditCategory(category)">
+          <button mat-icon-button *ngIf="mep.expanded  && category.items.length > 1" (click)="$event.stopPropagation();onEditCategory(category)">
             <mat-icon>edit</mat-icon>
           </button>
         </div>
