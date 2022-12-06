@@ -43,6 +43,8 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient} from '@angular/common/http';
 import { EditCategoryComponent } from './inventory/edit-category/edit-category.component';
+import { MobileComponent } from './mobile/mobile.component';
+import { MobileLoginComponent } from './mobile-login/mobile-login.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,8 @@ import { EditCategoryComponent } from './inventory/edit-category/edit-category.c
     LoginComponent,
     FatelComponent,
     EditCategoryComponent,
+    MobileComponent,
+    MobileLoginComponent,
   ],
   imports: [
     BrowserModule,

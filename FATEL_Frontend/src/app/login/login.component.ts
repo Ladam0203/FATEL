@@ -27,14 +27,23 @@ export class LoginComponent implements OnInit {
       password: this.password
     };
     const token = await this.loginService.login(loginDto);
-    if(!token)
-    {
+    if (!token) {
       this.unauthorized = token;
     }
-    else
+    else {
+      localStorage.setItem('token', token);
+      await this.router.navigate(['']);
+    }
+    /*else if(window.innerWidth > 500)
     {
       localStorage.setItem('token', token);
       await this.router.navigate(['']);
     }
+    else if(window.innerWidth <= 500)
+    {
+      localStorage.setItem('token', token);
+      await this.router.navigate(['../mobile']);
+    }
+     */
   }
 }
