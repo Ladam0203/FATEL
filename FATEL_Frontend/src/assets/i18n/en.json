@@ -176,7 +176,7 @@
   },
   "LOGIN-COMPONENT": {
     "WELCOME-TEXT": "Welcome to",
-    "LOGIN-TEXT": "Please log in.",
+    "LOGIN-TEXT": "Please, log in.",
     "USERNAME-FIELD": {
       "LABEL": "Username"
     },
