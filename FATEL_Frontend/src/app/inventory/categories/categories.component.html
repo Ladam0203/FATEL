@@ -13,8 +13,10 @@
           <input class="edit-field fs-5" type="text" value="{{category.name}}" [(ngModel)]="categoryName"
                  (click)="$event.stopPropagation();"
                  (keydown.space)="$event.stopPropagation();"
-                 (keydown.enter)="$event.stopPropagation();editCategory()">
-          <button mat-button (click)=$event.stopPropagation();editCategory()>
+                 (keydown.enter)="$event.stopPropagation();editCategory()"
+                 [ngStyle]="{'width.ch': categoryName.length > 32 ? 32 : categoryName.length, 'min-width.ch': 10}"
+          >
+          <button mat-button class="category-action-button editing" (click)=$event.stopPropagation();editCategory()>
             <mat-icon>check</mat-icon>
           </button>
         </div>
