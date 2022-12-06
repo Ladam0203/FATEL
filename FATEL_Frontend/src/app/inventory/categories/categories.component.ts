@@ -43,7 +43,7 @@ export class CategoriesComponent implements OnInit {
   confirmDelete: boolean = true;
   deletingId: number | undefined;
 
-  //editingCategory: Category | undefined;
+  editingCategory: Category | undefined;
 
   constructor(private itemService: ItemService, private readonly store: Store<any>) {
   }
@@ -129,14 +129,19 @@ export class CategoriesComponent implements OnInit {
     this.store.dispatch(setShowRecordMovementComponent({item: itemToRecordMovementOn}));
   }
 
-  /*
+
   editCategory($event: any) {
     $event.stopPropagation();
+    //TODO: Save the category and update the NgRx state
   }
 
-  onEditCategory($event: any, category: Category) {
+  onStartEditCategory($event: any, category: Category) {
     $event.stopPropagation();
     this.editingCategory = category;
   }
-  */
+
+  onStopEditCategory() {
+    this.editingCategory = undefined;
+    console.log("stop edit");
+  }
 }
