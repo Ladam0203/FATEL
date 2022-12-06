@@ -101,12 +101,8 @@ export class ReportService {
     doc.save(warehouseName + fileDate + '.pdf');
   }
 
-  createDiaryReport(warehouseName
-                      :
-                      string, entries
-                      :
-                      Entry[]
-  ) {
+  createDiaryReport(warehouseName: string,
+                    entries: Entry[]) {
     const doc = this.getDoc();
 
     let parsedData: any[][] = [];
@@ -130,7 +126,7 @@ export class ReportService {
         ],
         body: parsedData,
         styles: {
-          font: 'Roboto-Bold',
+          font: 'Roboto-Regular',
         },
         theme: "striped",
       }
