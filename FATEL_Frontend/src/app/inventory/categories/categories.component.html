@@ -5,13 +5,16 @@
       <mat-panel-title class="fs-5">
         <div *ngIf="category !== editingCategory">
           {{category.name}}
-          <button mat-icon-button *ngIf="mep.expanded" (click)="onEditCategory($event, category)">
+          <button mat-icon-button *ngIf="mep.expanded" (click)="$event.stopPropagation();onEditCategory(category)">
             <mat-icon>edit</mat-icon>
           </button>
         </div>
         <div *ngIf="category === editingCategory">
-          <input type="text" value="{{category.name}}" [(ngModel)]="category.name" (click)="$event.stopPropagation();">
-          <button mat-button (click)=editCategory($event)>
+          <input type="text" value="{{category.name}}" [(ngModel)]="categoryName"
+                 (click)="$event.stopPropagation();"
+                 (keydown.space)="$event.stopPropagation();"
+                 (keydown.enter)="$event.stopPropagation();editCategory()">
+          <button mat-button (click)=$event.stopPropagation();editCategory()>
             <mat-icon>check</mat-icon>
           </button>
         </div>
