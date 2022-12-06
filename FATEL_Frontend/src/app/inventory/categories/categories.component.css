@@ -119,3 +119,8 @@ tr:not(:last-child) {
   border-color: var(--danger);
   color: var(--white);
 }
+
+.edit-field {
+  border: none;
+  color: var(--primary);
+}
