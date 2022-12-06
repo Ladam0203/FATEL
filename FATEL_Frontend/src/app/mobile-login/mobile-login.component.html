@@ -1,1 +1,19 @@
-<p>mobile-login works!</p>
+<div class="login-form-wrapper">
+  <mat-form-field class="login-form-field" appearance="fill">
+    <mat-label>{{'LOGIN-COMPONENT.USERNAME-FIELD.LABEL' | translate}}</mat-label>
+    <input [(ngModel)]="username" matInput>
+  </mat-form-field>
+  <br>
+
+  <mat-form-field class="login-form-field" appearance="fill">
+    <mat-label>{{'LOGIN-COMPONENT.PASSWORD-FIELD.LABEL' | translate}}</mat-label>
+    <input [(ngModel)]="password" matInput [type]="hide ? 'password' : 'text'">
+    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+  </mat-form-field>
+  <br>
+
+  <button class="login-button" mat-button (click)="login()">
+    {{'LOGIN-COMPONENT.ENTER-BUTTON.LABEL' | translate}}
+    <mat-icon>navigate_next</mat-icon>
+  </button>
+</div>
