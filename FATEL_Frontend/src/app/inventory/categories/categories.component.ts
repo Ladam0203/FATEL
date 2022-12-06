@@ -44,7 +44,6 @@ export class CategoriesComponent implements OnInit {
   deletingId: number | undefined;
 
   editingCategory: Category | undefined;
-  categoryName: string = "";
 
   constructor(private itemService: ItemService, private readonly store: Store<any>) {
   }
@@ -133,6 +132,27 @@ export class CategoriesComponent implements OnInit {
 
   editCategory($event: any) {
     $event.stopPropagation();
+    if (!this.editingCategory)
+      return;
+
+    if (!this.editingCategory.name) {
+      return;
+    }
+    if (this.editingCategory.name == '') {
+      return;
+    }
+
+    //create PatchItemDTO list from category items
+    let patchItemDTOs = this.editingCategory.items.map(item => {
+      return {
+        id: item.id,
+        name: this.editingCategory!.name,
+      }
+    });
+    this.itemService.updateNameRange(patchItemDTOs).then(data => {
+      console.log(data);
+    });
+
     this.editingCategory = undefined;
     //TODO: Save the category and update the NgRx state
   }
@@ -140,11 +160,9 @@ export class CategoriesComponent implements OnInit {
   onEditCategory($event: any, category: Category) {
     $event.stopPropagation();
     this.editingCategory = category;
-    this.categoryName = category.name;
   }
 
   onStopEditCategory() {
     this.editingCategory = undefined;
-    console.log("stop edit");
   }
 }

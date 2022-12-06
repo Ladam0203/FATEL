@@ -9,6 +9,7 @@ import {Movement} from "../entities/DTOs/Movement";
 import {environment} from "../../environments/environment";
 import {Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
+import {PatchItemNameDTO} from "../entities/DTOs/PatchItemNameDTO";
 
 export const customAxios = axios.create({
   baseURL: environment.baseUrl,
@@ -93,6 +94,15 @@ export class ItemService {
       }
     });
     return this.mapResponse(response.data);
+  }
+
+  async updateNameRange(dtos: PatchItemNameDTO[]) {
+    const response = await customAxios.patch('item/updateNameRange', dtos, {
+      headers: {
+        Authorization:`Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    return response.data;
   }
 
   private mapResponse(data: any) {
