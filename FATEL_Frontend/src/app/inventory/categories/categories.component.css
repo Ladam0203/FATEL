@@ -124,3 +124,30 @@ tr:not(:last-child) {
   border: none;
   color: var(--primary);
 }
+
+.edit-field:focus {
+  border: none;
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+.category-action-button {
+  color: var(--primary);
+}
+
+.category-action-button:hover {
+  background-color: #eeecec;
+}
+
+.editing {
+  background-color: #eeecec;
+}
+
+.editing:hover {
+  background-color: var(--success);
+}
+
+.editing:hover mat-icon, .deleting:hover mat-icon {
+  color: var(--white);
+}
