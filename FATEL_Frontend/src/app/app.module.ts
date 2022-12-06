@@ -45,6 +45,7 @@ import {HttpClient} from '@angular/common/http';
 import { EditCategoryComponent } from './inventory/edit-category/edit-category.component';
 import { MobileComponent } from './mobile/mobile.component';
 import { MobileLoginComponent } from './mobile-login/mobile-login.component';
+import { MobileNavComponent } from './mobile-nav/mobile-nav.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { MobileLoginComponent } from './mobile-login/mobile-login.component';
     EditCategoryComponent,
     MobileComponent,
     MobileLoginComponent,
+    MobileNavComponent,
   ],
   imports: [
     BrowserModule,
