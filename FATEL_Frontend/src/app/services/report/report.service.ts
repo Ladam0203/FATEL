@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import jsPDF from "jspdf";
 import {RobotoRegular} from "./Roboto-Regular";
-import autoTable from "jspdf-autotable";
+import autoTable, {CellHook, CellHookData} from "jspdf-autotable";
 import {Unit} from "../../entities/units";
 import {Entry} from "../../entities/entry";
 import {TranslateService} from "@ngx-translate/core";
 import {Category} from "../../entities/category";
 import {Item} from "../../entities/item";
+import {RobotoBold} from "./Roboto-Bold";
 
 @Injectable({
   providedIn: 'root'
@@ -53,15 +54,16 @@ export class ReportService {
 
     let parsedCategoryData: any[] [] = [];
     this.categories.forEach((category) => {
-      let row = [category.name, getTotalQuantity(category.items), this.translate.instant(this.units[category.unit])];
+      let row = [category.name, Number(getTotalQuantity(category.items).toFixed(3)), this.translate.instant(this.units[category.unit])];
       parsedCategoryData.push(row);
       if (category.unit !== this.units.Piece) {
         category.items.forEach((item) => {
           let row;
           if (item.width != null) {
-            row = [("    " + item.width + '*' + item.length), item.quantity];
+            row = [("    " + item.width + "m" + " * " + item.length + "m"), item.quantity, this.translate.instant(this.units[2])];
           } else {
-            row = [("    " + item.length), item.quantity];
+            row = [("    " + item.length + "m"), item.quantity, this.translate.instant(this.units[2])];
+
           }
           parsedCategoryData.push(row);
         })
@@ -81,8 +83,17 @@ export class ReportService {
             this.translate.instant('REPORT.INVENTORY.UNIT')]
         ],
         body: parsedCategoryData,
+
+        didParseCell: function (cell: CellHookData) {
+          console.log(cell.row.raw.toString())
+          if (!cell.row.raw.toString().includes('   ')) {
+            cell.cell.styles.font = 'Roboto-Bold';
+            cell.cell.styles.fontSize = 11;
+          }
+        },
         styles: {
           font: 'Roboto-Regular',
+          fontSize: 10,
         },
         theme: "striped",
       }
@@ -119,7 +130,7 @@ export class ReportService {
         ],
         body: parsedData,
         styles: {
-          font: 'Roboto-Regular',
+          font: 'Roboto-Bold',
         },
         theme: "striped",
       }
@@ -132,6 +143,8 @@ export class ReportService {
 
     doc.addFileToVFS('Roboto-Regular.ttf', RobotoRegular);
     doc.addFont('Roboto-Regular.ttf', 'Roboto-Regular', 'regular');
+    doc.addFileToVFS('Roboto-Bold.ttf', RobotoBold);
+    doc.addFont('Roboto-Bold.ttf', 'Roboto-Bold', 'bold');
 
     return doc;
   }
