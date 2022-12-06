@@ -10,7 +10,7 @@
           </button>
         </div>
         <div *ngIf="category === editingCategory">
-          <input type="text" value="{{category.name}}" [(ngModel)]="categoryName"
+          <input class="edit-field fs-5" type="text" value="{{category.name}}" [(ngModel)]="categoryName"
                  (click)="$event.stopPropagation();"
                  (keydown.space)="$event.stopPropagation();"
                  (keydown.enter)="$event.stopPropagation();editCategory()">
