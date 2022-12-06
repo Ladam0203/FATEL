@@ -1,9 +1,20 @@
 <mat-accordion multi class="inventory">
 
-  <mat-expansion-panel *ngFor="let category of categories | filter: 'name' : ((searchbarQuery | async) ?? '')" (closed)="onStopEditCategory()">
+  <mat-expansion-panel *ngFor="let category of categories | filter: 'name' : ((searchbarQuery | async) ?? '')" (closed)="onStopEditCategory()" #mep=matExpansionPanel>
     <mat-expansion-panel-header>
       <mat-panel-title class="fs-5">
-        {{category.name}}
+        <div *ngIf="category !== editingCategory">
+          {{category.name}}
+          <button mat-icon-button *ngIf="mep.expanded" (click)="onEditCategory($event, category)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="category === editingCategory">
+          <input type="text" value="{{category?.name}}" [(ngModel)]="categoryName">
+          <button mat-button (click)=editCategory($event)>
+            <mat-icon>check</mat-icon>
+          </button>
+        </div>
       </mat-panel-title>
       <mat-panel-description class="fs-5 panel-description">
         {{category.getDescription() }}

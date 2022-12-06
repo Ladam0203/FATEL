@@ -44,6 +44,7 @@ export class CategoriesComponent implements OnInit {
   deletingId: number | undefined;
 
   editingCategory: Category | undefined;
+  categoryName: string = "";
 
   constructor(private itemService: ItemService, private readonly store: Store<any>) {
   }
@@ -135,8 +136,9 @@ export class CategoriesComponent implements OnInit {
     //TODO: Save the category and update the NgRx state
   }
 
-  onStartEditCategory($event: any, category: Category) {
+  onEditCategory($event: any, category: Category) {
     $event.stopPropagation();
+    console.log(category !== this.editingCategory)
     this.editingCategory = category;
   }
 
