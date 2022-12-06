@@ -133,13 +133,14 @@ export class CategoriesComponent implements OnInit {
 
   editCategory($event: any) {
     $event.stopPropagation();
+    this.editingCategory = undefined;
     //TODO: Save the category and update the NgRx state
   }
 
   onEditCategory($event: any, category: Category) {
     $event.stopPropagation();
-    console.log(category !== this.editingCategory)
     this.editingCategory = category;
+    this.categoryName = category.name;
   }
 
   onStopEditCategory() {

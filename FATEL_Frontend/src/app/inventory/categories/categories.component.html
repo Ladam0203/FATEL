@@ -10,7 +10,7 @@
           </button>
         </div>
         <div *ngIf="category === editingCategory">
-          <input type="text" value="{{category?.name}}" [(ngModel)]="categoryName">
+          <input type="text" value="{{category.name}}" [(ngModel)]="categoryName" (click)="$event.stopPropagation();">
           <button mat-button (click)=editCategory($event)>
             <mat-icon>check</mat-icon>
           </button>
