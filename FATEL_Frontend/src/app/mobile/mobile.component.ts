@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Warehouse} from "../entities/warehouse";
+import {Store} from "@ngrx/store";
+import {Router} from "@angular/router";
+import {WarehouseService} from "../services/warehouse.service";
+import {setSelectedWarehouse} from "../states/app.states";
 
 @Component({
   selector: 'app-mobile',
@@ -7,9 +12,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MobileComponent implements OnInit {
 
-  constructor() { }
+  warehouses: Warehouse[] = [];
 
-  ngOnInit(): void {
+  constructor(private readonly store: Store<any>,
+              private router: Router,
+              private service: WarehouseService) {
   }
 
+  ngOnInit(): void {
+    this.service.readAll().then(warehouses => {
+      this.warehouses = warehouses;
+    });
+  }
+
+  onSelectWarehouse(i: number, warehouse: Warehouse) {
+    this.store.dispatch(setSelectedWarehouse({warehouse: warehouse}));
+    this.router.navigate(['./mobileInventory']);
+  }
 }

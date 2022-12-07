@@ -1,1 +1,13 @@
-<p>mobile works!</p>
+<div class="mobile-container">
+  <div class="content-wrapper">
+    <h2 class="fs-2 heading">Choose a Warehouse.</h2>
+    <div class="content">
+      <div *ngFor="let warehouse of warehouses; let i = index"
+           class="warehouse-component"
+           (click)="onSelectWarehouse(i, warehouse)">
+        <mat-icon>home</mat-icon>
+        <h5>{{warehouse.name}}</h5>
+      </div>
+    </div>
+  </div>
+</div>

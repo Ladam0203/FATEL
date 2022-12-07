@@ -7,12 +7,14 @@ import {MobileComponent} from "./mobile/mobile.component";
 import {DesktopGuard} from "./services/desktop-guard.service";
 import {MobileGuard} from "./services/mobile-guard.service";
 import {MobileLoginComponent} from "./mobile-login/mobile-login.component";
+import {MobileInventoryComponent} from "./mobile-inventory/mobile-inventory.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [DesktopGuard]},
   {path: '', component: FatelComponent, canActivate: [AuthguardService]},
   {path: 'mobileLogin', component: MobileLoginComponent, canActivate: [MobileGuard]},
   {path: 'mobile', component: MobileComponent, canActivate: [AuthguardService]},
+  {path: 'mobileInventory', component:MobileInventoryComponent, canActivate: [AuthguardService]}
 ]
 
 @NgModule({
