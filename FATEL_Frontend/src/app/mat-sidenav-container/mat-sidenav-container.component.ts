@@ -36,10 +36,8 @@ export class MatSidenavContainerComponent implements OnInit {
       this.warehouses = warehouses;
 
       let firstWarehouse = this.warehouses[0];
-      if (!firstWarehouse) {
-        this.warehouseActive = -1;
-      }
       this.store.dispatch(setSelectedWarehouse({warehouse: firstWarehouse}));
+      this.warehouseActive = this.warehouseActive ? 0 : -1;
     });
 
     this.appState.subscribe(state => {
