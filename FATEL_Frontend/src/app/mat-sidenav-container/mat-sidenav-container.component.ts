@@ -85,6 +85,11 @@ export class MatSidenavContainerComponent implements OnInit {
     this.service.create({name: "New Warehouse"}).then(warehouse => {
       console.log("Created warehouse: " + warehouse);
       this.warehouses.push(warehouse);
+      //Select the newly created warehouse, if that is the only one
+      if (this.warehouses.length == 1) {
+        this.warehouseActive = 0;
+        this.store.dispatch(setSelectedWarehouse({warehouse: warehouse}));
+      }
     });
   }
 
