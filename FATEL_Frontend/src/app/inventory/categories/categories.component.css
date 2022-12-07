@@ -137,17 +137,17 @@ tr:not(:last-child) {
 }
 
 .category-action-button:hover {
+  *background-color: #eeecec;
+}
+
+.editing-category {
   background-color: #eeecec;
 }
 
-.editing {
-  background-color: #eeecec;
-}
-
-.editing:hover {
+.editing-category:hover {
   background-color: var(--success);
 }
 
-.editing:hover mat-icon, .deleting:hover mat-icon {
+.editing-category:hover mat-icon, .deleting:hover mat-icon {
   color: var(--white);
-}
+ }
