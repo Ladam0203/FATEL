@@ -58,9 +58,12 @@ export class CategoriesComponent implements OnInit {
 
       this.selectedItem = state.selectedItem;
 
-      if (this.items != state.selectedWarehouse.inventory) {
-        this.items = state.selectedWarehouse.inventory;
-        this.categoriseItems();
+      if (state.selectedWarehouse)
+      {
+        if (this.items != state.selectedWarehouse.inventory) {
+          this.items = state.selectedWarehouse.inventory;
+          this.categoriseItems();
+        }
       }
 
       this.warehouse = state.selectedWarehouse;
