@@ -130,10 +130,11 @@ export const reducer = createReducer(
     }
   })),
 
+  //Setting the warehouse name to null triggers the deletion of the warehouse
   on(deleteWarehouseAction, (state, {warehouse}) => ({
     ...state,
     //@ts-ignore
-    selectedWarehouse: {id: warehouse.id, name: null},
+    selectedWarehouse: {id: warehouse.id, name: null, inventory: state.selectedWarehouse.inventory, diary: state.selectedWarehouse.diary}
   }))
 );
 
