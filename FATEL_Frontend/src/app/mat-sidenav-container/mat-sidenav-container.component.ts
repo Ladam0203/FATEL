@@ -24,7 +24,7 @@ export class MatSidenavContainerComponent implements OnInit {
   appState = this.store.select('appState');
 
   inventoryActive: boolean = true;
-  warehouseActive: number = 0;
+  warehouseActive: number = -1;
 
   warehouses: Warehouse[] = [];
 
@@ -36,19 +36,27 @@ export class MatSidenavContainerComponent implements OnInit {
       this.warehouses = warehouses;
 
       let firstWarehouse = this.warehouses[0];
+      if (!firstWarehouse) {
+        this.warehouseActive = -1;
+      }
       this.store.dispatch(setSelectedWarehouse({warehouse: firstWarehouse}));
     });
 
     this.appState.subscribe(state => {
+      //If there is no warehouse, does not select either
       if (!state.selectedWarehouse) {
+        this.warehouseActive = -1;
         return;
       }
+      //If a warehouse is deleted (it's name is set to null), select the one before and make the deleted one vanish
       if (state.selectedWarehouse.name == null) {
-        let index = this.warehouses.findIndex(warehouse => warehouse.id == state.selectedWarehouse.id);
-        this.store.dispatch(setSelectedWarehouse({warehouse: this.warehouses[index - 1]}));
+        let index = this.warehouses.findIndex(warehouse => warehouse.id == state.selectedWarehouse.id) - 1;
+        this.store.dispatch(setSelectedWarehouse({warehouse: this.warehouses[index]}));
+        this.warehouseActive = index;
         this.warehouses = this.warehouses.filter(w => w.id != state.selectedWarehouse.id);
         return;
       }
+      //If a warehouse is edited, update the warehouse
       let warehouse = this.warehouses.find(w => w.id == state.selectedWarehouse.id);
       if (!warehouse) {
         return;
