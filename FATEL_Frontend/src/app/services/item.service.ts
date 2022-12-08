@@ -41,12 +41,15 @@ export class ItemService {
             {duration: 4000});
         }
         else if (rejected.response.status == 401) {
+
           this.matSnackBar.open(translate.instant("API-SERVICE.SNACKBAR.INVALID-TOKEN"),
+
             undefined,
             {duration: 4000});
           this.router.navigate(['./login'])
         }
         else if (rejected.response.status == 403) {
+
           this.matSnackBar.open(translate.instant("API-SERVICE.SNACKBAR.SAME-ITEM-EXISTS"),
             undefined,
             {duration: 4000});

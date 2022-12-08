@@ -4,68 +4,49 @@
   top: 0;
   height: 100%;
   width: 100%;
+
+  background-color: var(--white);
 }
 
-.login-wrapper {
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-}
-
-.left-side {
-  width: 55%;
+.welcome-wrapper {
+  text-align: center;
+  padding-top: 32px;
+  padding-bottom: 16px;
   background-image: url("src/assets/blue-skies.png");
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-
-  row-gap: 80px;
-}
-
-.wood-image {
-  width: 128px;
-  height: 128px;
-
-  margin-top: 80px;
 }
 
 .welcome-text {
   font-family: "Nunito Sans", serif !important;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   color: var(--white);
 }
 
 .VHF-font {
   font-family: "Very Happy Family", serif !important;
-  font-size: 6rem;
+  font-size: 3.2rem;
 }
 
-.right-side {
+.login-wrapper {
+  margin: 32px auto 0 auto;
   display: flex;
-  flex-direction: column;
-
-  justify-content: space-around;
-
-  flex: 1;
-  background: var(--white);
+  flex-direction: row;
+  width: 280px;
 }
 
 .login-form-wrapper {
-  margin: 150px auto 0 auto;
+  width: 100%;
 }
 
 .login-form-field, .login-button {
   font-family: "Nunito Sans", serif !important;
-  width: 340px;
+  width: 100%;
 }
 
 .login-button {
   height: 48px;
   color: var(--white);
   background-color: dodgerblue;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .login-button mat-icon {
@@ -73,6 +54,13 @@
 }
 
 .workers {
-  margin: 0 auto;
+  margin-top: 48px;
+  background-color: var(--white);
+}
+
+.workers img {
+  display: -webkit-box;
+  margin-left: auto;
+  padding: 12px;
 }
 

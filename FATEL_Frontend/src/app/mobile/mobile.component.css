@@ -1,0 +1,46 @@
+.mobile-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--light);
+}
+
+.content-wrapper {
+  margin: 20px 20px 0 20px;
+}
+
+.heading {
+  margin-bottom: 20px;
+}
+
+.content {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  row-gap: 32px;
+  margin-bottom: 20px;
+}
+
+.warehouse-component {
+  width: 150px;
+  height: 150px;
+  background-color: #001233;
+  border-radius: 8px;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+
+  cursor: pointer;
+}
+
+
+.warehouse-component h5, .warehouse-component mat-icon {
+  color: var(--white);
+}
+
+.warehouse-component mat-icon {
+  transform: scale(2);
+}
