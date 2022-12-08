@@ -12,4 +12,7 @@ export class MobileInventoryComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onSelectWarehouse() {
+    // go bak to selekting werhaus
+  }
 }

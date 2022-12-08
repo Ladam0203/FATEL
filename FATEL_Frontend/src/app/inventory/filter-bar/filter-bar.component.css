@@ -1,5 +1,11 @@
+.filter-wrapper {
+  max-width: 350px;
+  display: flex;
+  flex: 1;
+}
+
 .search-field {
-  width: 350px;
+  flex: 1;
 }
 
 .search-field input {

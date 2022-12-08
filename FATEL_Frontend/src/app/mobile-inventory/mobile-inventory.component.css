@@ -17,25 +17,32 @@
 }
 
 .warehouse-selector-container {
-
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-end;
 }
 
 .warehouse-selector-button {
-  flex: 1;
 }
 
 .warehouse-selector-button mat-icon {
   transform: scale(1.5);
   color: var(--primary);
+  margin-left: -4px;
 }
 
 .selected-warehouse-header {
   flex: 1;
+  text-align: center;
 }
 
 
+.filter-bar {
+  display: flex;
+}
+
 .filter-bar > .search-field {
-  width: 200px !important;
+
 }
 
 .categories-container {
