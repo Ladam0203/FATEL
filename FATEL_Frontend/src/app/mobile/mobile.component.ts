@@ -27,6 +27,6 @@ export class MobileComponent implements OnInit {
 
   onSelectWarehouse(i: number, warehouse: Warehouse) {
     this.store.dispatch(setSelectedWarehouse({warehouse: warehouse}));
-    this.router.navigate(['./mobileInventory']);
+    this.router.navigate(['./mobile/inventory']);
   }
 }

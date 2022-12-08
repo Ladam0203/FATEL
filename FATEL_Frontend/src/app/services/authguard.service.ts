@@ -23,7 +23,7 @@ export class AuthguardService implements CanActivate{
       }
     }
     if (window.innerWidth <= 500) {
-      this.router.navigate(['./mobileLogin'])
+      this.router.navigate(['./mobile/login'])
       return false
     }
     else {
