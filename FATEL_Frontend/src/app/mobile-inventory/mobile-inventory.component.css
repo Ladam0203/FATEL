@@ -1,0 +1,44 @@
+.inventory-container {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 20px;
+
+  display: flex;
+  flex-flow: column wrap;
+  row-gap: 12px;
+}
+
+.navbar-wrapper {
+  display: flex;
+  flex-flow: column wrap;
+  row-gap: 12px;
+}
+
+.warehouse-selector-container {
+
+}
+
+.warehouse-selector-button {
+  flex: 1;
+}
+
+.warehouse-selector-button mat-icon {
+  transform: scale(1.5);
+  color: var(--primary);
+}
+
+.selected-warehouse-header {
+  flex: 1;
+}
+
+
+.filter-bar > .search-field {
+  width: 200px !important;
+}
+
+.categories-container {
+  display: block;
+
+}
