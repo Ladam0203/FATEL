@@ -18,7 +18,7 @@ export class DesktopGuard implements CanActivate {
     if (window.innerWidth > 500) {
       return true;
     }
-    this.router.navigate(['./mobileLogin']);
+    this.router.navigate(['mobile']);
     return false;
   }
 }

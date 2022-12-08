@@ -18,7 +18,7 @@ export class MobileGuard implements CanActivate {
     if (window.innerWidth <= 500) {
       return true;
     }
-    this.router.navigate(['./login']);
+    this.router.navigate(['']);
     return false;
 
   }
