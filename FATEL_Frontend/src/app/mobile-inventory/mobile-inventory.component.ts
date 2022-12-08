@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class MobileInventoryComponent implements OnInit {
   // Table columns
-  displayedColumns: string[] = ['name', 'width', 'length', 'unit', 'quantity', 'note', 'actions'];
+  displayedColumns: string[] = ['width', 'length', 'quantity'];
 
   // Component variables
   items: Item[] = [];

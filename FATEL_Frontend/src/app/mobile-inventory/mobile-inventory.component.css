@@ -19,24 +19,26 @@
 .warehouse-selector-container {
   display: flex;
   flex-flow: row nowrap;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .warehouse-selector-button {
   padding-left: 4px;
   padding-bottom: 4px;
+  margin-right: auto;
+  flex:0;
 }
 
 .warehouse-selector-button mat-icon {
   transform: scale(1.5);
   color: var(--primary);
-  margin-left: -4px;
+  margin-left: 1px;
   margin-top: -4px;
 }
 
 .selected-warehouse-header {
-  flex: 1;
-  text-align: center;
+  margin-bottom: 0;
+  margin-right: auto;
 }
 
 
@@ -47,3 +49,39 @@
 .categories-container {
   width: 100%;
 }
+
+.panel-description {
+  flex: 0;
+}
+
+table {
+  width: 100%;
+}
+
+.ta-center {
+  text-align: center !important;
+}
+
+tr:last-of-type td {
+  border-bottom-width: 0 !important;
+}
+
+.mat-expansion-panel {
+  margin: 0 0 16px 0;
+  border: 1px solid rgba(0, 0, 0, .24);
+
+}
+
+.mat-accordion .mat-expansion-panel:not(.mat-expanded), .mat-accordion .mat-expansion-panel:not(.mat-expansion-panel-spacing) {
+  border-radius: 4px !important;
+}
+
+tr:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, .12);
+}
+
+.mat-expansion-panel-header {
+  padding: 8px;
+  height: inherit;
+}
+
