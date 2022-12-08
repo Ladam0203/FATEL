@@ -12,9 +12,9 @@ import {MobileInventoryComponent} from "./mobile-inventory/mobile-inventory.comp
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [DesktopGuard]},
   {path: '', component: FatelComponent, canActivate: [AuthguardService, DesktopGuard]},
-  {path: 'mobileLogin', component: MobileLoginComponent, canActivate: [MobileGuard]},
+  {path: 'mobile/login', component: MobileLoginComponent, canActivate: [MobileGuard]},
   {path: 'mobile', component: MobileComponent, canActivate: [AuthguardService, MobileGuard]},
-  {path: 'mobileInventory', component:MobileInventoryComponent, canActivate: [AuthguardService, MobileGuard]}
+  {path: 'mobile/inventory', component:MobileInventoryComponent, canActivate: [AuthguardService, MobileGuard]}
 ]
 
 @NgModule({
