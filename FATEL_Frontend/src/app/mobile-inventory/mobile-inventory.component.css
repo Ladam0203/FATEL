@@ -23,12 +23,15 @@
 }
 
 .warehouse-selector-button {
+  padding-left: 4px;
+  padding-bottom: 4px;
 }
 
 .warehouse-selector-button mat-icon {
   transform: scale(1.5);
   color: var(--primary);
   margin-left: -4px;
+  margin-top: -4px;
 }
 
 .selected-warehouse-header {
@@ -41,11 +44,6 @@
   display: flex;
 }
 
-.filter-bar > .search-field {
-
-}
-
 .categories-container {
-  display: block;
-
+  width: 100%;
 }

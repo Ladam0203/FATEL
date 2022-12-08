@@ -14,6 +14,58 @@
   <app-filter-bar class="filter-bar"></app-filter-bar>
 
   <div class="categories-container">
+    <mat-accordion multi class="inventory">
 
+      <mat-expansion-panel *ngFor="let category of categories | filter: 'name' : ((searchbarQuery | async) ?? '')">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="fs-5">
+            {{category.name}}
+          </mat-panel-title>
+          <mat-panel-description class="fs-5 panel-description">
+            {{category.getDescription() }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <table mat-table [dataSource]="category.items">
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th class="fs-5 ta-left" mat-header-cell
+                *matHeaderCellDef>{{'CATEGORIES-COMPONENT.ITEMS-TABLE.NAME' | translate}}</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.name}} </td>
+          </ng-container>
+
+          <!-- Width Column -->
+          <ng-container matColumnDef="width">
+            <th class="fs-5 ta-left" mat-header-cell
+                *matHeaderCellDef>{{'CATEGORIES-COMPONENT.ITEMS-TABLE.WIDTH' | translate}}</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.width}} </td>
+          </ng-container>
+
+          <!-- Length Column -->
+          <ng-container matColumnDef="length">
+            <th class="fs-5 ta-left" mat-header-cell
+                *matHeaderCellDef>{{'CATEGORIES-COMPONENT.ITEMS-TABLE.LENGTH' | translate}}</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.length}} </td>
+          </ng-container>
+
+          <!-- Unit Column -->
+          <ng-container matColumnDef="unit">
+            <th class="fs-5 ta-left" mat-header-cell
+                *matHeaderCellDef>{{'CATEGORIES-COMPONENT.ITEMS-TABLE.UNIT' | translate}}</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item;"> {{units[item.unit]}} </td>
+          </ng-container>
+
+          <!-- Quantity Column -->
+          <ng-container matColumnDef="quantity">
+            <th class="fs-5 ta-left" mat-header-cell
+                *matHeaderCellDef>{{'CATEGORIES-COMPONENT.ITEMS-TABLE.QUANTITY' | translate}}</th>
+            <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.quantity}} </td>
+          </ng-container>
+          <tr class="fs-5" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
   </div>
 </div>
