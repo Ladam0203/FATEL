@@ -137,7 +137,7 @@ tr:not(:last-child) {
 }
 
 .category-action-button:hover {
-  *background-color: #eeecec;
+  background-color: #eeecec;
 }
 
 .editing-category {
