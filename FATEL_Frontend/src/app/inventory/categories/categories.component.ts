@@ -43,7 +43,8 @@ export class CategoriesComponent implements OnInit {
   confirmDelete: boolean = true;
   deletingId: number | undefined;
 
-  //editingCategory: Category | undefined;
+  editingCategory: Category | undefined;
+  categoryName = "";
 
   constructor(private itemService: ItemService, private readonly store: Store<any>) {
   }
@@ -57,9 +58,12 @@ export class CategoriesComponent implements OnInit {
 
       this.selectedItem = state.selectedItem;
 
-      if (this.items != state.selectedWarehouse.inventory) {
-        this.items = state.selectedWarehouse.inventory;
-        this.categoriseItems();
+      if (state.selectedWarehouse)
+      {
+        if (this.items != state.selectedWarehouse.inventory) {
+          this.items = state.selectedWarehouse.inventory;
+          this.categoriseItems();
+        }
       }
 
       this.warehouse = state.selectedWarehouse;
@@ -129,14 +133,41 @@ export class CategoriesComponent implements OnInit {
     this.store.dispatch(setShowRecordMovementComponent({item: itemToRecordMovementOn}));
   }
 
-  /*
-  editCategory($event: any) {
-    $event.stopPropagation();
+
+  editCategory() {
+    if (!this.editingCategory)
+      return;
+
+    if (!this.editingCategory.name) {
+      return;
+    }
+    if (this.editingCategory.name == '') {
+      return;
+    }
+
+    let patchItemDTOs = this.editingCategory.items.map(item => {
+      return {
+        id: item.id,
+        name: this.categoryName
+      }
+    });
+    this.itemService.updateNameRange(patchItemDTOs).then(data => {
+      for (const item of data) {
+        this.store.dispatch(editItemAction({item: item}));
+      }
+    });
+
+    this.editingCategory = undefined;
+    //TODO: Save the category and update the NgRx state
   }
 
-  onEditCategory($event: any, category: Category) {
-    $event.stopPropagation();
+  onEditCategory(category: Category) {
     this.editingCategory = category;
+    this.categoryName = category.name;
   }
-  */
+
+  onStopEditCategory() {
+    this.editingCategory = undefined;
+    this.categoryName = "";
+  }
 }

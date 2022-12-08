@@ -186,5 +186,17 @@
     "ENTER-BUTTON": {
       "LABEL": "Login"
     }
+  },
+  "API-SERVICE":
+  {
+    "SNACKBAR": {
+      "ITEM-CREATED": "Item created successfully",
+      "NO-CONNECTION": "Could not connect to server",
+      "INVALID-TOKEN": "Please login to continue",
+      "SAME-ITEM-EXISTS": "Similar item already exists",
+      "INTERNAL-SERVER-ERROR": "Internal server error",
+      "INCORRECT-CREDENTIALS": "Incorrect username or password",
+      "WAREHOUSE-CREATED": "Warehouse created successfully"
+    }
   }
 }

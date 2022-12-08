@@ -119,3 +119,35 @@ tr:not(:last-child) {
   border-color: var(--danger);
   color: var(--white);
 }
+
+.edit-field {
+  border: none;
+  color: var(--primary);
+}
+
+.edit-field:focus {
+  border: none;
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+.category-action-button {
+  color: var(--primary);
+}
+
+.category-action-button:hover {
+  *background-color: #eeecec;
+}
+
+.editing-category {
+  background-color: #eeecec;
+}
+
+.editing-category:hover {
+  background-color: var(--success);
+}
+
+.editing-category:hover mat-icon, .deleting:hover mat-icon {
+  color: var(--white);
+ }
