@@ -34,16 +34,5 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('token', token);
       await this.router.navigate(['']);
     }
-    /*else if(window.innerWidth > 500)
-    {
-      localStorage.setItem('token', token);
-      await this.router.navigate(['']);
-    }
-    else if(window.innerWidth <= 500)
-    {
-      localStorage.setItem('token', token);
-      await this.router.navigate(['../mobile']);
-    }
-     */
   }
 }
