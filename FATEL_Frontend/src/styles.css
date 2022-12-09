@@ -69,6 +69,16 @@ body {
   color: var(--primary);
 }
 
+.filter-bar .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: var(--white);
+}
+
+.filter-bar .mat-form-field-outline-start,
+.filter-bar .mat-form-field-outline-gap,
+.filter-bar .mat-form-field-outline-end {
+  background-color: var(--white);
+}
+
 /*
   CATEGORY EXPANSION PANEL
  */

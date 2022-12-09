@@ -1,24 +1,26 @@
 <div class="inventory-container">
 
-  <div class="warehouse-selector-container">
-    <button mat-icon-button
-            class="warehouse-selector-button"
-            (click)="onSelectWarehouse()">
-      <mat-icon>home</mat-icon>
-    </button>
+  <div class="navigation-wrapper">
+    <div class="warehouse-selector-container">
+      <button mat-icon-button
+              class="warehouse-selector-button"
+              (click)="onSelectWarehouse()">
+        <mat-icon>home</mat-icon>
+      </button>
 
-    <h2 class="fs-1 selected-warehouse-header">{{warehouse!.name}}</h2>
+      <h2 class="fs-1 selected-warehouse-header">{{warehouse!.name}}</h2>
+    </div>
+
+    <app-filter-bar class="filter-bar"></app-filter-bar>
   </div>
 
-
-  <app-filter-bar class="filter-bar"></app-filter-bar>
 
   <div class="categories-container">
     <mat-accordion multi>
 
       <mat-expansion-panel *ngFor="let category of categories | filter: 'name' : ((searchbarQuery | async) ?? '')">
         <mat-expansion-panel-header>
-          <mat-panel-title class="fs-5">
+          <mat-panel-title class="fs-5 panel-title">
             {{category.name}}
           </mat-panel-title>
           <mat-panel-description class="fs-5 panel-description">
