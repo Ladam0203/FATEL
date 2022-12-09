@@ -37,6 +37,7 @@
         {{'ADD-ITEM-COMPONENT.QUANTITY-FIELD.ERROR.WHOLE-NUMBER' | translate}}
       </mat-error>
     </mat-form-field>
+    <br>
 
     <ng-container *ngIf="shouldValidateLength()">
       <mat-form-field appearance="fill">
@@ -53,6 +54,8 @@
         </mat-error>
       </mat-form-field>
     </ng-container>
+    <br>
+
     <ng-container *ngIf="shouldValidateWidth()">
       <mat-form-field appearance="fill">
         <mat-label>{{'ADD-ITEM-COMPONENT.WIDTH-FIELD.LABEL' | translate}}</mat-label>

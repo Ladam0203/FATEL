@@ -194,7 +194,10 @@
       "SAME-ITEM-EXISTS": "Már létezik hasonló tétel",
       "INTERNAL-SERVER-ERROR": "Szerver hiba",
       "INCORRECT-CREDENTIALS": "Hibás felhasználónév vagy jelszó",
-      "WAREHOUSE-CREATED": "Raktár sikeresen létrehozva",
+      "WAREHOUSE-CREATED": "Raktár sikeresen létrehozva"
     }
+  },
+  "MOBILE": {
+    "SELECT-WAREHOUSE": "Select a warehouse"
   }
 }

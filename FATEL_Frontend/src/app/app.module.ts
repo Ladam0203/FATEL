@@ -42,7 +42,6 @@ import {AppRoutingModule} from "./app-routing.module";
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient} from '@angular/common/http';
-import { EditCategoryComponent } from './inventory/edit-category/edit-category.component';
 import { MobileComponent } from './mobile/mobile.component';
 import { MobileLoginComponent } from './mobile-login/mobile-login.component';
 import { MobileInventoryComponent } from './mobile-inventory/mobile-inventory.component';
@@ -65,7 +64,6 @@ import { MobileInventoryComponent } from './mobile-inventory/mobile-inventory.co
     NoWarehouseComponent,
     LoginComponent,
     FatelComponent,
-    EditCategoryComponent,
     MobileComponent,
     MobileLoginComponent,
     MobileInventoryComponent,
