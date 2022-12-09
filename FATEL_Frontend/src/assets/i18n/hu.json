@@ -196,5 +196,8 @@
       "INCORRECT-CREDENTIALS": "Hibás felhasználónév vagy jelszó",
       "WAREHOUSE-CREATED": "Raktár sikeresen létrehozva",
     }
+  },
+  "MOBILE": {
+    "SELECT-WAREHOUSE": "Válasszon raktárat"
   }
 }
