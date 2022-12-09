@@ -1,4 +1,3 @@
-using Application.DTOs;
 using Application.Interfaces;
 using Domain;
 
@@ -10,6 +9,7 @@ public class RepositoryFacade : IRepositoryFacade
     private readonly IItemRepository _itemRepository;
     private readonly IEntryRepository _entryRepository;
     private readonly IWarehouseRepository _warehouseRepository;
+    private readonly IUserRepository _userRepository;
 
     public RepositoryFacade(AppDbContext context)
     {
@@ -18,10 +18,7 @@ public class RepositoryFacade : IRepositoryFacade
         _itemRepository = new ItemRepository(context);
         _entryRepository = new EntryRepository(context);
         _warehouseRepository = new WarehouseRepository(context);
-        
-        //rebuild db
-        //_context.Database.EnsureDeleted();
-        //_context.Database.EnsureCreated();
+        _userRepository = new UserRepository(context);
     }
     
     public Item UpdateQuantityAndRecord(Item item, Entry entry)
@@ -140,5 +137,10 @@ public class RepositoryFacade : IRepositoryFacade
     public Warehouse DeleteWarehouse(int id)
     {
         return _warehouseRepository.Delete(id);
+    }
+
+    public User GetUserByUsername(string username)
+    {
+        return _userRepository.GetUserByUsername(username);
     }
 }

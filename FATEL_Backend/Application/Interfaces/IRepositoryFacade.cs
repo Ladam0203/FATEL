@@ -1,4 +1,3 @@
-using Application.DTOs;
 using Domain;
 
 namespace Application.Interfaces;
@@ -19,7 +18,7 @@ public interface IRepositoryFacade
     Item DeleteAndRecord(int id, Entry entry);
     Warehouse CreateWarehouse(Warehouse warehouse);
     List<Warehouse> ReadAllWarehouses();
-    //Read???
     Warehouse UpdateWarehouse(Warehouse warehouse);
     Warehouse DeleteWarehouse(int id);
+    User GetUserByUsername(string username);
 }

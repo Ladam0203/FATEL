@@ -10,58 +10,6 @@ public class ItemRepository : IItemRepository
     public ItemRepository(AppDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
-        /*
-        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
-        {
-            Rebuild();
-            Seed();
-        }
-        */
-    }
-
-    private void Rebuild()
-    {
-        _context.Database.EnsureDeleted();
-        _context.Database.EnsureCreated();
-    }
-
-    private void Seed()
-    {
-        Item doorKnob = new Item()
-        {
-            Name = "Pánt", 
-            Unit = Unit.Piece,
-            Quantity = 5
-        };
-        Item plank = new Item()
-        {
-            Name = "Fenyőpadléc", 
-            Length = 5,
-            Unit = Unit.Meter,
-            Quantity = 2
-        };
-        Item floor1 = new Item()
-        {
-            Name = "Fenyőlambéria 12x95",
-            Length = 5,
-            Width = 0.0095f,
-            Unit = Unit.SquareMeter,
-            Quantity = 2,
-            Note = "Szar minőségű"
-        };
-        Item floor2 = new Item()
-        {
-            Name = "Fenyőlambéria 12x95",
-            Length = 2,
-            Width = 0.0095f,
-            Unit = Unit.SquareMeter,
-            Quantity = 2,
-        };
-        _context.ItemTable.Add(doorKnob);
-        _context.ItemTable.Add(plank);
-        _context.ItemTable.Add(floor1);
-        _context.ItemTable.Add(floor2);
-        _context.SaveChanges();
     }
 
     public Item Create(Item item)

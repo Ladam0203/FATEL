@@ -24,10 +24,4 @@ public class EntryRepository : IEntryRepository
     {
         return _context.EntryTable.ToList();
     }
-    
-    private void Rebuild()
-    {
-        _context.Database.EnsureDeleted();
-        _context.Database.EnsureCreated();
-    }
 }

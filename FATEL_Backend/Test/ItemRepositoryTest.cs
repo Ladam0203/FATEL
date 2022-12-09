@@ -34,7 +34,6 @@ public class ItemRepositoryTest
         //Assert
         Assert.NotNull(itemRepository);
         Assert.True(itemRepository is ItemRepository);
-        //TODO: Test if the repository is truly injected
     }
 
     [Fact]

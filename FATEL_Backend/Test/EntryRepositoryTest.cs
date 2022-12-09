@@ -34,44 +34,8 @@ public class EntryRepositoryTest
         //Assert
         Assert.NotNull(entryRepository);
         Assert.True(entryRepository is EntryRepository);
-        //TODO: Test if the repository is truly injected
     }
-
-    /*[Fact]
-    public void CreateEntry()
-    {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseInMemoryDatabase(databaseName: "EntryDatabase")
-            .Options;
-
-        using (var context = new AppDbContext(options))
-        {
-            //Arrange
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
-            
-            Entry entry1 = new Entry()
-            {
-                Timestamp = DateTime.Now,
-                ItemId = 1,
-                ItemName = "Item",
-                Change = 1,
-                QuantityAfterChange = 1
-            };
-            
-            IEntryRepository repo = new EntryRepository(context);
-            
-            //Act
-            Entry result = repo.Create(entry1);
-            Entry foundResult = context.EntryTable.Find(result.Id);
-            
-            
-            //Assert
-            Assert.Equal(entry1, result);
-            Assert.Equal(entry1, foundResult);
-        }
-    }
-    */
+    
     [Fact]
     public void ReadAllEntries()
     {

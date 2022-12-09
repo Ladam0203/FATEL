@@ -165,10 +165,8 @@ public class ItemServiceTest
         //Assert
         Assert.NotNull(itemService);
         Assert.True(itemService is ItemService);
-        //TODO: Test if the parameters were truly injected
     }
 
-    //TODO: Add more coverage
     [Fact]
     public void Read()
     {
