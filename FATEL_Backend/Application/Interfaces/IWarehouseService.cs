@@ -5,9 +5,8 @@ namespace Application.Interfaces;
 
 public interface IWarehouseService
 {
-    public Warehouse Create(PostWarehouseDTO dto);
-    public List<Warehouse> ReadAll();
-    //Read???
-    public Warehouse Update(int id, PutWarehouseDTO dto);
-    public Warehouse Delete(int id);
+    Warehouse Create(PostWarehouseDTO dto);
+    List<Warehouse> ReadAll();
+    Warehouse Update(int id, PutWarehouseDTO dto);
+    Warehouse Delete(int id);
 }

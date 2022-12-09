@@ -1,9 +1,6 @@
-﻿using System.Runtime.Intrinsics;
-using Application.DTOs;
+﻿using Application.DTOs;
 using Application.Validators;
 using Domain;
-using FluentValidation.Validators;
-
 namespace Test;
 
 public class PostItemDTOValidationTest

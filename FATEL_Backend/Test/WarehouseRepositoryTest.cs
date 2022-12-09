@@ -4,7 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 
-namespace DefaultNamespace;
+namespace Test;
 
 public class WarehouseRepositoryTest
 {
@@ -33,32 +33,6 @@ public class WarehouseRepositoryTest
         Assert.NotNull(warehouseRepository);
         Assert.True(warehouseRepository is WarehouseRepository);
     }
-    
-    // [Fact]
-    // public void CreateWarehouse()
-    // {
-    //     var options = new DbContextOptionsBuilder<AppDbContext>()
-    //         .UseInMemoryDatabase(databaseName: "WarehouseDatabase")
-    //         .Options;
-    //     
-    //     using (var context = new AppDbContext(options))
-    //     {
-    //         //Arrange
-    //         context.Database.EnsureDeleted();
-    //         context.Database.EnsureCreated();
-    //         
-    //         List<Item> inventory = new List<Item>();
-    //         List<Entry> diary = new List<Entry>();
-    //
-    //         Warehouse warehouse = new Warehouse()
-    //             { Id = 1, Name = "Warehouse", Inventory = inventory, Diary = diary};
-    //
-    //         IWarehouseRepository repository = new WarehouseRepository(context);
-    //         
-    //         //Act
-    //         Warehouse result = repository.Create(warehouse);
-    //             
-    //     }
 
     [Fact]
     public void ReadAllWarehouses()
