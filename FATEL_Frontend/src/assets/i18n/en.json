@@ -198,5 +198,8 @@
       "INCORRECT-CREDENTIALS": "Incorrect username or password",
       "WAREHOUSE-CREATED": "Warehouse created successfully"
     }
+  },
+  "MOBILE": {
+    "SELECT-WAREHOUSE": "Select a warehouse"
   }
 }
