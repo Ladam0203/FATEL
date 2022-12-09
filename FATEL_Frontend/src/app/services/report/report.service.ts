@@ -75,7 +75,10 @@ export class ReportService {
     let huDate = new Date().toLocaleDateString("hu-HU");
     let fileDate = now.getFullYear().toString() + (now.getMonth() + 1).toString() + now.getDate().toString();
 
-    doc.text(this.translate.instant("INVENTORY") + " | " + warehouseName + " " + huDate, 20, 25);
+    let title = this.translate.instant("INVENTORY") + " | " + warehouseName + " " + huDate;
+    let pageWidth = doc.internal.pageSize.width || doc.internal.pageSize.getWidth();
+    doc.text(title, pageWidth / 2, 25, {align: "center"});
+
     autoTable(doc, {
         head: [
           [this.translate.instant('REPORT.INVENTORY.NAME'),
@@ -116,7 +119,9 @@ export class ReportService {
     let huDate = new Date().toLocaleDateString("hu-HU");
     let fileDate = now.getFullYear().toString() + (now.getMonth() + 1).toString() + now.getDate().toString();
 
-    doc.text(this.translate.instant("DIARY") + " | " + warehouseName + " " + huDate, 20, 25);
+    let title = this.translate.instant("DIARY") + " | " + warehouseName + " " + huDate;
+    let pageWidth = doc.internal.pageSize.width || doc.internal.pageSize.getWidth();
+    doc.text(title, pageWidth / 2, 25, {align: "center"});
     autoTable(doc, {
         head: [
           [this.translate.instant('REPORT.DIARY.TIMESTAMP'),
