@@ -72,7 +72,7 @@ export class ReportService {
 
     //date in hungarian format
     let now = new Date();
-    let huDate = new Date().toLocaleDateString("hu-HU");
+    let huDate = new Date().toLocaleDateString(navigator.language);
     let fileDate = now.getFullYear().toString() + (now.getMonth() + 1).toString() + now.getDate().toString();
 
     let title = this.translate.instant("INVENTORY") + " | " + warehouseName + " " + huDate;
@@ -110,13 +110,17 @@ export class ReportService {
 
     let parsedData: any[][] = [];
     entries.forEach((entry) => {
-      let row: any[] = [new Date(entry.timestamp).toLocaleDateString('hu-HU') + " " + new Date(entry.timestamp).toLocaleTimeString('hu-HU').slice(0, 5), entry.itemName, Number(entry.change.toFixed(3)), Number(entry.quantityAfterChange.toFixed(3))];
+      let row: any[] = [
+        new Date(entry.timestamp).toLocaleDateString(navigator.language) + " " + new Date(entry.timestamp).toLocaleTimeString(navigator.language, {hour: '2-digit', minute: '2-digit'}),
+        entry.itemName,
+        Number(entry.change.toFixed(3)),
+        Number(entry.quantityAfterChange.toFixed(3))];
       parsedData.push(row);
     });
 
     //date in hungarian format
     let now = new Date();
-    let huDate = new Date().toLocaleDateString("hu-HU");
+    let huDate = new Date().toLocaleDateString(navigator.language);
     let fileDate = now.getFullYear().toString() + (now.getMonth() + 1).toString() + now.getDate().toString();
 
     let title = this.translate.instant("DIARY") + " | " + warehouseName + " " + huDate;
