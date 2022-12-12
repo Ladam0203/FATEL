@@ -10,7 +10,7 @@ export class AppComponent{
   title = 'FATEL_Frontend';
 
   constructor(private translate: TranslateService) {
-    translate.setDefaultLang('hu');
+    translate.setDefaultLang('en');
 
     switch (navigator.language) {
       case 'hu':
