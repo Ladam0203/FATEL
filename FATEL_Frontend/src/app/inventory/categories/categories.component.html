@@ -49,7 +49,7 @@
       <!-- Unit Column -->
       <ng-container matColumnDef="unit">
         <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>{{'CATEGORIES-COMPONENT.ITEMS-TABLE.UNIT' | translate}}</th>
-        <td class="fs-5 ta-left" mat-cell *matCellDef="let item;"> {{units[item.unit]}} </td>
+        <td class="fs-5 ta-left" mat-cell *matCellDef="let item;"> {{units[item.unit] | translate}} </td>
       </ng-container>
 
       <!-- Quantity Column -->
