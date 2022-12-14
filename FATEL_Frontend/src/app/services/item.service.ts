@@ -54,7 +54,7 @@ export class ItemService {
             undefined,
             {duration: 4000});
         } else if (rejected.response.status == 500) {
-          this.matSnackBar.open("API-SERVICE.SNACKBAR.INTERNAL-SERVER-ERROR",
+          this.matSnackBar.open(translate.instant("API-SERVICE.SNACKBAR.INTERNAL-SERVER-ERROR"),
             undefined,
             {duration: 4000})
         }

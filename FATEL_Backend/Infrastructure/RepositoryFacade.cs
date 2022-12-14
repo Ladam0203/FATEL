@@ -25,7 +25,7 @@ public class RepositoryFacade : IRepositoryFacade
     {
         using (var dbContextTransaction = _context.Database.BeginTransaction())
         {
-            var newItem = _itemRepository.Update(item);
+            var newItem = _itemRepository.UpdateQuantity(item);
             
             var newEntry = _entryRepository.Create(entry);
 

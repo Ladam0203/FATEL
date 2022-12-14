@@ -39,9 +39,23 @@ public class ItemRepository : IItemRepository
         _context.ChangeTracker.Clear();
         _context.ItemTable.Update(item);
         _context.Entry(item).Property(i => i.WarehouseId).IsModified = false;
+        _context.Entry(item).Property(i => i.Quantity).IsModified = false;
+        _context.SaveChanges();
+        _context.ChangeTracker.Clear();
+        return _context.ItemTable.Find(item.Id);
+    }
+    
+    public Item UpdateQuantity(Item item)
+    {
+        if (_context.ItemTable.Find(item.Id) == null)
+            throw new KeyNotFoundException("Item with id " + item.Id + " does not exist");
+        _context.ChangeTracker.Clear();
+        _context.ItemTable.Update(item);
+        _context.Entry(item).Property(i => i.WarehouseId).IsModified = false;
         _context.SaveChanges();
         return item;
     }
+    
 
     public List<Item> UpdateNameRange(List<Item> items)
     {
