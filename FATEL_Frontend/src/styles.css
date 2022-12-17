@@ -1,4 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: Nunito Sans;
+  src: url("src/assets/NunitoSansRegular.ttf");
+}
+
+@font-face {
+  font-family: Very Happy Family;
+  src: url("src/assets/VeryHappyFamily.ttf");
+}
+
 :root {
   --white: #ffffff;
   --light: #e4e0e0;
@@ -34,9 +44,17 @@ body {
   background-color: var(--light);
 }
 
+/*
+  SIDENAV HIDE SCROLLBAR
+ */
+
 .mat-drawer-inner-container {
   overflow: hidden !important;
 }
+
+/*
+  SEARCH FIELD STYLING
+ */
 
 .search-field .mat-form-field-wrapper {
   padding-bottom: 0;
@@ -44,12 +62,26 @@ body {
 
 .search-field .mat-form-field-infix {
   padding-bottom: 8px;
-  border-top: 0 solid rgba(0,0,0,0);
+  border-top: 0 solid rgba(0, 0, 0, 0);
 }
 
 .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
   color: var(--primary);
 }
+
+.filter-bar .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: var(--white);
+}
+
+.filter-bar .mat-form-field-outline-start,
+.filter-bar .mat-form-field-outline-gap,
+.filter-bar .mat-form-field-outline-end {
+  background-color: var(--white);
+}
+
+/*
+  CATEGORY EXPANSION PANEL
+ */
 
 .mat-expansion-panel-body {
   padding: 0 !important;
@@ -59,10 +91,35 @@ body {
   box-shadow: none !important;
 }
 
+/*
+  INPUT FIELDS WHITE BACKGROUND (New Item, etc.)
+ */
+
 .mat-form-field-appearance-fill .mat-form-field-flex {
   background-color: var(--white);
 }
 
 .editing .mat-button-focus-overlay {
   background: transparent !important;
+}
+
+/*
+    YEAR FILTER
+ */
+
+.year-filter .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+.year-filter .mat-form-field-infix {
+  padding-bottom: 8px;
+  border-top: 0 solid rgba(0, 0, 0, 0);
+}
+
+.mat-form-field-appearance-outline .mat-select-arrow-wrapper {
+  transform: translateY(0) !important;
+}
+
+.mat-select-arrow {
+  color: var(--primary) !important;
 }

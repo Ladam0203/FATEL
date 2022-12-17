@@ -1,7 +1,7 @@
 import {createAction, createReducer, on, Action, props} from "@ngrx/store";
-import {Item} from "../../entities/item";
-import {Warehouse} from "../../entities/warehouse";
-import {Entry} from "../../entities/entry";
+import {Item} from "../entities/item";
+import {Warehouse} from "../entities/warehouse";
+import {Entry} from "../entities/entry";
 
 export const setShowAddItemComponent = createAction('[Categories Component] Show Add Item');
 export const setShowEditItemComponent = createAction('[Categories Component] Show Edit Item', props<{ item: Item }>());
@@ -130,10 +130,11 @@ export const reducer = createReducer(
     }
   })),
 
+  //Setting the warehouse name to null triggers the deletion of the warehouse
   on(deleteWarehouseAction, (state, {warehouse}) => ({
     ...state,
     //@ts-ignore
-    selectedWarehouse: {id: warehouse.id, name: null},
+    selectedWarehouse: {id: warehouse.id, name: null, inventory: state.selectedWarehouse.inventory, diary: state.selectedWarehouse.diary}
   }))
 );
 

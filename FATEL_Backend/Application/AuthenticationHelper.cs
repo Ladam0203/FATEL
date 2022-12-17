@@ -54,7 +54,7 @@ public class AuthenticationHelper : IAuthenticationHelper
                 null, // audience - not needed (ValidateAudience = false)
                 claims.ToArray(), //I add the claims to the token!
                 DateTime.Now, // notBefore
-                DateTime.Now.AddMinutes(10))); // expires
+                DateTime.Now.AddHours(8))); // expires
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }

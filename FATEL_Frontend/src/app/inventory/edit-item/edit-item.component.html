@@ -3,65 +3,72 @@
     <div class="action-panel">
 
       <mat-form-field appearance="fill">
-        <mat-label>Name</mat-label>
+        <mat-label>{{'EDIT-ITEM-COMPONENT.NAME-FIELD.LABEL' | translate}}</mat-label>
         <input formControlName="name" matInput>
         <mat-error *ngIf="itemForm.get('name')?.hasError('required')">
-          Name is required
+          {{'EDIT-ITEM-COMPONENT.NAME-FIELD.ERROR.REQUIRED' | translate}}
         </mat-error>
       </mat-form-field>
       <br>
 
       <!-- TODO: Add Select one... or something similar as default value -->
       <mat-form-field appearance="fill">
-        <mat-label>Unit</mat-label>
+        <mat-label>{{'EDIT-ITEM-COMPONENT.UNIT-FIELD.LABEL' | translate}}</mat-label>
         <mat-select formControlName="unit">
-          <mat-option *ngIf="!itemForm.get('name')" [value]=null>Unit</mat-option>
+          <mat-option *ngIf="!itemForm.get('name')" [value]=null>{{'EDIT-ITEM-COMPONENT.UNIT-FIELD.DEFAULT' | translate}}</mat-option>
           <mat-option *ngFor="let unit of units | keys" [value]=units[unit]>
-            {{unit}}
+            {{unit | translate}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="itemForm.get('unit')?.hasError('required')">
-          Unit is required
+          {{'EDIT-ITEM-COMPONENT.UNIT-FIELD.ERROR.REQUIRED' | translate}}
         </mat-error>
       </mat-form-field>
       <br>
 
       <ng-container *ngIf="shouldValidateLength()">
         <mat-form-field appearance="fill">
-          <mat-label>Length</mat-label>
+          <mat-label>{{'EDIT-ITEM-COMPONENT.LENGTH-FIELD.LABEL' | translate}}</mat-label>
           <input formControlName="length" type="number" matInput>
           <mat-error *ngIf="itemForm.get('length')?.hasError('required')">
-            Length is required
+            {{'EDIT-ITEM-COMPONENT.LENGTH-FIELD.ERROR.REQUIRED' | translate}}
           </mat-error>
           <mat-error *ngIf="itemForm.get('length')?.hasError('greaterThan')">
-            Length must be greater than 0
+            {{'EDIT-ITEM-COMPONENT.LENGTH-FIELD.ERROR.GREATER-THAN-ZERO' | translate}}
+          </mat-error>
+          <mat-error *ngIf="itemForm.get('length')?.hasError('pattern')">
+            {{'EDIT-ITEM-COMPONENT.LENGTH-FIELD.ERROR.THREE-DECIMALS' | translate}}
           </mat-error>
         </mat-form-field>
       </ng-container>
+      <br>
 
       <ng-container *ngIf="shouldValidateWidth()">
         <mat-form-field appearance="fill">
-          <mat-label>Width</mat-label>
+          <mat-label>{{'EDIT-ITEM-COMPONENT.WIDTH-FIELD.LABEL' | translate}}</mat-label>
           <input formControlName="width" type="number" matInput>
           <mat-error *ngIf="itemForm.get('width')?.hasError('required')">
-            Width is required
+            {{'EDIT-ITEM-COMPONENT.WIDTH-FIELD.ERROR.REQUIRED' | translate}}
           </mat-error>
           <mat-error *ngIf="itemForm.get('width')?.hasError('greaterThan')">
-            Width must be greater than 0
+            {{'EDIT-ITEM-COMPONENT.WIDTH-FIELD.ERROR.GREATER-THAN-ZERO' | translate}}
+          </mat-error>
+          <mat-error *ngIf="itemForm.get('width')?.hasError('pattern')">
+            {{'EDIT-ITEM-COMPONENT.WIDTH-FIELD.ERROR.THREE-DECIMALS' | translate}}
           </mat-error>
         </mat-form-field>
       </ng-container>
       <br>
 
       <mat-form-field appearance="fill">
-        <mat-label>Notes</mat-label>
+        <mat-label>{{'EDIT-ITEM-COMPONENT.NOTE-FIELD.LABEL' | translate}}</mat-label>
         <textarea formControlName="note" matInput></textarea>
       </mat-form-field>
       <br>
 
       <div class="action-buttons-container">
-        <button [disabled]="itemForm.invalid && restrictedButtonUsage" class="edit-item-button" mat-button (click)="editItem()" [innerHTML]="text" [class.confirmEdit]="!confirmEdit"></button>
-        <button class="close-component-button" mat-button (click)="closeEditItemComponent()">CLOSE</button>
+        <button [disabled]="itemForm.invalid && restrictedButtonUsage" class="edit-item-button" mat-button (click)="editItem()" [innerHTML]="text | translate" [class.confirmEdit]="!confirmEdit"></button>
+        <button class="close-component-button" mat-button (click)="closeEditItemComponent()">{{'EDIT-ITEM-COMPONENT.CLOSE-BUTTON.LABEL' | translate}}</button>
       </div>
 
     </div>

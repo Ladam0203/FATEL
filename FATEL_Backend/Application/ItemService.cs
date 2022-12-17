@@ -1,11 +1,8 @@
-using System.ComponentModel.DataAnnotations;
-using System.Reflection.Metadata.Ecma335;
 using Application.DTOs;
 using Application.Interfaces;
 using AutoMapper;
 using Domain;
 using FluentValidation;
-using Newtonsoft.Json;
 using ValidationException = FluentValidation.ValidationException;
 
 namespace Application;
@@ -16,13 +13,16 @@ public class ItemService : IItemService
     private IMapper _mapper;
     private IValidator<PostItemDTO> _postValidator;
     private IValidator<PutItemDTO> _putValidator;
+    private IValidator<PatchItemNameDTO> _patchValidator;
     private readonly IValidator<Movement> _movementValidator;
 
-    public ItemService(IRepositoryFacade repository, IMapper mapper, IValidator<PostItemDTO> postValidator, IValidator<PutItemDTO> putValidator, IValidator<Movement> movementValidator)
+    public ItemService(IRepositoryFacade repository, IMapper mapper, IValidator<PostItemDTO> postValidator, 
+        IValidator<PutItemDTO> putValidator, IValidator<PatchItemNameDTO> patchValidator, IValidator<Movement> movementValidator)
     {
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         _postValidator = postValidator ?? throw new ArgumentNullException(nameof(postValidator));
         _putValidator = putValidator ?? throw new ArgumentNullException(nameof(putValidator));
+        _patchValidator = patchValidator ?? throw new ArgumentNullException(nameof(patchValidator));
         _movementValidator = movementValidator ?? throw new ArgumentNullException(nameof(movementValidator));
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
     }
@@ -74,7 +74,18 @@ public class ItemService : IItemService
         Item item = _mapper.Map<Item>(dto);
         return _repository.UpdateItem(item);
     }
-    
+    public List<Item> UpdateNameRange(List<PatchItemNameDTO> dtos)
+    {
+        foreach (var dto in dtos)
+        {
+            var validation = _patchValidator.Validate(dto);
+            if (!validation.IsValid)
+                throw new ValidationException(validation.ToString());
+        }
+        List<Item> items = _mapper.Map<List<Item>>(dtos);
+        return _repository.UpdateItemRange(items);
+    }
+
     public Item UpdateQuantity(int id, Movement movement)
     {
         if (id != movement.Item.Id)

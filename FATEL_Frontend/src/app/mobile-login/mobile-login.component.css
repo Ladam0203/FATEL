@@ -1,0 +1,66 @@
+.login-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+
+  background-color: var(--white);
+}
+
+.welcome-wrapper {
+  text-align: center;
+  padding-top: 32px;
+  padding-bottom: 16px;
+  background-image: url("src/assets/blue-skies.png");
+}
+
+.welcome-text {
+  font-family: "Nunito Sans", serif !important;
+  font-size: 2.2rem;
+  color: var(--white);
+}
+
+.VHF-font {
+  font-family: "Very Happy Family", serif !important;
+  font-size: 3.2rem;
+}
+
+.login-wrapper {
+  margin: 32px auto 0 auto;
+  display: flex;
+  flex-direction: row;
+  width: 280px;
+}
+
+.login-form-wrapper {
+  width: 100%;
+}
+
+.login-form-field, .login-button {
+  font-family: "Nunito Sans", serif !important;
+  width: 100%;
+}
+
+.login-button {
+  height: 48px;
+  color: var(--white);
+  background-color: dodgerblue;
+  font-size: 16px;
+}
+
+.login-button mat-icon {
+  margin-top: -2px;
+}
+
+.workers {
+  margin-top: 48px;
+  background-color: var(--white);
+}
+
+.workers img {
+  display: -webkit-box;
+  margin-left: auto;
+  padding: 12px;
+}
+

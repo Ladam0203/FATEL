@@ -68,7 +68,8 @@ public class WarehouseServiceTest
         Assert.Equal("Value cannot be null. (Parameter 'postValidator')", e.Message);
         Assert.Null(warehouseService);
     }
-    
+  
+    [Fact]
     public void CreateWarehouseService_WithNullPutValidator_ExpectArgumentNullException()
     {
         //Arrange
@@ -109,7 +110,6 @@ public class WarehouseServiceTest
         //Assert
         Assert.NotNull(warehouseService);
         Assert.True(warehouseService is WarehouseService);
-        //TODO: Test if the parameters were truly injected
     }
 
     [Fact]

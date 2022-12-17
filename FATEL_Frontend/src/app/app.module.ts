@@ -24,13 +24,27 @@ import {MatSidenavContainerComponent} from './mat-sidenav-container/mat-sidenav-
 import {ToolBarComponent} from './inventory/tool-bar/tool-bar.component';
 import {StoreModule} from '@ngrx/store';
 import {FilterBarComponent} from './inventory/filter-bar/filter-bar.component';
-import {searchbarQueryReducer} from "./inventory/states/filter-bar.actions";
+import {searchbarQueryReducer} from "./states/filter-bar.actions";
 import {CategoriesComponent} from './inventory/categories/categories.component';
 import {EditItemComponent} from './inventory/edit-item/edit-item.component';
-import {AppReducer} from "./inventory/states/app.states";
+import {AppReducer} from "./states/app.states";
 import {RecordMovementComponent} from './inventory/record-movement/record-movement.component';
 import {DiaryComponent} from './diary/diary.component';
 import {MatSortModule} from "@angular/material/sort";
+import { WarehouseActionBarComponent } from './warehouse-action-bar/warehouse-action-bar.component';
+import { NoWarehouseComponent } from './no-warehouse/no-warehouse.component';
+import { LoginComponent } from './login/login.component';
+import { FatelComponent } from './fatel/fatel.component';
+import {RouterOutlet} from "@angular/router";
+import {AppRoutingModule} from "./app-routing.module";
+
+// import ngx-translate and the http loader
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient} from '@angular/common/http';
+import { MobileComponent } from './mobile/mobile.component';
+import { MobileLoginComponent } from './mobile-login/mobile-login.component';
+import { MobileInventoryComponent } from './mobile-inventory/mobile-inventory.component';
 
 @NgModule({
   declarations: [
@@ -46,27 +60,48 @@ import {MatSortModule} from "@angular/material/sort";
     EditItemComponent,
     RecordMovementComponent,
     DiaryComponent,
+    WarehouseActionBarComponent,
+    NoWarehouseComponent,
+    LoginComponent,
+    FatelComponent,
+    MobileComponent,
+    MobileLoginComponent,
+    MobileInventoryComponent,
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        NgbModule,
-        NgMaterialModule,
-        MatTableModule,
-        MatSidenavModule,
-        MatCheckboxModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatOptionModule,
-        MatSelectModule,
-        MatAutocompleteModule,
-        StoreModule.forRoot({searchbarQuery: searchbarQueryReducer, appState: AppReducer}),
-        MatSortModule,
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    NgbModule,
+    NgMaterialModule,
+    MatTableModule,
+    MatSidenavModule,
+    MatCheckboxModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    StoreModule.forRoot({searchbarQuery: searchbarQueryReducer, appState: AppReducer}),
+    MatSortModule,
+    RouterOutlet,
+    AppRoutingModule,
+    TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+          }
+        })
+  ],
+
   providers: [MatSnackBar, Overlay],
   bootstrap: [AppComponent],
 })
 export class AppModule {
+}
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
 }

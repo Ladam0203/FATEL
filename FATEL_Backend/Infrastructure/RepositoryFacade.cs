@@ -1,4 +1,3 @@
-using Application.DTOs;
 using Application.Interfaces;
 using Domain;
 
@@ -10,6 +9,7 @@ public class RepositoryFacade : IRepositoryFacade
     private readonly IItemRepository _itemRepository;
     private readonly IEntryRepository _entryRepository;
     private readonly IWarehouseRepository _warehouseRepository;
+    private readonly IUserRepository _userRepository;
 
     public RepositoryFacade(AppDbContext context)
     {
@@ -18,17 +18,14 @@ public class RepositoryFacade : IRepositoryFacade
         _itemRepository = new ItemRepository(context);
         _entryRepository = new EntryRepository(context);
         _warehouseRepository = new WarehouseRepository(context);
-        
-        //rebuild db
-        //_context.Database.EnsureDeleted();
-        //_context.Database.EnsureCreated();
+        _userRepository = new UserRepository(context);
     }
     
     public Item UpdateQuantityAndRecord(Item item, Entry entry)
     {
         using (var dbContextTransaction = _context.Database.BeginTransaction())
         {
-            var newItem = _itemRepository.Update(item);
+            var newItem = _itemRepository.UpdateQuantity(item);
             
             var newEntry = _entryRepository.Create(entry);
 
@@ -83,6 +80,12 @@ public class RepositoryFacade : IRepositoryFacade
     {
         return _itemRepository.Update(item);
     }
+
+    public List<Item> UpdateItemRange(List<Item> items)
+    {
+        return _itemRepository.UpdateNameRange(items);
+    }
+
     public Item DeleteItem(int id)
     {
         return _itemRepository.Delete(id);
@@ -134,5 +137,10 @@ public class RepositoryFacade : IRepositoryFacade
     public Warehouse DeleteWarehouse(int id)
     {
         return _warehouseRepository.Delete(id);
+    }
+
+    public User GetUserByUsername(string username)
+    {
+        return _userRepository.GetUserByUsername(username);
     }
 }

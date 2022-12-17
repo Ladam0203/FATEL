@@ -1,8 +1,5 @@
 ﻿using Application;
-using Application.DTOs;
 using Application.Interfaces;
-using Application.Validators;
-using AutoMapper;
 using Domain;
 using Moq;
 
@@ -36,7 +33,6 @@ public class EntryServiceTest
         //Assert
         Assert.NotNull(entryService);
         Assert.True(entryService is EntryService);
-        //TODO: Test if the parameters were truly injected
     }
 
     [Fact]

@@ -1,0 +1,15 @@
+<div class="warehouse-action-bar">
+  <h2 class="warehouse-header">{{toolbarHeader}}</h2>
+  <hr class="divider">
+  <h2 *ngIf="!editing" class="warehouse-header fs-2">{{warehouse?.name}}</h2>
+  <input *ngIf="editing" value="{{warehouse?.name}}" class="edit-field fs-5" [(ngModel)]="name"
+         [ngStyle]="{'width.ch': name!.length > 32 ? 32 : name!.length, 'min-width.ch': 10}">
+  <div class="warehouse-action-wrapper">
+    <button mat-button class="warehouse-action-button fs-5" (click)="editing ? editWarehouse() : onEditWarehouse()" [class.editing]="editing">
+      <mat-icon [innerHTML]="editing ? 'check' : 'edit' ">check</mat-icon>
+    </button>
+    <button *ngIf="!editing" mat-button class="warehouse-action-button fs-5 delete-warehouse-button" (click)="deleteWarehouse()" [class.deleting]="deleting">
+      <mat-icon [innerHTML]="deleting ? 'check' : 'delete' "></mat-icon>
+    </button>
+  </div>
+</div>

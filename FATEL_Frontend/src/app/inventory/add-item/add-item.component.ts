@@ -10,7 +10,7 @@ import {
 } from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {greaterThanDirective} from "../../validators/greaterThan.directive";
-import {close} from "../states/app.states";
+import {close} from "../../states/app.states";
 
 
 @Component({
@@ -35,7 +35,7 @@ export class AddItemComponent implements OnInit {
 
   restrictedButtonUsage: boolean = false;
 
-  text: string = 'ADD ITEM';
+  text: string = 'ADD-ITEM-COMPONENT.ADD-BUTTON.LABEL.DEFAULT';
   confirmAdd: boolean = true;
 
   appState = this.store.select('appState');
@@ -59,14 +59,17 @@ export class AddItemComponent implements OnInit {
         Validators.required
       ]),
       length: new FormControl(null, [
+        Validators.pattern(/^\d*(?:[.,]\d{1,3})?$/),
         greaterThanDirective(),
         Validators.required
       ]),
       width: new FormControl(null, [
+        Validators.pattern(/^\d*(?:[.,]\d{1,3})?$/),
         greaterThanDirective(),
         Validators.required
       ]),
       quantity: new FormControl(0, [
+        Validators.pattern(/^\d*$/),
         Validators.min(0),
         Validators.required,
       ]),
@@ -101,7 +104,7 @@ export class AddItemComponent implements OnInit {
     }
 
     if (this.confirmAdd) {
-      this.text = 'CONFIRM';
+      this.text = 'ADD-ITEM-COMPONENT.ADD-BUTTON.LABEL.CONFIRM';
       this.confirmAdd = false;
       return;
     }

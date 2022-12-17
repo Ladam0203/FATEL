@@ -1,24 +1,7 @@
-<div class="warehouse-action-bar">
-  <h2 class="warehouse-header">Inventory</h2>
-  <hr class="divider">
-  <h2 *ngIf="!editing" class="warehouse-header fs-2">{{warehouse?.name}}</h2>
-  <input *ngIf="editing" value="{{warehouse?.name}}" class="edit-field fs-5" [(ngModel)]="name">
-  <div class="warehouse-action-wrapper">
-    <button mat-button class="warehouse-action-button fs-5" (click)="editing ? editWarehouse() : onEditWarehouse()" [class.editing]="editing">
-      <mat-icon [innerHTML]="editing ? 'check' : 'edit' "></mat-icon>
-    </button>
-    <button *ngIf="!editing" mat-button class="warehouse-action-button fs-5 delete-warehouse-button" (click)="deleteWarehouse()" [class.deleting]="deleting">
-      <mat-icon [innerHTML]="deleting ? 'check' : 'delete' "></mat-icon>
-    </button>
-  </div>
-</div>
+<app-warehouse-action-bar toolbarHeader="{{'INVENTORY' | translate}}"></app-warehouse-action-bar>
 <div class="action-bar">
-  <button mat-button class="secondary-button fs-5">
-    Export
-  </button>
-
-  <button mat-button class="secondary-button fs-5">
-    Import
+  <button mat-button class="secondary-button fs-5" (click)="exportPDF()">
+    {{ 'TOOL-BAR-COMPONENT.EXPORT-BUTTON.LABEL' | translate }}
   </button>
 
   <button mat-button class="main-button fs-5" (click)="openAddItemComponent()">
@@ -28,6 +11,6 @@
       aria-label="add icon"
       fontIcon="add"
     ></mat-icon>
-    New Item
+    {{ 'TOOL-BAR-COMPONENT.NEW-ITEM-BUTTON.LABEL' | translate }}
   </button>
 </div>

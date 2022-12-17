@@ -1,0 +1,58 @@
+<div class="inventory-container">
+
+  <div class="navigation-wrapper">
+    <div class="warehouse-selector-container">
+      <button mat-icon-button
+              class="warehouse-selector-button"
+              (click)="onSelectWarehouse()">
+        <mat-icon>home</mat-icon>
+      </button>
+
+      <h2 class="fs-1 selected-warehouse-header">{{warehouse!.name}}</h2>
+    </div>
+
+    <app-filter-bar class="filter-bar"></app-filter-bar>
+  </div>
+
+
+  <div class="categories-container">
+    <mat-accordion multi>
+
+      <mat-expansion-panel *ngFor="let category of categories | filter: 'name' : ((searchbarQuery | async) ?? '')">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="fs-5 panel-title">
+            {{category.name}}
+          </mat-panel-title>
+          <mat-panel-description class="fs-5 panel-description">
+            {{category.getDescription() }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <table mat-table [dataSource]="category.items">
+          <!-- Width Column -->
+          <ng-container matColumnDef="width">
+            <th class="fs-5 ta-center" mat-header-cell
+                *matHeaderCellDef>{{'CATEGORIES-COMPONENT.ITEMS-TABLE.WIDTH' | translate}}</th>
+            <td class="fs-5 ta-center" mat-cell *matCellDef="let item"> {{item.width}} </td>
+          </ng-container>
+
+          <!-- Length Column -->
+          <ng-container matColumnDef="length">
+            <th class="fs-5 ta-center" mat-header-cell
+                *matHeaderCellDef>{{'CATEGORIES-COMPONENT.ITEMS-TABLE.LENGTH' | translate}}</th>
+            <td class="fs-5 ta-center" mat-cell *matCellDef="let item"> {{item.length}} </td>
+          </ng-container>
+
+          <!-- Quantity Column -->
+          <ng-container matColumnDef="quantity">
+            <th class="fs-5 ta-center" mat-header-cell
+                *matHeaderCellDef>{{'CATEGORIES-COMPONENT.ITEMS-TABLE.QUANTITY' | translate}}</th>
+            <td class="fs-5 ta-center" mat-cell *matCellDef="let item"> {{item.quantity}} </td>
+          </ng-container>
+          <tr class="fs-5" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr class="fs-5" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

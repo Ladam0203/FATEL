@@ -1,0 +1,205 @@
+{
+  "Meter": "Meter",
+  "SquareMeter": "Square meter",
+  "Piece": "Piece",
+  "INVENTORY": "Inventory",
+  "DIARY": "Diary",
+
+
+  "DIARY-COMPONENT":
+  {
+    "EXPORT-BUTTON": {
+      "LABEL": "Export"
+    },
+    "YEAR-FILTER": {
+      "PLACEHOLDER": "Year",
+      "ALL": "All"
+    },
+    "ENTRIES-TABLE": {
+      "TIMESTAMP": "Timestamp",
+      "NAME": "Name",
+      "CHANGE": "Change",
+      "AFTER": "After"
+    }
+  },
+  "ADD-ITEM-COMPONENT": {
+    "NAME-FIELD" : {
+      "LABEL": "Name",
+      "ERROR": {
+        "REQUIRED": "Name is required"
+      }
+    },
+    "UNIT-FIELD": {
+      "LABEL": "Unit",
+      "DEFAULT": "Unit",
+      "ERROR": {
+        "REQUIRED": "Unit is required"
+      }
+    },
+    "QUANTITY-FIELD": {
+      "LABEL": "Quantity",
+      "ERROR": {
+        "REQUIRED": "Quantity is required",
+        "GREATER-THAN-OR-ZERO": "Quantity must be greater than or equal to 0",
+        "WHOLE-NUMBER": "Quantity must be a whole number"
+      }
+    },
+    "LENGTH-FIELD": {
+      "LABEL": "Length",
+      "ERROR": {
+        "REQUIRED": "Length is required",
+        "GREATER-THAN-ZERO": "Length must be greater than 0",
+        "THREE-DECIMALS": "Length must not contain more than 3 decimal places"
+      }
+    },
+    "WIDTH-FIELD": {
+      "LABEL": "Width",
+      "ERROR": {
+        "REQUIRED": "Width is required",
+        "GREATER-THAN-ZERO": "Width must be greater than 0",
+        "THREE-DECIMALS": "Width must not contain more than 3 decimal places"
+      }
+    },
+    "NOTE-FIELD": {
+      "LABEL": "Note"
+    },
+    "ADD-BUTTON": {
+      "LABEL": {
+        "DEFAULT": "ADD",
+        "CONFIRM": "CONFIRM"
+      }
+    },
+    "CLOSE-BUTTON": {
+      "LABEL": "Close"
+    }
+  },
+  "CATEGORIES-COMPONENT": {
+    "ITEMS-TABLE": {
+      "NAME": "Name",
+      "WIDTH": "Width",
+      "LENGTH": "Length",
+      "UNIT": "Unit",
+      "QUANTITY": "Quantity",
+      "NOTE": "Note"
+    }
+  },
+  "EDIT-ITEM-COMPONENT": {
+    "NAME-FIELD" : {
+      "LABEL": "Name",
+      "ERROR": {
+        "REQUIRED": "Name is required"
+      }
+    },
+    "UNIT-FIELD": {
+      "LABEL": "Unit",
+      "DEFAULT": "Unit",
+      "ERROR": {
+        "REQUIRED": "Unit is required"
+      }
+    },
+    "LENGTH-FIELD": {
+      "LABEL": "Length",
+      "ERROR": {
+        "REQUIRED": "Length is required",
+        "GREATER-THAN-ZERO": "Length must be greater than 0",
+        "THREE-DECIMALS": "Length must not contain more than 3 decimal places"
+      }
+    },
+    "WIDTH-FIELD": {
+      "LABEL": "Width",
+      "ERROR": {
+        "REQUIRED": "Width is required",
+        "GREATER-THAN-ZERO": "Width must be greater than 0",
+        "THREE-DECIMALS": "Width must not contain more than 3 decimal places"
+      }
+    },
+    "NOTE-FIELD": {
+      "LABEL": "Note"
+    },
+    "EDIT-BUTTON": {
+      "LABEL": {
+        "DEFAULT": "SAVE",
+        "CONFIRM": "CONFIRM"
+      }
+    },
+    "CLOSE-BUTTON": {
+      "LABEL": "Close"
+    }
+  },
+  "FILTER-BAR-COMPONENT" : {
+    "SEARCH-BAR": {
+      "PLACEHOLDER": "Search"
+    }
+  },
+  "RECORD-MOVEMENT-COMPONENT" : {
+    "CHANGE-FIELD" : {
+      "LABEL": "Change",
+      "ERROR": {
+        "REQUIRED": "Change is required",
+        "GREATER-THAN-ZERO": "Change must be greater than 0",
+        "WHOLE-NUMBER": "Change must be a whole number"
+      }
+    },
+    "IN-BUTTON": {
+      "LABEL": "IN"
+    },
+    "OUT-BUTTON": {
+      "LABEL": "OUT"
+    },
+    "CLOSE-BUTTON": {
+      "LABEL": "Close"
+    }
+  },
+  "TOOL-BAR-COMPONENT": {
+    "EXPORT-BUTTON": {
+      "LABEL": "Export"
+    },
+    "NEW-ITEM-BUTTON": {
+      "LABEL": "New item"
+    }
+  },
+  "NO-WAREHOUSE-COMPONENT": {
+    "MESSAGE": "Start by creating a warehouse on the left"
+  },
+  "REPORT": {
+    "INVENTORY": {
+      "NAME": "Name",
+      "QUANTITY": "Quantity",
+      "UNIT": "Unit"
+    },
+    "DIARY": {
+      "TIMESTAMP": "Timestamp",
+      "NAME": "Name",
+      "CHANGE": "Change",
+      "AFTER": "After"
+    }
+  },
+  "LOGIN-COMPONENT": {
+    "WELCOME-TEXT": "Welcome to",
+    "LOGIN-TEXT": "Please, log in.",
+    "USERNAME-FIELD": {
+      "LABEL": "Username"
+    },
+    "PASSWORD-FIELD": {
+      "LABEL": "Password"
+    },
+    "ENTER-BUTTON": {
+      "LABEL": "Login"
+    }
+  },
+  "API-SERVICE":
+  {
+    "SNACKBAR": {
+      "ITEM-CREATED": "Item created successfully",
+      "NO-CONNECTION": "Could not connect to server",
+      "INVALID-TOKEN": "Please login to continue",
+      "SAME-ITEM-EXISTS": "Similar item already exists",
+      "INTERNAL-SERVER-ERROR": "Internal server error",
+      "INCORRECT-CREDENTIALS": "Incorrect username or password",
+      "WAREHOUSE-CREATED": "Warehouse created successfully"
+    }
+  },
+  "MOBILE": {
+    "SELECT-WAREHOUSE": "Select a warehouse"
+  }
+}

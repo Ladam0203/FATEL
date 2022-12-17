@@ -4,11 +4,13 @@ namespace Application.Interfaces;
 
 public interface IItemRepository
 {
-    public Item Create(Item item);
-    public Item Read(int id);
-    public List<Item> ReadAll();
-    public Item Update(Item item);
-    public Item Delete(int id);
-    public double ReadTotalQuantityOf(Item item);
-    public bool DoesIdenticalExist(Item item);
+    Item Create(Item item);
+    Item Read(int id);
+    List<Item> ReadAll();
+    Item Update(Item item);
+    Item UpdateQuantity(Item item);
+    List<Item> UpdateNameRange(List<Item> items);
+    Item Delete(int id);
+    double ReadTotalQuantityOf(Item item);
+    bool DoesIdenticalExist(Item item);
 }

@@ -1,12 +1,2 @@
-<app-mat-sidenav-container
-  class="sidenav-container"
-  (showInventoryEvent)="onShowInventory($event)"
-></app-mat-sidenav-container>
-
-<div class="main-container">
-  <div class="content-container">
-    <inventory *ngIf="showInventory"></inventory>
-    <diary *ngIf="!showInventory"></diary>
-  </div>
-</div>
+<router-outlet></router-outlet>
 

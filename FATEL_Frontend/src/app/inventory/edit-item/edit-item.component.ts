@@ -5,8 +5,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ItemService} from "../../services/item.service";
 import {Store} from "@ngrx/store";
 import {greaterThanDirective} from "../../validators/greaterThan.directive";
-import {UpdateItemDTO} from "../../entities/DTOs/UpdateItemDTO";
-import {close} from "../states/app.states";
+import {PutItemDTO} from "../../entities/DTOs/PutItemDTO";
+import {close} from "../../states/app.states";
 
 @Component({
   selector: 'app-edit-item',
@@ -29,7 +29,7 @@ export class EditItemComponent implements OnInit {
 
   restrictedButtonUsage: boolean = false;
 
-  text: string = 'APPLY CHANGES';
+  text: string = 'EDIT-ITEM-COMPONENT.EDIT-BUTTON.LABEL.DEFAULT';
   confirmEdit: boolean = true;
 
   appState = this.store.select('appState');
@@ -49,10 +49,12 @@ export class EditItemComponent implements OnInit {
         Validators.required
       ]),
       length: new FormControl(null, [
+        Validators.pattern(/^\d*(?:[.,]\d{1,3})?$/),
         greaterThanDirective(),
         Validators.required
       ]),
       width: new FormControl(null, [
+        Validators.pattern(/^\d*(?:[.,]\d{1,3})?$/),
         greaterThanDirective(),
         Validators.required
       ]),
@@ -110,7 +112,7 @@ export class EditItemComponent implements OnInit {
     }
 
     if (this.confirmEdit) {
-      this.text = 'CONFIRM';
+      this.text = 'EDIT-ITEM-COMPONENT.EDIT-BUTTON.LABEL.CONFIRM';
       this.confirmEdit = false;
       return;
     }
@@ -118,7 +120,7 @@ export class EditItemComponent implements OnInit {
     if (!this.editingItem?.id)
       return;
 
-    let updateItem: UpdateItemDTO = {
+    let updateItem: PutItemDTO = {
       id: this.editingItem?.id,
       name: this.itemForm.get('name')?.value,
       unit: this.itemForm.get('unit')?.value,

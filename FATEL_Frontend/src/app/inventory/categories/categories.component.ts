@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Unit} from "../../entities/units";
 import {Category} from "../../entities/category";
-import {selectSearchbarQueryValue} from "../states/filter-bar.actions";
+import {selectSearchbarQueryValue} from "../../states/filter-bar.actions";
 import {Store} from "@ngrx/store";
 import {ItemService} from "../../services/item.service";
 import {Item} from "../../entities/item";
@@ -10,8 +10,8 @@ import {
   setShowEditItemComponent,
   setShowRecordMovementComponent,
   addItemAction,
-  editItemAction, deleteItemAction, addEntryAction,
-} from "../states/app.states";
+  editItemAction, deleteItemAction, addEntryAction
+} from "../../states/app.states";
 import {Warehouse} from "../../entities/warehouse";
 
 @Component({
@@ -43,6 +43,9 @@ export class CategoriesComponent implements OnInit {
   confirmDelete: boolean = true;
   deletingId: number | undefined;
 
+  editingCategory: Category | undefined;
+  categoryName = "";
+
   constructor(private itemService: ItemService, private readonly store: Store<any>) {
   }
 
@@ -55,9 +58,12 @@ export class CategoriesComponent implements OnInit {
 
       this.selectedItem = state.selectedItem;
 
-      if (this.items != state.selectedWarehouse.inventory) {
-        this.items = state.selectedWarehouse.inventory;
-        this.categoriseItems();
+      if (state.selectedWarehouse)
+      {
+        if (this.items != state.selectedWarehouse.inventory) {
+          this.items = state.selectedWarehouse.inventory;
+          this.categoriseItems();
+        }
       }
 
       this.warehouse = state.selectedWarehouse;
@@ -125,5 +131,43 @@ export class CategoriesComponent implements OnInit {
 
   openRecordMovementComponent(itemToRecordMovementOn: Item) {
     this.store.dispatch(setShowRecordMovementComponent({item: itemToRecordMovementOn}));
+  }
+
+
+  editCategory() {
+    if (!this.editingCategory)
+      return;
+
+    if (!this.editingCategory.name) {
+      return;
+    }
+    if (this.editingCategory.name == '') {
+      return;
+    }
+
+    let patchItemDTOs = this.editingCategory.items.map(item => {
+      return {
+        id: item.id,
+        name: this.categoryName
+      }
+    });
+    this.itemService.updateNameRange(patchItemDTOs).then(data => {
+      for (const item of data) {
+        this.store.dispatch(editItemAction({item: item}));
+      }
+    });
+
+    this.editingCategory = undefined;
+    //TODO: Save the category and update the NgRx state
+  }
+
+  onEditCategory(category: Category) {
+    this.editingCategory = category;
+    this.categoryName = category.name;
+  }
+
+  onStopEditCategory() {
+    this.editingCategory = undefined;
+    this.categoryName = "";
   }
 }

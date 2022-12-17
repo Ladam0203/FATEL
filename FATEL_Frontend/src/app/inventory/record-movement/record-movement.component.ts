@@ -5,7 +5,7 @@ import {ItemService} from "../../services/item.service";
 import {Store} from "@ngrx/store";
 import {Item} from "../../entities/item";
 import {Movement} from "../../entities/DTOs/Movement";
-import {close} from "../states/app.states";
+import {close} from "../../states/app.states";
 
 @Component({
   selector: 'app-record-movement',
@@ -35,6 +35,7 @@ export class RecordMovementComponent implements OnInit {
   ngOnInit(): void {
     this.movementForm = new FormGroup({
       change: new FormControl('', [
+        Validators.pattern(/^\d*$/),
         Validators.required,
         greaterThanDirective()
       ])

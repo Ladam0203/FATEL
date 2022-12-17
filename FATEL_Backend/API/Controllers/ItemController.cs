@@ -2,11 +2,12 @@ using Application.DTOs;
 using Application.Interfaces;
 using Domain;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-
+[Authorize]
 [ApiController]
 [Route("api/[Controller]")]
 public class ItemController : ControllerBase
@@ -113,7 +114,29 @@ public class ItemController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
-    
+
+    [HttpPatch]
+    [Route("UpdateNameRange")]
+    public ActionResult<List<Item>> UpdateNameRange(List<PatchItemNameDTO> dtos)
+    {
+        try
+        {
+            return Ok(_itemService.UpdateNameRange(dtos));
+        }
+        catch (ValidationException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (KeyNotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e.Message);
+        }
+    }
+
     [HttpPut]
     [Route("UpdateQuantity/{id}")]
     public ActionResult<Item> UpdateQuantity([FromRoute] int id, [FromBody] Movement movement)

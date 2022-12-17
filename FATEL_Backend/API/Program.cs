@@ -36,6 +36,7 @@ var mapper = new MapperConfiguration(configuration =>
 {
     configuration.CreateMap<PutItemDTO, Item>();
     configuration.CreateMap<PostItemDTO, Item>();
+    configuration.CreateMap<PatchItemNameDTO, Item>();
     configuration.CreateMap<PostWarehouseDTO, Warehouse>();
     configuration.CreateMap<PutWarehouseDTO, Warehouse>();
 }).CreateMapper();
@@ -73,8 +74,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.MapControllers();
 

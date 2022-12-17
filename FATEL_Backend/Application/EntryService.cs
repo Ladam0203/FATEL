@@ -1,8 +1,5 @@
-﻿using Application.DTOs;
-using Application.Interfaces;
-using AutoMapper;
+﻿using Application.Interfaces;
 using Domain;
-using FluentValidation;
 
 namespace Application;
 
@@ -15,8 +12,6 @@ public class EntryService : IEntryService
     {
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
     }
-
-
     public List<Entry> ReadAll()
     {
         return _repository.ReadAllEntries();

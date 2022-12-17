@@ -1,11 +1,28 @@
 <mat-accordion multi class="inventory">
-  <mat-expansion-panel *ngFor="let category of categories | filter: 'name' : ((searchbarQuery | async) ?? '')">
+
+  <mat-expansion-panel *ngFor="let category of categories | filter: 'name' : ((searchbarQuery | async) ?? '')" (closed)="onStopEditCategory()" #mep=matExpansionPanel>
     <mat-expansion-panel-header>
       <mat-panel-title class="fs-5">
-        {{category.name}}
+        <div *ngIf="category !== editingCategory">
+          {{category.name}}
+          <button mat-button class="category-action-button" *ngIf="mep.expanded  && category.items.length > 1" (click)="$event.stopPropagation();onEditCategory(category)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="category === editingCategory">
+          <input class="edit-field fs-5" type="text" value="{{category.name}}" [(ngModel)]="categoryName"
+                 (click)="$event.stopPropagation();"
+                 (keydown.space)="$event.stopPropagation();"
+                 (keydown.enter)="$event.stopPropagation();editCategory()"
+                 [ngStyle]="{'width.ch': categoryName.length > 32 ? 32 : categoryName.length, 'min-width.ch': 10}"
+          >
+          <button mat-button class="category-action-button editing-category" (click)=$event.stopPropagation();editCategory()>
+            <mat-icon>check</mat-icon>
+          </button>
+        </div>
       </mat-panel-title>
       <mat-panel-description class="fs-5 panel-description">
-        {{category.getDescription()}}
+        {{category.getDescription() }}
       </mat-panel-description>
     </mat-expansion-panel-header>
 
@@ -13,37 +30,37 @@
 
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Name</th>
+        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>{{'CATEGORIES-COMPONENT.ITEMS-TABLE.NAME' | translate}}</th>
         <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.name}} </td>
       </ng-container>
 
       <!-- Width Column -->
       <ng-container matColumnDef="width">
-        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Width</th>
+        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>{{'CATEGORIES-COMPONENT.ITEMS-TABLE.WIDTH' | translate}}</th>
         <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.width}} </td>
       </ng-container>
 
       <!-- Length Column -->
       <ng-container matColumnDef="length">
-        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Length</th>
+        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>{{'CATEGORIES-COMPONENT.ITEMS-TABLE.LENGTH' | translate}}</th>
         <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.length}} </td>
       </ng-container>
 
       <!-- Unit Column -->
       <ng-container matColumnDef="unit">
-        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Unit</th>
-        <td class="fs-5 ta-left" mat-cell *matCellDef="let item;"> {{units[item.unit]}} </td>
+        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>{{'CATEGORIES-COMPONENT.ITEMS-TABLE.UNIT' | translate}}</th>
+        <td class="fs-5 ta-left" mat-cell *matCellDef="let item;"> {{units[item.unit] | translate}} </td>
       </ng-container>
 
       <!-- Quantity Column -->
       <ng-container matColumnDef="quantity">
-        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Quantity</th>
+        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>{{'CATEGORIES-COMPONENT.ITEMS-TABLE.QUANTITY' | translate}}</th>
         <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.quantity}} </td>
       </ng-container>
 
       <!-- Note Column -->
       <ng-container matColumnDef="note">
-        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>Note</th>
+        <th class="fs-5 ta-left" mat-header-cell *matHeaderCellDef>{{'CATEGORIES-COMPONENT.ITEMS-TABLE.NOTE' | translate}}</th>
         <td class="fs-5 ta-left" mat-cell *matCellDef="let item"> {{item.note}} </td>
       </ng-container>
 
@@ -51,7 +68,6 @@
       <ng-container matColumnDef="actions">
         <th class="fs-5 ta-left actions-cell-header" mat-header-cell *matHeaderCellDef></th>
         <mat-cell class="fs-5 ta-left actions-cell" *matCellDef="let row">
-          <!-- TODO: Add classes for formatting -->
           <button class="edit-item-button fs-6" mat-button (click)="openRecordMovementComponent(row)"
                   [class.editing]="row.id == selectedItem?.id && showRecordMovement">
             <mat-icon class="main-icon" aria-hidden="false" aria-label="import_export">import_export</mat-icon>

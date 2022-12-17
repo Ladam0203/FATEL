@@ -28,19 +28,4 @@ public class UserController : ControllerBase
         }
         return Unauthorized("Username or password is incorrect");
     }
-    
-    [HttpPost]
-    [Route("Register")]
-    public IActionResult Register([FromBody] LoginDTO model)
-    {
-
-        if (_userService.CreateUser(model))
-        {
-            return Ok();
-        }
-        else
-        {
-            return Problem("Could not create user with name: " + model.Username);
-        }
-    }
 }

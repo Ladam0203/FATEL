@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent{
   title = 'FATEL_Frontend';
 
-  showInventory: boolean = true;
+  constructor(private translate: TranslateService) {
+    translate.setDefaultLang('en');
 
-  constructor() {}
-
-  onShowInventory(value: boolean) {
-    this.showInventory = value;
+    switch (navigator.language) {
+      case 'hu':
+        translate.use('hu');
+    }
   }
+
 }

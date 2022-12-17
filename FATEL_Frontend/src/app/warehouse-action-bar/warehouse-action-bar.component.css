@@ -1,0 +1,63 @@
+.warehouse-action-bar {
+  display: flex;
+  flex-direction: row;
+}
+
+.warehouse-header {
+  color: var(--primary);
+}
+
+.divider {
+  border-left: 1px solid var(--primary);
+  height: 2em;
+  margin: 6px 20px 0 20px;
+}
+
+.edit-field {
+  border: none;
+  color: var(--primary);
+}
+
+.edit-field:focus {
+  border: none;
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+.warehouse-action-wrapper {
+  align-self: center;
+  margin-left: 8px;
+}
+
+.warehouse-action-button {
+  color: var(--primary);
+}
+
+.warehouse-action-button:hover {
+  background-color: #eeecec;
+}
+
+.delete-warehouse-button {
+  margin-left: 4px;
+}
+
+.editing {
+  background-color: #eeecec;
+}
+
+.editing:hover {
+  background-color: var(--success);
+}
+
+.editing:hover mat-icon, .deleting:hover mat-icon {
+  color: var(--white);
+}
+
+.deleting {
+  background-color: #eeecec;
+}
+
+.deleting:hover {
+  background-color: var(--danger);
+}
