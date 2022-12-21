@@ -13,6 +13,6 @@ public class UserRepository : IUserRepository
     }
     public User GetUserByUsername(string username)
     {
-        return _context.UserTable.FirstOrDefault(u => u.Username == username) ?? throw new KeyNotFoundException("Username not found");
+        return _context.UserTable.FirstOrDefault(u => u.Username == username);
     }
 }
